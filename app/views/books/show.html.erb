@@ -1,0 +1,73 @@
+<main class="container">
+  <%= link_to "Back to results", books_path(category: @category), class: "general-back-link" %>
+  <i class="fa fa-long-arrow-left mr-15"></i>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="product-gallery">
+        <div class="mb-20">
+          <%= image_tag("test.jpg", :alt => "rss feed", class:"img-responsive") %>
+        </div>
+        <div class="images clearfix"></div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <h1 class="mt-res-0"><%= @book.title %></h1>
+      <p class="lead small">
+        <%= @book.authors.each do |author|%>
+          <% author.firstname %>
+          <% author.lastname %>
+        <% end %>
+      </p>
+      <div class="row">
+        <div class="col-xs-12 col-md-4">
+          <p class="h1 in-gold-500 mt-10">
+            € <%= @book.price %>
+          </p>
+        </div>
+      </div>
+      <div class="general-info-wrap divider-lg">
+        <p>Description</p>
+        <p class="lead small line-height-2">
+          <%= @book.description %>
+        </p>
+      </div>
+      <div class="general-info-wrap divider-lg">
+        <div class="clearfix">
+          <p class="pull-left">Year of publication</p>
+          <p class="lead small pull-right"><%= @book.year %></p>
+        </div>
+      </div>
+      <div class="general-info-wrap divider-lg">
+        <div class="clearfix">
+          <p class="pull-left">Dimensions</p>
+          <p class="lead small pull-right">
+            H: <%= @book.dimension_h %>" x W: <%= @book.dimension_w %> " x D: <%= @book.dimension_d %>
+          </p>
+        </div>
+      </div>
+      <div class="general-info-wrap divider-lg">
+        <div class="clearfix">
+          <p class="pull-left">Materials</p>
+          <p class="lead small pull-right"><%= @book.material %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mb-20 make-review">
+    <div class="row">
+      <div class="col-md-5 col-xs-10"></div>
+    </div>
+  </div>
+
+  <div class="mb-80">
+    <h3 class="in-gold-500 mb-25">
+      Reviews (0)
+    </h3>
+  </div>
+</main>
+
+
+  <%= link_to "Back", root_path %>
+  <%= link_to "Edit", edit_book_path(@book) %>
+  <%= link_to "Delete", book_path(@book), method: :delete, data: { confirm: "Are u sure?" } %>
