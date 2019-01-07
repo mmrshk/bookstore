@@ -7,114 +7,149 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <style media="screen">
-    .navbar {
-      position: relative;
-      min-height: 80px;
-      margin-bottom: 60px;
-      border: 1px solid transparent;
-    }
-    .navbar-default {
-      box-shadow: 0 5px 18px 2px rgba(1,1,1,0.1);
-    }
-    .navbar-brand {
-      float: left;
-      padding: 29.5px 15px;
-      font-size: 14px;
-      line-height: 21px;
-      height: 80px;
-    }
-    .navbar-default .navbar-brand {
-      color: #333333;
-    }
 
-  </style>
   <body>
-    <header>
-      <nav class="nav navbar navbar-default" style="background-color: #ffffff;">
-        <div class="container">
-          <div class="nav navbar-nav navbar-left">
-            <%= link_to "Bookstore", root_path, class: "navbar-brand" %>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", root_path %></li>
-            <li class="dropdown">
-              <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Shop</a>
-              <ul class="dropdown-menu" role="menu">
-                <% Category.all.each do |category| %>
-                  <li class="<%= 'active' if params[:category] == category.title %>">
-                    <%= link_to category.title, books_path(category: category.title), class: "collapse-link" %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-            <% if user_signed_in? %>
-              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-            <% else %>
-              <li><%= link_to "Log in", new_user_session_path %></li>
-            <% end %>
-            <li><%= link_to "Sign up", new_user_registration_path %></li>
-          </ul>
+    <header class="navbar navbar-default" style="background-color: #ffffff;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#navbar" class="navbar-toggle pull-left">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span></button>
+          <%= link_to "Bookstore", root_path, class: "navbar-brand" %>
         </div>
-      </nav>
+        <a href="#" class="shop-link pull-right hidden-xs">
+          <span class="shop-icon">
+            <span class="shop-quantity">0</span>
+          </span>
+        </a>
+        <div id="navbar" aria-expanded="false" class="navbar-collapse collapse pl-30">
+          <div class="visible-xs">
+            <button type="button" aria-label="Close" class="close">
+              <span aria-hidden="true">&times;</span></button>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Home", root_path %></li>
+              <li>
+                <a type="button" data-toggle="collapse" href="#menu" aria-expanded="false" aria-controls="menu">Shop</a>
+                <ul id="menu" aria-expanded="false" class="collapse list-unstyled-none mb-10 pl-30">
+                  <% Category.all.each do |category| %>
+                    <li class="<%= 'active' if params[:category] == category.title %>">
+                      <%= link_to category.title, books_path(category: category.title), class: "collapse-link" %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+              <% if user_signed_in? %>
+                <li>
+                  <a type="button" href="#account" data-toggle="collapse" class="collapse" aria-expanded="false" aria-controls="account">My account</a>
+                  <ul id="account" aria-expanded="false" class="collapse list-unstyled-none mb-10 pl-30">
+                    <li>
+                      <a class="collapse-link" href="#">Orders</a>
+                    </li>
+                    <li>
+                      <a class="collapse-link" href="#">Settings</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to "Log in", new_user_session_path %></li>
+                <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="hidden-xs">
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Home", root_path %></li>
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Shop</a>
+                <ul class="dropdown-menu" role="menu">
+                  <% Category.all.each do |category| %>
+                    <li class="<%= 'active' if params[:category] == category.title %>">
+                      <%= link_to category.title, books_path(category: category.title), class: "collapse-link" %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+              <% if user_signed_in? %>
+                <li>
+                  <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">My account</a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <a href="#">Orders</a>
+                    </li>
+                    <li>
+                      <a href="#">Settings</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+                  </ul>
+                </li>
+              <% else %>
+                <li><%= link_to "Log in", new_user_session_path %></li>
+                <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <div class="container">
-      <%= yield %>
-      <%= link_to "Add book ", new_book_path %>
-    </div>
+    <%= yield %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-  </body>
+    <footer class="navbar-inverse">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9">
+            <ul class="list-inline mb-25">
+              <li><%= link_to "Home", root_path, class:"nav-link" %></li>
+              <li><%= link_to "Shop", books_path, class:"nav-link" %></li>
+              <% if user_signed_in? %>
+              <li>
+                <a class="nav-link" href="#">Orders</a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">Settings</a>
+              </li>
+              <% else %>
+                <li><%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>
+                <li><%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+              <% end %>
+            </ul>
+          </div>
 
-  <footer class="navbar-inverse">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-9">
-          <ul class="list-inline general-align mb-25">
-            <li>
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li>
-              <a class="nav-link" href="/categories">Shop</a>
-            </li>
-            <li>
-              <a class="nav-link" href="/users/sign_in">Log In</a>
-            </li>
-            <li>
-              <a class="nav-link" href="/users/sign_up">Sign Up</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-3">
-          <p class="general-nav-mail">support@bookstore.com</p>
-          <p class="general-nav-number">(555)-555-5555</p>
-          <ul class="list-inline general-align">
-            <li>
-              <a class="nav-link" href="#">
-                <i aria-hidden="true" class="fa fa-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i aria-hidden="true" class="fa fa-twitter"></i>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i aria-hidden="true" class="fa fa-google-plus"></i>
-              </a>
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i aria-hidden="true" class="fa fa-instagram"></i>
-              </a>
-            </li>
-          </ul>
+          <div class="col-sm-3">
+            <p class="general-nav-mail">support@bookstore.com</p>
+            <p class="general-nav-number">(555)-555-5555</p>
+            <ul class="list-inline general-align mb-25">
+              <li>
+                <a class="nav-link" href="#">
+                  <i aria-hidden="true" class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">
+                  <i aria-hidden="true" class="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">
+                  <i aria-hidden="true" class="fa fa-google-plus"></i>
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" href="#">
+                  <i aria-hidden="true" class="fa fa-instagram"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </body>
 </html>

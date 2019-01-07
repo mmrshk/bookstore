@@ -2,12 +2,14 @@ class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:category].blank?
-      @books = Book.all.order("created_at DESC")
-    else
-      @category_id = Category.find_by(title: params[:category]).id
-      @books = Book.where(category_id: @category_id).order("created_at DESC")
-    end
+    @categories = Category.all
+    @all_books = Book.all
+    @books = Book.all.order("created_at DESC")
+
+    return @books if params[:category].blank?
+
+    @category_id = Category.find_by(title: params[:category]).id
+    @books = Book.where(category_id: @category_id).order("created_at DESC")
   end
 
   def new
@@ -45,6 +47,7 @@ class BooksController < ApplicationController
   def update
     @book.category_id = params[:category_id]
     @book.author_ids = params[:author_ids]
+    
     if @book.update(book_params)
       redirect_to book_path(@book)
     else

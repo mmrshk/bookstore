@@ -1,25 +1,49 @@
-<h2>Sign up</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true ,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+<main class="container general-main-wrap">
+  <div class="text-center">
+    <h3 class="general-login-title">Sign up</h3>
+    <a href="#" class="general-login-icon">
+      <i class="fa fa-facebook-official"></i>
+    </a>
+    <p class="general-login-text">or</p>
   </div>
+  <div class="general-form">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-group mb-30">
+      <%= f.label :email, "Enter Email", class:"control-label input-label" %>
+      <%= f.input :email, required: false, autofocus: true, input_html: { autocomplete: "email" }, label: false %>
+    </div>
+    <div class="form-group mb-30">
+      <%= f.label :password, "Password", class:"control-label input-label" %>
+      <%= f.input :password, label:false, required: true, input_html: { autocomplete: "new-password" } %>
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to "Forgot password?", new_password_path(resource_name), class: "help-block in-gold-500" %>
+      <% end -%>
+    </div>
+    <div class="form-group mb-30">
+      <%= f.label :password_confirmation, "Confirm Password", class:"control-label input-label" %>
+      <%= f.input :password_confirmation, label:false, required: true, input_html: { autocomplete: "new-password" } %>
+    </div>
+    <div class="form-group checkbox text-center mb-30">
+      <label class="checkbox-label">
+        <input type="checkbox" hidden="true" class="checkbox-input"/>
+        <span class="checkbox-icon">
+          <i class="fa fa-check"></i>
+        </span>
+        <span class="checkbox-text">Remember me</span></label>
+    </div>
+    <div class="text-center">
+      <%= f.button :submit, "Sign up", class:"btn btn-default mb-20" %>
+    </div>
+  <% end %>
+</div>
+  <p class="general-sign-text text-center">Have an Account?
+  <%- if controller_name != 'sessions' %>
+    <%= link_to "Log in", new_session_path(resource_name), class:"in-gold-500" %>
+  <% end -%>
+  </p>
+</main>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+<div class="form-inputs">
+</div>

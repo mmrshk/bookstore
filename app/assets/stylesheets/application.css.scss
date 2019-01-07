@@ -13,5 +13,74 @@
  *= require_tree .
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+
+.navbar {
+  position: relative;
+  min-height: 80px;
+  margin-bottom: 60px;
+  border: 1px solid transparent;
+}
+.navbar-default {
+  box-shadow: 0 5px 18px 2px rgba(1,1,1,0.1);
+}
+.navbar-brand {
+  float: left;
+  padding: 29.5px 15px;
+  font-size: 14px;
+  line-height: 21px;
+  height: 80px;
+}
+.navbar-default .navbar-brand {
+  color: #333333;
+}
+.general-nav-mail {
+  font-size: 12px;
+  color: #c59c71;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.general-nav-number {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+}
+.general-align {
+  text-align: center;
+}
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+  margin-left: -5px;
+}
+.mb-25 {
+  margin-bottom: 25px !important;
+}
+.list-inline > li {
+  display: inline-block;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.btn {
+    max-width: 100%;
+    font-size: 12px;
+    padding-left: 32px;
+    padding-right: 32px;
+    white-space: unset;
+}
+
+.btn-default {
+    color: white;
+    background-color: #1e1e1c;
+}
+
+.btn-default:active:hover {
+  color: white;
+  background-color: black;
+  border-color: transparent;
+}
