@@ -5737,7 +5737,7 @@ a.badge:hover, a.badge:focus {
   cursor: pointer;
 }
 
-.jumbotron {
+.jumbot {
   padding-top: 50px;
   padding-bottom: 50px;
   margin-bottom: 50px;
@@ -5745,44 +5745,44 @@ a.badge:hover, a.badge:focus {
   background-color: white;
 }
 
-.jumbotron h1,
-.jumbotron .h1 {
+.jumbot h1,
+.jumbot .h1 {
   color: inherit;
 }
 
-.jumbotron p {
+.jumbot p {
   margin-bottom: 25px;
   font-size: 18px;
   font-weight: 200;
 }
 
-.jumbotron > hr {
+.jumbot > hr {
   border-top-color: #e6e6e6;
 }
 
-.container .jumbotron,
-.container-fluid .jumbotron {
+.container .jumbot,
+.container-fluid .jumbot {
   border-radius: 6px;
   padding-left: 15px;
   padding-right: 15px;
 }
 
-.jumbotron .container {
+.jumbot .container {
   max-width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  .jumbotron {
+  .jumbot {
     padding-top: 80px;
     padding-bottom: 80px;
   }
-  .container .jumbotron,
-  .container-fluid .jumbotron {
+  .container .jumbot,
+  .container-fluid .jumbot {
     padding-left: 100px;
     padding-right: 100px;
   }
-  .jumbotron h1,
-  .jumbotron .h1 {
+  .jumbot h1,
+  .jumbot .h1 {
     font-size: 36px;
   }
 }
@@ -7959,7 +7959,7 @@ button.close {
   padding: 15px 12px 0;
 }
 
-.jumbotron p {
+.jumbot p {
   color: #8c8c8c;
 }
 

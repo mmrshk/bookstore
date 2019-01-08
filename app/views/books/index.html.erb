@@ -1,120 +1,73 @@
 <main class="container">
-  <% if @books.count == @all_books.count %>
-    <h1 class="general-title-margin">Сatalog</h1>
-  <% else %>
-    <h1 class="general-title-margin"><%= params[:category] %></h1>
-  <% end %>
-
-  <div class="hidden-xs clearfix">
-    <div class="dropdowns pull-right">
-      <div class="dropdown width-240">
-        <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle lead small">Newest first
-          <i class="fa fa-angle-down dropdown-icon pull-right"></i>
-        </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="#">Newest first</a>
-          </li>
-          <li>
-            <a href="#">Popular first</a>
-          </li>
-          <li>
-            <a href="#">Price: Low to hight</a>
-          </li>
-          <li>
-            <a href="#">Price: Hight to low</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <ul class="list-inline pt-10 mb-25 mr-240">
-      <li class="mr-35">
-        <%= link_to books_path, class: "filter-link"  do %>
-          All <span class="badge general-badge"><%= @all_books.count %></span>
+  <div id="slider" data-ride="carousel" class="carousel slide">
+      <ol class="carousel-indicators">
+        <% @latest_books.each_with_index do |book, index| %>
+        <li data-target="#slider" data-slide-to="<% index %>" class="<% if index == 0 %>active <% end %>"></li>
         <% end %>
-      </li>
-      <% @categories.each do |category| %>
-      <li class="mr-35">
-        <%= link_to books_path(category: category.title), class: "filter-link"  do %>
-          <%= category.title %> <span class="badge general-badge"><%= category.books.count %></span>
-        <% end %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="dropdowns mb-25 visible-xs">
-    <p class="lead small mb-10">Filter by category</p>
-    <div class="dropdown">
-      <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle lead small">Newest first
-        <i class="fa fa-angle-down dropdown-icon pull-right"></i>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <a href="#">Newest first</a>
-        </li>
-        <li>
-          <a href="#">Popular first</a>
-        </li>
-        <li>
-          <a href="#">Price: Low to hight</a>
-        </li>
-        <li>
-          <a href="#">Price: Hight to low</a>
-        </li>
-      </ul>
-    </div>
-    <p class="lead small mb-10">Sort by</p>
-    <div class="dropdown">
-      <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle lead small">Newest first
-        <i class="fa fa-angle-down dropdown-icon pull-right"></i>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <a href="#">Newest first</a>
-        </li>
-        <li>
-          <a href="#">Popular first</a>
-        </li>
-        <li>
-          <a href="#">Price: Low to hight</a>
-        </li>
-        <li>
-          <a href="#">Price: Hight to low</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="mb-120">
-    <div class="row">
-      <% @books.each do |book| %>
-      <div class="col-xs-6 col-sm-3">
-        <div class="general-thumb-wrap">
-          <div class="general-thumbnail thumbnail-main">
-            <img src="http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg" alt="design-book" class="img-shadow general-thumbnail-img"/>
-            <div class="thumb-hover">
-              <div class="general-thumb-link-wrap">
-                <%= link_to book_path(book), class:"thumb-hover-link" do %>
-                  <i aria-hidden="true" class="fa fa-eye thumb-icon"></i>
-                <% end %>
-                <a href="#" class="thumb-hover-link">
-                  <i class="fa fa-shopping-cart thumb-icon"></i>
-                </a>
+      </ol>
+    <div role="listbox" class="carousel-inner">
+      <% @latest_books.each_with_index do |book, index| %>
+        <div class="<% if index == 0 %> active <% end %> item">
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="general-img-wrap">
+                <img src="http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg" alt="design-book" class="img-shadow general-thumbnail-img" /></div>
+            </div>
+            <div class="col-sm-7">
+              <div class="mb-60">
+                <h1><%= book.title %></h1>
+                <p class="lead"><%= book.description %></p>
+                <p class="lead small"><% book.authors.each do |author| %> <% author.firstname %> <% author.lastname %> <% end %></p>
+                <div class="general-align">
+                  <button class="btn btn-primary">Buy Now</button></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="general-thumb-info">
-          <p class="title"><%= book.title %></p>
-          <p class="font-16 in-gold-500">€ <%= book.price %></p>
-          <span class="divider-sm"></span>
-          <p class="lead small">
-            <% book.authors.each do |author|%>
-              <%= author.firstname %> <%= author.lastname %>
-            <% end %>
-          </p>
-        </div>
-      </div>
       <% end %>
     </div>
+    <a href="#slider" role="button" data-slide="prev" class="left carousel-control">
+      <span aria-hidden="true" class="icon-prev"></span>
+      <span class="sr-only">Previous</span></a>
+    <a href="#slider" role="button" data-slide="next" class="right carousel-control">
+      <span aria-hidden="true" class="icon-next"></span>
+      <span class="sr-only">Next</span></a>
   </div>
 </main>
+
+<div class="container">
+  <div class="jumbot text-center mb-0">
+    <h2 class="h1">Welcome to our amazing Bookstore!</h2>
+    <div class="mb-res-50">
+      <p>We pore through hundreds of new books each month and select the five best we can find to share with our members.</p>
+    </div>
+    <%= link_to "Get Started", categories_path, class:"btn btn-default" %>
+  </div>
+  <div class="mb-35">
+    <h3>Best Sellers</h3>
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="general-thumb-wrap">
+          <div class="thumbnail-main general-thumbnail">
+            <img src="http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg" alt="design-book" class="img-shadow general-thumbnail-img" />
+            <div class="thumb-hover">
+              <div class="general-thumb-link-wrap">
+                <a href="#" class="thumb-hover-link">
+                  <i aria-hidden="true" class="fa fa-eye thumb-icon"></i></a>
+                <a href="#" class="thumb-hover-link">
+                  <i class="fa fa-shopping-cart thumb-icon"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-35">
+          <div class="clearfix">
+            <p class="pull-right font-16 in-gold-500">€28.50</p>
+            <p class="title mr-55">Android Programming for Beginners</p>
+          </div>
+          <span class="divider-sm"></span>
+          <p class="lead small">John Horton</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
