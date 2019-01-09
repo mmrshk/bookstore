@@ -16,14 +16,15 @@
             <span class="sr-only"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span></button>
+            <span class="icon-bar"></span>
+          </button>
           <%= link_to "Bookstore", root_path, class: "navbar-brand" %>
         </div>
-        <a href="#" class="shop-link pull-right hidden-xs">
+        <%= link_to carts_path, class:"shop-link pull-right hidden-xs" do %>
           <span class="shop-icon">
-            <span class="shop-quantity">0</span>
+            <span class="shop-quantity"><%= LineItem.all.count %></span>
           </span>
-        </a>
+        <% end %>
         <div id="navbar" aria-expanded="false" class="navbar-collapse collapse pl-30 pd-1">
           <div class="visible-xs">
             <button type="button" aria-label="Close" class="close">
@@ -97,9 +98,6 @@
     </header>
 
     <%= yield %>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
     <footer class="navbar-inverse">
       <div class="container">

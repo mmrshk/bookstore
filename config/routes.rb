@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :categories
+  resources :line_items
+  resources :carts
+
   resources :books  do
     resources :reviews
   end
-  resources :categories
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
   root 'books#index'
 end

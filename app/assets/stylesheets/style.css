@@ -8045,6 +8045,14 @@ button.close {
   color: white;
 }
 
+.button-hover {
+  background-color: #1e426100;
+}
+
+.fl-r {
+  float: right;
+}
+
 .thumb-hover {
   background-color: #c59c71;
   text-align: center;

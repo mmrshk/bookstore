@@ -108,9 +108,11 @@
                 <%= link_to book_path(book), class:"thumb-hover-link" do %>
                   <i aria-hidden="true" class="fa fa-eye thumb-icon"></i>
                 <% end %>
-                <a href="#" class="thumb-hover-link">
-                  <i class="fa fa-shopping-cart thumb-icon"></i>
-                </a>
+                <div class="fl-r">
+                  <%= button_to line_items_path(book_id: book), class: "thumb-hover-link button-hover" do %>
+                    <i class="fa fa-shopping-cart thumb-icon"></i>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>

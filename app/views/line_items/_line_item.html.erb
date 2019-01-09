@@ -1,0 +1,30 @@
+<tr>
+  <td>
+    <div class="general-img-wrap-table">
+      <img src="http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg" alt="design-book" class="cart-img-shadow pull-left" />
+    </div>
+  </td>
+  <td>
+    <p class="title"><%= line_item.book.title %></p>
+  </td>
+  <td>
+    <span class="font-16 in-gold-500"><%= number_to_currency(line_item.book.price, unit: "€") %></span></td>
+  <td>
+    <div class="input-group">
+      <%= link_to edit_line_item_path(book_id: line_item.book, quantity: :decrement), class: "input-link" do %>
+        <i class="fa fa-minus line-heaght-40"></i>
+      <% end %>
+      <input type="text" class="form-control quantity-input" value="<%= line_item.quantity %>"/>
+      <%= link_to edit_line_item_path(book_id: line_item.book, quantity: :increment), class: "input-link" do %>
+        <i class="fa fa-plus line-heaght-40"></i>
+      <% end %>
+    </div>
+  </td>
+  <td>
+    <span class="font-16 in-gold-500"><%= number_to_currency(line_item.total_price, unit: "€") %></span></td>
+  <td>
+    <%= link_to line_item, method: :delete, class: "close general-cart-close" do %>
+    <span aria-hidden="true">&times;</span>
+    <% end %>
+  </td>
+</tr>
