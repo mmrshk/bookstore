@@ -21,6 +21,8 @@ gem 'i18n'
 gem 'pg'
 gem 'paperclip', '~> 6.1'
 gem 'pagy'
+gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

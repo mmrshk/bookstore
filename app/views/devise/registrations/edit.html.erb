@@ -1,35 +1,152 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
-
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+<main class="container">
+  <h1 class="general-title-margin">Settings</h1>
+  <ul role="tablist" class="nav clearfix mb-20">
+    <li role="presentation" class="tab-item active">
+      <a href="#address" aria-controls="address" role="tab" data-toggle="tab" class="tab-link">Address</a>
+    </li>
+    <li role="presentation" class="tab-item">
+      <a href="#privacy" aria-controls="privacy" role="tab" data-toggle="tab" class="tab-link">Privacy</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div id="address" role="tabpanel" class="tab-pane fade in active general-main-wrap">
+      <form>
+        <div class="hidden-xs hidden-sm">
+          <div class="row">
+            <div class="col-md-5">
+              <h3 class="general-subtitle mt-0">Billing Address</h3>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <h3 class="general-subtitle mt-0">Shipping Address</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5 mb-40">
+            <div class="visible-xs visible-sm">
+              <h3 class="general-subtitle mt-0">Billing Address</h3>
+            </div>
+            <div class="form-group has-error">
+              <label for="firstName" class="control-label input-label">First Name</label>
+              <input id="firstName" name="fname" type="text" placeholder="First Name" class="form-control"/>
+              <span class="help-block">Please enter your first name</span></div>
+            <div class="form-group">
+              <label for="lastName" class="control-label input-label">Last Name</label>
+              <input id="lastName" name="lname" type="text" placeholder="Last Name" class="form-control"/></div>
+            <div class="form-group">
+              <label for="address" class="control-label input-label">Address</label>
+              <input id="address" name="address" type="text" placeholder="Address" class="form-control"/></div>
+            <div class="form-group">
+              <label for="city" class="control-label input-label">City</label>
+              <input id="city" name="city" type="text" placeholder="City" class="form-control"/></div>
+            <div class="form-group">
+              <label for="zip" class="control-label input-label">Zip</label>
+              <input id="zip" name="zip" type="text" placeholder="Zip" class="form-control"/></div>
+            <div class="form-group">
+              <label for="сountry" class="control-label input-label">Country</label>
+              <input id="country" name="country" type="text" placeholder="Select a country" class="form-control"/></div>
+            <div class="form-group mb-60">
+              <label for="phone" class="control-label input-label">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="Example +355 66 123 4567" class="form-control"/></div>
+            <div class="text-center general-text-align">
+              <button class="btn disabled">Save</button>
+            </div>
+          </div>
+          <div class="col-md-5 col-md-offset-1 mb-25">
+            <div class="visible-xs visible-sm">
+              <h3 class="general-subtitle mt-0">Shipping Address</h3>
+            </div>
+            <div class="form-group has-error">
+              <label for="firstName" class="control-label input-label">First Name</label>
+              <input id="firstName" name="fname" type="text" placeholder="First Name" class="form-control"/>
+              <span class="help-block">Please enter your first name</span></div>
+            <div class="form-group">
+              <label for="lastName" class="control-label input-label">Last Name</label>
+              <input id="lastName" name="lname" type="text" placeholder="Last Name" class="form-control"/></div>
+            <div class="form-group">
+              <label for="address" class="control-label input-label">Address</label>
+              <input id="address" name="address" type="text" placeholder="Address" class="form-control"/></div>
+            <div class="form-group">
+              <label for="city" class="control-label input-label">City</label>
+              <input id="city" name="city" type="text" placeholder="City" class="form-control"/></div>
+            <div class="form-group">
+              <label for="zip" class="control-label input-label">Zip</label>
+              <input id="zip" name="zip" type="text" placeholder="Zip" class="form-control"/></div>
+            <div class="form-group">
+              <label for="сountry" class="control-label input-label">Country</label>
+              <select id="country" name="country" placeholder="Select a country" class="form-control">
+                <option>London</option>
+                <option>London</option>
+                <option>London</option>
+              </select>
+            </div>
+            <div class="form-group mb-55">
+              <label for="phone" class="control-label input-label">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="Example +355 66 123 4567" class="form-control"/></div>
+            <div class="text-center general-text-align">
+              <button class="btn disabled">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="privacy" role="tabpanel" class="tab-pane fade">
+      <div class="row mb-60">
+        <div class="col-sm-5">
+          <p class="in-gold-500 font-18 mb-25">Email</p>
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'email' }, class: "general-form-md") do |f| %>
+          <%= f.error_notification %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for:
+              <%= resource.unconfirmed_email %></p>
+          <% end %>
+          <div class="form-group mb-35">
+            <%= f.input :email, required: true, autofocus: true, placeholder: "Enter email", type: "email", class:"form-control", label:false, name: "email" %>
+            <div class="general-text-align">
+              <%= f.button :submit, "Save", class:"btn btn-default mb-35" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-5 col-sm-offset-1">
+        <p class="in-gold-500 font-18 mb-25">Password</p>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'change_password_form' }, class:"general-form-md divider-lg-bottom pb-25") do |f| %>
+        <%= f.error_notification %>
+        <div class="form-group mb-30">
+          <label for="oldPassword" class="control-label input-label">Old Password</label>
+          <%= f.input :current_password, class: "form-control", placeholder: "Old Password", required: true, type: "password", input_html: { autocomplete: "current-password" } %>
+        </div>
+        <div class="form-group mb-30">
+          <label for="password" class="control-label input-label">New Password</label>
+          <%= f.input :password, type:"password",placeholder:"New Password", class: "form-control", required: true, input_html: { autocomplete: "new-password" } %>
+        </div>
+        <div class="form-group mb-40">
+          <label for="confirmPassword" class="control-label input-label">Confirm Password</label>
+          <%= f.input :password_confirmation, placeholder: "Confirm Password", required: true, type: "password", class: "form-control", input_html: { autocomplete: "new-password" } %>
+        </div>
+        <div class="general-text-align">
+          <%= f.button :submit, "Save", class:"btn btn-default mb-10" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-sm-12">
+      <p class="in-gold-500 font-18 mb-25">Remove Account</p>
+      <form>
+        <div class="general-settings-btn">
+          <%= link_to "Please Remove My Account", registration_path(resource_name), class:"btn disabled mb-20", method: :delete %>
+        </div>
+        <div class="form-group checkbox general-settings-checkbox">
+          <label class="checkbox-label">
+            <input type="checkbox" hidden="true" class="checkbox-input"/>
+            <span class="checkbox-icon">
+              <i class="fa fa-check"></i>
+            </span>
+            <span class="checkbox-text">I understand that all data will be lost</span>
+          </label>
+        </div>
+      </form>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
+</div>
+</main>
