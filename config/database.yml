@@ -1,23 +1,20 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: bookstore
   pool: 5
+  host: localhost
+  port: 5432
   username: postgres
   password: postgres
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: bookstore
-  pool: 5
-  username: postgres
-  password: postgres
+
+development:
+  <<: *default
+  database: bookstore
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: bookstore
-  pool: 5
-  username: postgres
-  password: postgres
