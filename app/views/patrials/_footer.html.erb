@@ -10,7 +10,7 @@
             <a class="nav-link" href="#">Orders</a>
           </li>
           <li>
-            <a class="nav-link" href="#">Settings</a>
+            <%= link_to "Settings", edit_user_registration_path, class: "nav-link" %>
           </li>
           <% else %>
             <li><%= link_to "Log in", new_user_session_path, class:"nav-link" %></li>

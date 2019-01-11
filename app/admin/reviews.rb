@@ -1,6 +1,10 @@
 ActiveAdmin.register Review do
   permit_params :rating, :comment, :name
 
+  scope :all
+  scope :published
+  scope :unpublished
+  
   action_item :publish, only: :show do
     link_to "Publish", publish_admin_review_path(review), method: :put if !review.publish?
   end

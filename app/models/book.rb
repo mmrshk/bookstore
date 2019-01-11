@@ -25,7 +25,6 @@ class Book < ApplicationRecord
   scope :price_asc, -> { order('price') }
   scope :price_desc, -> { order('price DESC') }
   scope :by_filter, ->(filter) { public_send(filter) }
-
   scope :latest_books, -> { order('created_at DESC').limit(LATEST_BOOKS_COUNT) }
 
   private
