@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_line_item, only: [:show, :update, :destroy]
+  before_action :set_line_item, only: [:update, :destroy]
   before_action :set_cart, only: [:create]
 
   QUANTITY = {
@@ -10,13 +10,6 @@ class LineItemsController < ApplicationController
 
   def index
     @line_items = LineItem.all
-  end
-
-  def show
-  end
-
-  def new
-    @line_item  = LineItem.new
   end
 
   def edit
@@ -62,8 +55,7 @@ class LineItemsController < ApplicationController
   def quantity_change!(current_item)
     case params[:quantity]
     when QUANTITY[:increment] then current_item.increment!(:quantity)
-    when QUANTITY[:decrement]
-      current_item.decrement!(:quantity) if current_item.quantity.positive?
+    when QUANTITY[:decrement] then current_item.decrement!(:quantity) if current_item.quantity.positive?
     end
   end
 end

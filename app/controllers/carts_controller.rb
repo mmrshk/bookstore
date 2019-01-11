@@ -1,10 +1,11 @@
 class CartsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :index, :update]
+  before_action :total_price_init, :discount_init, :subtotal_price_init
 
   def index
-    @carts = Cart.all
+    redirect_to root_path if Cart.all.count == 0
+
     redirect_to cart_path(session[:cart_id])
   end
 
@@ -15,15 +16,40 @@ class CartsController < ApplicationController
     @cart = Cart.new
   end
 
-  def edit
-  end
+  def update
+    return redirect_to cart_path(session[:cart_id]) if coupon_not_exist?
 
-  def destroy
-    @cart.destroy if @cart.id == session[:cart_id]
-    session[:cart_id] = nil
+
+    @coupon = Coupon.all.find_by(coupon: params[:cart][:coupon_id])
+    @discount = discount(@total_price, @coupon)
+    @total_price -= @discount
+    #@cart.coupon_id = @coupon.id
+    #@cart.save
+
+    render "show"
   end
 
   private
+
+  def subtotal_price_init
+    @subtotal = @cart.total_price
+  end
+
+  def total_price_init
+    @total_price = @cart.total_price
+  end
+
+  def discount_init
+    @discount = 0
+  end
+
+  def discount(total_price, coupon)
+    total_price * coupon.sale / 100
+  end
+
+  def coupon_not_exist?
+    Coupon.all.find_by(coupon: params[:cart][:coupon_id]).nil?
+  end
 
   def set_cart
     @cart = Cart.find(params[:id])

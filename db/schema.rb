@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_095950) do
+ActiveRecord::Schema.define(version: 2019_01_11_132410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 2019_01_11_095950) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_carts_on_coupon_id"
   end
 
   create_table "categories", force: :cascade do |t|

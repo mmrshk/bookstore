@@ -67,9 +67,13 @@
       <div class="col-sm-4">
         <div class="input-group general-input-group">
           <label class="input-label">Enter Your Coupon Code</label>
-          <input type="text" placeholder="Enter Your Coupon Code " class="form-control mb-30"/>
-          <div>
-            <button class="btn btn-primary mr-5 mb-15">Apply Coupon</button>
+          <div class="input-group general-input-group">
+            <%= simple_form_for @cart do |f| %>
+              <%= f.input :coupon_id, :input_html => { class: "form-control mb-30" }, placeholder: "Enter Your Coupon Code ", label: false %>
+              <div>
+                <%= f.button :submit, class:"btn btn-primary mr-5 mb-15", value: "Apply Coupon"%>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -82,7 +86,7 @@
                 <p class="font-16">Subtotal:</p>
               </td>
               <td>
-                <p class="font-16"><%= number_to_currency(@cart.total_price, unit: "€") %></p>
+                <p class="font-16"><%= number_to_currency(@subtotal, unit: "€") %></p>
               </td>
             </tr>
             <tr>
@@ -90,7 +94,7 @@
                 <p class="font-16">Coupon:</p>
               </td>
               <td>
-                <p class="font-16"><%= number_to_currency(0.0, unit: "€") %></p>
+                <p class="font-16"><%= number_to_currency(@discount, unit: "€") %></p>
               </td>
             </tr>
             <tr>
@@ -98,7 +102,7 @@
                 <strong class="font-18">Order Total:</strong>
               </td>
               <td>
-                <strong class="font-18"><%= number_to_currency(@cart.total_price, unit: "€") %></strong>
+                <strong class="font-18"><%= number_to_currency(@total_price, unit: "€") %></strong>
               </td>
             </tr>
           </table>
