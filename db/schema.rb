@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_11_132410) do
+ActiveRecord::Schema.define(version: 2019_01_12_203741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(version: 2019_01_11_132410) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "adresses", force: :cascade do |t|
+    t.string "firstname", null: false
+    t.string "lastname", null: false
+    t.string "adress", null: false
+    t.string "city", null: false
+    t.string "zip", null: false
+    t.string "country", null: false
+    t.string "phone", null: false
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "authors", force: :cascade do |t|
@@ -92,6 +105,16 @@ ActiveRecord::Schema.define(version: 2019_01_11_132410) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "card_numder", null: false
+    t.string "name", null: false
+    t.integer "cvv", null: false
+    t.integer "expiration_month", null: false
+    t.integer "expiration_year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "cart_id"
@@ -100,6 +123,17 @@ ActiveRecord::Schema.define(version: 2019_01_11_132410) do
     t.integer "quantity", default: 1
     t.index ["book_id"], name: "index_line_items_on_book_id"
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal "total_price", precision: 6, scale: 2, null: false
+    t.string "status", default: "processing"
+    t.bigint "user_id"
+    t.bigint "credit_card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["credit_card_id"], name: "index_orders_on_credit_card_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -7,14 +7,13 @@ class Book < ApplicationRecord
   DESCRIPTION_LENGTH_MAX = 2000
   PRICE_LENGTH_MAX = 7
 
-  belongs_to :category
   has_and_belongs_to_many :authors
+  belongs_to :category
   has_many :reviews
   has_many :line_items
 
-  validates :title, :price, :quantity, presence: true
-  validates :publication_year, numericality: { less_than_or_equal_to: Time.current.year }
-  validates :height, :width, :depth, numericality: { greater_than: 0 }
+  validates :title, :price, :quantity,:dimension_h, :dimension_w, :dimension_d, presence: true
+  validates :year, numericality: { less_than_or_equal_to: Time.current.year }
   validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX, too_long: "#{count} characters is the maximum allowed." }
   validates :price, numericality: { only_integer: true }, length: { maximum: PRICE_LENGTH_MAX}
 

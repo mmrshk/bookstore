@@ -6,7 +6,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @category = Category.find_by(title: @book.category)
+    @category = Category.find_by(@book.category)
   end
 
   private

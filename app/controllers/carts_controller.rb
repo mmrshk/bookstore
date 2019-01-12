@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   before_action :total_price_init, :discount_init, :subtotal_price_init
 
   def index
-    redirect_to root_path if Cart.all.count == 0
+    redirect_to root_path if Cart.none?
 
     redirect_to cart_path(session[:cart_id])
   end
