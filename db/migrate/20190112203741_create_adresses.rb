@@ -1,14 +1,15 @@
 class CreateAdresses < ActiveRecord::Migration[5.2]
   def change
-    create_table :adresses do |t|
+    create_table :addresses do |t|
       t.string :firstname, null:false
       t.string :lastname, null:false
-      t.string :adress, null:false
+      t.string :address, null:false
       t.string :city, null:false
       t.string :zip, null:false
       t.string :country, null:false
       t.string :phone, null:false
-      t.string :type
+      t.integer :cast, null:false
+      t.references :addressable, polymorphic: true, index: true
 
       t.timestamps
     end
