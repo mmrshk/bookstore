@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_092105) do
 
   create_table "orders", force: :cascade do |t|
     t.decimal "total_price", precision: 6, scale: 2, null: false
-    t.string "status", default: "processing"
+    t.string "status", default: "open"
     t.bigint "user_id"
     t.bigint "credit_card_id"
     t.datetime "created_at", null: false

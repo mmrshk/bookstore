@@ -1,9 +1,7 @@
 class BooksController < ApplicationController
-  before_action :find_book, only: [:show]
+  load_and_authorize_resource
 
-  def index
-    @latest_books = Book.latest_books
-  end
+  before_action :find_book, only: [:show]
 
   def show
     @category = Category.find_by(@book.category)

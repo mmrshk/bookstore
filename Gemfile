@@ -24,6 +24,8 @@ gem 'pagy'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'country_select', '~> 3.1', '>= 3.1.1'
+gem 'aasm'
+gem 'cancancan', '~> 2.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

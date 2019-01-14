@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  load_and_authorize_resource
+  
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   before_action :set_cart, only: [:show, :index, :update]
   before_action :total_price_init, :discount_init, :subtotal_price_init

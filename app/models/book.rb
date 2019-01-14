@@ -3,7 +3,6 @@ class Book < ApplicationRecord
 
   FILTERS = %i[newest pop_first by_title_asc by_title_desc price_asc price_desc].freeze
   DEFAULT_FILTER = :newest
-  LATEST_BOOKS_COUNT = 3
   DESCRIPTION_LENGTH_MAX = 2000
   PRICE_LENGTH_MAX = 7
 
@@ -24,7 +23,6 @@ class Book < ApplicationRecord
   scope :price_asc, -> { order('price') }
   scope :price_desc, -> { order('price DESC') }
   scope :by_filter, ->(filter) { public_send(filter) }
-  scope :latest_books, -> { order('created_at DESC').limit(LATEST_BOOKS_COUNT) }
 
   private
 

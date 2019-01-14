@@ -1,4 +1,6 @@
 class AddressesController < ApplicationController
+  load_and_authorize_resource
+  
   def create
     @address = Address.new(address_params)
     @address.addressable = current_user
@@ -13,6 +15,7 @@ class AddressesController < ApplicationController
 
     redirect_to edit_user_registration_path
   end
+
   private
 
   def address_params
