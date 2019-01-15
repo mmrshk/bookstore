@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   before_action :find_book, only: [:show]
 
   def show
-    @category = Category.find_by(@book.category)
+
+    @category = Category.where(name: @book.category)
   end
 
   private

@@ -9,9 +9,9 @@
       </button>
       <%= link_to "Bookstore", root_path, class: "navbar-brand" %>
     </div>
-    <%= link_to cart_path(session[:cart_id]), class:"shop-link pull-right hidden-xs" do %>
+    <%= link_to cart_path, class:"shop-link pull-right hidden-xs" do %>
       <span class="shop-icon">
-        <span class="shop-quantity"><%= LineItem.all.count %></span>
+        <span class="shop-quantity"><%= cart_items_count %></span>
       </span>
     <% end %>
     <div id="navbar" aria-expanded="false" class="navbar-collapse collapse pl-30 pd-1">

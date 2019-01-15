@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :users, only: :edit
   resources :categories
   resources :line_items
-  resources :carts
+  resources :orders
+  resources :checkout
+  resource  :cart, only: %i[show update]
   resources :books  do
     resources :reviews
   end

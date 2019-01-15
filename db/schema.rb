@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_092105) do
+ActiveRecord::Schema.define(version: 2019_01_14_102453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,8 +90,6 @@ ActiveRecord::Schema.define(version: 2019_01_13_092105) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "coupon_id"
-    t.index ["coupon_id"], name: "index_carts_on_coupon_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -128,16 +126,16 @@ ActiveRecord::Schema.define(version: 2019_01_13_092105) do
 
   create_table "line_items", force: :cascade do |t|
     t.bigint "book_id"
-    t.bigint "cart_id"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "quantity", default: 1
+    t.bigint "order_id"
     t.index ["book_id"], name: "index_line_items_on_book_id"
-    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.decimal "total_price", precision: 6, scale: 2, null: false
+    t.decimal "total_price", precision: 6, scale: 2
     t.string "status", default: "open"
     t.bigint "user_id"
     t.bigint "credit_card_id"
@@ -174,5 +172,5 @@ ActiveRecord::Schema.define(version: 2019_01_13_092105) do
   end
 
   add_foreign_key "line_items", "books"
-  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "orders"
 end

@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
-  include CurrentCart
-  before_action :set_cart
+  helper_method :current_order
 
+  private
+
+  def current_order
+    return Order.new unless session[:order_id]
+
+    Order.find(session[:order_id])
+  end
 end

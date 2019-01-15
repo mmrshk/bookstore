@@ -1,53 +1,43 @@
 class LineItemsController < ApplicationController
   load_and_authorize_resource
-  
-  include CurrentCart
-  before_action :set_line_item, only: [:update, :destroy]
-  before_action :set_cart, only: [:create]
 
   QUANTITY = {
     increment: "increment",
     decrement: "decrement"
   }
 
-  def index
-    @line_items = LineItem.all
-  end
-
   def edit
-    @book = Book.find(params[:book_id])
-    @line_items = LineItem.all
-    current_item = @line_items.find_by(book_id: @book)
-    quantity_change!(current_item)
-    redirect_to cart_path(session[:cart_id])
-  end
+    quantity_change!(LineItem.all.find_by(id: params[:id]))
 
-  def destroy
-    @cart = Cart.find(session[:cart_id])
-    @line_item.destroy
-
-    redirect_to cart_path(session[:cart_id])
+    redirect_to cart_path
   end
 
   def create
-    book = Book.find(params[:book_id])
-    @line_item = @cart.add_book(book)
+    @line_item = LineItem.create(line_item_params)
+    line_item_ids << @line_item.id
 
-    respond_to do |format|
-      if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: "Item added to cart."}
-        format.json { render :show, status: :created, location: @line_item }
-      else
-        format.html { render :new }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to cart_path
+  end
+
+  def update
+    @line_item.update_attributes(line_item_params)
+    @line_items = LineItem.where(id: line_item_ids)
+    
+    redirect_to cart_path
+  end
+
+  def destroy
+    @line_item = LineItem.all.find_by(id: params[:id])
+    @line_item.destroy
+    line_item_ids.delete_if { |item_id| item_id == @line_item.id }
+
+    redirect_to cart_path
   end
 
   private
 
-  def set_line_item
-    @line_item = LineItem.find(params[:id])
+  def line_item_ids
+    session[:line_item_ids] ||= []
   end
 
   def line_item_params

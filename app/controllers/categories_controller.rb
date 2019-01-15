@@ -1,7 +1,6 @@
 class CategoriesController < ApplicationController
-  load_and_authorize_resource
-  
   before_action :set_filter
+  before_action :set_line_item, only: %i[index show update]
 
   def index
     @categories = Category.all
@@ -17,5 +16,9 @@ class CategoriesController < ApplicationController
 
   def set_filter
     @filter = Book::FILTERS.include?(params[:filter]&.to_sym) ? params[:filter] : Book::DEFAULT_FILTER
+  end
+
+  def set_line_item
+    @line_item = LineItem.new
   end
 end

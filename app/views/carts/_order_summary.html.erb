@@ -1,0 +1,32 @@
+<div class="col-sm-8">
+  <div class="res-mr-200 text-center general-text-right">
+    <p class="in-gold-500 font-18 general-text-right">Order Summary</p>
+    <table class="general-summary-table general-summary-table-right general-text-right">
+      <tr>
+        <td>
+          <p class="font-16">Subtotal:</p>
+        </td>
+        <td>
+          <p class="font-16"><%= number_to_currency(subtotal_price_init, unit: "€") %></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="font-16">Coupon:</p>
+        </td>
+        <td>
+          <p class="font-16"><%= number_to_currency(discount, unit: "€") %></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong class="font-18">Order Total:</strong>
+        </td>
+        <td>
+          <strong class="font-18"><%= number_to_currency(total_price_init, unit: "€") %></strong>
+        </td>
+      </tr>
+    </table>
+    <button class="btn btn-default mb-20 visible-xs-inline-block">Checkout</button>
+  </div>
+</div>

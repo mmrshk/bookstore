@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   load_and_authorize_resource
-  
+
   def create
     @address = Address.new(address_params)
     @address.addressable = current_user

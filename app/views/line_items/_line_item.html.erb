@@ -5,17 +5,17 @@
     </div>
   </td>
   <td>
-    <p class="title"><%= line_item.book.title %></p>
+    <%= link_to line_item.book.title, book_path(id: line_item.book), class: "title"%>
   </td>
   <td>
     <span class="font-16 in-gold-500"><%= number_to_currency(line_item.book.price, unit: "€") %></span></td>
   <td>
     <div class="input-group">
-      <%= link_to edit_line_item_path(book_id: line_item.book, quantity: :decrement), class: "input-link" do %>
+      <%= link_to edit_line_item_path(id: line_item.id, quantity: :decrement), class: "input-link" do %>
         <i class="fa fa-minus line-heaght-40"></i>
       <% end %>
       <input type="text" class="form-control quantity-input" value="<%= line_item.quantity %>"/>
-      <%= link_to edit_line_item_path(book_id: line_item.book, quantity: :increment), class: "input-link" do %>
+      <%= link_to edit_line_item_path(id: line_item.id, quantity: :increment), class: "input-link" do %>
         <i class="fa fa-plus line-heaght-40"></i>
       <% end %>
     </div>
@@ -23,7 +23,7 @@
   <td>
     <span class="font-16 in-gold-500"><%= number_to_currency(line_item.total_price, unit: "€") %></span></td>
   <td>
-    <%= link_to line_item, method: :delete, class: "close general-cart-close" do %>
+    <%= link_to line_item_path(id: line_item.id), method: :delete, class: "close general-cart-close" do %>
     <span aria-hidden="true">&times;</span>
     <% end %>
   </td>

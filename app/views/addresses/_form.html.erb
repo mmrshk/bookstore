@@ -13,17 +13,10 @@
       <div class="visible-xs visible-sm">
         <h3 class="general-subtitle mt-0"><%= cast.capitalize %> Address</h3>
       </div>
-      <%= simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |f| %>
-        <%= f.error_notification %>
-        <%= f.input :firstname, class: "form-control", placeholder: "First Name" %>
-        <%= f.input :lastname, class: "form-control", placeholder: "Last Name" %>
-        <%= f.input :address, class: "form-control", placeholder: "Address" %>
-        <%= f.input :city, class: "form-control", placeholder: "City" %>
-        <%= f.input :zip, class: "form-control", placeholder: "Zip" %>
-        <%= f.input :country, class: "form-control", placeholder: "Country" %>
-        <%= f.input :phone, class: "form-control", placeholder: "Phone" %>
-        <%= f.input :cast, :as => :hidden, :input_html => { :value => cast } %>
-        <%= f.button :submit, "Save", class:"btn btn-default btn" %>
+      <%= simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |ff| %>
+        <%= ff.error_notification %>
+        <%= render 'addresses/form_fields', f:ff, cast: cast%>
+        <%= ff.button :submit, "Save", class:"btn btn-default btn" %>
       <% end %>
     </div>
   <% end %>

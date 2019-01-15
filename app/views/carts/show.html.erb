@@ -3,7 +3,7 @@
   <div class="visible-xs">
     <div class="general-cart-item divider-lg-bottom">
       <div class="general-cart-item divider-lg-bottom">
-        <% @cart.line_items.each do |line_item| %>
+        <% @order.line_items.each do |line_item| %>
           <button type="button" aria-label="Close" class="close general-cart-close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -24,11 +24,11 @@
                 <span class="in-grey-600">Quantity</span></td>
               <td>
                 <div class="input-group">
-                  <%= link_to line_item_path(quantity: :decrease), class: "input-link" do %>
+                  <%= link_to line_item_path(id: line_item.id, quantity: :decrease), class: "input-link" do %>
                     <i class="fa fa-minus line-heaght-40"></i>
                   <% end %>
                   <input type="text" class="form-control quantity-input" value="<%= line_item.quantity %>"/>
-                  <%= link_to line_item_path(quantity: :increase), class: "input-link" do %>
+                  <%= link_to line_item_path(id: line_item.id, quantity: :increase), class: "input-link" do %>
                     <i class="fa fa-plus line-heaght-40"></i>
                   <% end %>
                 </div>
@@ -59,7 +59,7 @@
           <span class="in-grey-600">SubTotal</span></th>
         <th class="col-close"></th>
       </tr>
-      <%= render(@cart.line_items) %>
+      <%= render(@order.line_items) %>
     </table>
   </div>
   <div class="general-order-wrap">
@@ -68,7 +68,7 @@
         <div class="input-group general-input-group">
           <label class="input-label">Enter Your Coupon Code</label>
           <div class="input-group general-input-group">
-            <%= simple_form_for @cart do |f| %>
+            <%= simple_form_for cart_path, method: :put do |f| %>
               <%= f.input :coupon_id, :input_html => { class: "form-control mb-30" }, placeholder: "Enter Your Coupon Code ", label: false %>
               <div>
                 <%= f.button :submit, class:"btn btn-primary mr-5 mb-15", value: "Apply Coupon"%>
@@ -77,39 +77,8 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-8">
-        <div class="res-mr-200 text-center general-text-right">
-          <p class="in-gold-500 font-18 general-text-right">Order Summary</p>
-          <table class="general-summary-table general-summary-table-right general-text-right">
-            <tr>
-              <td>
-                <p class="font-16">Subtotal:</p>
-              </td>
-              <td>
-                <p class="font-16"><%= number_to_currency(@subtotal, unit: "€") %></p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p class="font-16">Coupon:</p>
-              </td>
-              <td>
-                <p class="font-16"><%= number_to_currency(@discount, unit: "€") %></p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong class="font-18">Order Total:</strong>
-              </td>
-              <td>
-                <strong class="font-18"><%= number_to_currency(@total_price, unit: "€") %></strong>
-              </td>
-            </tr>
-          </table>
-          <button class="btn btn-default mb-20 visible-xs-inline-block">Checkout</button>
-        </div>
-      </div>
+      <%= render 'order_summary' %>
     </div>
   </div>
-  <button class="btn btn-default mb-20 hidden-xs center-block">Checkout</button>
+  <%= button_to "Checkout", checkout_path(:login), class:"btn btn-default mb-20 hidden-xs center-block" %>
 </main>
