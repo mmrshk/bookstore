@@ -5,7 +5,7 @@
       <p class="font-16">Item Total:</p>
     </td>
     <td>
-      <p class="font-16"><%= number_to_currency(total_price_init, unit: "€") %></p>
+      <p class="font-16"><%= number_to_currency(total_price_init(current_order), unit: "€") %></p>
     </td>
     </tr>
     <tr>
@@ -13,7 +13,7 @@
       <p class="font-16">Order Total:</p>
     </td>
     <td>
-      <p class="font-16"><%= number_to_currency(total_price_init, unit: "€") %></p>
+      <p class="font-16"><%= number_to_currency(total_price_init(current_order), unit: "€") %></p>
     </td>
   </tr>
 </table>

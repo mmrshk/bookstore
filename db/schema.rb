@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_14_102453) do
+ActiveRecord::Schema.define(version: 2019_01_16_121102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,10 +110,11 @@ ActiveRecord::Schema.define(version: 2019_01_14_102453) do
     t.string "card_numder", null: false
     t.string "name", null: false
     t.integer "cvv", null: false
-    t.integer "expiration_month", null: false
-    t.integer "expiration_year", null: false
+    t.string "expiration_month_year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "deliveries", force: :cascade do |t|
@@ -142,8 +143,10 @@ ActiveRecord::Schema.define(version: 2019_01_14_102453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "coupon_id"
+    t.bigint "delivery_id"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["credit_card_id"], name: "index_orders_on_credit_card_id"
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -171,6 +174,9 @@ ActiveRecord::Schema.define(version: 2019_01_14_102453) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "orders"
+  add_foreign_key "orders", "credit_cards"
+  add_foreign_key "orders", "deliveries"
 end

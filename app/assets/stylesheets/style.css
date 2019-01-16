@@ -7568,9 +7568,7 @@ button.close {
 }
 
 .center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: center;
 }
 
 .pull-right {

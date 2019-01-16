@@ -1,0 +1,15 @@
+%tr
+  %td
+    %p.font-16 Item Total:
+  %td
+    %p.font-16= number_to_currency(subtotal_price_init(current_order), unit: "€")
+%tr
+  %td
+    %p.font-16 Coupone:
+  %td
+    %p.font-16= number_to_currency(discount(current_order), unit: "€")
+%tr
+  %td
+    %strong.font-18 Order Total:
+  %td
+    %strong.font-18= number_to_currency(total_price_init(current_order), unit: "€")

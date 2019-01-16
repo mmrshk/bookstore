@@ -80,5 +80,7 @@
       <%= render 'order_summary' %>
     </div>
   </div>
-  <%= button_to "Checkout", checkout_path(:login), class:"btn btn-default mb-20 hidden-xs center-block" %>
+  <div class="center-block">
+    <%= link_to "Checkout", checkout_path(:login, destination: 'login'), class:"btn btn-default mb-20 hidden-xs center-block" %>
+  </div>
 </main>

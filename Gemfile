@@ -27,6 +27,8 @@ gem 'country_select', '~> 3.1', '>= 3.1.1'
 gem 'aasm'
 gem 'cancancan', '~> 2.0'
 gem 'wicked'
+gem 'haml', '~> 5.0', '>= 5.0.3'
+gem 'haml-rails', '~> 1.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

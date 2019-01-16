@@ -4,5 +4,4 @@ class Delivery < ApplicationRecord
   validates :name, uniqueness: true
   validates :name, length: { maximum: 50 }
   validates :price, numericality: true
-
 end

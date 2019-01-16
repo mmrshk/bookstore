@@ -7,7 +7,7 @@
           <p class="font-16">Subtotal:</p>
         </td>
         <td>
-          <p class="font-16"><%= number_to_currency(subtotal_price_init, unit: "€") %></p>
+          <p class="font-16"><%= number_to_currency(subtotal_price_init(@order), unit: "€") %></p>
         </td>
       </tr>
       <tr>
@@ -15,7 +15,7 @@
           <p class="font-16">Coupon:</p>
         </td>
         <td>
-          <p class="font-16"><%= number_to_currency(discount, unit: "€") %></p>
+          <p class="font-16"><%= number_to_currency(discount(@order), unit: "€") %></p>
         </td>
       </tr>
       <tr>
@@ -23,7 +23,7 @@
           <strong class="font-18">Order Total:</strong>
         </td>
         <td>
-          <strong class="font-18"><%= number_to_currency(total_price_init, unit: "€") %></strong>
+          <strong class="font-18"><%= number_to_currency(total_price_init(@order), unit: "€") %></strong>
         </td>
       </tr>
     </table>

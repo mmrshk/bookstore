@@ -1,23 +1,30 @@
 module CheckoutHelper
-  def subtotal_price_init
-    set_order.total_price
+  def step_state(current_step)
+    return 'active' if step_active?(current_step)
+    'done' if step_done?(current_step)
   end
 
-  def total_price_init
-    return set_order.total_price unless set_order.coupon
-
-    set_order.total_price  - discount
+  def step_active?(current_step)
+    current_step == step
   end
 
-  def discount
-    return 0 unless set_order.coupon
-
-    set_order.total_price * set_order.coupon.sale / 100
+  def step_done?(current_step)
+    past_step?(current_step)
   end
 
-  private
+  def subtotal_price_init(order)
+    order.total_price
+  end
 
-  def set_order
-    Order.find_by(id: session[:order_id])
+  def total_price_init(order)
+    return order.total_price unless order.coupon
+
+    order.total_price  - discount(order)
+  end
+
+  def discount(order)
+    return 0 unless order.coupon
+
+    order.total_price * order.coupon.sale / 100
   end
 end
