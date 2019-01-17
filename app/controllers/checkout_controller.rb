@@ -57,7 +57,6 @@ class CheckoutController < ApplicationController
   end
 
   def update_addresses
-    binding.pry
     @addresses = Address.new(addresses_params)
     render_wizard unless @addresses.save
   end

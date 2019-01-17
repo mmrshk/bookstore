@@ -1,7 +1,7 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Checkout
   = render 'steps'
-  = simple_form_for @addresses, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
+  = form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
