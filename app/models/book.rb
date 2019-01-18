@@ -13,7 +13,7 @@ class Book < ApplicationRecord
 
   validates :title, :price, :quantity,:dimension_h, :dimension_w, :dimension_d, presence: true
   validates :year, numericality: { less_than_or_equal_to: Time.current.year }
-  validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX, too_long: "#{count} characters is the maximum allowed." }
+  #validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX, too_long: "#{count} characters is the maximum allowed." }
   validates :price, numericality: { only_integer: true }, length: { maximum: PRICE_LENGTH_MAX}
 
   scope :pop_first, -> { order('created_at DESC') }

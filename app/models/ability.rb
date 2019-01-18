@@ -12,6 +12,7 @@ class Ability
       can %i[create update], Address, addressable_type: 'User', addressable_id: user.id
       can %i[create update], [Order, CreditCard], user_id: user.id
       can %i[create update destroy], LineItem
+      can %i[update], Book
       #can %i[update destroy], LineItem, id: session[:book_id].to_a
       can :manage, User, id: user.id
     else

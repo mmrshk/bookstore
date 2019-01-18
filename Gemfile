@@ -29,6 +29,7 @@ gem 'cancancan', '~> 2.0'
 gem 'wicked'
 gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
+gem 'coffee-rails', '~> 4.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,0 +1,33 @@
+%main.container
+  %h1.general-title-margin Checkout
+  = render 'steps'
+  = simple_form_for @addresses, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
+    .hidden-xs.hidden-sm
+      .row
+        = Address.casts.each_key do |cast|
+          .col-md-5
+            %h3.general-subtitle.mt-0
+              = cast.capitalize
+              Address
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0 Billing Address
+        = form.simple_fields_for(current_user.addresses.find_or_initialize_by(cast: "billing")) do |ff|
+          = ff.error_notification
+          = render 'addresses/form_fields', f:ff, cast: "billing"
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0 Shipping Address
+        = form.simple_fields_for(current_user.addresses.find_or_initialize_by(cast: "shipping")) do |ff|
+          = ff.error_notification
+          = render 'addresses/form_fields', f:ff, cast: "shipping"
+    .form-group.checkbox
+      %label.checkbox-label
+        %input.checkbox-input{:hidden => "true", :type => "checkbox"}/
+        %span.checkbox-icon
+          %i.fa.fa-check
+        %span.checkbox-text Use Billing Adress
+    = render 'order_total'
+    .center-block
+      = form.button :submit, "Save and Continue", class:"btn btn-default mb-20"

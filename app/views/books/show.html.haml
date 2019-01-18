@@ -1,0 +1,36 @@
+%main.container
+  = link_to :back, class: "general-back-link" do
+    %i.fa.fa-long-arrow-left.mr-15
+    Back to results
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+    .col-sm-6
+      %h1.mt-res-0= @book.title
+      %p.lead.small= book_authors(@book)
+      .row
+        = render 'form'
+      .general-info-wrap.divider-lg
+        %p Description
+        %p.lead.small.line-height-2
+          = @book.description
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Year of publication
+          %p.lead.small.pull-right= @book.year
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Dimensions
+          %p.lead.small.pull-right= book_dimensions(@book)
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left Materials
+          %p.lead.small.pull-right= @book.material
+  .mb-80
+    %h3.in-gold-500.mb-25= "Reviews (#{@book.reviews.count})"
+    = render @book.reviews
+    - if user_signed_in?
+      %h3.in-gold-500.mb-25 Write review
+      = render 'reviews/form'

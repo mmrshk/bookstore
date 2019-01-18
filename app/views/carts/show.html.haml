@@ -1,0 +1,60 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin Cart
+  .visible-xs
+    .general-cart-item.divider-lg-bottom
+      .general-cart-item.divider-lg-bottom
+        - @order.line_items.each do |line_item|
+          %button.close.general-cart-close{"aria-label" => "Close", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          .general-img-wrap-table
+            %img.cart-img-shadow{:alt => "design-book", :src => "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg"}/
+          %p.title
+            = line_item.book.title
+          %table.table
+            %tr
+              %td
+                %span.in-grey-600 Price
+              %td
+                %span.font-16.in-gold-500= number_to_currency(line_item.book.price, unit: "€")
+            %tr
+              %td.vertical-middle
+                %span.in-grey-600 Quantity
+              %td
+                .input-group
+                  = link_to line_item_path(id: line_item.id, quantity: :decrease), class: "input-link" do
+                    %i.fa.fa-minus.line-heaght-40
+                  %input.form-control.quantity-input{:type => "text", :value => "#{line_item.quantity}"}/
+                  = link_to line_item_path(id: line_item.id, quantity: :increase), class: "input-link" do
+                    %i.fa.fa-plus.line-heaght-40
+            %tr
+              %td
+                %span.in-grey-600 SubTotal
+              %td
+                %span.font-16.in-gold-500= number_to_currency(line_item.total_price, unit: "€")
+  .hidden-xs
+    %table.table.table-hover
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600 Product
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600 Price
+        %th.col-quantity
+          %span.in-grey-600 Quantity
+        %th.col-total
+          %span.in-grey-600 SubTotal
+        %th.col-close
+      = render(@order.line_items)
+  .general-order-wrap
+    .row
+      .col-sm-4
+        .input-group.general-input-group
+          %label.input-label Enter Your Coupon Code
+          .input-group.general-input-group
+            = simple_form_for cart_path, method: :put do |f|
+              = f.input :coupon_id, :input_html => { class: "form-control mb-30" }, placeholder: "Enter Your Coupon Code ", label: false
+              %div
+                = f.button :submit, class:"btn btn-primary mr-5 mb-15", value: "Apply Coupon"
+      = render 'order_summary'
+  .center-block
+    = link_to "Checkout", checkout_path(:login, destination: 'login'), class:"btn btn-default mb-20 hidden-xs center-block"
