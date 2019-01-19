@@ -6,7 +6,12 @@ ruby '2.5.3'
 gem "font-awesome-rails"
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
+
+# Autentification
 gem 'devise', '~> 4.5'
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 gem 'bootstrap-sass'
