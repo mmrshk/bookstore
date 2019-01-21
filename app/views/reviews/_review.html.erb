@@ -1,7 +1,4 @@
 <% if review.publish == true %>
-<h3 class="in-gold-500 mb-25">
-  Reviews (<%= @book.reviews.where(publish: true).count %>)
-</h3>
 <div class="general-message-wrap divider-lg">
   <div class="clearfix">
     <span class="img-circle logo-size inlide-block pull-left logo-empty"><%= review.name.slice(0,1).capitalize %></span>

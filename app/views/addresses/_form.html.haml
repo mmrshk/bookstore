@@ -1,0 +1,17 @@
+.hidden-xs.hidden-sm
+  .row
+    .col-md-5
+      %h3.general-subtitle.mt-0 Billing Address
+    .col-md-5
+      %h3.general-subtitle.mt-0 Shipping Address
+.row
+  -Address.casts.each_key do |cast|
+    .col-md-5.mb-40
+      .visible-xs.visible-sm
+        %h3.general-subtitle.mt-0
+          = cast.capitalize
+          Address
+      = simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |ff|
+        = ff.error_notification
+        = render 'addresses/form_fields', f:ff, cast: cast
+        = ff.button :submit, "Save", class:"btn btn-default btn"

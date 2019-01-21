@@ -48,6 +48,7 @@ group :development do
   gem 'pry'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'foreman'
+  gem 'ffaker'
 end
 
 group :test do

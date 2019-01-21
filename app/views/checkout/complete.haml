@@ -1,35 +1,27 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Checkout
   = render 'steps'
+  .text-center.mb-40
+    %h3.general-subtitle Thank You for your Order!
+    %p.fw-300= "An order confirmation has been sent to #{current_user.email}"
   .row.mb-20
-    - current_order.addresses.each do |current_address|
-      .col-sm-3
-        %h3.general-subtitle "#{current_address.cast.capitalize} Address"
-        %p.general-address
-          = "#{current_address.firstname} #{current_address.lastname}"
-          = link_to "edit", checkout_path(:addresses), class: "general-edit"
-          %br
-          = current_address.address
-          %br
-          = "#{current_address.city} #{current_address.zip}"
-          %br
-          = current_address.country
-          %br
-          = "Phone #{current_address.phone}"
-    .col-sm-3
-      %h3.general-subtitle Shipments
+    .col-sm-6
+      .visible-xs
+        %p.general-order-number.mb-0= "Order ##{current_order.number}"
+        %p.general-address.mb-30= @order.completed_at.strftime("%B %-d, %Y")
       %p.general-address
-        = current_order.delivery.name
-        = link_to "edit", checkout_path(:delivery), class: "general-edit"
+        = "#{@order.addresses.first.firstname} #{@order.addresses.first.lastname}"
         %br
-        = current_order.delivery.time
-    .col-sm-3
-      %h3.general-subtitle Payment Information
-      %p.general-address
-        = "**** **** **** #{current_order.credit_card.card_numder.last(4)}"
-        = link_to "edit", checkout_path(:payment), class: "general-edit"
+        = @order.addresses.first.address
         %br
-        = current_order.credit_card.expiration_month_year
+        = "#{@order.addresses.first.city} #{@order.addresses.first.zip}"
+        %br
+        = @order.addresses.first.country
+        %br
+        = "Phone #{@order.addresses.first.phone}"
+    .col-sm-6.hidden-xs.text-right
+      %p.general-order-number.mb-0= "Order ##{@order.number}"
+      %p.general-address.mb-30= @order.completed_at.strftime("%B %-d, %Y")
   .visible-xs
     - current_order.line_items.each do |line_item|
       .general-cart-item.divider-lg
@@ -83,6 +75,6 @@
   .text-center.general-text-right
     %p.in-gold-500.font-18 Order Summary
     %table.general-summary-table.general-summary-table-right.general-text-right
-      = render 'order_summary', order: current_order
+      = render 'order_summary', order: @order
   .text-center
-    = button_to "Place Order", wizard_path, method: :put, class: 'btn btn-default mb-20'
+    = link_to "Back to Store", root_path, class: 'btn btn-default mb-20'

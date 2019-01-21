@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_19_072326) do
+ActiveRecord::Schema.define(version: 2019_01_21_174313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2019_01_19_072326) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "number"
     t.decimal "total_price", precision: 6, scale: 2
     t.string "status", default: "open"
     t.bigint "user_id"
@@ -145,6 +146,7 @@ ActiveRecord::Schema.define(version: 2019_01_19_072326) do
     t.datetime "updated_at", null: false
     t.bigint "coupon_id"
     t.bigint "delivery_id"
+    t.datetime "completed_at"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["credit_card_id"], name: "index_orders_on_credit_card_id"
     t.index ["delivery_id"], name: "index_orders_on_delivery_id"

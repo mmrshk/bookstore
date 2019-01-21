@@ -81,7 +81,7 @@
                     = simple_form_for @line_item do |f|
                       = f.input :book_id, :as => :hidden, :input_html => { :value => book.id }
                       = f.input :quantity, :as => :hidden, :input_html => { :value => 1 }
-                      = f.button :submit, class: "thumb-hover-link button-hover"  do
+                      = button_tag(type: 'submit', class: "thumb-hover-link button-hover") do
                         %i.fa.fa-shopping-cart.thumb-icon
           .general-thumb-info
             %p.title= book.title

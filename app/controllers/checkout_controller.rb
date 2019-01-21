@@ -44,7 +44,8 @@ class CheckoutController < ApplicationController
   end
 
   def show_addresses
-    @addresses = Address.new(show_addresses_params)
+    @billing_addresses = Address.new(show_addresses_params)
+    @shipping_addresses = Address.new(show_addresses_params)
   end
 
   def show_payment
@@ -54,23 +55,43 @@ class CheckoutController < ApplicationController
   end
 
   def show_confirm
+    return jump_to(previous_step) unless current_order.credit_card
+  end
+
+  def show_complete
+    return jump_to(previous_step) unless session[:order_complete]
+
+    @order = current_user.orders.in_queue.last
+    session[:order_complete] = false
   end
 
   def update_addresses
-    binding.pry
-    @addresses = Address.new(addresses_params)
-    render_wizard unless @addresses.save
+    @billing_addresses = Address.new(billing_addresses_params)
+    @shipping_addresses = Address.new(shipping_addresses_params)
+
+    render_wizard unless @billing_addresses.save && @shipping_addresses.save
   end
 
   def update_delivery
     current_order.update_attributes(order_params)
-    flash[:warning] = 'Please choose delivery mehod.' if current_order.delivery_id.nil?
+    flash[:warning] = 'Please choose delivery method.' if current_order.delivery_id.nil?
   end
 
   def update_payment
     @credit_card = CreditCard.new(credit_card_params)
     render_wizard unless @credit_card.save
     current_order.update_attributes(credit_card_id: @credit_card.id)
+  end
+
+  def update_confirm
+    session[:order_complete] = true
+    current_order.place_in_queue
+    session[:order_id] = nil
+    session[:order_item_ids] = nil
+    session[:coupon_id] = nil
+  end
+
+  def update_complete
   end
 
   def set_order
@@ -97,7 +118,13 @@ class CheckoutController < ApplicationController
     params.require(:credit_card).permit(:name, :card_numder, :cvv, :expiration_month_year)
   end
 
-  def addresses_params
-    params.require(:address).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast)
+  def billing_addresses_params
+    billing_addresses_params = params[:order][:billing_addresses].keys
+    params.require(:order).permit(billing_addresses: billing_addresses_params)[:billing_addresses]
+  end
+
+  def shipping_addresses_params
+    shipping_addresses_params = params[:order][:shipping_addresses].keys
+    params.require(:order).permit(shipping_addresses: shipping_addresses_params)[:shipping_addresses]
   end
 end

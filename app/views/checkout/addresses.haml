@@ -1,7 +1,7 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Checkout
   = render 'steps'
-  = form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
+  = simple_form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -15,12 +15,12 @@
           %h3.general-subtitle Billing Address
           %p.general-info-text all fields are required
 
-        = form.simple_fields_for :addresses, Address.new(cast: :shipping) do |ff|
+        = form.simple_fields_for :shipping_addresses, Address.new(cast: :shipping) do |ff|
           = render 'addresses/form_fields', f: ff, cast: :shipping
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle Shipping Address
-        = form.simple_fields_for :addresses, Address.new(cast: :billing) do |ff|
+        = form.simple_fields_for :billing_addresses, Address.new(cast: :billing) do |ff|
           = render 'addresses/form_fields', f: ff, cast: :billing
     .general-text-align.mb-60
       %p.in-gold-500.font-18 Order Summary
