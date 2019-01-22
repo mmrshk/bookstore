@@ -3,7 +3,7 @@
   = render 'steps'
   %h3.general-subtitle Credit Card
   = simple_form_for @credit_card, url: wizard_path, method: :put, html: {class: 'max-600'} do |form|
-    = form.input :card_numder, required: false, label: 'Card Number', placeholder: 'Card Number'
+    = form.input :card_number, required: false, label: 'Card Number', placeholder: 'Card Number'
     .row
       .col-sm-6
         = form.input :name, required: false, placeholder: 'Name on Card'

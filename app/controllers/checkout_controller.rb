@@ -69,7 +69,7 @@ class CheckoutController < ApplicationController
     @billing_addresses = Address.new(billing_addresses_params)
     @shipping_addresses = Address.new(shipping_addresses_params)
 
-    render_wizard unless @billing_addresses.save && @shipping_addresses.save
+    render_wizard if !@billing_addresses.save || !@shipping_addresses.save
   end
 
   def update_delivery
@@ -87,15 +87,12 @@ class CheckoutController < ApplicationController
     session[:order_complete] = true
     current_order.place_in_queue
     session[:order_id] = nil
-    session[:order_item_ids] = nil
+    session[:line_item_ids] = nil
     session[:coupon_id] = nil
   end
 
-  def update_complete
-  end
-
   def set_order
-    return if session[:order_id]
+    return if session[:order_id] || %i[login complete].include?(step)
 
     @order = Order.new(line_item_ids: session[:line_item_ids],
                        coupon_id: session[:coupon_id],
@@ -115,7 +112,7 @@ class CheckoutController < ApplicationController
   end
 
   def credit_card_params
-    params.require(:credit_card).permit(:name, :card_numder, :cvv, :expiration_month_year)
+    params.require(:credit_card).permit(:name, :card_number, :cvv, :expiration_month_year)
   end
 
   def billing_addresses_params

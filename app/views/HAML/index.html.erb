@@ -16,7 +16,7 @@
             <div class="col-sm-7">
               <div class="mb-60">
                 <h1><%= book.title %></h1>
-                <p class="lead"><%= book.description %></p>
+                <p class="lead"><%= truncate(book.description, length: 150) %></p>
                 <p class="lead small"><% book.authors.each do |author| %> <% author.firstname %> <% author.lastname %> <% end %></p>
                 <div class="general-align">
                   <button class="btn btn-primary">Buy Now</button></div>

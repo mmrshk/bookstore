@@ -8,7 +8,9 @@ class Order < ApplicationRecord
   has_many :addresses, as: :addressable
 
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
-  
+
+  scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
+
   after_create :set_number_and_status
 
   def place_in_queue

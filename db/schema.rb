@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_174313) do
   end
 
   create_table "credit_cards", force: :cascade do |t|
-    t.string "card_numder", null: false
+    t.string "card_number", null: false
     t.string "name", null: false
     t.integer "cvv", null: false
     t.string "expiration_month_year", null: false
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_174313) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.decimal "total_price", precision: 6, scale: 2
-    t.string "status", default: "open"
+    t.integer "status"
     t.bigint "user_id"
     t.bigint "credit_card_id"
     t.datetime "created_at", null: false

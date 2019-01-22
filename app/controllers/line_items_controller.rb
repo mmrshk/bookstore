@@ -13,8 +13,28 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    @line_item = LineItem.create(line_item_params)
-    line_item_ids << @line_item.id
+    # puts '.........................> '
+    # puts params[:line_item][:quantity].to_i
+    #
+    # @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]) do |item|
+    #   puts '.........................> '
+    #   puts item.quantity
+    #   item.quantity += params[:line_item][:quantity].to_i
+    #   puts '.........................> '
+    #   puts item.quantity
+    # end
+    #
+    # @line_item.save!
+
+    @line_item = LineItem.where(book_id: params[:line_item][:book_id]).first_or_create do |item|
+      item.book_id = params[:line_item][:book_id]
+      item.quantity = 0
+    end
+
+    @line_item.quantity += params[:line_item][:quantity].to_i
+    @line_item.save!
+
+    line_item_ids << @line_item.id unless line_item_ids.include?(@line_item.id)
 
     redirect_to cart_path
   end
@@ -22,7 +42,7 @@ class LineItemsController < ApplicationController
   def update
     @line_item.update_attributes(line_item_params)
     @line_items = LineItem.where(id: line_item_ids)
-    
+
     redirect_to cart_path
   end
 

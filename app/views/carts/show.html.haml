@@ -7,7 +7,7 @@
           %button.close.general-cart-close{"aria-label" => "Close", :type => "button"}
             %span{"aria-hidden" => "true"} ×
           .general-img-wrap-table
-            %img.cart-img-shadow{:alt => "design-book", :src => "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg"}/
+            %img.cart-img-shadow{:alt => "design-book", :src => "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg"}
           %p.title
             = line_item.book.title
           %table.table
@@ -55,6 +55,11 @@
               = f.input :coupon_id, :input_html => { class: "form-control mb-30" }, placeholder: "Enter Your Coupon Code ", label: false
               %div
                 = f.button :submit, class:"btn btn-primary mr-5 mb-15", value: "Apply Coupon"
-      = render 'order_summary'
+      .col-sm-8
+        .res-mr-200.text-center.general-text-right
+          %p.in-gold-500.font-18.general-text-right Order Summary
+          %table.general-summary-table.general-summary-table-right.general-text-right
+            = render 'order_summary'
+          %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
   .center-block
     = link_to "Checkout", checkout_path(:login, destination: 'login'), class:"btn btn-default mb-20 hidden-xs center-block"
