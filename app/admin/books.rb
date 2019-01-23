@@ -1,5 +1,5 @@
 ActiveAdmin.register Book do
-  permit_params :title, :description, :price, :quantity, :category_id, :year, :dimension_d, :dimension_h, :dimension_w, :material
+  permit_params :title, :description, :price, :quantity, :category_id, :year, :dimension_d, :dimension_h, :dimension_w, :material, :image
 
   form do |f|
     f.semantic_errors
@@ -15,6 +15,9 @@ ActiveAdmin.register Book do
       f.input :dimension_h
       f.input :material
       f.input :author_ids, :label => 'Authors', as: :check_boxes, collection: Author.all.map{|a| ["#{a.firstname} #{a.lastname}", a.id]}
+      f.inputs "Image", :multipart => true do
+        f.input :image, as: :file
+      end
     end
     f.actions
   end

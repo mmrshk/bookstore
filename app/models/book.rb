@@ -1,6 +1,8 @@
 class Book < ApplicationRecord
   before_destroy :not_referenced_by_any_line_item
 
+  mount_uploader :image, ImageUploader
+
   FILTERS = %i[newest pop_first by_title_asc by_title_desc price_asc price_desc].freeze
   DEFAULT_FILTER = :newest
   DESCRIPTION_LENGTH_MAX = 2000

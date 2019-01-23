@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 4.times do
   User.create!(email: FFaker::Internet.safe_email,
@@ -41,7 +41,7 @@ end
 
 used_book_titles = []
 
-50.times do |index|
+20.times do |index|
   title = FFaker::Book.title
   used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
 
@@ -55,6 +55,7 @@ used_book_titles = []
               year: rand(2001..2019),
               material: FFaker::Lorem.words.join(', '),
               category_id: categories.sample.id,
+              image: "https://share.icloud.com/photos/0Xf7NtQooqrl8izN1j7AG8zOA"
               )
 end
 

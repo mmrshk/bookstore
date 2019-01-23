@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_174313) do
+ActiveRecord::Schema.define(version: 2019_01_23_080841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_174313) do
     t.decimal "dimension_w", precision: 5, scale: 2
     t.decimal "dimension_d", precision: 5, scale: 2
     t.string "material"
+    t.json "image"
   end
 
   create_table "carts", force: :cascade do |t|

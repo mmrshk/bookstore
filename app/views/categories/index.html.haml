@@ -72,7 +72,8 @@
         .col-xs-6.col-sm-3
           .general-thumb-wrap
             .general-thumbnail.thumbnail-main
-              %img.img-shadow.general-thumbnail-img{:alt => "design-book", :src => "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg"}/
+              = link_to book.image.url do
+                = image_tag book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
               .thumb-hover
                 .general-thumb-link-wrap
                   = link_to book_path(book), class:"thumb-hover-link" do

@@ -47,6 +47,9 @@ gem 'haml-rails', '~> 1.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'mailcatcher'
 
+gem 'carrierwave'
+gem 'mini_magick'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
