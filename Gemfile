@@ -45,7 +45,6 @@ gem 'wicked'
 gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'mailcatcher'
 
 gem 'carrierwave'
 gem 'mini_magick'
