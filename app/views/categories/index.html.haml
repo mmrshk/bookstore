@@ -90,8 +90,6 @@
               € #{book.price}
             %span.divider-sm
             %p.lead.small
-              - book.authors.each do |author|
-                = author.firstname
-                = author.lastname
+              = book_authors(book)
   .text-center
     = pagy_nav_bootstrap(@pagy).html_safe

@@ -15,15 +15,17 @@ class LineItemsController < ApplicationController
   def create
     # puts '.........................> '
     # puts params[:line_item][:quantity].to_i
+    # puts params[:line_item][:book_id]
     #
     # @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]) do |item|
     #   puts '.........................> '
     #   puts item.quantity
+    #   item.quantity = 0
     #   item.quantity += params[:line_item][:quantity].to_i
     #   puts '.........................> '
     #   puts item.quantity
     # end
-    #
+
     # @line_item.save!
 
     @line_item = LineItem.where(book_id: params[:line_item][:book_id]).first_or_create do |item|
@@ -33,7 +35,6 @@ class LineItemsController < ApplicationController
 
     @line_item.quantity += params[:line_item][:quantity].to_i
     @line_item.save!
-
     line_item_ids << @line_item.id unless line_item_ids.include?(@line_item.id)
 
     redirect_to cart_path

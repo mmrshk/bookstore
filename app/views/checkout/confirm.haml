@@ -31,11 +31,11 @@
         %br
         = current_order.credit_card.expiration_month_year
   .visible-xs
-    - @order.line_items.each do |line_item|
+    - current_order.line_items.each do |line_item|
       .general-cart-item.divider-lg
         .general-img-wrap-table
-          = link_to book.image.url do
-            = image_tag book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+          = link_to line_item.book.image.url do
+            = image_tag line_item.book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
         %p.title= line_item.book.title
         %table.table
           %tr
@@ -71,8 +71,8 @@
           %tr
             %td
               .general-img-wrap-table
-                = link_to book.image.url do
-                  = image_tag book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+                = link_to line_item.book.image.url do
+                  = image_tag line_item.book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
             %td
               %p.title= line_item.book.title
               %p.in-grey-600.fw-300= line_item.book.description.split('.').first

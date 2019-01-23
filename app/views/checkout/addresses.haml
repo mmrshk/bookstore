@@ -15,13 +15,19 @@
           %h3.general-subtitle Billing Address
           %p.general-info-text all fields are required
 
-        = form.simple_fields_for :shipping_addresses, Address.new(cast: :shipping) do |ff|
-          = render 'addresses/form_fields', f: ff, cast: :shipping
+        = form.simple_fields_for :billing_addresses do |ff|
+          = render 'addresses/form_fields', f: ff, cast: :billing
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle Shipping Address
-        = form.simple_fields_for :billing_addresses, Address.new(cast: :billing) do |ff|
-          = render 'addresses/form_fields', f: ff, cast: :billing
+        = form.simple_fields_for :shipping_addresses, class: 'billing_addresses' do |ff|
+          = render 'addresses/form_fields', f: ff, cast: :shipping
+        .form-group.checkbox
+          %label.checkbox-label
+            = form.check_box :use_billing, class: 'checkbox-input', id: 'use_billing', hidden: true
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text= 'Use Billing Adress'
     .general-text-align.mb-60
       %p.in-gold-500.font-18 Order Summary
       %table.general-summary-table

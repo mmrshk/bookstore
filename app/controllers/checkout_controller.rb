@@ -5,7 +5,7 @@ class CheckoutController < ApplicationController
   steps :login, :addresses, :delivery, :payment, :confirm, :complete
 
   def show
-    return redirect_to root_path if session[:line_item_ids].nil? && step == :address
+    return redirect_to root_path if session[:line_item_ids].nil? && step == :addresses
 
     case step
     when :login then login
@@ -66,8 +66,8 @@ class CheckoutController < ApplicationController
   end
 
   def update_addresses
-    @billing_addresses = Address.new(billing_addresses_params)
-    @shipping_addresses = Address.new(shipping_addresses_params)
+    @billing_addresses = Address.new(params_for(:billing_addresses))
+    @shipping_addresses = use_type_billing?
 
     render_wizard if !@billing_addresses.save || !@shipping_addresses.save
   end
@@ -115,13 +115,18 @@ class CheckoutController < ApplicationController
     params.require(:credit_card).permit(:name, :card_number, :cvv, :expiration_month_year)
   end
 
-  def billing_addresses_params
-    billing_addresses_params = params[:order][:billing_addresses].keys
-    params.require(:order).permit(billing_addresses: billing_addresses_params)[:billing_addresses]
+  def use_type_billing?
+    return Address.new(params_for(:shipping_addresses)) if params[:order][:use_billing] != '1'
+
+    shipping_addresses = Address.new(params_for(:billing_addresses))
+    shipping_addresses.cast = :shipping
+    shipping_addresses
   end
 
-  def shipping_addresses_params
-    shipping_addresses_params = params[:order][:shipping_addresses].keys
-    params.require(:order).permit(shipping_addresses: shipping_addresses_params)[:shipping_addresses]
+  def params_for(type)
+    type = params[:order][:use_billing] == '1' ? :billing_addresses : type
+
+    return params.require(:order).permit(billing_addresses: params[:order][type].keys)[type] if type == :billing_addresses
+    params.require(:order).permit(shipping_addresses: params[:order][type].keys)[type] if type == :shipping_addresses
   end
 end

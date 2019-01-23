@@ -10,6 +10,7 @@ class Order < ApplicationRecord
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
+  scope :payed,  -> { where.not status: %w[in_progress canceled] }
 
   after_create :set_number_and_status
 

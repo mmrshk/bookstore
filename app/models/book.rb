@@ -1,6 +1,4 @@
 class Book < ApplicationRecord
-  before_destroy :not_referenced_by_any_line_item
-
   mount_uploader :image, ImageUploader
 
   FILTERS = %i[newest pop_first by_title_asc by_title_desc price_asc price_desc].freeze
@@ -15,7 +13,7 @@ class Book < ApplicationRecord
 
   validates :title, :price, :quantity,:dimension_h, :dimension_w, :dimension_d, presence: true
   validates :year, numericality: { less_than_or_equal_to: Time.current.year }
-  #validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX, too_long: "#{count} characters is the maximum allowed." }
+  validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX }
   validates :price, numericality: { only_integer: true }, length: { maximum: PRICE_LENGTH_MAX}
 
   scope :pop_first, -> { order('created_at DESC') }
@@ -26,12 +24,9 @@ class Book < ApplicationRecord
   scope :price_desc, -> { order('price DESC') }
   scope :by_filter, ->(filter) { public_send(filter) }
 
-  private
-
-  def not_referenced_by_any_line_item
-    unless line_items.empty?
-      errors.add(:base, "Line item present")
-      throw :abort
-    end
+  def self.best_sellers
+    best = Order.payed.joins(:line_items).group(:book_id)
+                .order('sum("line_items"."quantity") DESC').count.keys
+    Book.find(best)
   end
 end

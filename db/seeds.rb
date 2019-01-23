@@ -16,7 +16,7 @@ end
 user = User.last
 users = User.all
 
-['Mobile development', 'Photo', 'Web development'].each do |category|
+['Mobile development', 'Photo', 'Web development', 'Web design'].each do |category|
   Category.create(title: category)
 end
 
