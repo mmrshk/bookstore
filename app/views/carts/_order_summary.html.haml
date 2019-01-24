@@ -2,14 +2,14 @@
   %td
     %p.font-16 Subtotal:
   %td
-    %p.font-16= number_to_currency(subtotal_price_init(@order), unit: "€")
+    %p.font-16= number_to_euro subtotal_price_init(@order)
 %tr
   %td
     %p.font-16 Coupon:
   %td
-    %p.font-16= number_to_currency(discount(@order), unit: "€")
+    %p.font-16= number_to_euro discount(@order)
 %tr
   %td
     %strong.font-18 Order Total:
   %td
-    %strong.font-18= number_to_currency(total_price_init(@order), unit: "€")
+    %strong.font-18= number_to_euro total_price_init(@order)

@@ -39,7 +39,7 @@
             %td
               %span.in-grey-600 Total
             %td
-              %strong.font-16= number_to_currency(order.total_price, unit: "€")
+              %strong.font-16= number_to_euro order.total_price
 
   .hidden-xs.mb-res-50
     %table.table.table-hover
@@ -64,4 +64,4 @@
             %td
               %span.font-16.in-grey-900.fw-300= order.status.capitalize
             %td
-              %strong.font-16=  number_to_currency(order.total_price, unit: "€")
+              %strong.font-16=  number_to_euro order.total_price

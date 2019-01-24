@@ -42,7 +42,7 @@
             %td
               %span.in-grey-600 Price
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.book.price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.book.price
           %tr
             %td.vertical-middle
               %span.in-grey-600 Quantity
@@ -52,7 +52,7 @@
             %td
               %span.in-grey-600 SubTotal
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.total_price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.total_price
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       %thead
@@ -77,11 +77,11 @@
               %p.title= line_item.book.title
               %p.in-grey-600.fw-300= line_item.book.description.split('.').first
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.book.price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.book.price
             %td
               %span.ml-30= line_item.quantity
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.total_price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.total_price
   .text-center.general-text-right
     %p.in-gold-500.font-18 Order Summary
     %table.general-summary-table.general-summary-table-right.general-text-right

@@ -34,7 +34,7 @@
             %td
               %span.in-grey-600 Price
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.book.price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.book.price
           %tr
             %td.vertical-middle
               %span.in-grey-600 Quantity
@@ -44,7 +44,7 @@
             %td
               %span.in-grey-600 SubTotal
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.total_price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.total_price
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       %thead
@@ -59,24 +59,24 @@
           %th
             %span.in-grey-600 Total
       %tbody
-        - current_order.line_items.each do |line_item|
+        - current_user.orders.last.line_items.each do |line_item|
           %tr
             %td
               .general-img-wrap-table
-                = link_to book.image.url do
-                  = image_tag book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+                = link_to line_item.book.image.url do
+                  = image_tag line_item.book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
             %td
               %p.title= line_item.book.title
               %p.in-grey-600.fw-300= line_item.book.description.split('.').first
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.book.price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.book.price
             %td
               %span.ml-30= line_item.quantity
             %td
-              %span.font-16.in-gold-500= number_to_currency(line_item.total_price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro line_item.total_price
   .text-center.general-text-right
     %p.in-gold-500.font-18 Order Summary
     %table.general-summary-table.general-summary-table-right.general-text-right
-      = render 'order_summary', order: @order
+      = render 'order_summary', order: current_order
   .text-center
     = link_to "Back to Store", root_path, class: 'btn btn-default mb-20'

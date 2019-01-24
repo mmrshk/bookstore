@@ -13,37 +13,13 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    # puts '.........................> '
-    # puts params[:line_item][:quantity].to_i
-    # puts params[:line_item][:book_id]
-    #
-    # @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]) do |item|
-    #   puts '.........................> '
-    #   puts item.quantity
-    #   item.quantity = 0
-    #   item.quantity += params[:line_item][:quantity].to_i
-    #   puts '.........................> '
-    #   puts item.quantity
-    # end
-
-    # @line_item.save!
-
-    @line_item = LineItem.where(book_id: params[:line_item][:book_id]).first_or_create do |item|
-      item.book_id = params[:line_item][:book_id]
-      item.quantity = 0
+    begin
+      existed_line_item = LineItem.where(id: line_item_ids).find_by(book_id: @line_item.book_id)
+      existed_line_item.quantity += @line_item.quantity
+      existed_line_item.save!
+    rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordNotUnique, NoMethodError
+      create_new_line_item
     end
-
-    @line_item.quantity += params[:line_item][:quantity].to_i
-    @line_item.save!
-    line_item_ids << @line_item.id unless line_item_ids.include?(@line_item.id)
-
-    redirect_to cart_path
-  end
-
-  def update
-    @line_item.update_attributes(line_item_params)
-    @line_items = LineItem.where(id: line_item_ids)
-
     redirect_to cart_path
   end
 
@@ -56,13 +32,19 @@ class LineItemsController < ApplicationController
   end
 
   private
+  
+  def create_new_line_item
+    @line_item = LineItem.create(line_item_params)
+    @line_item.save!
+    line_item_ids << @line_item.id
+  end
 
   def line_item_ids
     session[:line_item_ids] ||= []
   end
 
   def line_item_params
-    params.require(:line_item).permit(:book_id, :quantity)
+    params.require(:line_item).permit(:quantity, :book_id)
   end
 
   def quantity_change!(current_item)

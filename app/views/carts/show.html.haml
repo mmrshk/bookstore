@@ -17,7 +17,7 @@
               %td
                 %span.in-grey-600 Price
               %td
-                %span.font-16.in-gold-500= number_to_currency(line_item.book.price, unit: "€")
+                %span.font-16.in-gold-500= number_to_euro line_item.book.price
             %tr
               %td.vertical-middle
                 %span.in-grey-600 Quantity
@@ -32,7 +32,7 @@
               %td
                 %span.in-grey-600 SubTotal
               %td
-                %span.font-16.in-gold-500= number_to_currency(line_item.total_price, unit: "€")
+                %span.font-16.in-gold-500= number_to_euro line_item.total_price
   .hidden-xs
     %table.table.table-hover
       %tr.no-hover

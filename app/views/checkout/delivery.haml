@@ -24,7 +24,7 @@
             %td
               %span= option.object.time
             %td
-              %span.font-16.in-gold-500= number_to_currency(option.object.price, unit: "€")
+              %span.font-16.in-gold-500= number_to_euro option.object.price
     .general-text-align
       %p.in-gold-500.font-18 Order Summary
       %table.general-summary-table
