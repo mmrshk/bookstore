@@ -62,6 +62,7 @@ class CheckoutController < ApplicationController
     return jump_to(previous_step) unless session[:order_complete]
 
     @order = current_user.orders.in_queue.last
+    OrderMailer.confirm_order(current_user).deliver_now
     session[:order_complete] = false
   end
 
