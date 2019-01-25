@@ -96,15 +96,17 @@ Rails.application.configure do
   # Email
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.default_url_options = { :host => 'radiant-plains-48256.heroku.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'localhost',
-    port: 1025,
+    address: 'smtp.gmail.com',
+    port: 587,
     user_name: ENV['SENDMAIL_USERNAME'],
     password: ENV['SENDMAIL_PASSWORD'],
     domain: ENV['MAIL_HOST'],
     authentication: :plain,
     enable_starttls_auto: true
   }
-  config.action_mailer.default_url_options = { :host => 'radiant-plains-48256.heroku.com' }
+
 end
