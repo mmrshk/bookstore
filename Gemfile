@@ -49,6 +49,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'ffaker'
+gem 'figaro'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
