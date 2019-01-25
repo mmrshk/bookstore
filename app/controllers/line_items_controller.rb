@@ -13,13 +13,13 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    begin
-      existed_line_item = LineItem.where(id: line_item_ids).find_by(book_id: @line_item.book_id)
-      existed_line_item.quantity += @line_item.quantity
-      existed_line_item.save!
-    rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordNotUnique, NoMethodError
-      create_new_line_item
+    @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]).tap do |item|
+      item.quantity += params[:line_item][:quantity].to_i
     end
+
+    @line_item.save!
+    create_new_line_item
+
     redirect_to cart_path
   end
 
@@ -32,10 +32,10 @@ class LineItemsController < ApplicationController
   end
 
   private
-  
+
   def create_new_line_item
-    @line_item = LineItem.create(line_item_params)
-    @line_item.save!
+    return if line_item_ids.include?(@line_item.id)
+
     line_item_ids << @line_item.id
   end
 

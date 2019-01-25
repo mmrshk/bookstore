@@ -14,6 +14,14 @@ class Order < ApplicationRecord
 
   after_create :set_number_and_status
 
+  ORDER_FILTERS = {
+    in_queue: 'Waiting for processing',
+    in_delivery: 'In delivery',
+    delivered: 'Delivery',
+    canceled: 'Canceled',
+    all: 'All'
+  }.freeze
+
   def place_in_queue
     update(status: 1, completed_at: Time.current)
   end

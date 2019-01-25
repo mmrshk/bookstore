@@ -1,5 +1,5 @@
 ActiveAdmin.register Book do
-  permit_params :title, :description, :price, :quantity, :category_id, :year, :dimension_d, :dimension_h, :dimension_w, :material, :image
+  permit_params :title, :description, :price, :quantity, :category_id, :year, :dimension_d, :dimension_h, :dimension_w, :material, :image, :author_ids
 
   form do |f|
     f.semantic_errors

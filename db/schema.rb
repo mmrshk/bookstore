@@ -88,11 +88,6 @@ ActiveRecord::Schema.define(version: 2019_01_23_145813) do
     t.json "image"
   end
 
-  create_table "carts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "categories", force: :cascade do |t|
     t.string "title", null: false
     t.datetime "created_at", null: false
@@ -128,8 +123,8 @@ ActiveRecord::Schema.define(version: 2019_01_23_145813) do
 
   create_table "line_items", force: :cascade do |t|
     t.bigint "book_id"
-    t.integer "quantity", default: 1
-    t.integer "integer", default: 1
+    t.integer "quantity", default: 0
+    t.integer "integer", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"

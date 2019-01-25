@@ -3,9 +3,7 @@ class ReviewsController < ApplicationController
 
   before_action :find_book
 
-  def new
-    @review = Review.new
-  end
+  def new; end
 
   def create
     @review = Review.new(review_params)

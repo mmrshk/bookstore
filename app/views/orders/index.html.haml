@@ -34,7 +34,7 @@
             %td
               %span.in-grey-600 Status
             %td
-              %span.font-16.in-grey-900.fw-300= order.status.capitalize
+              %span.font-16.in-grey-900.fw-300= order_status(order)
           %tr
             %td
               %span.in-grey-600 Total
@@ -62,6 +62,6 @@
             %td
               %span.in-grey-900.font-16.fw-300= order.completed_at.strftime("%Y-%m-%d")
             %td
-              %span.font-16.in-grey-900.fw-300= order.status.capitalize
+              %span.font-16.in-grey-900.fw-300= order_status(order)
             %td
               %strong.font-16=  number_to_euro order.total_price

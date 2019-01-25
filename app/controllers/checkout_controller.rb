@@ -68,7 +68,7 @@ class CheckoutController < ApplicationController
 
   def update_addresses
     @billing_addresses = Address.new(params_for(:billing_addresses))
-    @shipping_addresses = use_type_billing?
+    @shipping_addresses = use_type_billing
 
     render_wizard if !@billing_addresses.save || !@shipping_addresses.save
   end
@@ -87,6 +87,7 @@ class CheckoutController < ApplicationController
   def update_confirm
     session[:order_complete] = true
     current_order.place_in_queue
+    current_order.coupon.update_attributes!(active: false) if current_order.coupon
     session[:order_id] = nil
     session[:line_item_ids] = nil
     session[:coupon_id] = nil
@@ -103,6 +104,7 @@ class CheckoutController < ApplicationController
   end
 
   def show_addresses_params
+    @shipping_addresses = current_order.addresses.shipping
     return { addressable_type: "User", addressable_id: current_user.id } if current_order.addresses.empty?
 
     { addressable_type: "Order", addressable_id: current_order.id }
@@ -116,7 +118,7 @@ class CheckoutController < ApplicationController
     params.require(:credit_card).permit(:name, :card_number, :cvv, :expiration_month_year)
   end
 
-  def use_type_billing?
+  def use_type_billing
     return Address.new(params_for(:shipping_addresses)) if params[:order][:use_billing] != '1'
 
     shipping_addresses = Address.new(params_for(:billing_addresses))

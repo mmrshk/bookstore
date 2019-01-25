@@ -1,0 +1,7 @@
+default: &default
+  SENDMAIL_PASSWORD: pronatashu
+  SENDMAIL_USERNAME: emma.yeroshek@gmail.com
+  MAIL_HOST: gmail.com
+
+development:
+  <<: *default
