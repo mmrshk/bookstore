@@ -48,6 +48,7 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'ffaker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -60,7 +61,6 @@ group :development do
   gem 'pry'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'foreman'
-  gem 'ffaker'
 end
 
 group :test do

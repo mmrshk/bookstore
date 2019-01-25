@@ -18,3 +18,4 @@ development:
 production:
   <<: *default
   database: bookstore
+  
