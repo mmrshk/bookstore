@@ -38,14 +38,13 @@ class CheckoutController < ApplicationController
   end
 
   def show_delivery
-    return jump_to(previous_step) unless current_order.addresses.presence
+    return jump_to(previous_step) unless current_user.addresses.presence
 
     @deliveries = Delivery.all
   end
 
   def show_addresses
-    @billing_addresses = Address.new(show_addresses_params)
-    @shipping_addresses = Address.new(show_addresses_params)
+    @addresses = AddressesForm.new(show_addresses_params)
   end
 
   def show_payment
@@ -67,10 +66,9 @@ class CheckoutController < ApplicationController
   end
 
   def update_addresses
-    @billing_addresses = Address.new(params_for(:billing_addresses))
-    @shipping_addresses = use_type_billing
+    @addresses = AddressesForm.new(addresses_params)
 
-    render_wizard if !@billing_addresses.save || !@shipping_addresses.save
+    render_wizard unless @addresses.save
   end
 
   def update_delivery
@@ -104,7 +102,6 @@ class CheckoutController < ApplicationController
   end
 
   def show_addresses_params
-    @shipping_addresses = current_order.addresses.shipping
     return { addressable_type: "User", addressable_id: current_user.id } if current_order.addresses.empty?
 
     { addressable_type: "Order", addressable_id: current_order.id }
@@ -118,18 +115,7 @@ class CheckoutController < ApplicationController
     params.require(:credit_card).permit(:name, :card_number, :cvv, :expiration_month_year)
   end
 
-  def use_type_billing
-    return Address.new(params_for(:shipping_addresses)) if params[:order][:use_billing] != '1'
-
-    shipping_addresses = Address.new(params_for(:billing_addresses))
-    shipping_addresses.cast = :shipping
-    shipping_addresses
-  end
-
-  def params_for(type)
-    type = params[:order][:use_billing] == '1' ? :billing_addresses : type
-
-    return params.require(:order).permit(billing_addresses: params[:order][type].keys)[type] if type == :billing_addresses
-    params.require(:order).permit(shipping_addresses: params[:order][type].keys)[type] if type == :shipping_addresses
+  def addresses_params
+    params.require(:addresses_form)
   end
 end

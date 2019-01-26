@@ -5,8 +5,10 @@ class Order < ApplicationRecord
   belongs_to :credit_card, optional: true
 
   has_many :line_items, dependent: :destroy
-  has_many :addresses, as: :addressable
-
+  has_many :addresses, dependent: :destroy
+  has_one :billing, dependent: :destroy
+  has_one :shipping, dependent: :destroy
+  
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }

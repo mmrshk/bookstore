@@ -25,7 +25,7 @@
                 .input-group
                   = link_to line_item_path(id: line_item.id, quantity: :decrease), class: "input-link" do
                     %i.fa.fa-minus.line-heaght-40
-                  %input.form-control.quantity-input{:type => "text", :value => "#{line_item.quantity}"}/
+                  %input.form-control.quantity-input{type: "text", value: "#{line_item.quantity}"}
                   = link_to line_item_path(id: line_item.id, quantity: :increase), class: "input-link" do
                     %i.fa.fa-plus.line-heaght-40
             %tr

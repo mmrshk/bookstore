@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def show
     @order = Order.new(line_item_ids: session[:line_item_ids],
                        coupon_id: session[:coupon_id])
