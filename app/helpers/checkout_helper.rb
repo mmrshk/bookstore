@@ -12,10 +12,6 @@ module CheckoutHelper
     past_step?(current_step)
   end
 
-  def subtotal_price_init(order)
-    order.total_price
-  end
-
   def total_price_init(order)
     return order.total_price unless order.coupon
 

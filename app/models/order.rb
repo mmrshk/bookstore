@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_one :billing, dependent: :destroy
   has_one :shipping, dependent: :destroy
-  
+
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
@@ -29,7 +29,7 @@ class Order < ApplicationRecord
   end
 
   def total_price
-    line_items.to_a.sum { |item| item.total_price }
+    line_items.to_a.sum(&:total_price)
   end
 
   private

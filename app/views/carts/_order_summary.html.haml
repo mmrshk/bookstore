@@ -2,7 +2,7 @@
   %td
     %p.font-16 Subtotal:
   %td
-    %p.font-16= number_to_euro subtotal_price_init(@order)
+    %p.font-16= number_to_euro @order.total_price
 %tr
   %td
     %p.font-16 Coupon:
