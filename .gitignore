@@ -33,5 +33,7 @@
 .DS_Store
 
 /config/database.yml
-/config/application.yml
 /config/initializers/devise
+
+# Ignore application configuration
+/config/application.yml
