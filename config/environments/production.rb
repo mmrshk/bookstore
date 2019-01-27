@@ -145,12 +145,13 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   ActionMailer::Base.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :enable_starttls_auto => true,
-    :port => 587,
-    :authentication => :plain,
-    :user_name => ENV["GMAIL_USERNAME"],
-    :password =>  ENV["GMAIL_PASSWORD"]
+    address: "smtp.gmail.com",
+    enable_starttls_auto: true,
+    port: 587,
+    domain: 'heroku.com',
+    authentication: :plain,
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"]
   }
 
 end

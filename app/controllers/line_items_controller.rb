@@ -51,8 +51,8 @@ class LineItemsController < ApplicationController
 
   def quantity_change!(current_item)
     case params[:quantity]
-    when QUANTITY[:increment] then current_item.increment(:quantity)
-    when QUANTITY[:decrement] then current_item.decrement(:quantity) if current_item.quantity.positive?
+    when QUANTITY[:increment] then current_item.increment!(:quantity)
+    when QUANTITY[:decrement] then current_item.decrement!(:quantity) if current_item.quantity.positive?
     end
   end
 end
