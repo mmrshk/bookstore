@@ -4,9 +4,9 @@ ActiveAdmin.register Coupon do
   RANGE = (1...10).freeze
 
   form do |f|
-    f.inputs "Coupon" do
-      f.input :coupon, :input_html => { :value => Array.new(DIGITS_COUNT) { rand(RANGE) }.join }
-      f.input :active, :input_html => { :checked => true }
+    f.inputs 'Coupon' do
+      f.input :coupon, input_html: { value: Array.new(DIGITS_COUNT) { rand(RANGE) }.join }
+      f.input :active, input_html: { checked: true }
       f.input :sale
     end
     f.actions

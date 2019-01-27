@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :trackable, :validatable,
-        :confirmable, :omniauthable,
-        :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable, :omniauthable, omniauth_providers: [:facebook]
 
   has_many :reviews, dependent: :destroy
   has_many :addresses, dependent: :destroy
@@ -20,7 +19,7 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
     end
   end

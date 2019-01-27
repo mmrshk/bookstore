@@ -1,3 +1,3 @@
 ActiveAdmin.register Delivery do
- permit_params :price, :name, :time
+  permit_params :price, :name, :time
 end

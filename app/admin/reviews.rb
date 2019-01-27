@@ -4,13 +4,13 @@ ActiveAdmin.register Review do
   scope :all
   scope :published
   scope :unpublished
-  
+
   action_item :publish, only: :show do
-    link_to "Publish", publish_admin_review_path(review), method: :put if !review.publish?
+    link_to 'Publish', publish_admin_review_path(review), method: :put unless review.publish?
   end
 
   action_item :publish, only: :show do
-    link_to "Unpublish", unpublish_admin_review_path(review), method: :put if review.publish?
+    link_to 'Unpublish', unpublish_admin_review_path(review), method: :put if review.publish?
   end
 
   member_action :publish, method: :put do

@@ -12,6 +12,7 @@ class AddressesForm
   def save
     @save = true
     return false unless valid?
+
     persist!
     true
   end

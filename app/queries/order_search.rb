@@ -1,6 +1,7 @@
 class OrderSearch
   def initialize(user, params)
-    @params, @orders = params, user.orders
+    @params = params
+    @orders = user.orders
   end
 
   def call

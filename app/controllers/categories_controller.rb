@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_filter
-  before_action :set_line_item, only: %i[index show update]
+  before_action :set_line_item, only: %i[index]
 
   def index
     @pagy, @books = pagy(Book.by_filter(@filter))

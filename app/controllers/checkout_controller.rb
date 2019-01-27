@@ -72,20 +72,20 @@ class CheckoutController < ApplicationController
   end
 
   def update_delivery
-    current_order.update_attributes(order_params)
+    current_order.update(order_params)
     flash[:warning] = 'Please choose delivery method.' if current_order.delivery_id.nil?
   end
 
   def update_payment
     @credit_card = CreditCard.new(credit_card_params)
     render_wizard unless @credit_card.save
-    current_order.update_attributes(credit_card_id: @credit_card.id)
+    current_order.update(credit_card_id: @credit_card.id)
   end
 
   def update_confirm
     session[:order_complete] = true
     current_order.place_in_queue
-    current_order.coupon.update_attributes!(active: false) if current_order.coupon
+    current_order&.coupon.update(active: false)
     session[:order_id] = nil
     session[:line_item_ids] = nil
     session[:coupon_id] = nil
@@ -102,9 +102,9 @@ class CheckoutController < ApplicationController
   end
 
   def show_addresses_params
-    return { addressable_type: "User", addressable_id: current_user.id } if current_order.addresses.empty?
+    return { addressable_type: 'User', addressable_id: current_user.id } if current_order.addresses.empty?
 
-    { addressable_type: "Order", addressable_id: current_order.id }
+    { addressable_type: 'Order', addressable_id: current_order.id }
   end
 
   def order_params

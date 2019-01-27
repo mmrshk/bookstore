@@ -1,6 +1,7 @@
 module CheckoutHelper
   def step_state(current_step)
     return 'active' if step_active?(current_step)
+
     'done' if step_done?(current_step)
   end
 
@@ -15,7 +16,7 @@ module CheckoutHelper
   def total_price_init(order)
     return order.total_price unless order.coupon
 
-    order.total_price  - discount(order)
+    order.total_price - discount(order)
   end
 
   def discount(order)

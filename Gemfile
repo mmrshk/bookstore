@@ -17,55 +17,56 @@ gem 'pg'
 gem 'puma', '~> 3.11'
 
 # Forms
-gem 'simple_form', '~> 4.1'
 gem 'country_select', '~> 3.1', '>= 3.1.1'
+gem 'simple_form', '~> 4.1'
 
-gem 'bootstrap-sass'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'bootstrap-sass'
+gem 'jbuilder', '~> 2.5'
+gem 'sass-rails', '~> 5.0'
+gem 'turbolinks', '~> 5'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'uglifier', '>= 1.3.0'
 
 # Rails Internationalization
 gem 'i18n'
 
-gem 'paperclip', '~> 6.1'
-gem 'pagy'
-gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'pagy'
+gem 'paperclip', '~> 6.1'
 gem 'rails-ujs', '~> 0.1.0'
 
 gem 'aasm'
 gem 'cancancan', '~> 2.0'
-gem 'wicked'
+gem 'coffee-rails', '~> 4.2'
 gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
-gem 'coffee-rails', '~> 4.2'
+gem 'wicked'
 
 gem 'carrierwave'
-gem 'mini_magick'
 gem 'ffaker'
 gem 'figaro'
+gem 'mini_magick'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'pry'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'foreman'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'pry'
+  gem 'rubocop'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
 end

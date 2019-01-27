@@ -1,12 +1,12 @@
 class LineItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   load_and_authorize_resource
 
   QUANTITY = {
-    increment: "increment",
-    decrement: "decrement"
-  }
+    increment: 'increment',
+    decrement: 'decrement'
+  }.freeze
 
   def edit
     quantity_change!(LineItem.all.find_by(id: params[:id]))
@@ -51,8 +51,8 @@ class LineItemsController < ApplicationController
 
   def quantity_change!(current_item)
     case params[:quantity]
-    when QUANTITY[:increment] then current_item.increment!(:quantity)
-    when QUANTITY[:decrement] then current_item.decrement!(:quantity) if current_item.quantity.positive?
+    when QUANTITY[:increment] then current_item.increment(:quantity)
+    when QUANTITY[:decrement] then current_item.decrement(:quantity) if current_item.quantity.positive?
     end
   end
 end

@@ -1,0 +1,30 @@
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'test/**/*'
+  TargetRubyVersion: 2.4
+
+Rails:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 10 

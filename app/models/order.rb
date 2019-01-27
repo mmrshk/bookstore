@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
-  scope :payed,  -> { where.not status: %w[in_progress canceled] }
+  scope :payed, -> { where.not status: %w[in_progress canceled] }
 
   after_create :set_number_and_status
 
@@ -35,6 +35,6 @@ class Order < ApplicationRecord
   private
 
   def set_number_and_status
-    update(number: 'R'+Time.now.strftime("%Y%m%d"), status: 0)
+    update(number: 'R' + Time.now.strftime('%Y%m%d'), status: 0)
   end
 end
