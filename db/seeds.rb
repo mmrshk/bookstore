@@ -13,8 +13,8 @@ AdminUser.create!(email: 'admin@example.com', password: 'password', password_con
                password: "test#{rand(100...999)}XX")
 end
 
-user = User.last
-users = User.all
+# user = User.last
+# users = User.all
 
 ['Mobile development', 'Photo', 'Web development', 'Web design'].each do |category|
   Category.create(title: category)
@@ -41,42 +41,42 @@ end
 
 used_book_titles = []
 
-20.times do |index|
-  title = FFaker::Book.title
-  used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
+# 20.times do |index|
+#   title = FFaker::Book.title
+#   used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
+#
+#   Book.create!(title: title,
+#               price: rand(1..99),
+#               description: FFaker::Lorem.paragraphs.join('. ') + FFaker::Lorem.paragraphs.join('. '),
+#               quantity: rand(0...20),
+#               dimension_h: rand(7.5...10.0).floor(2),
+#               dimension_w: rand(4.5...5.5).floor(2),
+#               dimension_d: rand(0.3...4.0).floor(2),
+#               year: rand(2001..2019),
+#               material: FFaker::Lorem.words.join(', '),
+#               category_id: categories.sample.id,
+#               image: "assets/images/test.png"
+#               )
+# end
+#
+# books = Book.all
 
-  Book.create!(title: title,
-              price: rand(1..99),
-              description: FFaker::Lorem.paragraphs.join('. ') + FFaker::Lorem.paragraphs.join('. '),
-              quantity: rand(0...20),
-              dimension_h: rand(7.5...10.0).floor(2),
-              dimension_w: rand(4.5...5.5).floor(2),
-              dimension_d: rand(0.3...4.0).floor(2),
-              year: rand(2001..2019),
-              material: FFaker::Lorem.words.join(', '),
-              category_id: categories.sample.id,
-              image: "https://share.icloud.com/photos/0Xf7NtQooqrl8izN1j7AG8zOA"
-              )
-end
-
-books = Book.all
-
-books.each do |book|
-  book_authors(authors).each do |author|
-    author_range_first = rand(1...32)
-    author_range_second = rand(1...32)
-    book.author_ids = [author_range_first, author_range_second] if author_range_first != author_range_second
-  end
-
-  rand(1..4).times do
-    Review.create!(name: FFaker::Lorem.words.join(', '),
-                  comment: FFaker::Lorem.sentences.join('. '),
-                  rating: rand(1..5),
-                  publish: true,
-                  book_id: book.id,
-                  user_id: users.sample.id)
-  end
-end
+# books.each do |book|
+#   book_authors(authors).each do |author|
+#     author_range_first = rand(1...32)
+#     author_range_second = rand(1...32)
+#     book.author_ids = [author_range_first, author_range_second] if author_range_first != author_range_second
+#   end
+#
+#   rand(1..4).times do
+#     Review.create!(name: FFaker::Lorem.words.join(', '),
+#                   comment: FFaker::Lorem.sentences.join('. '),
+#                   rating: rand(1..5),
+#                   publish: true,
+#                   book_id: book.id,
+#                   user_id: users.sample.id)
+#   end
+# end
 
 Delivery.create(name: 'Nova Poshta', time: '3', price:  30.00)
 Delivery.create(name: 'Ukr Poshta', time: '5', price: 20.00)
