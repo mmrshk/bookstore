@@ -5,8 +5,11 @@ class User < ApplicationRecord
         :omniauth_providers => [:facebook]
 
   has_many :reviews, dependent: :destroy
-  has_many :orders, dependent: :destroy
   has_many :addresses, dependent: :destroy
+
+  has_many :orders, dependent: :destroy
+  has_many :line_items, through: :orders, dependent: :destroy
+  has_many :books, through: :line_items, dependent: :destroy
 
   has_one :billing, dependent: :destroy
   has_one :shipping, dependent: :destroy
@@ -18,6 +21,7 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
+      user.skip_confirmation!
     end
   end
 end

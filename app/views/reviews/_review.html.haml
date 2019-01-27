@@ -1,0 +1,17 @@
+- if review.publish == true
+  .general-message-wrap.divider-lg
+    .clearfix
+      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty= review.name.slice(0,1).capitalize
+      .ml-70
+        %div
+          .general-message-date.hidden-xs= review.created_at.strftime("%d/%m/%y")
+          .max-240
+            - if review.user.book_ids.include?(@book.id)
+              .general-message-verified Verified Reviewer
+            .general-message-name= review.name
+        .mb-15
+          - review.rating.times do
+            %i.fa.fa-star.rate-star
+          - ( 5 - review.rating ).times do
+            %i.fa.fa-star.rate-star.rate-empty
+        %p= review.comment

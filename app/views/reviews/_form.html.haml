@@ -4,17 +4,15 @@
       .col-md-8
         .mb-40
           = f.label :rating, "Rating", class:"general-info-text"
-          %input#review_rating{:name => "review[rating]", :type => "hidden", :value => "5"}/
-          .mb-15.review-rating
-            %i#star-1.fa.fa-star
-            %i#star-2.fa.fa-star
-            %i#star-3.fa.fa-star
-            %i#star-4.fa.fa-star
-            %i#star-5.fa.fa-star
-          = f.input_field :rating, class: "form-control"
+          %fieldset.rating
+            - for i in 0...5
+              = f.input_field :rating, required: true, label: false, name: "rating", type: "radio", required: "", value: 5 - i, id: "#{i}_rating"
+              %label.rating{for: "#{i}_rating"}
           = f.label :name, "Your name", class:"control-label input-label in-grey-600"
           = f.input_field :name, class: "form-control"
           = f.label :comment, "Review", class:"control-label input-label in-grey-600"
           = f.input_field :comment, class: "form-control"
+          = f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }
+          = f.input :book_id, label: false, input_html: { value: @book.id, type: 'hidden' }
         .text-right
-          = f.button :submit, "Post", class: "btn disabled mb-20"
+          = f.button :submit, "Post", class: "btn btn-default mb-20"

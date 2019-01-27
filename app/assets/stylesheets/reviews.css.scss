@@ -1,0 +1,45 @@
+.rating {
+    height: 34px;
+    margin-left: -20px;
+    width: 130px;
+}
+
+.rating label {
+    text-indent: -100px;
+    width: 40px !important;
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.label {
+    float: left;
+    padding-top: 3px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"], .rating label.rating {
+    float: right;
+    line-height: 30px;
+    height: 30px;
+}
+
+span + input[type=radio] + label, legend + input[type=radio] + label {
+    clear: right;
+    margin-right: 80px;
+    counter-reset: checkbox;
+}
+
+.rating label.rating {
+    background: transparent url('/assets/star-off.svg') no-repeat center center;
+}
+
+.rating label.rating:hover ~ label.rating,
+.rating label.rating:hover,
+.rating input[type=radio][name=rating]:checked ~ label.rating {
+    background-image: url('/assets/star-on.svg');
+    counter-increment: checkbox;
+}

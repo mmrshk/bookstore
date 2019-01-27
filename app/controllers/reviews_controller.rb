@@ -3,24 +3,29 @@ class ReviewsController < ApplicationController
 
   before_action :find_book
 
-  def new; end
-
   def create
     @review = Review.new(review_params)
-    @review.book_id = @book.id
-    @review.user_id = current_user.id
+    @review.rating = review_rating
 
     if @review.save
-      redirect_to book_path(@book)
+      flash[:notice] = 'Thanks for Review. It will be published as soon as Admin will approve it.'
     else
-      render 'new'
+      flash[:error] = 'Review not applied.'
     end
+
+    redirect_to book_path(@book)
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:rating, :comment, :name)
+    params.require(:review).permit(:comment, :name, :book_id, :user_id)
+  end
+
+  def review_rating
+    return 0 unless params[:rating]
+
+    params.require(:rating)
   end
 
   def find_book
