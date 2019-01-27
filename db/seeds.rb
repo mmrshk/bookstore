@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') 
 
-4.times do
-  User.create!(email: FFaker::Internet.safe_email,
-               password: "test#{rand(100...999)}XX")
-end
+# 4.times do
+#   User.create!(email: FFaker::Internet.safe_email,
+#                password: "test#{rand(100...999)}XX")
+# end
 
 # user = User.last
 # users = User.all
@@ -20,26 +20,26 @@ end
   Category.create(title: category)
 end
 
-categories = Category.all
-
-32.times do
-  Author.create(firstname: FFaker::Name.first_name,
-                lastname: FFaker::Name.last_name,
-                biography: FFaker::Lorem.paragraph)
-end
-
-authors = Author.all
-
-def book_authors(authors)
-  selected_authors = []
-  rand(1..3).times do
-    author = authors.sample
-    selected_authors << author unless selected_authors.include?(author)
-  end
-  selected_authors
-end
-
-used_book_titles = []
+# categories = Category.all
+#
+# 32.times do
+#   Author.create(firstname: FFaker::Name.first_name,
+#                 lastname: FFaker::Name.last_name,
+#                 biography: FFaker::Lorem.paragraph)
+# end
+#
+# authors = Author.all
+#
+# def book_authors(authors)
+#   selected_authors = []
+#   rand(1..3).times do
+#     author = authors.sample
+#     selected_authors << author unless selected_authors.include?(author)
+#   end
+#   selected_authors
+# end
+#
+# used_book_titles = []
 
 # 20.times do |index|
 #   title = FFaker::Book.title
