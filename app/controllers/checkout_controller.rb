@@ -85,7 +85,7 @@ class CheckoutController < ApplicationController
   def update_confirm
     session[:order_complete] = true
     current_order.place_in_queue
-    current_order&.coupon.update(active: false)
+    current_order.coupon.update(active: false) if current_order.coupon
     session[:order_id] = nil
     session[:line_item_ids] = nil
     session[:coupon_id] = nil

@@ -7,6 +7,6 @@ class CreditCard < ApplicationRecord
   validates :name, length: { maximum: 50 }
   validates :cvv, length: 3..4
   validates :card_number, :cvv, numericality: { only_integer: true }
-  validates :name, format: %r{\A[a-zA-Z]*\s*[a-zA-Z]*\z/}
-  validates :expiration_month_year, format: %r{\A(0[1-9]|10|11|12)\/\d\d\z}
+  validates :name, format: /\A[a-zA-Z]*\s*[a-zA-Z]*\z/
+  validates :expiration_month_year, format: /\A(0[1-9]|10|11|12)\/\d\d\z/
 end
