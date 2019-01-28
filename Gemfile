@@ -52,6 +52,7 @@ gem 'carrierwave'
 gem 'ffaker'
 gem 'figaro'
 gem 'mini_magick'
+gem 'fog'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

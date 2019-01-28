@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
     t.decimal "dimension_w", precision: 5, scale: 2
     t.decimal "dimension_d", precision: 5, scale: 2
     t.string "material"
-    t.json "image"
+    t.string "image"
   end
 
   create_table "categories", force: :cascade do |t|

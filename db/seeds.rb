@@ -14,7 +14,7 @@ end
 
 categories = Category.all
 
-32.times do
+15.times do
   Author.create(firstname: FFaker::Name.first_name,
                 lastname: FFaker::Name.last_name,
                 biography: FFaker::Lorem.paragraph)
@@ -33,7 +33,7 @@ end
 
 used_book_titles = []
 
-1.times do |index|
+40.times do |index|
   title = FFaker::Book.title
   used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
 
@@ -47,7 +47,7 @@ used_book_titles = []
               year: rand(2001..2019),
               material: FFaker::Lorem.words.join(', '),
               category_id: categories.sample.id,
-              image: File.open("app/assets/images/test.png")
+              image: File.open(File.join(Rails.root,'app/assets/images/1.jpg'))
               )
 end
 
