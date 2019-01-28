@@ -8,6 +8,7 @@ Rails.application.configure do
 
   config.serve_static_assets = true
   config.assets.compile = true
+  config.assets.initialize_on_precompile = false
 
   config.active_storage.service = :google
 
