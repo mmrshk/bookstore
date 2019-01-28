@@ -14,7 +14,7 @@ end
 
 categories = Category.all
 
-15.times do
+32.times do
   Author.create(firstname: FFaker::Name.first_name,
                 lastname: FFaker::Name.last_name,
                 biography: FFaker::Lorem.paragraph)
@@ -33,7 +33,7 @@ end
 
 used_book_titles = []
 
-40.times do |index|
+60.times do |index|
   title = FFaker::Book.title
   used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
 
