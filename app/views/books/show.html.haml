@@ -30,7 +30,7 @@
           %p.pull-left Materials
           %p.lead.small.pull-right= @book.material
   .mb-80
-    %h3.in-gold-500.mb-25= "Reviews (#{@book.reviews.count})"
+    %h3.in-gold-500.mb-25= "Reviews (#{@book.reviews.where(publish: true).count})"
     = render @book.reviews
     - if user_signed_in?
       %h3.in-gold-500.mb-25 Write review

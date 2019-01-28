@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
+# Cloud Storage
+gem "google-cloud-storage", "~> 1.8", require: false
 # Autentification
 gem 'devise', '~> 4.5'
 gem 'omniauth'

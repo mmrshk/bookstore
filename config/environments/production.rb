@@ -9,11 +9,11 @@ Rails.application.configure do
   config.serve_static_assets = true
   config.assets.compile = true
 
-  config.active_storage.service = :local
+  config.active_storage.service = :google
 
   config.log_level = :debug
   config.log_tags = [ :request_id ]
-  
+
   config.action_mailer.perform_caching = false
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
