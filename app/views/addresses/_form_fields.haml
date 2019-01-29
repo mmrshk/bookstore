@@ -9,8 +9,8 @@
       wrapper_html: { class: (".form-control") } do
       %label.control-label.input-label{:for => "city"} City
       = f.input :city, value: object.billing.city, label: false
+    %span.help-block
       = f.error :city
-    %span.help-block Please enter your first name
 
 
 
@@ -20,8 +20,8 @@
       wrapper_html: { class: (".form-group.has-error" if object.errors[cast][:zip].any?) } do
       %label.control-label.input-label{:for => "zip"} Zip
       = f.input :zip, value: object.billing.zip, label: false
+    %span.help-block
       = f.error :zip
-    %span.help-block Please enter your first name
 
   -# .form-group.has-error
   -# %label.control-label.input-label{:for => "firstName"} First Name
