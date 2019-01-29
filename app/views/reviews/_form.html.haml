@@ -4,10 +4,12 @@
       .col-md-8
         .mb-40
           = f.label :rating, "Rating", class:"general-info-text"
-          %fieldset.rating
+          %fieldset.rating-input
             - for i in 0...5
-              = f.input_field :rating, required: true, label: false, name: "rating", type: "radio", required: "", value: 5 - i, id: "#{i}_rating"
-              %label.rating{for: "#{i}_rating"}
+              = f.input_field :check_rate, required: true, label: false, name: "rating-input", "data-val":5-i , class:"rate-input", type: "radio", required: "", value: 5 - i, id: "#{i}_rating"
+              %label.rating-input{for: "#{i}_rating"}
+
+          = f.input :rating, label: false, input_html: { type: 'hidden', class: 'hidden-rate-value' }
           = f.label :name, "Your name", class:"control-label input-label in-grey-600"
           = f.input_field :name, class: "form-control"
           = f.label :comment, "Review", class:"control-label input-label in-grey-600"

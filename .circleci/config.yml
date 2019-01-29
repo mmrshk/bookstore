@@ -5,10 +5,6 @@ jobs:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
         environment:
-          # PG_HOST: localhost
-          # PG_USER: ubuntu
-          # RAILS_ENV: test
-          # RACK_ENV: test
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: postgres

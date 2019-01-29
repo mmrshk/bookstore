@@ -1,10 +1,10 @@
-.rating {
+.rating-input {
     height: 34px;
     margin-left: -20px;
     width: 130px;
 }
 
-.rating label {
+.rating-input label {
     text-indent: -100px;
     width: 40px !important;
     height: 30px;
@@ -21,7 +21,7 @@ input[type="radio"] {
   display: none;
 }
 
-input[type="radio"], .rating label.rating {
+input[type="radio"], .rating-input label.rating-input {
     float: right;
     line-height: 30px;
     height: 30px;
@@ -33,13 +33,13 @@ span + input[type=radio] + label, legend + input[type=radio] + label {
     counter-reset: checkbox;
 }
 
-.rating label.rating {
+.rating-input label.rating-input {
     background: transparent url('/assets/star-off.svg') no-repeat center center;
 }
 
-.rating label.rating:hover ~ label.rating,
-.rating label.rating:hover,
-.rating input[type=radio][name=rating]:checked ~ label.rating {
+.rating-input label.rating-input:hover ~ label.rating-input,
+.rating-input label.rating-input:hover,
+.rating-input input[type=radio][name=rating-input]:checked ~ label.rating-input {
     background-image: url('/assets/star-on.svg');
     counter-increment: checkbox;
 }
