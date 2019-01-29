@@ -9,7 +9,7 @@ default: &default
 
 test:
   <<: *default
-  database: bookstore
+  database: bookstore_test
 
 development:
   <<: *default
