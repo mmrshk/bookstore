@@ -1,7 +1,7 @@
 %main.container.general-main-wrap
   %h1.general-title-margin Checkout
   = render 'steps'
-  = form_for @addresses, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
+  = simple_form_for @addresses, url: wizard_path, method: :put, class: 'res-mb-100' do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -15,12 +15,13 @@
           %h3.general-subtitle Billing Address
           %p.general-info-text all fields are required
         = form.simple_fields_for :billing do |ff|
-          = render 'addresses/form_fields', f: ff, cast: :billing
+          = render 'addresses/form_fields', f: ff, cast: :billing, object: @addresses
       .col-md-5.col-md-offset-1.mb-60
-        .visible-xs.visible-sm
-          %h3.general-subtitle Shipping Address
-        = form.simple_fields_for :shipping do |ff|
-          = render 'addresses/form_fields', f: ff, cast: :shipping
+        .autoUpdate
+          .visible-xs.visible-sm
+            %h3.general-subtitle Shipping Address
+          = form.simple_fields_for :shipping do |ff|
+            = render 'addresses/form_fields', f: ff, cast: :shipping, object: @addresses
         .form-group.checkbox
           %label.checkbox-label
             = form.check_box :use_billing, class: 'checkbox-input', id: 'use_billing', hidden: true

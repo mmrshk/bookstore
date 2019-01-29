@@ -29,6 +29,10 @@ class AddressesForm
     @shipping ||= new_shipping
   end
 
+  def errors
+    { billing: billing.errors, shipping: shipping.errors }
+  end
+
   private
 
   def user_id
@@ -61,6 +65,6 @@ class AddressesForm
     type = params[:use_billing] == '1' ? :billing : type
     params.require(type).permit(:firstname, :lastname, :address,
                                 :country, :city, :zip, :phone,
-                                :user_id, :order_id)
+                                :user_id, :order_id, :cast)
   end
 end

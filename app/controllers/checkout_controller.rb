@@ -101,12 +101,6 @@ class CheckoutController < ApplicationController
     session[:order_id] = @order.id
   end
 
-  # def show_addresses_params
-  #   return { addressable_type: 'User', addressable_id: current_user.id } if current_order.addresses.empty?
-  #
-  #   { addressable_type: 'Order', addressable_id: current_order.id }
-  # end
-
   def show_addresses_params
     return { user_id: current_user.id } if current_order.addresses.empty?
     { order_id: current_order.id }

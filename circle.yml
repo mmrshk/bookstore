@@ -7,5 +7,3 @@ database:
 dependencies:
   pre:
     - gem install bundler
-  override:
-    - mv config/secrets.ci.yml config/application.yml

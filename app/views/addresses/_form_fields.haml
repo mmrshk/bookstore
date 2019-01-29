@@ -1,8 +1,34 @@
+= render 'shared/error_messages', object: object, cast: cast
 = f.input :firstname, required: false
 = f.input :lastname, required: false
 = f.input :address, required: false
-= f.input :city, required: false
-= f.input :zip, required: false
+
+- if object.errors[cast][:city].any?
+  .form-group.has-error
+    = f.input :city, required: false, label: false,
+      wrapper_html: { class: (".form-control") } do
+      %label.control-label.input-label{:for => "city"} City
+      = f.input :city, value: object.billing.city, label: false
+      = f.error :city
+    %span.help-block Please enter your first name
+
+
+
+- if object.errors[cast][:zip].any?
+  .form-group.has-error
+    = f.input :zip, required: false,  label: false,
+      wrapper_html: { class: (".form-group.has-error" if object.errors[cast][:zip].any?) } do
+      %label.control-label.input-label{:for => "zip"} Zip
+      = f.input :zip, value: object.billing.zip, label: false
+      = f.error :zip
+    %span.help-block Please enter your first name
+
+  -# .form-group.has-error
+  -# %label.control-label.input-label{:for => "firstName"} First Name
+  -# %input#firstName.form-control{:name => "fname", :placeholder => "First Name", :type => "text"}
+  -# %span.help-block Please enter your first name
+
+
 = f.input :country, required: false, prompt: "Select country"
 = f.input :phone, required: false, placeholder: 'Example +355661234567'
 = f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }

@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  # subject { FactoryGirl.build(:book) }
+  subject { FactoryBot.build(:book) }
+
   it { should have_and_belong_to_many(:authors) }
   it { should belong_to(:category) }
   it { should have_many(:reviews).dependent(:destroy)  }

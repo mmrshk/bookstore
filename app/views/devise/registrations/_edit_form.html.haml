@@ -30,7 +30,7 @@
     %p.in-gold-500.font-18.mb-25 Remove Account
     = simple_form_for(current_user, url: user_registration_path, html: { method: :delete, id: 'delete_account_form' } ) do |f|
       .general-settings-btn
-        = f.button :submit, class: 'disabled mb-20', value: 'Please Remove My Account', disabled: true, id: 'delete_account_btn'
+        = f.button :submit, class: 'btn btn-default disabled mb-20 delete-button', value: 'Please Remove My Account', disabled: true, id: 'delete_account_btn'
       .form-group.checkbox.general-settings-checkbox
         %label.checkbox-label
           %input.checkbox-input{type: "checkbox", hidden: "true"}
