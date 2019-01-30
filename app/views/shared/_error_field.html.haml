@@ -1,0 +1,11 @@
+.form-group.has-error
+  = f.input field, required: false, label: false,
+    wrapper_html: { class: (".form-control") } do
+    %label.control-label.input-label{:for => "#{field}"}
+      = field.to_s.capitalize
+    = f.input_field field, label: false, class: 'form-control', value: input_value(cast, field)
+  %span.help-block
+  - if cast == :billing
+    = object.billing.errors.messages[field].to_sentence.capitalize
+  - else
+    = object.shipping.errors.messages[field].to_sentence.capitalize

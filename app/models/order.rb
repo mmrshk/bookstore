@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  include AASM
+
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
   belongs_to :coupon, optional: true
@@ -8,8 +10,6 @@ class Order < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_one :billing, dependent: :destroy
   has_one :shipping, dependent: :destroy
-
-  enum status: %i[in_progress in_queue in_delivery delivered canceled]
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
   scope :payed, -> { where.not status: %w[in_progress canceled] }
@@ -30,6 +30,33 @@ class Order < ApplicationRecord
 
   def total_price
     line_items.to_a.sum(&:total_price)
+  end
+
+  enum status: %i[in_progress in_queue in_delivery delivered canceled]
+
+  aasm(:status) do
+    state :in_progress, initial: true
+    state :in_queue
+    state :in_delivery
+    state :delivered
+    state :canceled
+
+    event :order_in_queue do
+      transitions in_progress: :in_queue
+    end
+
+    event :order_in_delivery do
+      transitions in_queue: :in_delivery
+    end
+
+    event :order_delivered do
+      transitions in_delivery: :delivered
+    end
+
+    event :canceled do
+      transitions from: [:in_queue, :in_delivery], to: :canceled
+    end
+
   end
 
   private

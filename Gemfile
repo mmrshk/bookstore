@@ -21,6 +21,9 @@ gem 'puma', '~> 3.11'
 # Forms
 gem 'country_select', '~> 3.1', '>= 3.1.1'
 gem 'simple_form', '~> 4.1'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
+
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'

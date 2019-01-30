@@ -29,7 +29,7 @@ class AddressesForm
     @shipping ||= new_shipping
   end
 
-  def errors
+  def form_errors
     { billing: billing.errors, shipping: shipping.errors }
   end
 
