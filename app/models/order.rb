@@ -13,6 +13,8 @@ class Order < ApplicationRecord
   has_one :shipping, dependent: :destroy
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
+  scope :payed, -> { where.not status: %w[in_progress canceled] }
+  
   scope :in_progress, -> { where status: %w[in_progress] }
   scope :in_queue, -> { where status: %w[in_queue] }
   scope :in_delivery, -> { where status: %w[in_delivery] }
