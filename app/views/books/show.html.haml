@@ -16,7 +16,16 @@
       .general-info-wrap.divider-lg
         %p Description
         %p.lead.small.line-height-2
-          = @book.description
+          - if @book.description.length > 250
+            = truncate(@book.description, length: 250)
+            = link_to 'Read more', '', class: "read-more in-gold-500 ml-10"
+            :javascript
+              $(".read-more").on('click', function(e) {
+                e.preventDefault()
+                $(this).parent().html('#{escape_javascript @book.description}')
+              })
+          - else
+            = @book.description
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Year of publication
