@@ -13,5 +13,5 @@
           Address
       = simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |ff|
         = ff.error_notification
-        = render 'addresses/form_fields', f:ff, cast: cast
+        = render 'addresses/user_form_fields', f:ff, cast: cast
         = ff.button :submit, "Save", class:"btn btn-default btn"

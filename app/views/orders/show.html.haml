@@ -1,20 +1,41 @@
 %main.container.general-main-wrap
   %h1.general-title-margin= "Order #{@order.number}"
   .row.mb-20
-    - @order.addresses.each do |current_address|
-      .col-sm-3
-        %h3.general-subtitle "#{current_address.cast.capitalize} Address"
-        %p.general-address
-          = "#{current_address.firstname} #{current_address.lastname}"
-          = link_to "edit", checkout_path(:addresses), class: "general-edit"
+    .col-sm-3
+      %h3.general-subtitle.mt-0 Billing Address
+      %p.general-address
+        = "#{@order.addresses.billing.first.firstname} #{@order.addresses.billing.first.lastname}"
+        %br
+        = @order.addresses.billing.first.address
+        %br
+        = "#{@order.addresses.billing.first.city} #{@order.addresses.billing.first.zip}"
+        %br
+        = @order.addresses.billing.first.country
+        %br
+        = "Phone #{@order.addresses.billing.first.phone}"
+    .col-sm-3
+      %h3.general-subtitle.mt-0 Shipping Address
+      %p.general-address
+        - if @order.addresses.shipping.any?
+          = "#{@order.addresses.shipping.first.firstname} #{@order.addresses.shipping.first.lastname}"
           %br
-          = current_address.address
+          = @order.addresses.shipping.first.address
           %br
-          = "#{current_address.city} #{current_address.zip}"
+          = "#{@order.addresses.shipping.first.city} #{@order.addresses.shipping.first.zip}"
           %br
-          = current_address.country
+          = @order.addresses.shipping.first.country
           %br
-          = "Phone #{current_address.phone}"
+          = "Phone #{@order.addresses.shipping.first.phone}"
+        - else
+          = "#{@order.addresses.billing.first.firstname} #{@order.addresses.billing.first.lastname}"
+          %br
+          = @order.addresses.billing.first.address
+          %br
+          = "#{@order.addresses.billing.first.city} #{@order.addresses.billing.first.zip}"
+          %br
+          = @order.addresses.billing.first.country
+          %br
+          = "Phone #{@order.addresses.billing.first.phone}"
     .col-sm-3
       %h3.general-subtitle.mt-0 Shipments
       %p.general-address
