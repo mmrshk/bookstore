@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.decimal "total_price", precision: 6, scale: 2
-    t.integer "status"
+    t.string "status"
     t.bigint "user_id"
     t.bigint "credit_card_id"
     t.datetime "created_at", null: false

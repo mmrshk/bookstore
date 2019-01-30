@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   include AASM
+  attr_accessor :active_admin_requested_event
 
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
@@ -12,9 +13,13 @@ class Order < ApplicationRecord
   has_one :shipping, dependent: :destroy
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
-  scope :payed, -> { where.not status: %w[in_progress canceled] }
+  scope :in_progress, -> { where status: %w[in_progress] }
+  scope :in_queue, -> { where status: %w[in_queue] }
+  scope :in_delivery, -> { where status: %w[in_delivery] }
+  scope :delivered, -> { where status: %w[delivered] }
+  scope :canceled, -> { where status: %w[canceled] }
 
-  after_create :set_number_and_status
+  after_create :set_number
 
   ORDER_FILTERS = {
     in_queue: 'Waiting for processing',
@@ -24,44 +29,41 @@ class Order < ApplicationRecord
     all: 'All'
   }.freeze
 
-  def place_in_queue
-    update(status: 1, completed_at: Time.current)
+  def set_complete_date
+    update(completed_at: Time.current)
   end
 
   def total_price
     line_items.to_a.sum(&:total_price)
   end
 
-  enum status: %i[in_progress in_queue in_delivery delivered canceled]
-
-  aasm(:status) do
+  aasm column: 'status' do
     state :in_progress, initial: true
     state :in_queue
     state :in_delivery
     state :delivered
     state :canceled
 
-    event :order_in_queue do
-      transitions in_progress: :in_queue
+    event :place_in_queue do
+      transitions from: [:in_progress], to: :in_queue
     end
 
     event :order_in_delivery do
-      transitions in_queue: :in_delivery
+      transitions from: [:in_queue], to: :in_delivery
     end
 
     event :order_delivered do
-      transitions in_delivery: :delivered
+      transitions from: [:in_delivery], to: :delivered
     end
 
     event :canceled do
-      transitions from: [:in_queue, :in_delivery], to: :canceled
+      transitions from: [:in_queue, :in_delivery, :in_progress, :delivered], to: :canceled
     end
-
   end
 
   private
 
-  def set_number_and_status
-    update(number: 'R' + Time.now.strftime('%Y%m%d'), status: 0)
+  def set_number
+    update(number: 'R' + Time.now.strftime('%Y%m%d'))
   end
 end
