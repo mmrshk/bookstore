@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root 'home#index'
+  root 'pages#index'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     omniauth_callbacks: 'callbacks'
   }
-
+  resources :categories do
+    resources :books
+  end
   resources :users, only: :edit
-  resources :categories
   resources :line_items
   resources :orders
   resources :checkout

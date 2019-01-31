@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  include Pagy::Backend
   skip_before_action :verify_authenticity_token
   helper_method :current_order
+  protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   def current_order
     return Order.new unless session[:order_id]
 
-    Order.find(session[:order_id])
+    Order.find_by(id: session[:order_id])
   end
 
   def current_ability

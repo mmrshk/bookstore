@@ -54,10 +54,17 @@ gem 'figaro'
 gem 'fog'
 gem 'mini_magick'
 
+# Draper
+gem 'draper'
+
+# Brakemen
+gem 'brakeman', require: false
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rubocop-rspec'
+  gem 'overcommit'
 end
 
 group :development do

@@ -47,15 +47,15 @@ class Order < ApplicationRecord
     state :canceled
 
     event :place_in_queue do
-      transitions from: [:in_progress], to: :in_queue
+      transitions from: %i[in_progress], to: :in_queue
     end
 
     event :order_in_delivery do
-      transitions from: [:in_queue], to: :in_delivery
+      transitions from: %i[in_queue], to: :in_delivery
     end
 
     event :order_delivered do
-      transitions from: [:in_delivery], to: :delivered
+      transitions from: %i[in_delivery], to: :delivered
     end
 
     event :canceled do

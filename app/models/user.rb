@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :omniauthable, omniauth_providers: [:facebook]
+         :confirmable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :reviews, dependent: :destroy
   has_many :addresses, dependent: :destroy
@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_one :billing, dependent: :destroy
   has_one :shipping, dependent: :destroy
   has_one :credit_card, dependent: :destroy
-
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider

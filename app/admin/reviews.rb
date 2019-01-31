@@ -14,13 +14,13 @@ ActiveAdmin.register Review do
   end
 
   member_action :publish, method: :put do
-    review = Review.find(params[:id])
+    review = Review.find_by(id: params[:id])
     review.update(publish: true)
     redirect_to admin_review_path(review)
   end
 
   member_action :unpublish, method: :put do
-    review = Review.find(params[:id])
+    review = Review.find_by(id: params[:id])
     review.update(publish: false)
     redirect_to admin_review_path(review)
   end

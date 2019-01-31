@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "rating"
+    t.integer "rating", default: 0
     t.text "comment"
     t.string "name"
     t.datetime "created_at", null: false
