@@ -30,17 +30,13 @@ class AddressesForm
   end
 
   def form_errors
-    { billing: billing.errors, shipping: shipping.errors }
+    { shipping: shipping.errors, billing: billing.errors }
   end
 
   private
 
   def user_id
     params.fetch(:user_id, false) || (params[:billing][:user_id] if nested?)
-  end
-
-  def order_id
-    params.fetch(:order_id, false) || (params[:billing][:order_id] if nested?)
   end
 
   def nested?
@@ -52,13 +48,13 @@ class AddressesForm
   end
 
   def persist!
-    billing.save
     shipping.save
+    billing.save
   end
 
   def valid?
-    shipping.valid?
-    billing.valid? && shipping.valid?
+    billing.valid?
+    shipping.valid? && billing.valid?
   end
 
   def params_for(type)

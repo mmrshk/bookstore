@@ -37,14 +37,14 @@ class CheckoutController < ApplicationController
     cookies[:from_checkout] = { value: true, expires: 1.day.from_now }
   end
 
+  def show_addresses
+    @addresses = AddressesForm.new(show_addresses_params)
+  end
+
   def show_delivery
     return jump_to(previous_step) unless current_user.addresses.presence
 
     @deliveries = Delivery.all
-  end
-
-  def show_addresses
-    @addresses = AddressesForm.new(show_addresses_params)
   end
 
   def show_payment
@@ -103,9 +103,9 @@ class CheckoutController < ApplicationController
   end
 
   def show_addresses_params
-    return { user_id: current_user.id } if current_order.addresses.empty?
+    return { order_id: current_order.id } if current_order.addresses.any?
 
-    { order_id: current_order.id }
+    { user_id: current_user.id }
   end
 
   def order_params
