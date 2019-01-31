@@ -7,7 +7,7 @@ class CartsController < ApplicationController
   def update
     session[:coupon_id] = coupon.id if coupon
 
-    redirect_to cart_path, notice: coupon ? 'Coupon applied' : 'Invalid coupon'
+    redirect_to cart_path, notice: coupon ? I18n.t(:coupon_applied) : I18n.t(:coupon_not_applied)
   end
 
   private

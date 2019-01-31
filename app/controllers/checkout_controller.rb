@@ -73,7 +73,7 @@ class CheckoutController < ApplicationController
 
   def update_delivery
     current_order.update(order_params)
-    flash[:warning] = 'Please choose delivery method.' if current_order.delivery_id.nil?
+    flash[:warning] = I18n.t(:choose_delivery_method) if current_order.delivery_id.nil?
   end
 
   def update_payment

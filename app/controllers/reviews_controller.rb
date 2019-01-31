@@ -7,9 +7,9 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
 
     if @review.save
-      flash[:notice] = 'Thanks for Review. It will be published as soon as Admin will approve it.'
+      flash[:notice] =  I18n.t(:review_applied)
     else
-      flash[:error] = 'Review not applied.'
+      flash[:error] = I18n.t(:review_not_applied)
     end
 
     redirect_to book_path(@book)
