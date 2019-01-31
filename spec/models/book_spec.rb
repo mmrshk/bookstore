@@ -5,8 +5,8 @@ RSpec.describe Book, type: :model do
 
   it { should have_and_belong_to_many(:authors) }
   it { should belong_to(:category) }
-  it { should have_many(:reviews).dependent(:destroy)  }
-  it { should have_many(:line_items).dependent(:destroy)  }
+  it { should have_many(:reviews).dependent(:destroy) }
+  it { should have_many(:line_items).dependent(:destroy) }
 
   it { expect(subject).to validate_presence_of(:title) }
   it { expect(subject).to validate_presence_of(:price) }

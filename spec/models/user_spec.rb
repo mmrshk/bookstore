@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
   it { should have_many(:line_items).through(:orders).dependent(:destroy) }
   it { should have_many(:books).through(:line_items).dependent(:destroy) }
 
-
   it { should have_one(:billing).dependent(:destroy) }
   it { should have_one(:shipping).dependent(:destroy) }
   it { should have_one(:credit_card).dependent(:destroy) }

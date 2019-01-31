@@ -5,8 +5,8 @@ RSpec.describe Review, type: :model do
   let(:book) { create(:book) }
   let(:review) { create(:review, user_id: user.id, book_id: book.id) }
 
-  it { should belong_to(:book)}
-  it { should belong_to(:user)}
+  it { should belong_to(:book) }
+  it { should belong_to(:user) }
 
   it { expect(subject).to validate_presence_of(:name) }
   it { expect(subject).to validate_presence_of(:comment) }

@@ -24,7 +24,6 @@ class Address < ApplicationRecord
                       message: 'Consist of 0-9 only no special symbols' },
             length: { maximum: 15 }
 
-
   enum cast: %i[shipping billing]
 
   scope :shipping, -> { where(cast: 0) }

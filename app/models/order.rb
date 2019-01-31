@@ -14,7 +14,7 @@ class Order < ApplicationRecord
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
   scope :payed, -> { where.not status: %w[in_progress canceled] }
-  
+
   scope :in_progress, -> { where status: %w[in_progress] }
   scope :in_queue, -> { where status: %w[in_queue] }
   scope :in_delivery, -> { where status: %w[in_delivery] }
@@ -59,13 +59,13 @@ class Order < ApplicationRecord
     end
 
     event :canceled do
-      transitions from: [:in_queue, :in_delivery, :in_progress, :delivered], to: :canceled
+      transitions from: %i[in_queue in_delivery in_progress delivered], to: :canceled
     end
   end
 
   private
 
   def set_number
-    update(number: 'R' + Time.now.strftime('%Y%m%d'))
+    update(number: 'R' + Time.zone.now.strftime('%Y%m%d'))
   end
 end

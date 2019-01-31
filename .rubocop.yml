@@ -6,6 +6,7 @@ AllCops:
     - 'config/**/*'
     - 'bin/**/*'
     - 'test/**/*'
+    - 'spec/rails_helper.rb'
   TargetRubyVersion: 2.4
 
 Rails:
@@ -27,4 +28,7 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
-  Max: 10 
+  Max: 10
+
+Metrics/AbcSize:
+  Max: 20

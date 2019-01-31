@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 # Cloud Storage
-gem "google-cloud-storage", "~> 1.8", require: false
+gem 'google-cloud-storage', '~> 1.8', require: false
 # Autentification
 gem 'devise', '~> 4.5'
 gem 'omniauth'
@@ -21,9 +21,6 @@ gem 'puma', '~> 3.11'
 # Forms
 gem 'country_select', '~> 3.1', '>= 3.1.1'
 gem 'simple_form', '~> 4.1'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
-
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
@@ -54,8 +51,8 @@ gem 'wicked'
 gem 'carrierwave'
 gem 'ffaker'
 gem 'figaro'
-gem 'mini_magick'
 gem 'fog'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -67,17 +64,17 @@ group :development do
   gem 'foreman'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'pry'
+  gem 'rspec-rails'
   gem 'rubocop'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-  gem 'rspec-rails'
 end
 
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
-  gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers'
 end
