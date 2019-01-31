@@ -13,7 +13,7 @@ test:
 
 development:
   <<: *default
-  database: bookstore
+  database: bookstore_development
 
 production:
   <<: *default
