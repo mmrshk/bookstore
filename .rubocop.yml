@@ -12,6 +12,15 @@ AllCops:
 Rails:
   Enabled: true
 
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
@@ -31,4 +40,4 @@ Metrics/CyclomaticComplexity:
   Max: 10
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 25

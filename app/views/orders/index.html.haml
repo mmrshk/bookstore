@@ -24,7 +24,8 @@
             %td.col-half
               %span.in-grey-600 Number
             %td.col-half
-              %span.general-order-number= order.number
+              %span.general-order-number
+                = order.number
           %tr
             %td
               %span.in-grey-600 Completed at
@@ -34,13 +35,14 @@
             %td
               %span.in-grey-600 Status
             %td
-              %span.font-16.in-grey-900.fw-300= order_status(order)
+              %span.font-16.in-grey-900.fw-300
+                = order.status
           %tr
             %td
               %span.in-grey-600 Total
             %td
-              %strong.font-16= number_to_euro order.total_price
-
+              %strong.font-16
+                = number_to_euro order.total_price
   .hidden-xs.mb-res-50
     %table.table.table-hover
       %thead
@@ -58,10 +60,14 @@
           %tr
             %td
               = link_to order_path(order), class: "nav-link" do
-                %span.general-order-number= order.number
+                %span.general-order-number
+                  = order.number
             %td
-              %span.in-grey-900.font-16.fw-300= order.completed_at.strftime("%Y-%m-%d")
+              %span.in-grey-900.font-16.fw-300
+                = order.completed_at.strftime("%Y-%m-%d")
             %td
-              %span.font-16.in-grey-900.fw-300= order_status(order)
+              %span.font-16.in-grey-900.fw-300
+                = order.status
             %td
-              %strong.font-16=  number_to_euro order.total_price
+              %strong.font-16
+                = number_to_euro order.total_price

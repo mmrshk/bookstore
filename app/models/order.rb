@@ -63,6 +63,18 @@ class Order < ApplicationRecord
     end
   end
 
+  def discount
+    return 0 unless coupon
+
+    total_price * coupon.sale / 100
+  end
+
+  def total_price_init
+    return total_price unless coupon
+
+    total_price - discount
+  end
+
   private
 
   def set_number

@@ -19,4 +19,4 @@
       € #{book.price}
     %span.divider-sm
     %p.lead.small
-      = book_authors(book)
+      = BookPresenter.new(book, self).book_authors

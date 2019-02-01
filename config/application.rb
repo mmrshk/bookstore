@@ -15,5 +15,7 @@ module Bookstore
       g.test_framework :rspec
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    # config.action_controller.include_all_helpers = false
   end
 end

@@ -7,7 +7,8 @@
     .mb-60
       %h1= book.title
       %p.lead= truncate(book.description, length: 150)
-      %p.lead.small= book_authors(book)
+      %p.lead.small
+        = BookPresenter.new(book, self).book_authors
       .general-align
         = form_for LineItem.new, method: :post do |form|
           = form.hidden_field :book_id, value: book.id

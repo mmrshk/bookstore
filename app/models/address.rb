@@ -4,9 +4,9 @@ class Address < ApplicationRecord
   validates :firstname, :lastname, :address, :city, :zip, :country, :phone, :cast, presence: true
 
   validates :firstname, :lastname, :city, :country,
-          format: { with: /\A[a-zA-Z]*\z/,
-                    message: I18n.t('models.address.firstname_warning') },
-          length: { maximum: 50 }
+            format: { with: /\A[a-zA-Z]*\z/,
+                      message: I18n.t('models.address.firstname_warning') },
+            length: { maximum: 50 }
 
   validates :address,
             format: { with: /\A[a-zA-Z0-9 \-\,]*\z/,
@@ -15,7 +15,7 @@ class Address < ApplicationRecord
 
   validates :zip,
             format: { with: /\A[0-9\-]*\z/,
-                      message: I18n.t('models.address.zip_warning')},
+                      message: I18n.t('models.address.zip_warning') },
             length: { maximum: 10 }
 
   validates :phone,

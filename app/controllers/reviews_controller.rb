@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
 
     if @review.save
-      flash[:success] =  I18n.t(:review_applied)
+      flash[:success] = I18n.t(:review_applied)
     else
       flash[:danger] = I18n.t(:review_not_applied)
     end

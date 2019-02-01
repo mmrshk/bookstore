@@ -1,5 +1,7 @@
 class CheckoutController < ApplicationController
   include Wicked::Wizard
+  include CheckoutHelper
+
   before_action :set_order
 
   steps :login, :addresses, :delivery, :payment, :confirm, :complete

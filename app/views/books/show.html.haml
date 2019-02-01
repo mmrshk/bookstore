@@ -9,8 +9,10 @@
           = link_to @book.image.url do
             = image_tag @book.image.url, class: "img-responsive", alt: "design-book"
     .col-sm-6
-      %h1.mt-res-0= @book.title
-      %p.lead.small= book_authors(@book)
+      %h1.mt-res-0
+        = @book.title
+      %p.lead.small
+        = BookPresenter.new(@book, self).book_authors
       .row
         = render 'form'
       .general-info-wrap.divider-lg
@@ -33,7 +35,8 @@
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Dimensions
-          %p.lead.small.pull-right= book_dimensions(@book)
+          %p.lead.small.pull-right
+            = BookPresenter.new(@book, self).book_dimensions
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left Materials

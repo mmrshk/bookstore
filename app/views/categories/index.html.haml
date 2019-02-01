@@ -85,11 +85,12 @@
                       = button_tag(type: 'submit', class: "thumb-hover-link button-hover") do
                         %i.fa.fa-shopping-cart.thumb-icon
           .general-thumb-info
-            %p.title= book.title
+            %p.title
+              = book.title
             %p.font-16.in-gold-500
               € #{book.price}
             %span.divider-sm
             %p.lead.small
-              = book_authors(book)
+              = BookPresenter.new(book, self).book_authors
   .text-center
     = pagy_nav_bootstrap(@pagy).html_safe

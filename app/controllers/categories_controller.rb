@@ -1,10 +1,9 @@
 class CategoriesController < ApplicationController
   include Pagy::Backend
+  include CategoryHelper
 
   before_action :set_filter
   before_action :set_line_item, only: %i[index]
-
-# maybe service?
 
   def index
     @pagy, @books = pagy(Book.by_filter(@filter))
