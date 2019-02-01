@@ -34,9 +34,10 @@ class CheckoutController < ApplicationController
   private
 
   def login
-    return jump_to(next_step) if user_signed_in?
+    return jump_to(current_order.step) if user_signed_in?
 
     cookies[:from_checkout] = { value: true, expires: 1.day.from_now }
+    current_order.update(step: :addresses)
   end
 
   def show_addresses
@@ -69,6 +70,7 @@ class CheckoutController < ApplicationController
 
   def update_addresses
     @addresses = AddressesForm.new(addresses_params)
+    current_order.update(step: :delivery)
 
     render_wizard unless @addresses.save
   end
@@ -76,16 +78,19 @@ class CheckoutController < ApplicationController
   def update_delivery
     current_order.update(order_params)
     flash[:warning] = I18n.t(:choose_delivery_method) if current_order.delivery_id.nil?
+    current_order.update(step: :payment)
   end
 
   def update_payment
     @credit_card = CreditCard.new(credit_card_params)
     render_wizard unless @credit_card.save
     current_order.update(credit_card_id: @credit_card.id)
+    current_order.update(step: :confirm)
   end
 
   def update_confirm
     current_order.update(status: Order::ORDER_FILTERS.keys.first.to_s) if current_order.place_in_queue
+    current_order.update(step: :complete)
     current_order.set_complete_date
     current_order.coupon.update(active: false) if current_order.coupon
     session[:order_complete] = true

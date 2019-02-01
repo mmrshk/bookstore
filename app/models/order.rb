@@ -13,13 +13,13 @@ class Order < ApplicationRecord
   has_one :shipping, dependent: :destroy
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
-  scope :payed, -> { where.not status: %w[in_progress canceled] }
+  scope :payed,      -> { where.not status: %w[in_progress canceled] }
 
   scope :in_progress, -> { where status: %w[in_progress] }
-  scope :in_queue, -> { where status: %w[in_queue] }
+  scope :in_queue,    -> { where status: %w[in_queue] }
   scope :in_delivery, -> { where status: %w[in_delivery] }
-  scope :delivered, -> { where status: %w[delivered] }
-  scope :canceled, -> { where status: %w[canceled] }
+  scope :delivered,   -> { where status: %w[delivered] }
+  scope :canceled,    -> { where status: %w[canceled] }
 
   after_create :set_number
 
@@ -28,7 +28,7 @@ class Order < ApplicationRecord
     in_delivery: 'In delivery',
     delivered: 'Delivery',
     canceled: 'Canceled',
-    all: 'All'
+    all_orders: 'All'
   }.freeze
 
   def set_complete_date
@@ -39,7 +39,19 @@ class Order < ApplicationRecord
     line_items.to_a.sum(&:total_price)
   end
 
-  aasm column: 'status' do
+  def discount
+    return 0 unless coupon
+
+    total_price * coupon.sale / 100
+  end
+
+  def total_price_init
+    return total_price unless coupon
+
+    total_price - discount
+  end
+
+  aasm :status, column: :status do
     state :in_progress, initial: true
     state :in_queue
     state :in_delivery
@@ -61,18 +73,6 @@ class Order < ApplicationRecord
     event :canceled do
       transitions from: %i[in_queue in_delivery in_progress delivered], to: :canceled
     end
-  end
-
-  def discount
-    return 0 unless coupon
-
-    total_price * coupon.sale / 100
-  end
-
-  def total_price_init
-    return total_price unless coupon
-
-    total_price - discount
   end
 
   private

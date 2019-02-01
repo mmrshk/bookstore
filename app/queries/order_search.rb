@@ -16,7 +16,7 @@ class OrderSearch
   private
 
   def all
-    @orders = @orders.all_orders if @params['all'].present?
+    @orders = @orders.all_orders if @params['All'].present?
   end
 
   def in_queue

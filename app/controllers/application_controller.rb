@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token
   helper_method :current_order
   protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource)
     session[:line_item_ids] = ActiveSupport::JSON.decode(cookies[:line_item_ids])
+    current_order.destroy
     super
   end
 

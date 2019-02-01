@@ -23,10 +23,4 @@ class Book < ApplicationRecord
   scope :price_asc, -> { order('price') }
   scope :price_desc, -> { order('price DESC') }
   scope :by_filter, ->(filter) { public_send(filter) }
-
-  def self.best_sellers
-    best = Order.payed.joins(:line_items).group(:book_id)
-                .order('sum("line_items"."quantity") DESC').count.keys
-    Book.find(best)
-  end
 end

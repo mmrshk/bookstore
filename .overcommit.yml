@@ -30,9 +30,6 @@ PreCommit:
   BundleCheck:
     enabled: true
 
-  RuboCop:
-    enabled: true
-
 PrePush:
   Brakeman:
     enabled: true

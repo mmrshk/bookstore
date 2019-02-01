@@ -1,5 +1,4 @@
 class AddressPresenter < SimpleDelegator
-
   def initialize(model, view)
     @model = model
     @view = view

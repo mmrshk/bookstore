@@ -4,6 +4,6 @@ class PagesController < ApplicationController
 
   def index
     @latest_books = Book.last(DIGIT_LATEST_BOOKS)
-    @best_sellers = Book.best_sellers.first(DIGIT_BOOK_BEST_SELLERS)
+    @best_sellers = BookBestSellers.new.call.first(DIGIT_BOOK_BEST_SELLERS)
   end
 end

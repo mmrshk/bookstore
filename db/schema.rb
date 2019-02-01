@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
     t.string "status"
     t.bigint "user_id"
     t.bigint "credit_card_id"
+    t.string "step"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "coupon_id"
