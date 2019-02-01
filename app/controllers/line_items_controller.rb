@@ -16,7 +16,6 @@ class LineItemsController < ApplicationController
     @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]).tap do |item|
       item.quantity += params[:line_item][:quantity].to_i
     end
-
     @line_item.save!
     create_new_line_item
 

@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   load_and_authorize_resource
 
-  before_action :find_book, only: [:show]
+  before_action :find_book,     only: %i[show]
   before_action :set_line_item, only: %i[show]
 
   def show

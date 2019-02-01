@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  decorates_assigned :order
-
   def index
     order_status = params[:order_status] || Order::ORDER_FILTERS[:all_orders]
     @orders = OrderSearch.new(current_user, order_status).call.decorate

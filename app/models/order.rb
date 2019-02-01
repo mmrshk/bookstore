@@ -75,6 +75,10 @@ class Order < ApplicationRecord
     end
   end
 
+  aasm :step, column: :step do
+    state :addresses, initial: true
+  end
+
   private
 
   def set_number

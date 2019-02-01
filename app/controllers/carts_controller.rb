@@ -1,7 +1,6 @@
 class CartsController < ApplicationController
   def show
-    @order = Order.new(line_item_ids: session[:line_item_ids],
-                       coupon_id: session[:coupon_id])
+    @order = Order.new(line_item_ids: session[:line_item_ids], coupon_id: session[:coupon_id])
   end
 
   def update
