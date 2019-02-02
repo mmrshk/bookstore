@@ -2,9 +2,9 @@ module UpdateCheckoutService
   class << self
     def update_confirm(current_order)
       current_order.update(status: Order::ORDER_FILTERS.keys.first.to_s)
-      current_order.update(step: :complete)
-      current_order.set_complete_date
+      current_order.update(completed_at: Time.current)
       current_order.coupon.update(active: false) if current_order.coupon
+      current_order.update(step: :complete)
     end
 
     def update_payment(current_order, credit_card)

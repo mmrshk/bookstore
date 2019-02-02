@@ -16,6 +16,6 @@ module Bookstore
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
-    # config.action_controller.include_all_helpers = false
+    config.action_controller.include_all_helpers = false
   end
 end

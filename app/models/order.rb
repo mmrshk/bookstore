@@ -31,10 +31,6 @@ class Order < ApplicationRecord
     all_orders: 'All'
   }.freeze
 
-  def set_complete_date
-    update(completed_at: Time.current)
-  end
-
   def total_price
     line_items.to_a.sum(&:total_price)
   end
@@ -77,6 +73,10 @@ class Order < ApplicationRecord
 
   aasm :step, column: :step do
     state :addresses, initial: true
+    state :delivery
+    state :payment
+    state :confirm
+    state :complete
   end
 
   private
