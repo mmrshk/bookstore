@@ -1,8 +1,8 @@
 %tr
   %td
     .general-img-wrap-table
-      = link_to line_item.book.image.url do
-        = image_tag line_item.book.image.url, class: "cart-img-shadow pull-left", alt: "design-book"
+      = link_to line_item.book.images.first.url do
+        = image_tag line_item.book.images.first.url, class: "cart-img-shadow pull-left", alt: "design-book"
   %td
     = link_to line_item.book.title, book_path(id: line_item.book), class: "title"
   %td

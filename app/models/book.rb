@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
 
   FILTERS = %i[newest pop_first by_title_asc by_title_desc price_asc price_desc].freeze
   DEFAULT_FILTER = :newest

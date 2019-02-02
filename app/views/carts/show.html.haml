@@ -8,8 +8,8 @@
           %button.close.general-cart-close{"aria-label" => "Close", :type => "button"}
             %span{"aria-hidden" => "true"} ×
           .general-img-wrap-table
-            = link_to line_item.book.image.url do
-              = image_tag line_item.book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+            = link_to line_item.book.images.first.url do
+              = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
           %p.title
             = line_item.book.title
           %table.table

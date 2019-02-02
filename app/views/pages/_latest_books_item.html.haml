@@ -1,8 +1,8 @@
 .row
   .col-sm-5
     .general-img-wrap
-      = link_to book.image.url do
-        = image_tag book.image.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+      = link_to book.images.first.url do
+        = image_tag book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
   .col-sm-7
     .mb-60
       %h1= book.title

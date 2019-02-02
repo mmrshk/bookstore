@@ -1,8 +1,8 @@
 ActiveAdmin.register Book do
   permit_params :title, :description, :price, :quantity, :category_id, :year, :dimension_d, :dimension_h, :dimension_w,
-                :material, :image, author_ids: []
+                :material, { images: [] }, author_ids: []
 
-  form do |f|
+  form html: { multipart: true } do |f|
     f.semantic_errors
     f.inputs do
       f.input :title
@@ -17,10 +17,9 @@ ActiveAdmin.register Book do
       f.input :material
       f.input :author_ids, label: 'Authors', as: :check_boxes,
                            collection: Author.all.map { |a| ["#{a.firstname} #{a.lastname}", a.id] }
-      f.inputs 'Image', multipart: true do
-        f.input :image, as: :file
-      end
+      f.file_field :images, multiple: true
     end
+
     f.actions
   end
 end

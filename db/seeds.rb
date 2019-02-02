@@ -33,7 +33,7 @@ end
 
 used_book_titles = []
 
-60.times do |index|
+10.times do |index|
   title = FFaker::Book.title
   used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
 
@@ -47,7 +47,8 @@ used_book_titles = []
               year: rand(2001..2019),
               material: FFaker::Lorem.words.join(', '),
               category_id: categories.sample.id,
-              image: File.open(File.join(Rails.root,'app/assets/images/1.jpg'))
+              images: [File.open(File.join(Rails.root,'app/assets/images/1.jpg')), File.open(File.join(Rails.root,'app/assets/images/2.jpg')), File.open(File.join(Rails.root,'app/assets/images/3.jpg')),
+                       File.open(File.join(Rails.root,'app/assets/images/4.jpg'))]
               )
 end
 
