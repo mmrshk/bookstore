@@ -6,12 +6,14 @@
     .col-sm-6
       .product-gallery
         .mb-20
-        = link_to @book.images.first.url do
-          = image_tag @book.images.first.url, class: "img-responsive", alt: "design-book"
+          %img.img-responsive
+            = link_to @book.images.first.url do
+              = image_tag @book.images.first.url, alt: "design-book"
         .images.clearfix
           - @book.images.drop(1).each do |image|
-            %a.img-link{href: "#"}
-              = image_tag image.url(:thumb)
+            %a.img-link
+              %img
+                = image_tag image.url(:thumb)
     .col-sm-6
       %h1.mt-res-0
         = @book.title
