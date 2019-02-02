@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :checkout,   only: %i[index show update]
   resource  :cart,       only: %i[show update]
   resources :users,      only: :edit
-  resources :line_items, only: %i[edit create destroy]
+  resources :line_items
   resources :addresses,  only: %i[create update]
 
   resources :books, only: :show  do
