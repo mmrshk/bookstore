@@ -33,7 +33,7 @@ end
 
 used_book_titles = []
 
-10.times do |index|
+50.times do |index|
   title = FFaker::Book.title
   used_book_titles.include?(title) ? title << " #{index}" : used_book_titles << title
 

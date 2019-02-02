@@ -4,8 +4,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :fog
 
   def store_dir
-    "/production/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}" if Rails.env.production?
-    "/test/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}" if Rails.env.development?
+    "test/#{mounted_as}/#{model.id}" if Rails.env.development?
+    "production/#{mounted_as}/#{model.id}" if Rails.env.production?
   end
 
   version :thumb do
