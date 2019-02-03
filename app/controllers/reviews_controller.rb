@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    
+
     if @review.save
       flash[:success] = I18n.t(:review_applied)
     else

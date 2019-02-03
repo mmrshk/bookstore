@@ -4,7 +4,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :fog
 
   def store_dir
-    Rails.env.production? ? (primary_folder = "production") : (primary_folder = "test")
+    Rails.env.production? ? (primary_folder = 'production') : (primary_folder = 'test')
 
    "#{primary_folder}/#{mounted_as}/#{model.id}"
   end
