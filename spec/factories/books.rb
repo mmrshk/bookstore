@@ -8,8 +8,8 @@ FactoryBot.define do
     dimension_w { 1.0 }
     dimension_d { 1.0 }
     year { 2015 }
-    material { 'Vasilisk, Bavykin' }
-    image { File.open(File.join(Rails.root, 'app/assets/images/1.jpg')) }
+    material { 'Unicorn, Bavykin' }
+    images { [File.open(File.join(Rails.root, 'app/assets/images/1.jpg'))] }
     category
   end
 end
