@@ -1,66 +1,70 @@
 = csrf_meta_tags
 %main.container.general-main-wrap
   %h1.general-title-margin Cart
-  .visible-xs
-    .general-cart-item.divider-lg-bottom
+  - if @order.line_items.none?
+    %p
+      Your cart is empty
+  - else
+    .visible-xs
       .general-cart-item.divider-lg-bottom
-        - @order.line_items.each do |line_item|
-          %button.close.general-cart-close{"aria-label" => "Close", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-          .general-img-wrap-table
-            = link_to line_item.book.images.first.url do
-              = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
-          %p.title
-            = line_item.book.title
-          %table.table
-            %tr
-              %td
-                %span.in-grey-600 Price
-              %td
-                %span.font-16.in-gold-500= number_to_euro line_item.book.price
-            %tr
-              %td.vertical-middle
-                %span.in-grey-600 Quantity
-              %td
-                .input-group
-                  = link_to line_item_path(id: line_item.id, quantity: :decrease), class: "input-link" do
-                    %i.fa.fa-minus.line-heaght-40
-                  %input.form-control.quantity-input{type: "text", value: "#{line_item.quantity}"}
-                  = link_to line_item_path(id: line_item.id, quantity: :increase), class: "input-link" do
-                    %i.fa.fa-plus.line-heaght-40
-            %tr
-              %td
-                %span.in-grey-600 SubTotal
-              %td
-                %span.font-16.in-gold-500= number_to_euro line_item.total_price
-  .hidden-xs
-    %table.table.table-hover
-      %tr.no-hover
-        %th.col-pic.pl-0
-          %span.in-grey-600 Product
-        %th.col-title
-        %th.col-price
-          %span.in-grey-600 Price
-        %th.col-quantity
-          %span.in-grey-600 Quantity
-        %th.col-total
-          %span.in-grey-600 SubTotal
-        %th.col-close
-      = render(@order.line_items)
-  .general-order-wrap
-    .row
-      .col-sm-4
-        .input-group.general-input-group
-          = form_tag cart_path, method: :put
-          = label_tag :coupon_id, 'Enter Your Coupon Code', class: 'input-label'
-          = text_field_tag(:coupon, nil, placeholder: 'Enter Your Coupon Code', class: 'form-control mb-30')
-          %div
-            = submit_tag 'Apply Coupon', class: 'btn btn-primary mb-15 res-block'
-      .col-sm-8
-        .res-mr-200.text-center.general-text-right
-          %p.in-gold-500.font-18.general-text-right Order Summary
-          %table.general-summary-table.general-summary-table-right.general-text-right
-            = render 'order_summary'
-          %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
-  .center-block
-    = link_to "Checkout", checkout_path(:login, destination: 'login'), class:"btn btn-default mb-20 hidden-xs center-block"
+        .general-cart-item.divider-lg-bottom
+          - @order.line_items.each do |line_item|
+            %button.close.general-cart-close{"aria-label" => "Close", :type => "button"}
+              %span{"aria-hidden" => "true"} ×
+            .general-img-wrap-table
+              = link_to line_item.book.images.first.url do
+                = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+            %p.title
+              = line_item.book.title
+            %table.table
+              %tr
+                %td
+                  %span.in-grey-600 Price
+                %td
+                  %span.font-16.in-gold-500= number_to_euro line_item.book.price
+              %tr
+                %td.vertical-middle
+                  %span.in-grey-600 Quantity
+                %td
+                  .input-group
+                    = link_to line_item_path(id: line_item.id, quantity: :decrease), class: "input-link" do
+                      %i.fa.fa-minus.line-heaght-40
+                    %input.form-control.quantity-input{type: "text", value: "#{line_item.quantity}"}
+                    = link_to line_item_path(id: line_item.id, quantity: :increase), class: "input-link" do
+                      %i.fa.fa-plus.line-heaght-40
+              %tr
+                %td
+                  %span.in-grey-600 SubTotal
+                %td
+                  %span.font-16.in-gold-500= number_to_euro line_item.total_price
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600 Product
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600 Price
+          %th.col-quantity
+            %span.in-grey-600 Quantity
+          %th.col-total
+            %span.in-grey-600 SubTotal
+          %th.col-close
+        = render(@order.line_items)
+    .general-order-wrap
+      .row
+        .col-sm-4
+          .input-group.general-input-group
+            = form_tag cart_path, method: :put
+            = label_tag :coupon_id, 'Enter Your Coupon Code', class: 'input-label'
+            = text_field_tag(:coupon, nil, placeholder: 'Enter Your Coupon Code', class: 'form-control mb-30')
+            %div
+              = submit_tag 'Apply Coupon', class: 'btn btn-primary mb-15 res-block'
+        .col-sm-8
+          .res-mr-200.text-center.general-text-right
+            %p.in-gold-500.font-18.general-text-right Order Summary
+            %table.general-summary-table.general-summary-table-right.general-text-right
+              = render 'order_summary'
+            %button.btn.btn-default.mb-20.visible-xs-inline-block Checkout
+    .center-block
+      = link_to "Checkout", checkout_path(:login, destination: 'login'), class:"btn btn-default mb-20 hidden-xs center-block"
