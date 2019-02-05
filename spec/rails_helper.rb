@@ -35,6 +35,13 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers
 end
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+Capybara.app_host = 'http://localhost:3002'
+Capybara.server_host = 'localhost'
+Capybara.server_port = '3002'
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec

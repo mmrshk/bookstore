@@ -9,8 +9,8 @@ RSpec.feature 'Registration', type: :feature do
       fill_in 'Password', with: 'DievkaInMyHeart'
       fill_in 'Confirm Password', with: 'DievkaInMyHeart'
       # click_button('Sign up')
+      find('#register-btn').click
     end
-    find('#register-btn').click
 
     expect(page.current_path).to eq root_path
     expect(page).to have_content 'A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.'
