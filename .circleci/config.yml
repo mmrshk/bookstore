@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: ~/imm
     parallelism: 2
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
