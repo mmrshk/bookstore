@@ -43,8 +43,9 @@ RSpec.feature 'Log in page', type: :feature do
       fill_in 'user_email', with: @user.email
       # click_button('Email Instructions')
       # binding.pry
-      find('#reset-btn').click
     end
+
+    find('#reset-btn').click
 
     expect(page.current_path).to eq new_user_session_path
     expect(page).to have_content 'You will receive an email with instructions on how to reset your password in a few minutes.'
