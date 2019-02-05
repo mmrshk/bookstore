@@ -7,6 +7,6 @@
     .form-group.mb-25
       = f.email_field :email, placeholder: "Enter your email", class: "form-control"
     .actions
-      = f.submit "Email Instructions", class: "btn btn-default center-block mb-20"
+      = f.submit "Email Instructions", class: "btn btn-default center-block mb-20",  id: 'reset-btn'
     .text-center
       %a.in-gold-500.mb-20{href: root_path} Cancel

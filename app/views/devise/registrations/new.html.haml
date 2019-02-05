@@ -25,7 +25,7 @@
             %i.fa.fa-check
           %span.checkbox-text Remember me
       .text-center
-        = f.button :submit, "Sign up", class:"btn btn-default mb-20"
+        = f.button :submit, "Sign up", class:"btn btn-default mb-20",  id:'register-btn'
   %p.general-sign-text.text-center
     Have an Account?
     - if controller_name != 'sessions'

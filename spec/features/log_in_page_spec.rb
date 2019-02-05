@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.feature 'Log in page', type: :feature do
   background do
@@ -40,8 +41,11 @@ RSpec.feature 'Log in page', type: :feature do
 
     within '#new_user' do
       fill_in 'user_email', with: @user.email
-      click_button('Email Instructions')
+      # click_button('Email Instructions')
+      # binding.pry
+      find('#reset-btn').click
     end
+
     expect(page.current_path).to eq new_user_session_path
     expect(page).to have_content 'You will receive an email with instructions on how to reset your password in a few minutes.'
   end
