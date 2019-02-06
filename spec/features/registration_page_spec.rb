@@ -8,7 +8,6 @@ RSpec.feature 'Registration', type: :feature do
       fill_in 'Email', with: FFaker::Internet.safe_email
       fill_in 'Password', with: 'DievkaInMyHeart'
       fill_in 'Confirm Password', with: 'DievkaInMyHeart'
-      # click_button('Sign up')
       find('#register-btn').click
     end
 

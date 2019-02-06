@@ -1,10 +1,17 @@
 class Book < ApplicationRecord
   mount_uploaders :images, ImageUploader
 
-  FILTERS = %i[newest pop_first by_title_asc by_title_desc price_asc price_desc].freeze
   DEFAULT_FILTER = :newest
   DESCRIPTION_LENGTH_MAX = 2000
   PRICE_LENGTH_MAX = 7
+  FILTERS = {
+    newest: 'Newest first',
+    pop_first: 'Popular first',
+    by_title_asc: 'Title A-Z',
+    by_title_desc: 'Title Z-A',
+    price_asc: 'Price: Low to high',
+    price_desc: 'Price: High to low'
+  }.freeze
 
   has_and_belongs_to_many :authors
   belongs_to :category

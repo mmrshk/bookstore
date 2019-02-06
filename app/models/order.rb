@@ -2,15 +2,15 @@ class Order < ApplicationRecord
   include AASM
   attr_accessor :active_admin_requested_event
 
-  belongs_to :user, optional: true
-  belongs_to :delivery, optional: true
-  belongs_to :coupon, optional: true
+  belongs_to :user,        optional: true
+  belongs_to :delivery,    optional: true
+  belongs_to :coupon,      optional: true
   belongs_to :credit_card, optional: true
 
   has_many :line_items, dependent: :destroy
-  has_many :addresses, dependent: :destroy
-  has_one :billing, dependent: :destroy
-  has_one :shipping, dependent: :destroy
+  has_many :addresses,  dependent: :destroy
+  has_one  :billing,    dependent: :destroy
+  has_one  :shipping,   dependent: :destroy
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
   scope :payed,      -> { where.not status: %w[in_progress canceled] }

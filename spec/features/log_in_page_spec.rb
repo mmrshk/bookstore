@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.feature 'Log in page', type: :feature do
 
