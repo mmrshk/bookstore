@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature 'Log in page', type: :feature do
-
   given(:user) { FactoryBot.create(:user) }
 
   scenario 'User fill log in form successfully' do

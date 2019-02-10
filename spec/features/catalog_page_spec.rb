@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Catalog page', type: :feature do
+  let(:title) { 'title' }
   background do
     @books = FactoryBot.create_list(:book, 3)
     @categories = Category.all
@@ -15,14 +16,14 @@ RSpec.feature 'Catalog page', type: :feature do
     end
     expect(page.current_path).to eq categories_path
 
-    expect(all('.title').first.text).to eq @books.sort_by(&:'title').first.title
+    expect(all('.title').first.text).to eq @books.sort_by(&:title).first.title
 
     within('div.hidden-xs.clearfix') do
       find('a.dropdown-toggle.lead.small').click
       find('ul.dropdown-menu').click_link('Title Z-A')
     end
 
-    expect(all('.title').first.text).to eq @books.sort_by(&:'title').reverse.first.title
+    expect(all('.title').first.text).to eq @books.sort_by(&:title).reverse.first.title
   end
 
   scenario 'Go to catalog from menu' do

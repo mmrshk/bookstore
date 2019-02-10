@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature 'Cart page', type: :feature do
-
   scenario 'Empty cart' do
     visit root_path
     find('a.shop-link.pull-right.hidden-xs').click
