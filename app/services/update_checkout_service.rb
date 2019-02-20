@@ -1,20 +1,16 @@
 module UpdateCheckoutService
   class << self
     def update_confirm(current_order)
-      current_order.update(status: Order::ORDER_FILTERS.keys.first.to_s)
-      current_order.update(completed_at: Time.current)
+      current_order.update(status: Order::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current, step: :complete)
       current_order.coupon.update(active: false) if current_order.coupon
-      current_order.update(step: :complete)
     end
 
     def update_payment(current_order, credit_card)
-      current_order.update(credit_card_id: credit_card.id)
-      current_order.update(step: :confirm)
+      current_order.update(credit_card_id: credit_card.id, step: :confirm)
     end
 
     def update_delivery(current_order, order_params)
-      current_order.update(order_params)
-      current_order.update(step: :payment)
+      current_order.update(order_params, step: :payment)
     end
 
     def update_addresses(current_order)

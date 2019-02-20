@@ -14,4 +14,7 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
-//= require_tree .
+//= require active_admin
+//= require addresses
+//= require devise
+//= require reviews

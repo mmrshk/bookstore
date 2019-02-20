@@ -5,6 +5,11 @@ ruby '2.5.3'
 
 # Cloud Storage
 gem 'google-cloud-storage', '~> 1.8', require: false
+
+gem 'carrierwave'
+gem 'fog'
+gem 'mini_magick'
+
 # Autentification
 gem 'devise', '~> 4.5'
 gem 'omniauth'
@@ -51,11 +56,8 @@ gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
 gem 'wicked'
 
-gem 'carrierwave'
 gem 'ffaker'
 gem 'figaro'
-gem 'fog'
-gem 'mini_magick'
 
 # Draper
 gem 'draper'

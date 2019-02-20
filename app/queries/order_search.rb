@@ -5,13 +5,6 @@ class OrderSearch
   end
 
   def call
-    filter
-    @orders
-  end
-
-  private
-
-  def filter
-    @orders = @orders.public_send(@params) if @params.present?
+    @orders.public_send(@params) if @params.present?
   end
 end
