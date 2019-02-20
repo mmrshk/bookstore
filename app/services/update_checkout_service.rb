@@ -1,3 +1,5 @@
+require 'pry'
+
 module UpdateCheckoutService
   class << self
     def update_confirm(current_order)
@@ -10,7 +12,8 @@ module UpdateCheckoutService
     end
 
     def update_delivery(current_order, order_params)
-      current_order.update(order_params, step: :payment)
+      current_order.update(order_params)
+      current_order.update(step: :payment)
     end
 
     def update_addresses(current_order)
