@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   private
 
   def find_book
-    @book = Book.find_by(id: params[:id])
+    @book ||= Book.find_by(id: params[:id])
   end
 
   def set_line_item

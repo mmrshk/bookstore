@@ -1,5 +1,3 @@
-require 'pry'
-
 module UpdateCheckoutService
   class << self
     def update_confirm(current_order)

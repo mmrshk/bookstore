@@ -7,7 +7,7 @@ class LineItemsController < ApplicationController
   }.freeze
 
   def edit
-    quantity_change!(LineItem.all.find_by(id: params[:id]))
+    quantity_change!(LineItem.find_by(id: params[:id]))
 
     redirect_to cart_path
   end
@@ -23,7 +23,7 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    @line_item = LineItem.all.find_by(id: params[:id])
+    @line_item = LineItem.find_by(id: params[:id])
     @line_item.destroy
     line_item_ids.delete_if { |item_id| item_id == @line_item.id }
 
