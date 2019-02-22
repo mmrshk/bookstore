@@ -6,11 +6,11 @@ ActiveAdmin.register Review do
   scope :unpublished
 
   action_item :publish, only: :show do
-    link_to 'Publish', publish_admin_review_path(review), method: :put unless review.publish?
+    link_to I18n.t('admin.reviews.publish'), publish_admin_review_path(review), method: :put unless review.publish?
   end
 
   action_item :publish, only: :show do
-    link_to 'Unpublish', unpublish_admin_review_path(review), method: :put if review.publish?
+    link_to I18n.t('admin.reviews.unpublish'), unpublish_admin_review_path(review), method: :put if review.publish?
   end
 
   member_action :publish, method: :put do
