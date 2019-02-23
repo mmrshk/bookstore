@@ -53,14 +53,18 @@ class AddressesForm
   end
 
   def valid?
-    billing.valid?
-    shipping.valid? && billing.valid?
+    # billing.valid?
+    # shipping.valid? && billing.valid?
+    shipping.valid? & billing.valid?
   end
 
   def params_for(type)
-    type = params[:use_billing] == '1' ? :billing : type
-    params.require(type).permit(:firstname, :lastname, :address,
+    params.require(define_type(type)).permit(:firstname, :lastname, :address,
                                 :country, :city, :zip, :phone,
                                 :user_id, :order_id, :cast)
+  end
+
+  def define_type(type)
+    params[:use_billing] == '1' ? :billing : type
   end
 end

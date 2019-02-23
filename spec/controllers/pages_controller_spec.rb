@@ -4,8 +4,8 @@ RSpec.describe PagesController, type: :controller do
   let(:books) { FactoryBot.create_list(:book, 5) }
   DIGIT_LATEST_BOOKS = 3
 
-  describe 'GET #index' do
-    before { get :index }
+  describe 'GET #home' do
+    before { get :home }
 
     # it 'assign @latest_books' do
     #   expect(assigns(:latest_books)).to match_array(books.last(DIGIT_LATEST_BOOKS))

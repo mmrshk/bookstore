@@ -10,6 +10,7 @@ RSpec.feature 'Cart page', type: :feature do
   end
 
   scenario 'Full cart' do
+    # .hidden-xs -  не кликать по спрятанной кнопке
     FactoryBot.create(:book)
     visit root_path
     click_button('Buy Now')

@@ -1,5 +1,8 @@
 %p
-  Hi #{@account.email}!
-%p Thanks for choosing us!
-%p Your order successfully completed. Please visit our site for checking your status of order.
-%p= link_to 'Check it', orders_url(host: "radiant-plains-48256.herokuapp.com")
+  = I18n.t('views.order_mailer.greeting', email: @account.email)
+%p
+  = I18n.t('views.order_mailer.thanks')
+%p
+  = I18n.t('views.order_mailer.successfully_completed')
+%p
+  = link_to I18n.t('views.order_mailer.check_it'), orders_url(host: "radiant-plains-48256.herokuapp.com")

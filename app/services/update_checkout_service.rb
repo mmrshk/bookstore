@@ -1,7 +1,7 @@
 module UpdateCheckoutService
   class << self
     def update_confirm(current_order)
-      current_order.update(status: Order::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current, step: :complete)
+      current_order.update(status: OrderFilterService::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current, step: :complete)
       current_order.coupon.update(active: false) if current_order.coupon
     end
 
@@ -10,8 +10,7 @@ module UpdateCheckoutService
     end
 
     def update_delivery(current_order, order_params)
-      current_order.update(order_params)
-      current_order.update(step: :payment)
+      current_order.update(delivery_id: order_params[:delivery_id], step: :payment)
     end
 
     def update_addresses(current_order)

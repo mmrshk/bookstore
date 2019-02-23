@@ -1,36 +1,46 @@
 class LineItemsController < ApplicationController
   load_and_authorize_resource
 
-  QUANTITY = {
-    increment: 'increment',
-    decrement: 'decrement'
-  }.freeze
-
   def edit
-    quantity_change!(LineItem.find_by(id: params[:id]))
-
+    LineItemsService.new(@line_item, params).quantity_change!
     redirect_to cart_path
   end
 
   def create
-    @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]).tap do |item|
-      item.quantity += params[:line_item][:quantity].to_i
-    end
-    @line_item.save!
-    create_new_line_item
+    @line_item = LineItemsService.new(@line_item, params).create
 
-    redirect_to cart_path
+    if @line_item.save!
+      create_new_line_item
+      flash[:success] = I18n.t('controllers.line_item.line_item_created')
+    else
+      flash[:danger] = I18n.t('controllers.line_item.line_item_not_created')
+    end
+
+    redirect_to books_path
   end
 
   def destroy
-    @line_item = LineItem.find_by(id: params[:id])
-    @line_item.destroy
-    line_item_ids.delete_if { |item_id| item_id == @line_item.id }
+    LineItemsService.new(@line_item, params).destroy
+
+    if @line_item.destroy
+      destroy_line_item
+      flash[:success] = I18n.t('controllers.line_item.line_item_deleted')
+    else
+      flash[:danger] = I18n.t('controllers.line_item.line_item_not_deleted')
+    end
 
     redirect_to cart_path
   end
 
   private
+
+  def line_item_params
+    params.require(:line_item).permit(:quantity, :book_id)
+  end
+
+  def line_item_ids
+    session[:line_item_ids] ||= []
+  end
 
   def create_new_line_item
     return if line_item_ids.include?(@line_item.id)
@@ -38,18 +48,7 @@ class LineItemsController < ApplicationController
     line_item_ids << @line_item.id
   end
 
-  def line_item_ids
-    session[:line_item_ids] ||= []
-  end
-
-  def line_item_params
-    params.require(:line_item).permit(:quantity, :book_id)
-  end
-
-  def quantity_change!(current_item)
-    case params[:quantity]
-    when QUANTITY[:increment] then current_item.increment!(:quantity)
-    when QUANTITY[:decrement] then current_item.decrement!(:quantity) if current_item.quantity > 1
-    end
+  def destroy_line_item
+    line_item_ids.delete_if { |item_id| item_id == @line_item.id }
   end
 end

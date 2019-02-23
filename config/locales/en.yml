@@ -6,7 +6,211 @@ en:
   choose_delivery_method: 'Please choose delivery method.'
   models:
     address:
-      firstname_warning: 'Consist of a-z, A-Z only, no special symbols'
-      address_warning: 'Consist of a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’ only, no special symbols'
-      zip_warning: 'Consist of 0-9 only,’-’ no special symbols'
-      phone_warning: 'Consist of 0-9 only no special symbols'
+      firstname_warning: "Consist of a-z, A-Z only, no special symbols"
+      address_warning: "Consist of a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’ only, no special symbols"
+      zip_warning: "Consist of 0-9 only,’-’ no special symbols"
+      phone_warning: "Consist of 0-9 only no special symbols"
+    book:
+      newest: 'Newest first'
+      pop_first: 'Popular first'
+      by_title_asc: 'Title A-Z'
+      by_title_desc: 'Title Z-A'
+      price_asc: 'Price: Low to high'
+      price_desc: 'Price: High to low'
+    order:
+      in_queue: 'Waiting for processing'
+      in_delivery: 'In delivery'
+      delivery: 'Delivery'
+      canceled: 'Canceled'
+      all: 'All'
+  admin:
+    books:
+      category: 'Category'
+      authors: 'Authors'
+    orders:
+      error: "Forbidden event %{event} requested on instance %{order}"
+      safe_event: "%{safe_event}!"
+      current_state: 'Current state'
+      change_state: 'Change state'
+    coupons:
+      coupon: 'Coupon'
+      sale: 'Sale (%)'
+    reviews:
+      publish: 'Publish'
+      unpublish: 'Unpublish'
+  controllers:
+    addresses:
+      address_updated: 'Your address successfully updated!'
+      address_not_updated: 'Address not saved!'
+    line_item:
+      line_item_created: 'Book was added to your bucket!'
+      line_item_not_created: 'Book was not added to your bucket.'
+      line_item_deleted: 'Book was deleted from your bucket!'
+      line_item_not_deleted: 'Book was not deleted from your bucket!'
+  mailers:
+    recipient: 'Your Order with bookstore.com'
+  views:
+    pages:
+      welcome: 'Welcome to our amazing Bookstore!'
+      description: 'We pore through hundreds of new books each month and select the five best we can find to share with our members.'
+      start: 'Get Started'
+      best_sellers: 'Best Sellers'
+      previous: 'Previous'
+      next: 'Next'
+      support: 'support@bookstore.com'
+      number: '(555)-555-5555'
+      home: 'Home'
+      shop: 'Shop'
+      orders: 'Orders'
+      settings: 'Settings'
+      login: 'Log in'
+      signup: 'Sign up'
+    reviews:
+      rating: 'Rating'
+      name: 'Your name'
+      review: 'Review'
+      post: 'Post'
+      verified: 'Verified Reviewer'
+    addresses:
+      billing: 'Billing Address'
+      shipping: 'Shipping Address'
+      country: 'Select country'
+      phone: 'Example +355661234567'
+      order: 'Order'
+      save: 'Save'
+    books:
+      cart: 'Add to Cart'
+      all: 'All'
+      catalog: 'Сatalog'
+      sort: 'Sort by'
+      filter: 'Filter by category'
+      results: 'Back to results'
+      year: 'Year of publication'
+      dimensions: 'Dimensions'
+      reviews: "Reviews (%{review})"
+      materials: 'Materials'
+      write_review: 'Write review'
+    carts:
+      subtotal: 'Subtotal:'
+      coupon: 'Coupon:'
+      order_total: 'Order Total:'
+      cart: 'Cart'
+      cart_empty: 'Your cart is empty'
+      price: 'Price'
+      quantity: 'Quantity'
+      subtotal_show: 'Subtotal'
+      product: 'Product'
+      coupon_code: 'Enter Your Coupon Code'
+      apply_coupon: 'Apply Coupon'
+      order_summary: 'Order Summary'
+      checkout: 'Checkout'
+    checkout:
+      item_total: 'Item Total:'
+      coupon: 'Coupon:'
+      order_total: 'Order Total:'
+      order_summary: 'Order Summary'
+      checkout: 'Checkout'
+      billing: 'Billing Address'
+      shipping: 'Shipping Address'
+      fields_required: 'all fields are required'
+      save: 'Save and Continue'
+      use_billing: 'Use Billing Adress'
+      delivery:
+        shipping_method: 'Shipping method'
+        method: 'Method'
+        days: 'Days'
+        price: 'Price'
+      payment:
+        credit_card: 'Credit Card'
+        card_number: 'Card Number'
+        card_name: 'Name on Card'
+        month_year: 'MM / YY'
+        cvv: 'CVV'
+        cvv_notice: '3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front'
+      confirm:
+        address: "%{address} Address"
+        phone: "Phone %{phone}"
+        shipments: 'Shipments'
+        card_number: "**** **** **** %{number}"
+        price: 'Price'
+        quantity: 'Quantity'
+        subtotal: 'SubTotal'
+        book: 'Book'
+        price: 'Price'
+        total: 'Total'
+        place_order: 'Place Order'
+      complete:
+        thank: 'Thank You for your Order!'
+        email: "An order confirmation has been sent to %{email}"
+        order: "Order #%{order}"
+        phone: "Phone %{phone}"
+        price: 'Price'
+        quantity: 'Quantity'
+        subtotal: 'SubTotal'
+        total: 'Total'
+        book: 'Book'
+        back_to_store: 'Back to Store'
+      login:
+        customer: 'Returning Customer'
+        login: 'Log In with Password'
+        email: 'Enter Email'
+        password: 'Password'
+        forgot_password: 'Forgot password?'
+        new_customer: 'New Customer'
+        or: 'or'
+        quick_register: 'Quick Register'
+        create_password_later: "You will be able to create password later"
+        continue_checkout: 'Continue to Checkout'
+    order_mailer:
+      thanks: 'Thanks for choosing us!'
+      successfully_completed: 'Your order successfully completed. Please visit our site for checking your status of order.'
+      check_it: 'Check it'
+      email: 'Hi %{email}!'
+    orders:
+      my_orders: 'My Orders'
+      sort_by: 'Sort by'
+      all: 'All'
+      waiting: 'Waiting for processing'
+      in_delivery: 'In delivery'
+      delivered: 'Delivered'
+      canceled: 'Canceled'
+      number: 'Number'
+      completed_at: 'Completed at'
+      status: 'Status'
+      total: 'Total'
+      order_number: "Order %{order}"
+      phone: "Phone %{phone}"
+      payment_info: 'Payment Information'
+  devise:
+    passwords:
+      new_password: 'Set new password'
+      type_new_password: 'Type a new Password'
+      confirm_password: 'Confirm Password'
+      change: 'Change'
+      forgot_password: 'Forgot your password?'
+      instructions: 'We will email you instructions on how to reset it'
+      enter_email: 'Enter your email'
+      email_instructions: 'Email Instructions'
+      cancel: 'Cancel'
+    registrations:
+      signup: 'Sign up'
+      login: 'Log in'
+      save: 'Save'
+      password: 'Password'
+      or: 'or'
+      enter_email: 'Enter Email'
+      password: 'Password'
+      old_password: 'Old Password'
+      new_password: 'New Password'
+      forgot_password: 'Forgot password?'
+      confirm_password: 'Confirm Password'
+      remember_me: 'Remember me'
+      have_account: 'Have an Account?'
+      settings: 'Settings'
+      address: 'Address'
+      privacy: 'Privacy'
+      email: 'Email'
+      waiting_confirmation: "Currently waiting confirmation for: %{email}"
+      remove_account: 'Remove Account'
+      please_remove_account: 'Please Remove My Account'
+      all_data_lost: 'I understand that all data will be lost'

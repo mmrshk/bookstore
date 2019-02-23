@@ -1,9 +1,11 @@
 .hidden-xs.hidden-sm
   .row
     .col-md-5
-      %h3.general-subtitle.mt-0 Billing Address
+      %h3.general-subtitle.mt-0
+        = I18n.t('views.addresses.billing')
     .col-md-5
-      %h3.general-subtitle.mt-0 Shipping Address
+      %h3.general-subtitle.mt-0
+        = I18n.t('views.addresses.shipping')
 .row
   -Address.casts.each_key do |cast|
     .col-md-5.mb-40
@@ -14,4 +16,4 @@
       = simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |ff|
         = ff.error_notification
         = render 'addresses/user_form_fields', f:ff, cast: cast
-        = ff.button :submit, "Save", class:"btn btn-default btn"
+        = ff.button :submit,  I18n.t('views.addresses.save'), class:"btn btn-default btn"

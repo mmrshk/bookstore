@@ -1,17 +1,9 @@
 class Book < ApplicationRecord
   mount_uploaders :images, ImageUploader
 
-  DEFAULT_FILTER = :newest
   DESCRIPTION_LENGTH_MAX = 2000
   PRICE_LENGTH_MAX = 7
-  FILTERS = {
-    newest: 'Newest first',
-    pop_first: 'Popular first',
-    by_title_asc: 'Title A-Z',
-    by_title_desc: 'Title Z-A',
-    price_asc: 'Price: Low to high',
-    price_desc: 'Price: High to low'
-  }.freeze
+  DESCRIPTION_LENGTH = 250
 
   has_and_belongs_to_many :authors
   belongs_to :category

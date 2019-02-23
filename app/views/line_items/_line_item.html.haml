@@ -7,16 +7,18 @@
     .link_to_book
       = link_to line_item.book.title, book_path(id: line_item.book), class: "title"
   %td
-    %span.font-16.in-gold-500= number_to_euro line_item.book.price
+    %span.font-16.in-gold-500
+      = number_to_euro line_item.book.price
   %td
     .input-group
       = link_to edit_line_item_path(id: line_item.id, quantity: :decrement), class: "input-link" do
         %i.fa.fa-minus.line-heaght-40
-      %input.form-control.quantity-input{:type => "text", :value => "#{line_item.quantity}"}/
+      %input.form-control.quantity-input{ type: "text", value: "#{line_item.quantity}"}
       = link_to edit_line_item_path(id: line_item.id, quantity: :increment), class: "input-link" do
         %i.fa.fa-plus.line-heaght-40
   %td
-    %span.font-16.in-gold-500= number_to_euro line_item.total_price
+    %span.font-16.in-gold-500
+      = number_to_euro line_item.total_price
   %td
     = link_to line_item_path(id: line_item.id), method: :delete, class: "close general-cart-close" do
-      %span{"aria-hidden" => "true"} ×
+      %span{ "aria-hidden" => "true" } ×

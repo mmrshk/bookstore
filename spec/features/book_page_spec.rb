@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'pry'
+
 RSpec.feature 'Book page', type: :feature do
   let(:user) { FactoryBot.create(:user) }
 

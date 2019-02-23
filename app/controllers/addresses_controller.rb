@@ -8,10 +8,13 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address = Address.find_by(id: params[:id])
-    @address.update(address_params)
-
-    redirect_to edit_user_registration_path
+    if @address.update(address_params)
+      flash[:success] = I18n.t('controllers.addresses.address_updated')
+      redirect_to edit_user_registration_path
+    else
+      flash[:danger] = I18n.t('controllers.addresses.address_not_updated')
+      # render 'devise/registrations/edit'
+    end
   end
 
   private

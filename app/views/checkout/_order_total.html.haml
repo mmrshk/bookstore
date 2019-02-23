@@ -1,12 +1,17 @@
-%p.in-gold-500.font-18 Order Summary
+%p.in-gold-500.font-18
+  = I18n.t('views.carts.order_summary')
 %table.general-summary-table
   %tr
     %td
-      %p.font-16 Item Total:
+      %p.font-16
+        = I18n.t('views.checkout.item_total')
     %td
-      %p.font-16= number_to_euro current_order.total_price_init
+      %p.font-16
+        = number_to_euro current_order.total_price_init
   %tr
     %td
-      %p.font-16 Order Total:
+      %p.font-16
+        = I18n.t('views.checkout.order_total')
     %td
-      %p.font-16= number_to_euro current_order.total_price_init
+      %p.font-16
+        = number_to_euro current_order.total_price_init

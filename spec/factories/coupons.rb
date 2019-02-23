@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :coupon do
-    coupon { '6584798596' }
-    sale { 10 }
+    coupon { Faker::Number.number(10) }
+    sale { Faker::Number.between(1, 100) }
     active { true }
   end
 end

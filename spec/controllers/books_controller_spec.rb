@@ -8,11 +8,6 @@ RSpec.describe BooksController, type: :controller do
       allow(Book).to receive(:find_by) { book }
     end
 
-    it 'receives find_by and return book' do
-      expect(Book).to receive(:find_by).with(id: book.id.to_s)
-      get :show, params: { id: book.id }
-    end
-
     it 'assigns @book' do
       get :show, params: { id: book.id }
       expect(assigns(:book)).not_to be_nil

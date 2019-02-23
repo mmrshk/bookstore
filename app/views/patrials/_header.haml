@@ -23,7 +23,7 @@
               %ul#menu.collapse.list-unstyled-none.mb-10.pl-30{"aria-expanded" => "false"}
                 - Category.all.each do |category|
                   %li{:class => "#{'active' if params[:id] == category.id}"}
-                    = link_to category.title, category_path(category), class: "collapse-link"
+                    = link_to category.title, category_books_path(category), class: "collapse-link"
             - if user_signed_in?
               %li
                 %a.collapse{"aria-controls" => "account", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#account", :type => "button"} My account
@@ -44,7 +44,7 @@
               %ul.dropdown-menu{:role => "menu"}
                 - Category.all.each do |category|
                   %li{:class => "#{'active' if params[:id] == category.id}"}
-                    = link_to category.title, category_path(category), class: "collapse-link"
+                    = link_to category.title, category_books_path(category), class: "collapse-link"
             - if user_signed_in?
               %li
                 %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"} My account

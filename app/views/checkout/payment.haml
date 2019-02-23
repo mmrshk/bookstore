@@ -1,20 +1,23 @@
 %main.container.general-main-wrap.mb-res-50
-  %h1.general-title-margin Checkout
+  %h1.general-title-margin
+    = I18n.t('views.checkout.checkout')
   = render 'steps'
-  %h3.general-subtitle Credit Card
-  = simple_form_for @credit_card, url: wizard_path, method: :put, html: {class: 'max-600'} do |form|
-    = form.input :card_number, required: false, label: 'Card Number', placeholder: 'Card Number'
+  %h3.general-subtitle
+    = I18n.t('views.checkout.payment.credit_card')
+  = simple_form_for @credit_card, url: wizard_path, method: :put, html: { class: 'max-600' } do |form|
+    = form.input :card_number, required: false, label: I18n.t('views.checkout.payment.card_number'), placeholder: I18n.t('views.checkout.payment.card_number')
     .row
       .col-sm-6
-        = form.input :name, required: false, placeholder: 'Name on Card'
+        = form.input :name, required: false, placeholder: I18n.t('views.checkout.payment.card_name')
       .col-sm-3
-        = form.input :expiration_month_year, label: 'MM / YY', required: false, placeholder: 'MM / YY'
+        = form.input :expiration_month_year, label: I18n.t('views.checkout.payment.month_year'), required: false, placeholder: I18n.t('views.checkout.payment.month_year')
       .col-sm-3
-        = form.input :cvv, label: 'CVV', required: false, placeholder: 'CVV', input_html: { class: 'relative' }
-        %i.fa.fa-question-circle.general-form-help.pr-15{'data-toggle': 'tooltip', 'data-placement': :top, title: '3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front'}
+        = form.input :cvv, label: I18n.t('views.checkout.payment.cvv'), required: false, placeholder: I18n.t('views.checkout.payment.cvv'), input_html: { class: 'relative' }
+        %i.fa.fa-question-circle.general-form-help.pr-15{ 'data-toggle': 'tooltip', 'data-placement': :top, title: I18n.t('views.checkout.payment.cvv_notice') }
     .general-text-align.mt-80
-      %p.in-gold-500.font-18 Order Summary
+      %p.in-gold-500.font-18
+        = I18n.t('views.carts.order_summary')
       %table.general-summary-table
         = render 'order_summary', order: current_order
       .pull-right
-        = form.submit 'Save and Continue', class: 'btn btn-default mb-80'
+        = form.submit I18n.t('views.checkout.save'), class: 'btn btn-default mb-80'

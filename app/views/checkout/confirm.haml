@@ -1,23 +1,26 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin Checkout
+  %h1.general-title-margin
+    = I18n.t('views.checkout.checkout')
   = render 'steps'
   .row.mb-20
     - current_order.addresses.each do |current_address|
       .col-sm-3
-        %h3.general-subtitle "#{current_address.cast.capitalize} Address"
+        %h3.general-subtitle
+          = I18n.t('views.checkout.confirm.address', address: OrderPresenter.new(current_address, self).address)
         %p.general-address
-          = "#{current_address.firstname} #{current_address.lastname}"
+          = OrderPresenter.new(current_address, self).username
           = link_to "edit", checkout_path(:addresses), class: "general-edit"
           %br
           = current_address.address
           %br
-          = "#{current_address.city} #{current_address.zip}"
+          = OrderPresenter.new(current_address, self).city_zip
           %br
           = current_address.country
           %br
-          = "Phone #{current_address.phone}"
+          = I18n.t('views.checkout.confirm.phone', phone: current_address.phone)
     .col-sm-3
-      %h3.general-subtitle Shipments
+      %h3.general-subtitle
+        = I18n.t('views.checkout.confirm.shipments')
       %p.general-address
         = current_order.delivery.name
         = link_to "edit", checkout_path(:delivery), class: "general-edit"
@@ -26,7 +29,7 @@
     .col-sm-3
       %h3.general-subtitle Payment Information
       %p.general-address
-        = "**** **** **** #{current_order.credit_card.card_number.last(4)}"
+        = I18n.t('views.checkout.confirm.card_number', number: OrderPresenter.new(current_order, self).card_number)
         = link_to "edit", checkout_path(:payment), class: "general-edit"
         %br
         = current_order.credit_card.expiration_month_year
@@ -36,36 +39,47 @@
         .general-img-wrap-table
           = link_to line_item.book.images.first.url do
             = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
-        %p.title= line_item.book.title
+        %p.title
+          = line_item.book.title
         %table.table
           %tr
             %td
-              %span.in-grey-600 Price
+              %span.in-grey-600
+                = I18n.t('views.checkout.confirm.price')
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.book.price
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.book.price
           %tr
             %td.vertical-middle
-              %span.in-grey-600 Quantity
+              %span.in-grey-600
+                = I18n.t('views.checkout.confirm.quantity')
             %td
-              %span= line_item.quantity
+              %span
+                = line_item.quantity
           %tr
             %td
-              %span.in-grey-600 SubTotal
+              %span.in-grey-600
+                = I18n.t('views.checkout.confirm.subtotal')
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.total_price
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.total_price
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       %thead
         %tr
           %th
-            %span.in-grey-600 Book
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.book')
           %th.col-method
           %th
-            %span.in-grey-600 Price
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.price')
           %th
-            %span.in-grey-600 Quantity
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.quantity')
           %th
-            %span.in-grey-600 Total
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.total')
       %tbody
         - current_order.line_items.each do |line_item|
           %tr
@@ -74,17 +88,23 @@
                 = link_to line_item.book.images.first.url do
                   = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
             %td
-              %p.title= line_item.book.title
-              %p.in-grey-600.fw-300= line_item.book.description.split('.').first
+              %p.title
+                = line_item.book.title
+              %p.in-grey-600.fw-300
+                = OrderPresenter.new(line_item, self).description
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.book.price
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.book.price
             %td
-              %span.ml-30= line_item.quantity
+              %span.ml-30
+                = line_item.quantity
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.total_price
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.total_price
   .text-center.general-text-right
-    %p.in-gold-500.font-18 Order Summary
+    %p.in-gold-500.font-18
+      = I18n.t('views.checkout.order_summary')
     %table.general-summary-table.general-summary-table-right.general-text-right
       = render 'order_summary', order: current_order
   .text-center
-    = button_to "Place Order", wizard_path, method: :put, class: 'btn btn-default mb-20'
+    = button_to I18n.t('views.checkout.confirm.place_order'), wizard_path, method: :put, class: 'btn btn-default mb-20'

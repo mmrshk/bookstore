@@ -1,20 +1,24 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource :category
   load_and_authorize_resource
 
-  before_action :find_book,     only: %i[show]
-  before_action :set_line_item, only: %i[show]
+  include Pagy::Backend
 
-  def show
-    @category = Category.where(name: @book.category)
+  before_action :set_line_item, :set_filter
+
+  def index
+    @pagy, @books = @category ? pagy(PagyService.new.filter_by_category(@category, @filter)) : pagy(PagyService.new.default_filter(@filter))
   end
+
+  def show; end
 
   private
 
-  def find_book
-    @book = Book.find_by(id: params[:id])
-  end
-
   def set_line_item
     @line_item = LineItem.new
+  end
+
+  def set_filter
+    @filter = BookFilterService.new.filter(params)
   end
 end

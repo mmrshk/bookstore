@@ -23,29 +23,13 @@ class Order < ApplicationRecord
 
   after_create :set_number
 
-  ORDER_FILTERS = {
-    in_queue: 'Waiting for processing',
-    in_delivery: 'In delivery',
-    delivered: 'Delivery',
-    canceled: 'Canceled',
-    all_orders: 'All'
-  }.freeze
+  # def number=(set_number)
+  #   super(set_number)
+  # end
 
-  def total_price
-    line_items.to_a.sum(&:total_price)
-  end
-
-  def discount
-    return 0 unless coupon
-
-    total_price * coupon.sale / 100
-  end
-
-  def total_price_init
-    return total_price unless coupon
-
-    total_price - discount
-  end
+  # def number=
+  #   self.number ||= 'R' + Time.zone.now.strftime('%Y%m%d%H%M%S')
+  # end
 
   aasm :status, column: :status do
     state :in_progress, initial: true
@@ -79,9 +63,25 @@ class Order < ApplicationRecord
     state :complete
   end
 
+  def total_price
+    line_items.to_a.sum(&:total_price)
+  end
+
+  def discount
+    return 0 unless coupon
+
+    total_price * coupon.sale / 100
+  end
+
+  def total_price_init
+    return total_price unless coupon
+
+    total_price - discount
+  end
+
   private
 
   def set_number
-    update(number: 'R' + Time.zone.now.strftime('%Y%m%d'))
+    update(number: 'R' + Time.zone.now.strftime('%Y%m%d%H%M%S'))
   end
 end

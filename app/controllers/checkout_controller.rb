@@ -1,4 +1,5 @@
 class CheckoutController < ApplicationController
+  # load_and_authorize_resource
   include Wicked::Wizard
   include CheckoutHelper
 

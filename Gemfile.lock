@@ -166,6 +166,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    faker (1.9.3)
+      i18n (>= 0.7)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffaker (2.10.0)
@@ -686,6 +688,7 @@ DEPENDENCIES
   devise (~> 4.5)
   draper
   factory_bot_rails
+  faker
   ffaker
   figaro
   fog

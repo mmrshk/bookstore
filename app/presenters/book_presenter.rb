@@ -12,9 +12,13 @@ class BookPresenter < SimpleDelegator
     "H: #{dimension_h} x W: #{dimension_w} x D: #{dimension_d}"
   end
 
+  def book_reviews
+    @model.reviews.where(publish: true).count
+  end
+
   private
 
   def method_missing(*args, &block)
-    @model.send(*args, &block)
+    @model.public_send(*args, &block)
   end
 end

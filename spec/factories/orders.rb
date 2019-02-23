@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order do
-    number { '111111111111' }
+    number { Faker::Number.number(10) }
     total_price { 100 }
     status { 'in_queue' }
     use_billing { true }

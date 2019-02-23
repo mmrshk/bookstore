@@ -2,6 +2,6 @@
   = render 'shared/error_field', field: field, object: object, f: f, cast: cast
 - else
   .form-group
-    %label.control-label.input-label{:for => "#{field}"}
+    %label.control-label.input-label{ for: "#{field}"}
       = field.to_s.capitalize
     = f.input_field field, required: false, value: AddressPresenter.new(@addresses, self).input_value(cast, field), label: false, class: 'form-control'

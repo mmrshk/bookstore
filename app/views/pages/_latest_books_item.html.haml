@@ -5,8 +5,10 @@
         = image_tag book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
   .col-sm-7
     .mb-60
-      %h1= book.title
-      %p.lead= truncate(book.description, length: 150)
+      %h1
+        = book.title
+      %p.lead
+        = truncate(book.description, length: 150)
       %p.lead.small
         = BookPresenter.new(book, self).book_authors
       .general-align

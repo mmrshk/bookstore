@@ -1,7 +1,7 @@
 %main.container
   = link_to :back, class: "general-back-link" do
     %i.fa.fa-long-arrow-left.mr-15
-    Back to results
+    = I18n.t('views.books.results')
   .row
     .col-sm-6
       .product-gallery
@@ -24,8 +24,8 @@
       .general-info-wrap.divider-lg
         %p Description
         %p.lead.small.line-height-2
-          - if @book.description.length > 250
-            = truncate(@book.description, length: 250)
+          - if @book.description.length > Book::DESCRIPTION_LENGTH
+            = truncate(@book.description, length: Book::DESCRIPTION_LENGTH)
             = link_to 'Read more', '', class: "read-more in-gold-500 ml-10"
             :javascript
               $(".read-more").on('click', function(e) {
@@ -36,20 +36,25 @@
             = @book.description
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Year of publication
+          %p.pull-left
+            = I18n.t('views.books.year')
           %p.lead.small.pull-right= @book.year
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Dimensions
+          %p.pull-left
+            = I18n.t('views.books.dimensions')
           %p.lead.small.pull-right
             = BookPresenter.new(@book, self).book_dimensions
       .general-info-wrap.divider-lg
         .clearfix
-          %p.pull-left Materials
+          %p.pull-left
+            = I18n.t('views.books.materials')
           %p.lead.small.pull-right= @book.material
   .mb-80
-    %h3.in-gold-500.mb-25= "Reviews (#{@book.reviews.where(publish: true).count})"
+    %h3.in-gold-500.mb-25
+      = I18n.t('views.books.reviews', review: BookPresenter.new(@book, self).book_reviews)
     = render @book.reviews
     - if user_signed_in?
-      %h3.in-gold-500.mb-25 Write review
+      %h3.in-gold-500.mb-25
+        = I18n.t('views.books.write_review')
       = render 'reviews/form'

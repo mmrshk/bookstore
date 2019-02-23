@@ -1,33 +1,36 @@
 %main.container.general-main-wrap
   .text-center
-    %h3.general-login-title Sign up
+    %h3.general-login-title
+      = I18n.t('devise.registrations.signup')
     = link_to user_facebook_omniauth_authorize_path, class: "general-login-icon" do
       %i.fa.fa-facebook-official
-    %p.general-login-text or
+    %p.general-login-text
+      = I18n.t('devise.registrations.or')
   .general-form
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = f.error_notification
       .form-group.mb-30
-        = f.label :email, "Enter Email", class:"control-label input-label"
+        = f.label :email, I18n.t('devise.registrations.enter_email'), class:"control-label input-label"
         = f.input :email, required: true, autofocus: true, input_html: { autocomplete: "email" }, label: false
       .form-group.mb-30
-        = f.label :password, "Password", class:"control-label input-label"
+        = f.label :password, I18n.t('devise.registrations.password'), class:"control-label input-label"
         = f.input :password, label:false, required: true, input_html: { autocomplete: "new-password" }
         - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-          = link_to "Forgot password?", new_password_path(resource_name), class: "help-block in-gold-500"
+          = link_to I18n.t('devise.registrations.forgot_password'), new_password_path(resource_name), class: "help-block in-gold-500"
       .form-group.mb-30
-        = f.label :password_confirmation, "Confirm Password", class:"control-label input-label"
+        = f.label :password_confirmation, I18n.t('devise.registrations.confirm_password'), class:"control-label input-label"
         = f.input :password_confirmation, label:false, required: true, input_html: { autocomplete: "new-password" }
       .form-group.checkbox.text-center.mb-30
         %label.checkbox-label
-          %input.checkbox-input{:hidden => "true", :type => "checkbox"}/
+          %input.checkbox-input{ hidden: "true", type: "checkbox"}
           %span.checkbox-icon
             %i.fa.fa-check
-          %span.checkbox-text Remember me
+          %span.checkbox-text
+            = I18n.t('devise.registrations.remember_me')
       .text-center
-        = f.button :submit, "Sign up", class:"btn btn-default mb-20",  id:'register-btn'
+        = f.button :submit, I18n.t('devise.registrations.signup'), class:"btn btn-default mb-20",  id:'register-btn'
   %p.general-sign-text.text-center
-    Have an Account?
+    = I18n.t('devise.registrations.have_account')
     - if controller_name != 'sessions'
-      = link_to "Log in", new_session_path(resource_name), class:"in-gold-500"
+      = link_to I18n.t('devise.registrations.login'), new_session_path(resource_name), class:"in-gold-500"
 .form-inputs

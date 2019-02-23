@@ -3,9 +3,9 @@ ActiveAdmin.register Coupon do
 
   form do |f|
     f.inputs I18n.t('admin.coupons.coupon') do
-      f.input :coupon, input_html: { value: GenerateCouponService.generate }
+      f.input :coupon, input_html: { value: GenerateCouponService.new.generate }
       f.input :active, input_html: { checked: true }
-      f.input :sale
+      f.input :sale, label: I18n.t('admin.coupons.sale')
     end
     f.actions
   end

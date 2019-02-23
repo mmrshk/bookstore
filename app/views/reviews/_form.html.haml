@@ -3,19 +3,18 @@
     = simple_form_for([@book, @book.reviews.build]) do |f|
       .col-md-8
         .mb-40
-          = f.label :rating, "Rating", class:"general-info-text"
+          = f.label :rating, I18n.t('views.reviews.rating'), class:"general-info-text"
           %fieldset.rating-input
             - for i in 0...5
               = f.input_field :check_rate, required: true, label: false, name: "rating-input", "data-val":5-i , class:"rate-input", type: "radio", required: "", value: 5 - i, id: "#{i}_rating"
               %label.rating-input{for: "#{i}_rating"}
 
           = f.input :rating, label: false, input_html: { type: 'hidden', class: 'hidden-rate-value' }
-          = f.label :name, "Your name", class:"control-label input-label in-grey-600"
+          = f.label :name, I18n.t('views.reviews.name'), class:"control-label input-label in-grey-600"
           = f.input_field :name, class: "form-control"
-          = f.label :comment, "Review", class:"control-label input-label in-grey-600"
+          = f.label :comment, I18n.t('views.reviews.review'), class:"control-label input-label in-grey-600"
           = f.input_field :comment, class: "form-control"
           = f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }
           = f.input :book_id, label: false, input_html: { value: @book.id, type: 'hidden' }
         .text-right
-          = f.button :submit, "Post", class: "btn btn-default mb-20"
-  
+          = f.button :submit, I18n.t('views.reviews.post'), class: "btn btn-default mb-20"

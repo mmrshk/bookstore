@@ -18,3 +18,4 @@
 //= require addresses
 //= require devise
 //= require reviews
+//= require book_description

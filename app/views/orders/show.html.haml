@@ -1,51 +1,55 @@
 %main.container.general-main-wrap
-  %h1.general-title-margin= "Order #{@order.number}"
+  %h1.general-title-margin
+    = I18n.t('views.orders.order_number', order: @order.number)
   .row.mb-20
     .col-sm-3
-      %h3.general-subtitle.mt-0 Billing Address
+      %h3.general-subtitle.mt-0
+        = I18n.t('views.addresses.billing')
       %p.general-address
-        = "#{@order.addresses.billing.first.firstname} #{@order.addresses.billing.first.lastname}"
+        = OrderPresenter.new(@order, self).billing_username
         %br
         = @order.addresses.billing.first.address
         %br
-        = "#{@order.addresses.billing.first.city} #{@order.addresses.billing.first.zip}"
+        = OrderPresenter.new(@order, self).billing_zip_city
         %br
         = @order.addresses.billing.first.country
         %br
-        = "Phone #{@order.addresses.billing.first.phone}"
+        = I18n.t('views.orders.phone', phone: @order.addresses.billing.first.phone)
     .col-sm-3
       %h3.general-subtitle.mt-0 Shipping Address
       %p.general-address
         - if @order.addresses.shipping.any?
-          = "#{@order.addresses.shipping.first.firstname} #{@order.addresses.shipping.first.lastname}"
+          = OrderPresenter.new(@order, self).shipping_username
           %br
           = @order.addresses.shipping.first.address
           %br
-          = "#{@order.addresses.shipping.first.city} #{@order.addresses.shipping.first.zip}"
+          = OrderPresenter.new(@order, self).shipping_zip_city
           %br
           = @order.addresses.shipping.first.country
           %br
-          = "Phone #{@order.addresses.shipping.first.phone}"
+          = I18n.t('views.orders.phone', phone: @order.addresses.shipping.first.phone)
         - else
-          = "#{@order.addresses.billing.first.firstname} #{@order.addresses.billing.first.lastname}"
+          = OrderPresenter.new(@order, self).billing_username
           %br
           = @order.addresses.billing.first.address
           %br
-          = "#{@order.addresses.billing.first.city} #{@order.addresses.billing.first.zip}"
+          = OrderPresenter.new(@order, self).billing_zip_city
           %br
           = @order.addresses.billing.first.country
           %br
-          = "Phone #{@order.addresses.billing.first.phone}"
+          = I18n.t('views.orders.phone', phone: @order.addresses.billing.first.phone)
     .col-sm-3
-      %h3.general-subtitle.mt-0 Shipments
+      %h3.general-subtitle.mt-0
+        = I18n.t('views.checkout.confirm.shipments')
       %p.general-address
         = @order.delivery.name
         %br
         = @order.delivery.time
     .col-sm-3
-      %h3.general-subtitle.mt-0 Payment Information
+      %h3.general-subtitle.mt-0
+        = I18n.t('views.orders.payment_info')
       %p.general-address
-        = "**** **** **** #{@order.credit_card.card_number.last(4)}"
+        = I18n.t('views.checkout.confirm.card_number', number: OrderPresenter.new(@order, self).card_number)
         %br
         = @order.credit_card.expiration_month_year
   .visible-xs
@@ -54,37 +58,47 @@
         .general-img-wrap-table
           = link_to line_item.book.images.first.url do
             = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
-        %p.title= line_item.book.title
+        %p.title
+          = line_item.book.title
         %table.table
           %tr
             %td
-              %span.in-grey-600 Price
+              %span.in-grey-600
+                = I18n.t('views.checkout.confirm.price')
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.book.price
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.book.price
           %tr
             %td.vertical-middle
-              %span.in-grey-600 Quantity
+              %span.in-grey-600
+                = I18n.t('views.checkout.confirm.quantity')
             %td
-              %span= line_item.quantity
+              %span
+                = line_item.quantity
           %tr
             %td
-              %span.in-grey-600 SubTotal
+              %span.in-grey-600
+                = I18n.t('views.checkout.confirm.subtotal')
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.total_price
-
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.total_price
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       %thead
         %tr
           %th
-            %span.in-grey-600 Book
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.book')
           %th.col-method
           %th
-            %span.in-grey-600 Price
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.price')
           %th
-            %span.in-grey-600 Quantity
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.quantity')
           %th
-            %span.in-grey-600 Total
+            %span.in-grey-600
+              = I18n.t('views.checkout.confirm.total')
       %tbody
         - @order.line_items.each do |line_item|
           %tr
@@ -93,16 +107,21 @@
                 = link_to line_item.book.images.first.url do
                   = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
             %td
-              %p.title= line_item.book.title
-              %p.in-grey-600.fw-300= line_item.book.description.split('.').first
+              %p.title
+                = line_item.book.title
+              %p.in-grey-600.fw-300
+                = OrderPresenter.new(line_item, self).description
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.book.price
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.book.price
             %td
-              %span.ml-30= line_item.quantity
+              %span.ml-30
+                = line_item.quantity
             %td
-              %span.font-16.in-gold-500= number_to_euro line_item.total_price
-
+              %span.font-16.in-gold-500
+                = number_to_euro line_item.total_price
   .text-center.general-text-right
-    %p.in-gold-500.font-18 Order Summary
+    %p.in-gold-500.font-18
+      = I18n.t('views.checkout.order_summary')
     %table.general-summary-table.general-summary-table-right.general-text-right
       = render 'carts/order_summary', order: @order

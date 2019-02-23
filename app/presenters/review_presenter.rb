@@ -1,11 +1,15 @@
-class AddressPresenter < SimpleDelegator
+class ReviewPresenter < SimpleDelegator
   def initialize(model, view)
     @model = model
     @view = view
   end
 
-  def input_value(cast, field)
-    cast == :billing ? billing.public_send(field) : shipping.public_send(field)
+  def datetime
+    @model.created_at.strftime("%d/%m/%y")
+  end
+
+  def name
+    @model.name.slice(0,1).capitalize
   end
 
   private

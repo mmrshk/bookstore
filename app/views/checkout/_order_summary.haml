@@ -1,15 +1,21 @@
 %tr
   %td
-    %p.font-16 Item Total:
+    %p.font-16
+      = I18n.t('views.checkout.item_total')
   %td
-    %p.font-16= number_to_euro order.total_price
+    %p.font-16
+      = number_to_euro order.total_price
 %tr
   %td
-    %p.font-16 Coupone:
+    %p.font-16
+      = I18n.t('views.checkout.coupon')
   %td
-    %p.font-16= number_to_euro order.discount
+    %p.font-16
+      = number_to_euro order.discount
 %tr
   %td
-    %strong.font-18 Order Total:
+    %strong.font-18
+      = I18n.t('views.checkout.order_total')
   %td
-    %strong.font-18= number_to_euro order.total_price_init
+    %strong.font-18
+      = number_to_euro order.total_price_init

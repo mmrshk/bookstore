@@ -1,0 +1,36 @@
+%main.container
+  #slider.carousel.slide{'data-ride': "carousel"}
+    %ol.carousel-indicators
+      %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+      %li{'data-target': "#slider", 'data-slide-to': "1"}
+      %li{'data-target': "#slider", 'data-slide-to': "2"}
+    .carousel-inner{role: "listbox"}
+      - @latest_books.each_with_index do |book, index|
+        - if index == 0
+          .item.active
+            = render 'latest_books_item', book: book
+        - else
+          .item
+            = render 'latest_books_item', book: book
+    %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+      %span.icon-prev{'aria-hidden': "true"}
+      %span.sr-only
+        = I18n.t('views.pages.previous')
+    %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+      %span.icon-next{'aria-hidden': "true"}
+      %span.sr-only
+        = I18n.t('views.pages.next')
+.container
+  .jumbot.text-center.mb-0
+    %h2.h1
+      = I18n.t('views.pages.welcome')
+    .mb-res-50
+      %p
+        = I18n.t('views.pages.description')
+    = link_to I18n.t('views.pages.start'), books_path, class:"btn btn-default"
+  .mb-35
+    %h3
+      = I18n.t('views.pages.best_sellers')
+    .row
+      - @best_sellers.compact.each do |book|
+        = render 'bestsellers_item', book: book

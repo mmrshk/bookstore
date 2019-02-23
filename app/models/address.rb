@@ -30,8 +30,6 @@ class Address < ApplicationRecord
                       message: I18n.t('models.address.phone_warning') },
             length: { maximum: 15 }
 
+  #test on enum that shipping on first place, billing on second
   enum cast: %i[shipping billing]
-
-  scope :shipping, -> { where(cast: 0) }
-  scope :billing,  -> { where(cast: 1) }
 end
