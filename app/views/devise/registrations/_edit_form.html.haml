@@ -19,7 +19,7 @@
       .form-group.mb-30
         %label.control-label.input-label{ for: "oldPassword"}
           = I18n.t('devise.registrations.old_password')
-        = f.input :current_password, class: "form-control", placeholder: = I18n.t('devise.registrations.old_password'), required: true, type: "password", input_html: { autocomplete: "current-password" }
+        = f.input :current_password, class: "form-control", placeholder: I18n.t('devise.registrations.old_password'), required: true, type: "password", input_html: { autocomplete: "current-password" }
       .form-group.mb-30
         %label.control-label.input-label{ for: "password"}
           = I18n.t('devise.registrations.new_password')
