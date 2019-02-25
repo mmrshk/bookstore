@@ -1,11 +1,22 @@
-= render 'shared/field', field: :firstname, object: object, f: f, cast: cast
-= render 'shared/field', field: :lastname, object: object, f: f, cast: cast
-= render 'shared/field', field: :address, object: object, f: f, cast: cast
-= render 'shared/field', field: :city, object: object, f: f, cast: cast
-= render 'shared/field', field: :zip, object: object, f: f, cast: cast
-= render 'shared/field', field: :country, object: object, f: f, cast: cast
-= render 'shared/field', field: :phone, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :firstname, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :lastname, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :address, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :city, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :zip, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :country, object: object, f: f, cast: cast
+-# = render 'shared/field', field: :phone, object: object, f: f, cast: cast
+-#
+-# = f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }
+-# = f.input :order_id, label: false, input_html: { value: current_order.id, type: 'hidden' }
+-# = f.input :cast, label: false, input_html: { value: cast, type: 'hidden' }
 
+= f.input :firstname, required: false
+= f.input :lastname, required: false
+= f.input :address, required: false
+= f.input :city, required: false
+= f.input :zip, required: false
+= f.input :country, required: false, prompt: I18n.t('views.addresses.country')
+= f.input :phone, required: false, placeholder: I18n.t('views.addresses.phone')
+= f.input :cast, as: :hidden, input_html: { value: cast }
 = f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }
 = f.input :order_id, label: false, input_html: { value: current_order.id, type: 'hidden' }
-= f.input :cast, label: false, input_html: { value: cast, type: 'hidden' }

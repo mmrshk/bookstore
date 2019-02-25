@@ -1,20 +1,37 @@
-module UpdateCheckoutService
-  class << self
-    def update_confirm(current_order)
-      current_order.update(status: OrderFilterService::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current, step: :complete)
-      current_order.coupon.update(active: false) if current_order.coupon
-    end
-
-    def update_payment(current_order, credit_card)
-      current_order.update(credit_card_id: credit_card.id, step: :confirm)
-    end
-
-    def update_delivery(current_order, order_params)
-      current_order.update(delivery_id: order_params[:delivery_id], step: :payment)
-    end
-
-    def update_addresses(current_order)
-      current_order.update(step: :delivery)
-    end
-  end
-end
+# class UpdateCheckoutService
+#   attr_reader :user, :order
+#
+#   def initialize(current_user, current_order)
+#     @user = current_user
+#     @order = current_order
+#   end
+#
+#   def addresses(addresses_params)
+#     addresses = AddressesForm.new(addresses_params)
+#     return if !addresses.save
+#
+#     UpdateParamsCheckoutService.update_addresses(order)
+#     addresses
+#   end
+#
+#   def delivery(order_params)
+#     UpdateParamsCheckoutService.update_delivery(order, order_params)
+#     flash[:warning] = I18n.t(:choose_delivery_method) if order.delivery_id.nil?
+#   end
+#
+#   def payment(credit_card_params)
+#     credit_card = CreditCard.new(credit_card_params)
+#     return if !credit_card.save
+#
+#     UpdateParamsCheckoutService.update_payment(order, credit_card)
+#     credit_card
+#   end
+#
+#   def confirm(session)
+#     UpdateParamsCheckoutService.update_confirm(order)
+#     session[:order_complete] = true
+#     session[:order_id] = nil
+#     session[:line_item_ids] = nil
+#     session[:coupon_id] = nil
+#   end
+# end

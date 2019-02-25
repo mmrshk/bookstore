@@ -6,5 +6,4 @@
 = f.input :country, required: false, prompt: I18n.t('views.addresses.country')
 = f.input :phone, required: false, placeholder: I18n.t('views.addresses.phone')
 = f.input :cast, as: :hidden, input_html: { value: cast }
-= f.input :addressable_type, as: :hidden,  input_html: { value: I18n.t('views.addresses.order') }
-= f.input :addressable_id, as: :hidden, input_html: { value: current_order.id}
+= f.input :user_id, label: false, input_html: { value: current_user.id, type: 'hidden' }

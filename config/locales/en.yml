@@ -165,7 +165,7 @@ en:
       thanks: 'Thanks for choosing us!'
       successfully_completed: 'Your order successfully completed. Please visit our site for checking your status of order.'
       check_it: 'Check it'
-      email: 'Hi %{email}!'
+      greeting: 'Hi %{email}!'
     orders:
       my_orders: 'My Orders'
       sort_by: 'Sort by'

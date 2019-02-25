@@ -13,7 +13,7 @@
         %h3.general-subtitle.mt-0
           = cast.capitalize
           Address
-      = simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |ff|
-        = ff.error_notification
-        = render 'addresses/user_form_fields', f:ff, cast: cast
+      -# = simple_form_for(current_user.addresses.find_or_initialize_by(cast: Address.casts[cast])) do |ff|
+      = simple_form_for @addresses, url: wizard_path, method: :put, html: { class: 'max-600' } do |ff|
+        = render 'addresses/form_fields', f:ff, cast: cast
         = ff.button :submit,  I18n.t('views.addresses.save'), class:"btn btn-default btn"
