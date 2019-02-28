@@ -10,7 +10,9 @@ class BookFilterService
     price_desc: I18n.t('models.book.price_desc')
   }.freeze
 
-  def filter(params)
-    FILTERS.include?(params[:filter]&.to_sym) ? params[:filter] : DEFAULT_FILTER
+  class << self
+    def filter(params)
+      FILTERS.include?(params[:filter]&.to_sym) ? params[:filter] : DEFAULT_FILTER
+    end
   end
 end

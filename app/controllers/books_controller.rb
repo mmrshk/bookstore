@@ -19,6 +19,6 @@ class BooksController < ApplicationController
   end
 
   def set_filter
-    @filter = BookFilterService.new.filter(params)
+    @filter = BookFilterService.filter(params)
   end
 end

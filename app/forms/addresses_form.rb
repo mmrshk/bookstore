@@ -1,68 +1,50 @@
 class AddressesForm
   include ActiveModel::Model
 
-  attr_reader :params, :use_billing
+  attr_reader :params, :use_billing, :billing, :shipping,  :user
 
-  def initialize(params = false)
-    @save = false
-    @params = params
-    @user = User.find_or_initialize_by(id: user_id)
+  def initialize(user, addresses_params = nil)
+    @user = user
+    @params = addresses_params
+    @billing = user.addresses.billing.first_or_initialize
+    @shipping = user.addresses.shipping.first_or_initialize
   end
 
   def save
-    @save = true
-    return false unless valid?
-
-    persist!
-    true
-  end
-
-  def billing
-    new_billing = @user.addresses.find_or_initialize_by(cast: :billing)
-    new_billing.assign_attributes(params_for(:billing)) if save?
-    @billing ||= new_billing
-  end
-
-  def shipping
-    new_shipping = @user.addresses.find_or_initialize_by(cast: :shipping)
-    new_shipping.assign_attributes(params_for(:shipping)) if save?
-    @shipping ||= new_shipping
-  end
-
-  def form_errors
-    { shipping: shipping.errors, billing: billing.errors }
+    save_shipping & save_billing
   end
 
   private
 
-  def user_id
-    params.fetch(:user_id, false) || (params[:billing][:user_id] if nested?)
+  def save_billing
+    @billing = user.addresses.create(address_params(:billing))
+    valid?(@billing)
   end
 
-  def nested?
-    params.fetch(:billing, false)
+  def save_shipping
+    @shipping = user.addresses.create(address_params(:shipping))
+    valid?(@shipping)
   end
 
-  def save?
-    @save
-  end
-
-  def persist!
-    shipping.save
-    billing.save
-  end
-
-  def valid?
-    shipping.valid? & billing.valid?
-  end
-
-  def params_for(type)
-    params.require(define_type(type)).permit(:firstname, :lastname, :address,
-                                :country, :city, :zip, :phone,
-                                :user_id, :order_id, :cast)
+  def address_params(type)
+    type = use_billing? ? :billing : :shipping
+    set_cast
+    params.require(type).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast)
   end
 
   def use_billing?
     params[:use_billing].present?
+  end
+
+  def set_cast
+    if use_billing?
+      params[:billing][:cast] = 'shipping'
+    end
+  end
+
+  def valid?(type)
+    return if !type.save
+
+    true
   end
 end

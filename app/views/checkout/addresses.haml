@@ -2,7 +2,7 @@
   %h1.general-title-margin
     = I18n.t('views.checkout.checkout')
   = render 'steps'
-  = simple_form_for @addresses, url: wizard_path, method: :put, html: { class: 'res-mb-100' } do |form|
+  = simple_form_for @addresses, url: wizard_path, method: :put, html: { class: 'res-mb-100', id: 'address_form' } do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -20,15 +20,15 @@
             = I18n.t('views.checkout.billing')
           %p.general-info-text
             = I18n.t('views.checkout.fields_required')
-        = form.simple_fields_for :billing do |ff|
-          = render 'addresses/form_fields', f: ff, cast: :billing, object: @addresses
+        = form.simple_fields_for :billing, form.object.billing do |ff|
+          = render 'addresses/form_fields', f: ff, cast: :billing
       .col-md-5.col-md-offset-1.mb-60
         .autoUpdate
           .visible-xs.visible-sm
             %h3.general-subtitle
               = I18n.t('views.checkout.shipping')
-          = form.simple_fields_for :shipping do |ff|
-            = render 'addresses/form_fields', f: ff, cast: :shipping, object: @addresses
+          = form.simple_fields_for :shipping, form.object.shipping do |ff|
+            = render 'addresses/form_fields', f: ff, cast: :shipping
         .form-group.checkbox
           %label.checkbox-label
             = form.check_box :use_billing, class: 'checkbox-input', id: 'use_billing', hidden: true
