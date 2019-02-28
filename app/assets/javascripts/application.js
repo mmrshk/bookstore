@@ -19,3 +19,4 @@
 //= require devise
 //= require reviews
 //= require book_description
+//= require form_errors

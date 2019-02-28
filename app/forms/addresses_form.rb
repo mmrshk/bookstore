@@ -53,8 +53,6 @@ class AddressesForm
   end
 
   def valid?
-    # billing.valid?
-    # shipping.valid? && billing.valid?
     shipping.valid? & billing.valid?
   end
 
@@ -64,7 +62,7 @@ class AddressesForm
                                 :user_id, :order_id, :cast)
   end
 
-  def define_type(type)
-    params[:use_billing] == '1' ? :billing : type
+  def use_billing?
+    params[:use_billing].present?
   end
 end

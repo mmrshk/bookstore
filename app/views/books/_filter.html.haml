@@ -1,17 +1,17 @@
 - if @category
   %ul.dropdown-menu
     %li
-      = link_to I18n.t('models.book.newest'), category_books_path(category: Category.find_by(id: params[:id]), filter: :newest)
+      = link_to I18n.t('models.book.newest'), category_books_path(filter: :newest)
     %li
-      = link_to I18n.t('models.book.pop_first'), category_books_path(category: Category.find_by(id: params[:id]), filter: :pop_first)
+      = link_to I18n.t('models.book.pop_first'), category_books_path(filter: :pop_first)
     %li
-      = link_to I18n.t('models.book.by_title_asc'), category_books_path(category: Category.find_by(id: params[:id]), filter: :by_title_asc)
+      = link_to I18n.t('models.book.by_title_asc'), category_books_path( filter: :by_title_asc)
     %li
-      = link_to I18n.t('models.book.by_title_desc'), category_books_path(category: Category.find_by(id: params[:id]), filter: :by_title_desc)
+      = link_to I18n.t('models.book.by_title_desc'), category_books_path( filter: :by_title_desc)
     %li
-      = link_to I18n.t('models.book.price_asc'), category_books_path(category: Category.find_by(id: params[:id]), filter: :price_asc)
+      = link_to I18n.t('models.book.price_asc'), category_books_path( filter: :price_asc)
     %li
-      = link_to I18n.t('models.book.price_desc'), category_books_path(category: Category.find_by(id: params[:id]), filter: :price_desc)
+      = link_to I18n.t('models.book.price_desc'), category_books_path( filter: :price_desc)
 - else
   %ul.dropdown-menu
     %li

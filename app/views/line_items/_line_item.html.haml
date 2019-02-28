@@ -11,10 +11,10 @@
       = number_to_euro line_item.book.price
   %td
     .input-group
-      = link_to edit_line_item_path(id: line_item.id, quantity: :decrement), class: "input-link" do
+      = link_to line_item_path(id: line_item.id, quantity: :decrement), method: :put, class: "input-link" do
         %i.fa.fa-minus.line-heaght-40
       %input.form-control.quantity-input{ type: "text", value: "#{line_item.quantity}"}
-      = link_to edit_line_item_path(id: line_item.id, quantity: :increment), class: "input-link" do
+      = link_to line_item_path(id: line_item.id, quantity: :increment), method: :put, class: "input-link" do
         %i.fa.fa-plus.line-heaght-40
   %td
     %span.font-16.in-gold-500

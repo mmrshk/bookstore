@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resource  :cart,       only: %i[show update]
   resources :users,      only: :edit
   resources :line_items
-  resources :addresses,  only: %i[create update]
+  resources :addresses,  only: %i[index create update]
 
   resources :books, only: %i[index show]  do
     resources :reviews, only: :create

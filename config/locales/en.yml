@@ -41,7 +41,9 @@ en:
   controllers:
     addresses:
       address_updated: 'Your address successfully updated!'
-      address_not_updated: 'Address not saved!'
+      address_not_updated: 'Adress not saved! Please review errors.'
+      address_created: 'Your address successfully created!'
+      address_not_created: 'Adress not saved! Please review errors.'
     line_item:
       line_item_created: 'Book was added to your bucket!'
       line_item_not_created: 'Book was not added to your bucket.'

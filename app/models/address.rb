@@ -31,5 +31,5 @@ class Address < ApplicationRecord
             length: { maximum: 15 }
 
   #test on enum that shipping on first place, billing on second
-  enum cast: %i[shipping billing]
+  enum cast: %i[billing shipping]
 end

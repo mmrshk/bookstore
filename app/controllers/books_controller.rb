@@ -7,7 +7,7 @@ class BooksController < ApplicationController
   before_action :set_line_item, :set_filter
 
   def index
-    @pagy, @books = @category ? pagy(PagyService.new.filter_by_category(@category, @filter)) : pagy(PagyService.new.default_filter(@filter))
+    @pagy, @books = pagy(PagyService.new(@category, @filter).call)
   end
 
   def show; end

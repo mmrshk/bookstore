@@ -1,9 +1,18 @@
 class PagyService
-  def filter_by_category(category, filter)
-    category.books.by_filter(filter)
+  def initialize(category, filter)
+    @category = category
+    @filter = filter
   end
 
-  def default_filter(filter)
-    Book.by_filter(filter)
+  def call
+    (@category ? filter_by_category : default_filter).includes(:authors)
+  end
+
+  def filter_by_category
+    @category.books.by_filter(@filter)
+  end
+
+  def default_filter
+    Book.by_filter(@filter)
   end
 end

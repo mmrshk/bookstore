@@ -6,9 +6,9 @@ class LineItemsService
 
   attr_reader :params
 
-  def initialize(line_item, params)
+  def initialize(line_item, line_item_params)
     @line_item = line_item
-    @params = params
+    @params = line_item_params
   end
 
   def quantity_change!
@@ -19,8 +19,8 @@ class LineItemsService
   end
 
   def create
-    @line_item = LineItem.find_or_initialize_by(book_id: params[:line_item][:book_id]).tap do |item|
-      item.quantity += params[:line_item][:quantity].to_i
+    @line_item = LineItem.find_or_initialize_by(book_id: params[:book_id]).tap do |item|
+      item.quantity += params[:quantity].to_i
     end
   end
 

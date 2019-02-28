@@ -1,15 +1,15 @@
 class LineItemsController < ApplicationController
   load_and_authorize_resource
 
-  def edit
-    LineItemsService.new(@line_item, params).quantity_change!
+  def update
+    LineItemsService.new(@line_item, line_item_params).quantity_change!
     redirect_to cart_path
   end
 
   def create
-    @line_item = LineItemsService.new(@line_item, params).create
+    @line_item = LineItemsService.new(@line_item, line_item_params).create
 
-    if @line_item.save!
+    if @line_item.save
       create_new_line_item
       flash[:success] = I18n.t('controllers.line_item.line_item_created')
     else
@@ -20,7 +20,7 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
-    LineItemsService.new(@line_item, params).destroy
+    LineItemsService.new(@line_item, line_item_params).destroy
 
     if @line_item.destroy
       destroy_line_item

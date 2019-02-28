@@ -31,7 +31,7 @@
                   %li
                     = link_to "Orders", orders_path
                   %li
-                    = link_to "Settings", edit_user_registration_path, class: "collapse-link"
+                    = link_to "Settings", addresses_path, class: "collapse-link"
               %li= link_to "Log out", destroy_user_session_path, method: :delete
             - else
               %li= link_to "Log in", new_user_session_path
@@ -52,7 +52,7 @@
                   %li
                     = link_to "Orders", orders_path
                   %li
-                    = link_to "Settings", edit_user_registration_path
+                    = link_to "Settings", addresses_path
                   %li.divider{:role => "separator"}
                   %li= link_to "Log out", destroy_user_session_path, method: :delete
             - else

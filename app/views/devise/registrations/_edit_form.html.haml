@@ -8,7 +8,7 @@
         %p
           = I18n.t('devise.registrations.waiting_confirmation', email: resource.unconfirmed_email)
       .form-group.mb-35
-        = f.input :email, required: true, autofocus: true, placeholder: I18n.t('devise.registrations.enter_email'), type: "email", class:"form-control", label:false, name: "email"
+        = f.input :email, label: false, required: true, autofocus: true, placeholder: I18n.t('devise.registrations.enter_email'), type: "email", class:"form-control", label:false, name: "email"
         .general-text-align
           = f.button :submit, I18n.t('devise.registrations.save'), class:"btn btn-default mb-35"
   .col-sm-5.col-sm-offset-1
@@ -19,15 +19,15 @@
       .form-group.mb-30
         %label.control-label.input-label{ for: "oldPassword"}
           = I18n.t('devise.registrations.old_password')
-        = f.input :current_password, class: "form-control", placeholder: I18n.t('devise.registrations.old_password'), required: true, type: "password", input_html: { autocomplete: "current-password" }
+        = f.input :current_password, label: false, class: "form-control", placeholder: I18n.t('devise.registrations.old_password'), required: true, type: "password", input_html: { autocomplete: "current-password" }
       .form-group.mb-30
         %label.control-label.input-label{ for: "password"}
           = I18n.t('devise.registrations.new_password')
-        = f.input :password, type:"password", placeholder: I18n.t('devise.registrations.new_password'), class: "form-control", required: true, input_html: { autocomplete: "new-password" }
+        = f.input :password, label: false, type:"password", placeholder: I18n.t('devise.registrations.new_password'), class: "form-control", required: true, input_html: { autocomplete: "new-password" }
       .form-group.mb-40
         %label.control-label.input-label{ for: "confirmPassword"}
           = I18n.t('devise.registrations.confirm_password')
-        = f.input :password_confirmation, placeholder: I18n.t('devise.registrations.confirm_password'), required: true, type: "password", class: "form-control", input_html: { autocomplete: "new-password" }
+        = f.input :password_confirmation, label: false, placeholder: I18n.t('devise.registrations.confirm_password'), required: true, type: "password", class: "form-control", input_html: { autocomplete: "new-password" }
       .general-text-align
         = f.button :submit, I18n.t('devise.registrations.save'), class:"btn btn-default mb-10"
   .col-sm-12
