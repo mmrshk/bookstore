@@ -2,7 +2,7 @@
   %h1.general-title-margin
     = I18n.t('views.checkout.checkout')
   = render 'steps'
-  = simple_form_for @addresses, url: wizard_path, method: :put, html: { class: 'res-mb-100', id: 'address_form' } do |form|
+  = simple_form_for @checkout, url: wizard_path, method: :put, html: { class: 'res-mb-100', id: 'address_form' } do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5

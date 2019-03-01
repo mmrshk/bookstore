@@ -22,24 +22,28 @@ class AddressesForm
   end
 
   def save_shipping
-    @shipping = user.addresses.create(address_params(:shipping))
+    @shipping = user.addresses.create(address_params(type))
+    set_cast(@shipping)
     valid?(@shipping)
   end
 
   def address_params(type)
-    type = use_billing? ? :billing : :shipping
-    set_cast
-    params.require(type).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast)
+    params.require(type).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast, :user_id,
+                                :order_id)
   end
 
   def use_billing?
-    params[:use_billing].present?
+    !params[:use_billing].to_i.zero?
   end
 
-  def set_cast
+  def set_cast(shipping)
     if use_billing?
-      params[:billing][:cast] = 'shipping'
+      shipping[:cast] = 'shipping'
     end
+  end
+
+  def type
+    use_billing? ? :billing : :shipping
   end
 
   def valid?(type)

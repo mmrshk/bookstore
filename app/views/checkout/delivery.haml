@@ -18,7 +18,7 @@
             %span.in-grey-600
               = I18n.t('views.checkout.delivery.price')
       %tbody
-        = form.collection_radio_buttons :delivery_id, @deliveries, :id, :name do |option|
+        = form.collection_radio_buttons :delivery_id, @checkout, :id, :name do |option|
           %tr
             %td
               .form-group.radio.mt-0.mb-0
