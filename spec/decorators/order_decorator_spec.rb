@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrderDecorator do
-  let(:order) { FactoryBot.create(:order) }
+  let(:order) { create(:order) }
 
   describe '.status' do
     it 'should return status name' do

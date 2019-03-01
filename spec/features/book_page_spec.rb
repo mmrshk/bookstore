@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature 'Book page', type: :feature do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   background do
-    @book = FactoryBot.create(:book)
+    @book = create(:book)
     visit book_path(@book)
   end
 

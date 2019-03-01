@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Catalog page', type: :feature do
   let(:title) { 'title' }
   background do
-    @books = FactoryBot.create_list(:book, 3)
+    @books = create_list(:book, 3)
     @categories = Category.all
   end
 

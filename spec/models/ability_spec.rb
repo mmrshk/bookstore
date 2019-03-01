@@ -5,9 +5,9 @@ RSpec.describe Ability, type: :model do
   describe 'abilities of loggined user' do
     subject { ability }
 
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { create(:user) }
     let(:ability) { Ability.new(user) }
-    let(:review) { FactoryBot.create(:review) }
+    let(:review) { create(:review) }
 
     context 'for posts' do
       # it { expect(ability).to be_able_to(:create, Review) }

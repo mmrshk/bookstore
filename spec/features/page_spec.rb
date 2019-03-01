@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Home page', type: :feature do
   before(:each) do
-    FactoryBot.create(:book)
+    create(:book)
     visit root_path
   end
 

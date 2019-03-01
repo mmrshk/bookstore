@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PagesController, type: :controller do
-  let(:books) { FactoryBot.create_list(:book, 5) }
+  let(:books) { create_list(:book, 5) }
   DIGIT_LATEST_BOOKS = 3
 
   describe 'GET #home' do

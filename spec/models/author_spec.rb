@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Author, type: :model do
-  subject { FactoryBot.create(:author) }
+  subject { create(:author) }
 
   it { expect(subject).to validate_presence_of(:firstname) }
   it { expect(subject).to validate_presence_of(:lastname) }

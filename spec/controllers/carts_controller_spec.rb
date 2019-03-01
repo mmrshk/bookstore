@@ -15,7 +15,7 @@ RSpec.describe CartsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:coupon) { FactoryBot.create(:coupon) }
+    let(:coupon) { create(:coupon) }
 
     it 'set coupon' do
       expect(controller).to receive(:coupon).at_least(:once)

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Checkout', type: :feature do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   before do
-    FactoryBot.create(:book)
-    FactoryBot.create_list(:delivery, 2)
+    create(:book)
+    create_list(:delivery, 2)
   end
 
   scenario 'Checkout page' do
@@ -19,7 +19,7 @@ RSpec.feature 'Checkout', type: :feature do
     find('a[href="/checkout/login?destination=login"].hidden-xs').click
     expect(page.current_path).to eq checkout_path(:addresses)
 
-    within('form#new_addresses_form') do
+    within('form#address_form') do
       %w[billing shipping].each do |type|
         fill_in "addresses_form[#{type}][firstname]", with: 'Dima'
         fill_in "addresses_form[#{type}][lastname]", with: 'Bavykin'
@@ -40,7 +40,7 @@ RSpec.feature 'Checkout', type: :feature do
 
     expect(page.current_path).to eq checkout_path(:payment)
 
-    within('form#new_credit_card') do
+    within('form#credit_card_form') do
       fill_in 'credit_card[card_number]', with: '1111222233334444'
       fill_in 'credit_card[name]', with: 'Denis Zemlyanoi'
       fill_in 'credit_card[expiration_month_year]', with: '10/22'

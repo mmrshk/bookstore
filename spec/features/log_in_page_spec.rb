@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Log in page', type: :feature do
-  given(:user) { FactoryBot.create(:user) }
+  given(:user) { create(:user) }
 
   scenario 'User fill log in form successfully' do
     visit new_user_session_path

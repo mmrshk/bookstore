@@ -4,7 +4,7 @@
   = render 'steps'
   %h3.general-subtitle
     = I18n.t('views.checkout.payment.credit_card')
-  = simple_form_for @checkout, url: wizard_path, method: :put, html: { class: 'max-600', id: 'address_form' } do |form|
+  = simple_form_for @checkout, url: wizard_path, method: :put, html: { class: 'max-600', id: 'credit_card_form' } do |form|
     = form.input :card_number, required: false, label: I18n.t('views.checkout.payment.card_number'), placeholder: I18n.t('views.checkout.payment.card_number')
     .row
       .col-sm-6
