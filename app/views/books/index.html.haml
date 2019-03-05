@@ -39,11 +39,12 @@
           %li
             = link_to category_books_path(category) do
               = category.title
-              %span.badge.general-badge= category.books.count
+              %span.badge.general-badge
+                = category.books.count
     %p.lead.small.mb-10
       = I18n.t('views.books.sort')
     .dropdown
-      %a.dropdown-toggle.lead.small{ "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button" }
+      %a.dropdown-toggle.lead.small.filter{ "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button" }
         = I18n.t('models.book.newest')
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       = render 'filter'

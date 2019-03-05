@@ -3,18 +3,17 @@ require 'rails_helper'
 RSpec.feature 'Cart page', type: :feature do
   scenario 'Empty cart' do
     visit root_path
-    find('a.shop-link.pull-right.hidden-xs').click
+    find('a.shop-link.pull-right').click
 
     expect(page.current_path).to eq cart_path
     expect(page).to have_content 'Your cart is empty'
   end
 
   scenario 'Full cart' do
-    # .hidden-xs -  не кликать по спрятанной кнопке
     create(:book)
     visit root_path
     click_button('Buy Now')
-    find('a.shop-link.pull-right.hidden-xs').click
+    find('a.shop-link.pull-right').click
 
     expect(page.current_path).to eq cart_path
     expect(page).not_to have_content 'Your cart is empty'
@@ -25,7 +24,7 @@ RSpec.feature 'Cart page', type: :feature do
 
     visit root_path
     click_button('Buy Now')
-    find('a.shop-link.pull-right.hidden-xs').click
+    find('a.shop-link.pull-right').click
 
     expect(page.current_path).to eq cart_path
     expect(page).not_to have_content 'Your cart is empty'

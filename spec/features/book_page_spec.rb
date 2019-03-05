@@ -25,6 +25,6 @@ RSpec.feature 'Book page', type: :feature do
 
   scenario 'Add to cart' do
     click_button('Add to Cart')
-    expect(find('.hidden-xs .shop-quantity').text).to eq('1')
+    expect(find('.shop-quantity').text).to eq('1')
   end
 end

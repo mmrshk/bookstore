@@ -1,5 +1,5 @@
 - if @category
-  %ul.dropdown-menu
+  %ul.dropdown-menu.filter
     %li
       = link_to I18n.t('models.book.newest'), category_books_path(filter: :newest)
     %li
@@ -13,7 +13,7 @@
     %li
       = link_to I18n.t('models.book.price_desc'), category_books_path( filter: :price_desc)
 - else
-  %ul.dropdown-menu
+  %ul.dropdown-menu.filter
     %li
       = link_to I18n.t('models.book.newest'), books_path(filter: :newest)
     %li

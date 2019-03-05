@@ -67,6 +67,7 @@ en:
       settings: 'Settings'
       login: 'Log in'
       signup: 'Sign up'
+      logout: 'Log out'
     reviews:
       rating: 'Rating'
       name: 'Your name'
