@@ -23,16 +23,16 @@ class CheckoutController < ApplicationController
   private
 
   def handle_show_step
-    return jump_to(previous_step) if ConditionStepService.new(current_user, current_order, step, session).call
+    return jump_to(previous_step) if Checkout::ConditionStepService.new(current_user, current_order, step, session).call
 
-    @checkout = ShowCheckoutService.new(current_user, current_order, step, session).call
+    @checkout = Checkout::ShowCheckoutService.new(current_user, current_order, step, session).call
   end
 
   def handle_update_step
-    @checkout = UpdateCheckoutService.new(current_user, current_order, step, session, params).call
+    @checkout = Checkout::UpdateCheckoutService.new(current_user, current_order, step, session, params).call
 
     render_wizard(@checkout) if step == :addresses || step == :payment
-    UpdateParamsCheckoutService.new(current_order, step, session, @checkout, params).call
+    Checkout::UpdateParamsCheckoutService.new(current_order, step, session, @checkout, params).call
   end
 
   def login
@@ -44,7 +44,7 @@ class CheckoutController < ApplicationController
   def set_order
     return if session[:order_id] || %i[login complete].include?(step)
 
-    @order = OrderCheckoutService.call(session, current_user)
+    @order = Checkout::OrderCheckoutService.call(session, current_user)
     session[:order_id] = @order.id
   end
 end

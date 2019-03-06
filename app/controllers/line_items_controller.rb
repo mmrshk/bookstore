@@ -35,7 +35,7 @@ class LineItemsController < ApplicationController
   private
 
   def line_item_params
-    params.require(:line_item).permit(:quantity, :book_id)
+    params.require(:line_item).permit(%i[quantity book_id])
   end
 
   def line_item_ids

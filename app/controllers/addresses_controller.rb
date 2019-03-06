@@ -42,7 +42,7 @@ class AddressesController < ApplicationController
   private
 
   def address_params
-    params.require(:address).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast)
+    params.require(:address).permit(%i[firstname lastname address city zip country phone cast])
   end
 
   def set_addresses

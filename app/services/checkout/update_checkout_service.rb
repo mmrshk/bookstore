@@ -1,4 +1,4 @@
-class UpdateCheckoutService
+class Checkout::UpdateCheckoutService
   attr_reader :user, :order, :session
 
   def initialize(current_user, current_order, step, session, params)

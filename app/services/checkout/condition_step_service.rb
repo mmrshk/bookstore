@@ -1,4 +1,4 @@
-class ConditionStepService
+class Checkout::ConditionStepService
   attr_reader :step, :user, :order, :session
 
   def initialize(current_user, current_order, step, session)
