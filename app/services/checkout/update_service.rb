@@ -1,7 +1,7 @@
-class Checkout::UpdateCheckoutService
+class Checkout::UpdateService
   attr_reader :user, :order, :session
 
-  def initialize(current_user, current_order, step, session, params)
+  def initialize(current_user:, current_order:, step:, session:, params:)
     @user = current_user
     @order = current_order
     @step = step

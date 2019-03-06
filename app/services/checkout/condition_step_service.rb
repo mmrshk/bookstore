@@ -1,8 +1,7 @@
 class Checkout::ConditionStepService
-  attr_reader :step, :user, :order, :session
+  attr_reader :step, :order, :session
 
-  def initialize(current_user, current_order, step, session)
-    @user = current_user
+  def initialize(current_order:, step:, session:)
     @order = current_order
     @step = step
     @session = session
