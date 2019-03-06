@@ -1,4 +1,5 @@
 en:
+  bookstore: 'Bookstore'
   coupon_applied: 'Coupon applied'
   coupon_not_applied: 'Invalid coupon'
   review_applied: 'Thanks for Review. It will be published as soon as Admin will approve it.'

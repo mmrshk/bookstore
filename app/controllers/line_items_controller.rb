@@ -1,11 +1,6 @@
 class LineItemsController < ApplicationController
   load_and_authorize_resource
 
-  def update
-    LineItemsService.new(@line_item, line_item_params).quantity_change!
-    redirect_to cart_path
-  end
-
   def create
     @line_item = LineItemsService.new(@line_item, line_item_params).create
 
@@ -17,6 +12,11 @@ class LineItemsController < ApplicationController
     end
 
     redirect_to books_path
+  end
+
+  def update
+    LineItemsService.new(@line_item, line_item_params).quantity_change!
+    redirect_to cart_path
   end
 
   def destroy
