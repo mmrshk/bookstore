@@ -1,53 +1,72 @@
 class AddressesForm
+  USE_BILLING_CHECKED = "1"
+
   include ActiveModel::Model
 
-  attr_reader :params, :use_billing, :billing, :shipping,  :user
+  attr_reader :params, :use_billing, :billing, :shipping, :order, :user
 
-  def initialize(user, addresses_params = nil)
+  def initialize(user, order, addresses_params = nil)
     @user = user
+    @order = order
     @params = addresses_params
-    @billing = user.addresses.billing.first_or_initialize
-    @shipping = user.addresses.shipping.first_or_initialize
+    @billing = set_billing
+    @shipping = set_shipping
   end
 
   def save
-    save_shipping & save_billing
+    save_billing & save_shipping
   end
 
   private
 
   def save_billing
-    @billing = user.addresses.create(address_params(:billing))
-    valid?(@billing)
+    if order.addresses.billing.exists?
+      @billing = order.addresses.billing.first
+      @billing.update(address_params(:billing))
+    else
+      @billing = order.addresses.billing.new(address_params(:billing))
+      @billing.save
+    end
   end
 
   def save_shipping
-    @shipping = user.addresses.create(address_params(type))
-    set_cast(@shipping)
-    valid?(@shipping)
+    if order.addresses.shipping.exists?
+      @shipping = order.addresses.shipping.first
+      @shipping.update(set_cast(address_params(type)))
+    else
+      @shipping = order.addresses.shipping.new(set_cast(address_params(type)))
+      @shipping.save
+    end
+  end
+
+  def set_billing
+    return user.addresses.billing.first_or_initialize if order.addresses.billing.none?
+
+    order.addresses.billing.first_or_initialize
+  end
+
+  def set_shipping
+    return user.addresses.shipping.first_or_initialize if order.addresses.shipping.none?
+
+    order.addresses.shipping.first_or_initialize
+  end
+
+  def set_cast(params)
+    params[:cast] = 'shipping' if use_billing?
+
+    params
   end
 
   def address_params(type)
-    params.require(type).permit(%i[firstname lastname address city zip country phone cast user_id order_id])
+    params.require(type).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast,
+                                :addressable_type, :addressable_id)
   end
 
   def use_billing?
-    !params[:use_billing].to_i.zero?
-  end
-
-  def set_cast(shipping)
-    if use_billing?
-      shipping[:cast] = 'shipping'
-    end
+    params[:use_billing].eql?(USE_BILLING_CHECKED)
   end
 
   def type
     use_billing? ? :billing : :shipping
-  end
-
-  def valid?(type)
-    return if !type.save
-
-    true
   end
 end

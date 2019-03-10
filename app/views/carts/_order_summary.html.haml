@@ -3,16 +3,19 @@
     %p.font-16
       = I18n.t('views.carts.subtotal')
   %td
-    %p.font-16= number_to_euro @order.total_price
+    %p.font-16
+      = number_to_euro @order.total_price
 %tr
   %td
     %p.font-16
       = I18n.t('views.carts.coupon')
   %td
-    %p.font-16= number_to_euro @order.discount
+    %p.font-16
+      = number_to_euro @order.discount
 %tr
   %td
     %strong.font-18
       = I18n.t('views.carts.order_total')
   %td
-    %strong.font-18= number_to_euro @order.total_price_init
+    %strong.font-18
+      = number_to_euro @order.total_price_init

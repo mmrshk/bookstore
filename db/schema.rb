@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_26_081516) do
+ActiveRecord::Schema.define(version: 2019_03_07_053408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,11 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
     t.string "country", null: false
     t.string "phone", null: false
     t.integer "cast", null: false
+    t.string "addressable_type"
+    t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "order_id"
-    t.index ["order_id"], name: "index_addresses_on_order_id"
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -101,6 +100,8 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
     t.decimal "sale", precision: 5, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_coupons_on_order_id"
   end
 
   create_table "credit_cards", force: :cascade do |t|
@@ -190,8 +191,7 @@ ActiveRecord::Schema.define(version: 2019_01_26_081516) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "addresses", "orders"
-  add_foreign_key "addresses", "users"
+  add_foreign_key "coupons", "orders"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "orders"

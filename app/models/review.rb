@@ -1,13 +1,13 @@
 class Review < ApplicationRecord
-  belongs_to :book
-  belongs_to :user
-
   NAME_MAX_LENGTH = 80
   COMMENT_MAX_LENGTH = 500
   RATING = {
     min: 0,
     max: 5
   }
+
+  belongs_to :book
+  belongs_to :user
 
   scope :published, -> { where(publish: true) }
   scope :unpublished, -> { where(publish: false) }

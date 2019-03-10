@@ -9,7 +9,7 @@ class ReviewPresenter < SimpleDelegator
   end
 
   def name
-    @model.name.slice(0,1).capitalize
+    @model.name.first.capitalize
   end
 
   private

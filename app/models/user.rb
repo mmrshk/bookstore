@@ -4,14 +4,12 @@ class User < ApplicationRecord
          :confirmable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_many :reviews, dependent: :destroy
-  has_many :addresses, dependent: :destroy
+  has_many :addresses, as: :addressable, dependent: :destroy
 
   has_many :orders, dependent: :destroy
   has_many :line_items, through: :orders, dependent: :destroy
   has_many :books, through: :line_items, dependent: :destroy
 
-  has_one :billing, dependent: :destroy
-  has_one :shipping, dependent: :destroy
   has_one :credit_card, dependent: :destroy
 
   def self.from_omniauth(auth)

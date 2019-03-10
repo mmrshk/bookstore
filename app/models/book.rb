@@ -1,9 +1,9 @@
 class Book < ApplicationRecord
-  mount_uploaders :images, ImageUploader
-
   DESCRIPTION_LENGTH_MAX = 2000
   PRICE_LENGTH_MAX = 7
   DESCRIPTION_LENGTH = 250
+
+  mount_uploaders :images, ImageUploader
 
   has_and_belongs_to_many :authors
   belongs_to :category
@@ -15,7 +15,7 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX }
   validates :price, numericality: { only_integer: true }, length: { maximum: PRICE_LENGTH_MAX }
 
-  scope :pop_first, -> { order('created_at DESC') }
+  scope :pop_first, -> { includes(:line_items).order('line_items.quantity ASC') }
   scope :newest, -> { order('created_at DESC') }
   scope :by_title_asc, -> { order('title') }
   scope :by_title_desc, -> { order('title DESC') }

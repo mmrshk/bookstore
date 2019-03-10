@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Checkout', type: :feature do
   let(:user) { create(:user) }
+  let(:order) { create(:order) }
 
   before do
     create(:book)
@@ -52,6 +53,7 @@ RSpec.feature 'Checkout', type: :feature do
     expect(page.current_path).to eq checkout_path(:confirm)
 
     click_button('Place Order')
+
     expect(page.current_path).to eq checkout_path(:complete)
     expect(page).to have_content "An order confirmation has been sent to #{user.email}"
   end

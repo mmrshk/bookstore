@@ -8,41 +8,30 @@ class AddressesController < ApplicationController
   def create
     if params[:address][:cast] == "billing"
       @billing = current_user.addresses.create(address_params)
-      save_address(@billing)
+      AddressesService.set_save_flash(@billing, flash)
     else
       @shipping = current_user.addresses.create(address_params)
-      save_address(@shipping)
+      AddressesService.set_save_flash(@shipping, flash)
     end
+
+    render :index
   end
 
   def update
-    params[:address][:cast] == "billing" ? update_address(@billing) : update_address(@shipping)
-  end
-
-  def save_address(address)
-    if address.save
-      flash[:success] = I18n.t('controllers.addresses.address_created')
-      redirect_to addresses_path
+    if params[:address][:cast] == "billing"
+      AddressesService.set_update_flash(@billing, flash, address_params)
     else
-      flash[:danger] = I18n.t('controllers.addresses.address_not_created')
-      render :index
+      AddressesService.set_update_flash(@shipping, flash, address_params)
     end
-  end
 
-  def update_address(address)
-    if address.update(address_params)
-      flash[:success] = I18n.t('controllers.addresses.address_updated')
-      redirect_to addresses_path
-    else
-      flash[:danger] = I18n.t('controllers.addresses.address_not_updated')
-      render :index
-    end
+    render :index
   end
 
   private
 
   def address_params
-    params.require(:address).permit(%i[firstname lastname address city zip country phone cast])
+    params.require(:address).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast,
+                                    :addressable_type, :addressable_id)
   end
 
   def set_addresses

@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_ability
-    @current_ability ||= Ability.new(current_user, session)
+    @current_ability ||= Ability.new(current_user, session, current_order)
   end
 end

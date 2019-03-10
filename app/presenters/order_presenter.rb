@@ -17,11 +17,11 @@ class OrderPresenter < SimpleDelegator
   end
 
   def complete_username
-    "#{ @model.addresses.first.firstname} #{ @model.addresses.first.lastname}"
+    "#{ @model.addresses.first.firstname } #{ @model.addresses.first.lastname }"
   end
 
   def complete_city_zip
-    "#{ @model.addresses.first.city} #{ @model.addresses.first.zip}"
+    "#{ @model.addresses.first.city} #{ @model.addresses.first.zip }"
   end
 
   def card_number

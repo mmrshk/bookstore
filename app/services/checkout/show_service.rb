@@ -13,7 +13,7 @@ class Checkout::ShowService
   end
 
   def addresses
-    AddressesForm.new(user)
+    AddressesForm.new(user, order)
   end
 
   def delivery
@@ -31,4 +31,12 @@ class Checkout::ShowService
     session[:order_complete] = false
     user.orders.in_queue.last
   end
+
+  # private
+  #
+  # def addresses_model_params
+  #   return { addressable_id: user.id, addressable_type: "User" } if user.addresses.any?
+  #
+  #   { addressable_id: order.id, addressable_type: "Order" }
+  # end
 end

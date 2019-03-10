@@ -1,6 +1,6 @@
 ActiveAdmin.register Order do
-  permit_params :active_admin_requested_event, :number, :total_price, :status, :user_id, :credit_card_id,
-                :credit_card_id, :delivery_id, :use_billing, :completed_at
+  permit_params :active_admin_requested_event, :number, :total_price, :status, :addressable_id, :credit_card_id,
+                :credit_card_id, :delivery_id, :use_billing, :completed_at, :addressable_type
 
   scope :all_orders
   scope :in_progress

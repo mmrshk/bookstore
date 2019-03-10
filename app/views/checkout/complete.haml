@@ -15,15 +15,15 @@
         %p.general-address.mb-30
           = OrderPresenter.new(current_user, self).completed_date
       %p.general-address
-        = OrderPresenter.new(current_user, self).complete_username
+        = OrderPresenter.new(current_user.orders.last, self).complete_username
         %br
-        = current_user.addresses.first.address
+        = current_user.orders.last.addresses.first.address
         %br
-        = OrderPresenter.new(current_user, self).complete_city_zip
+        = OrderPresenter.new(current_user.orders.last, self).complete_city_zip
         %br
-        = current_user.addresses.first.country
+        = current_user.orders.last.addresses.first.country
         %br
-        = I18n.t('views.checkout.complete.phone', phone: current_user.addresses.first.phone)
+        = I18n.t('views.checkout.complete.phone', phone: current_user.orders.last.addresses.first.phone)
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0
         = I18n.t('views.checkout.complete.order', order: current_user.orders.last.number)

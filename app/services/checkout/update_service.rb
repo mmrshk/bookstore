@@ -1,5 +1,5 @@
 class Checkout::UpdateService
-  attr_reader :user, :order, :session
+  attr_reader :user, :order, :session, :params
 
   def initialize(current_user:, current_order:, step:, session:, params:)
     @user = current_user
@@ -14,7 +14,8 @@ class Checkout::UpdateService
   end
 
   def addresses
-    AddressesForm.new(order, addresses_params)
+    set_order_use_billing
+    AddressesForm.new(user, order, addresses_params)
   end
 
   def delivery
@@ -28,6 +29,18 @@ class Checkout::UpdateService
   def confirm; end
 
   private
+
+  def set_order_use_billing
+    if use_billing?
+      order.update(use_billing: true)
+    else
+      order.update(use_billing: false)
+    end
+  end
+
+  def use_billing?
+    addresses_params[:use_billing].eql?(AddressesForm::USE_BILLING_CHECKED)
+  end
 
   def addresses_params
     @params.require(:addresses_form)

@@ -1,7 +1,7 @@
 class CreditCard < ApplicationRecord
   REGULAR_EXPESSION = {
     name: /\A[a-zA-Z]*\s*[a-zA-Z]*\z/,
-    expiration_month_year: /\A((0[1-9])|(1[0-2]))[\/]*((1[5-9])|(2[0-3]))\z/
+    expiration_month_year: /\A((0[1-9])|(1[0-2]))[\/]*((1[5-9])|(2[0-3]))\Z/
   }.freeze
 
   belongs_to :user, optional: true

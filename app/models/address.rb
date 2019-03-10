@@ -6,8 +6,8 @@ class Address < ApplicationRecord
     phone: /\A\+[0-9]*\z/
   }.freeze
 
-  belongs_to :user, optional: true
-  belongs_to :order, optional: true
+  belongs_to :addressable, polymorphic: true
+
   validates :firstname, :lastname, :address, :city, :zip, :country, :phone, :cast, presence: true
 
   validates :firstname, :lastname, :city, :country,
@@ -30,6 +30,5 @@ class Address < ApplicationRecord
                       message: I18n.t('models.address.phone_warning') },
             length: { maximum: 15 }
 
-  #test on enum that shipping on first place, billing on second
   enum cast: %i[billing shipping]
 end
