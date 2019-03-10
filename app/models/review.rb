@@ -4,7 +4,7 @@ class Review < ApplicationRecord
   RATING = {
     min: 0,
     max: 5
-  }
+  }.freeze
 
   belongs_to :book
   belongs_to :user
@@ -13,7 +13,8 @@ class Review < ApplicationRecord
   scope :unpublished, -> { where(publish: false) }
 
   validates :name, :comment, :rating, presence: true
-  validates :rating, numericality: { only_integer: true, greater_then: RATING[:min], less_than_or_equal_to: RATING[:max] }
+  validates :rating, numericality: { only_integer: true, greater_then: RATING[:min],
+                                     less_than_or_equal_to: RATING[:max] }
 
   validates :name, length: { maximum: NAME_MAX_LENGTH }
   validates :comment, length: { maximum: COMMENT_MAX_LENGTH }

@@ -1,5 +1,5 @@
 class AddressesForm
-  USE_BILLING_CHECKED = "1"
+  USE_BILLING_CHECKED = '1'.freeze
 
   include ActiveModel::Model
 
@@ -32,9 +32,9 @@ class AddressesForm
   def save_shipping
     if order.addresses.shipping.exists?
       @shipping = order.addresses.shipping.first
-      @shipping.update(set_cast(address_params(type)))
+      @shipping.update(set_address_cast(address_params(type)))
     else
-      @shipping = order.addresses.shipping.new(set_cast(address_params(type)))
+      @shipping = order.addresses.shipping.new(set_address_cast(address_params(type)))
       @shipping.save
     end
   end
@@ -51,7 +51,7 @@ class AddressesForm
     order.addresses.shipping.first_or_initialize
   end
 
-  def set_cast(params)
+  def set_address_cast(params)
     params[:cast] = 'shipping' if use_billing?
 
     params

@@ -24,6 +24,6 @@ RSpec.describe Address, type: :model do
   it { expect(subject).not_to allow_value('!@#$%^&*()_+:;').for(:lastname) }
   it { expect(subject).not_to allow_value('!@#$%^&*()_+:;').for(:city) }
   it { should belong_to(:addressable) }
-  it { expect(Address.casts["billing"]).to eq(0) }
-  it { expect(Address.casts["shipping"]).to eq(1) }
+  it { expect(Address.casts['billing']).to eq(0) }
+  it { expect(Address.casts['shipping']).to eq(1) }
 end

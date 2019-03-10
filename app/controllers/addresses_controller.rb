@@ -6,7 +6,7 @@ class AddressesController < ApplicationController
   def index; end
 
   def create
-    if params[:address][:cast] == "billing"
+    if params[:address][:cast] == 'billing'
       @billing = current_user.addresses.create(address_params)
       AddressesService.set_save_flash(@billing, flash)
     else
@@ -18,7 +18,7 @@ class AddressesController < ApplicationController
   end
 
   def update
-    if params[:address][:cast] == "billing"
+    if params[:address][:cast] == 'billing'
       AddressesService.set_update_flash(@billing, flash, address_params)
     else
       AddressesService.set_update_flash(@shipping, flash, address_params)

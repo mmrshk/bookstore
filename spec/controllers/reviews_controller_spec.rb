@@ -6,8 +6,10 @@ RSpec.describe ReviewsController, type: :controller do
   let(:user) { create(:user) }
 
   describe 'POST #create' do
-    let(:review_params) { { book_id: book.id, review: { comment: review.comment, name: review.name, user_id: user.id,
-                            rating: review.rating } } }
+    let(:review_params) do
+      { book_id: book.id,
+        review: { comment: review.comment, name: review.name, user_id: user.id, rating: review.rating } }
+    end
 
     before do
       sign_in(user)

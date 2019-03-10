@@ -5,7 +5,7 @@ RSpec.describe LineItemsController, type: :controller do
   let(:book) { create(:book) }
 
   describe 'POST #create' do
-    let(:line_item_params) { {line_item: { quantity: 1, book_id: book.id } } }
+    let(:line_item_params) { { line_item: { quantity: 1, book_id: book.id } } }
     before { post :create, xhr: true, params: line_item_params }
 
     it 'assign @line_item' do
@@ -21,7 +21,7 @@ RSpec.describe LineItemsController, type: :controller do
     before do
       @line_item = create(:line_item)
       session[:line_item_ids] = [@line_item.id]
-      put :update, xhr: true, params:  { id: @line_item.id, line_item: { quantity: 2 } }
+      put :update, xhr: true, params: { id: @line_item.id, line_item: { quantity: 2 } }
     end
 
     it 'assign @line_item' do
@@ -37,7 +37,7 @@ RSpec.describe LineItemsController, type: :controller do
     before do
       @line_item = create(:line_item)
       session[:line_item_ids] = [@line_item.id]
-      put :destroy, xhr: true, params: { id: @line_item.id, line_item: { quantity: 1 }}
+      put :destroy, xhr: true, params: { id: @line_item.id, line_item: { quantity: 1 } }
     end
 
     it 'return success response' do

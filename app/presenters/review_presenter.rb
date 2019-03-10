@@ -5,7 +5,7 @@ class ReviewPresenter < SimpleDelegator
   end
 
   def datetime
-    @model.created_at.strftime("%d/%m/%y")
+    @model.created_at.strftime('%d/%m/%y')
   end
 
   def name

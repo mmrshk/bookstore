@@ -26,7 +26,8 @@ class Checkout::UpdateParamsService
   end
 
   def confirm
-    current_order.update(status: OrderFilterService::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current, step: :complete)
+    current_order.update(status: OrderFilterService::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current,
+                         step: :complete)
     current_order.coupon.update(active: false) if current_order.coupon
     session[:order_complete] = true
     session[:order_id] = nil

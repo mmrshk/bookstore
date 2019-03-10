@@ -7,7 +7,8 @@ ActiveAdmin.register Book do
     f.inputs do
       f.input :title
       f.input :description
-      f.input :category_id, label: I18n.t('admin.books.category'), as: :select, collection: Category.all.map { |c| [c.title.to_s, c.id] }
+      f.input :category_id, label: I18n.t('admin.books.category'), as: :select,
+                            collection: Category.all.map { |c| [c.title.to_s, c.id] }
       f.input :price
       f.input :quantity
       f.input :year

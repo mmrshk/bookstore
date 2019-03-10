@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   has_many :line_items,   dependent: :destroy
   has_many :addresses,    as: :addressable, dependent: :destroy
-  has_one  :coupon,       required: false
+  has_one  :coupon,       required: false, dependent: :destroy
 
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
   scope :payed,      -> { where.not status: %w[in_progress canceled] }

@@ -1,7 +1,7 @@
 class OrderFilterService
   ORDER_FILTERS = {
     in_queue: I18n.t('models.order.in_queue'),
-    in_delivery: I18n.t('models.order.in_delivery') ,
+    in_delivery: I18n.t('models.order.in_delivery'),
     delivered: I18n.t('models.order.delivery'),
     canceled: I18n.t('models.order.canceled'),
     all_orders: I18n.t('models.order.all')

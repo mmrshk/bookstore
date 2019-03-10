@@ -9,19 +9,19 @@ class OrderPresenter < SimpleDelegator
   end
 
   def username
-    "#{ @model.firstname } #{ @model.lastname }"
+    "#{@model.firstname} #{@model.lastname}"
   end
 
   def city_zip
-    "#{ @model.city } #{ @model.zip }"
+    "#{@model.city} #{@model.zip}"
   end
 
   def complete_username
-    "#{ @model.addresses.first.firstname } #{ @model.addresses.first.lastname }"
+    "#{@model.addresses.first.firstname} #{@model.addresses.first.lastname}"
   end
 
   def complete_city_zip
-    "#{ @model.addresses.first.city} #{ @model.addresses.first.zip }"
+    "#{@model.addresses.first.city} #{@model.addresses.first.zip}"
   end
 
   def card_number
@@ -33,28 +33,29 @@ class OrderPresenter < SimpleDelegator
   end
 
   def completed_date
-    @model.orders.last.completed_at.strftime("%B %-d, %Y")
+    @model.orders.last.completed_at.strftime('%B %-d, %Y')
   end
 
   def show_order_date
-    @model.completed_at.strftime("%Y-%m-%d")
+    @model.completed_at.strftime('%Y-%m-%d')
   end
 
   def billing_username
-    "#{ @model.addresses.billing.first.firstname } #{ @model.addresses.billing.first.lastname }"
+    "#{@model.addresses.billing.first.firstname} #{@model.addresses.billing.first.lastname}"
   end
 
   def billing_zip_city
-    "#{ @model.addresses.billing.first.city } #{ @model.addresses.billing.first.zip }"
+    "#{@model.addresses.billing.first.city} #{@model.addresses.billing.first.zip}"
   end
 
   def shipping_username
-    "#{ @model.addresses.shipping.first.firstname } #{ @model.addresses.shipping.first.lastname }"
+    "#{@model.addresses.shipping.first.firstname} #{@model.addresses.shipping.first.lastname}"
   end
 
   def shipping_zip_city
-    "#{ @model.addresses.shipping.first.city } #{ @model.addresses.shipping.first.zip }"
+    "#{@model.addresses.shipping.first.city} #{@model.addresses.shipping.first.zip}"
   end
+
   private
 
   def method_missing(*args, &block)
