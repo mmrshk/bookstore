@@ -11,7 +11,7 @@ class LineItemsController < ApplicationController
       flash[:danger] = I18n.t('controllers.line_item.line_item_not_created')
     end
 
-    redirect_to books_path
+    redirect_back(fallback_location: root_path)
   end
 
   def update

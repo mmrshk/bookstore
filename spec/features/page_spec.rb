@@ -13,7 +13,7 @@ RSpec.feature 'Home page', type: :feature do
   scenario 'Click on buy latest book' do
     click_button('Buy Now')
     expect(find('.shop-quantity').text).to eq('1')
-    expect(page).to have_current_path('/books')
+    expect(page).to have_current_path('/')
   end
 
   scenario 'Can see get started button' do

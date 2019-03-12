@@ -1,12 +1,12 @@
 class CheckoutController < ApplicationController
   include Wicked::Wizard
+  attr_reader :step
 
   authorize_resource class: false
+
   before_action :set_order
 
   steps :login, :addresses, :delivery, :payment, :confirm, :complete
-
-  attr_reader :step
 
   def show
     return redirect_to root_path if session[:line_item_ids].nil? && step == :addresses
@@ -23,7 +23,8 @@ class CheckoutController < ApplicationController
   private
 
   def handle_show_step
-    return jump_to(previous_step) if Checkout::ConditionStepService.new(current_order: current_order,
+    return jump_to(previous_step) if Checkout::ConditionStepService.new(current_user: current_user,
+                                                                        current_order: current_order,
                                                                         step: step, session: session).call
 
     @checkout = Checkout::ShowService.new(current_user: current_user, current_order: current_order, step: step,
@@ -46,7 +47,7 @@ class CheckoutController < ApplicationController
   end
 
   def set_order
-    return if session[:order_id] || %i[login complete].include?(step)
+    return if session[:order_id] || %i[login complete].include?(step) || step.nil? || current_user.nil?
 
     @order = Checkout::OrderService.call(session, current_user)
     session[:order_id] = @order.id
