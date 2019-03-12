@@ -15,8 +15,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
-    session[:line_item_ids] = JSON.parse(cookies[:line_item_ids])
-    current_order.destroy
+    session[:line_item_ids] = JSON.parse(cookies[:line_item_ids]) if cookies[:line_item_ids]
     super
   end
 end
