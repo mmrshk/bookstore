@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   scope :all_orders, -> { where.not(status: %w[in_progress]).order('created_at DESC') }
   scope :payed,      -> { where.not status: %w[in_progress canceled] }
 
-  after_create :set_number
+  before_create :set_number
 
   aasm :status, column: :status do
     state :in_progress, initial: true
@@ -70,6 +70,6 @@ class Order < ApplicationRecord
   end
 
   def set_number
-    update(number: 'R' + Time.zone.now.strftime('%Y%m%d%H%M%S'))
+    self.number ||= 'R' + Time.zone.now.strftime('%Y%m%d%H%M%S')
   end
 end

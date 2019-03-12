@@ -5,6 +5,6 @@ class OrderSearch
   end
 
   def call
-    @orders.public_send(@params) if @params.present?
+    @orders.public_send(@params).decorate if @params.present?
   end
 end

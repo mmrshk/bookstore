@@ -7,13 +7,21 @@ class OrderFilterService
     all_orders: I18n.t('models.order.all')
   }.freeze
 
-  class << self
-    def key_all
-      ORDER_FILTERS.key('All')
-    end
+  attr_reader :order_status
 
-    def key_set(order_status)
-      ORDER_FILTERS[order_status.to_sym]
-    end
+  def initialize(params)
+    @order_status = params[:order_status] || key_all
+  end
+
+  def set_active_filter
+    order_status ? key_set : key_all
+  end
+
+  def key_all
+    ORDER_FILTERS.key('All')
+  end
+
+  def key_set
+    ORDER_FILTERS[order_status.to_sym]
   end
 end
