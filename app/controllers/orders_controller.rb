@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   load_and_authorize_resource
-  attr_reader :order_filter_service
 
   def index
     @orders = OrderSearch.new(current_user, order_filter_service.order_status).call

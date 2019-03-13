@@ -58,7 +58,7 @@ class OrderPresenter < SimpleDelegator
 
   private
 
-  def method_missing(*args, &block)
+  def method_missing(*args , &block)
     @model.public_send(*args, &block)
   end
 end

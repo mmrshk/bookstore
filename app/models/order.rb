@@ -66,7 +66,7 @@ class Order < ApplicationRecord
   private
 
   def set_coupon
-    @coupon ||= Coupon.find_by(id: coupon_id)
+    @set_coupon ||= Coupon.find_by(id: coupon_id)
   end
 
   def set_number
