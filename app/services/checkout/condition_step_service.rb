@@ -11,7 +11,7 @@ class Checkout::ConditionStepService
   def call
     case step
     when :addresses then user.nil?
-    when :delivery  then !order.addresses.presence
+    when :delivery  then order.addresses.none?
     when :payment   then !order.delivery
     when :confirm   then !order.credit_card
     when :complete  then !session[:order_complete]

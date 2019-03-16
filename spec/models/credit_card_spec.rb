@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CreditCard, type: :model do
-  it { should belong_to(:user) }
-  it { should have_many(:orders).dependent(:destroy)  }
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_many(:orders).dependent(:destroy)  }
   it { expect(subject).to validate_presence_of(:name) }
   it { expect(subject).to validate_presence_of(:card_number) }
   it { expect(subject).to validate_presence_of(:cvv) }

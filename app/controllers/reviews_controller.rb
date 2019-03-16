@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
   load_resource
-
-  before_action :find_book
+  load_resource :book
 
   def create
     @review = Review.new(review_params)
@@ -19,9 +18,5 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.require(:review).permit(%i[comment name book_id user_id rating])
-  end
-
-  def find_book
-    @book = Book.find_by(id: params[:book_id])
   end
 end

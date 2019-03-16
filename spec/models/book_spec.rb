@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Book, type: :model do
   subject { build(:book) }
 
-  it { should have_and_belong_to_many(:authors) }
-  it { should belong_to(:category) }
-  it { should have_many(:reviews).dependent(:destroy) }
-  it { should have_many(:line_items).dependent(:destroy) }
+  it { is_expected.to have_and_belong_to_many(:authors) }
+  it { is_expected.to belong_to(:category) }
+  it { is_expected.to have_many(:reviews).dependent(:destroy) }
+  it { is_expected.to have_many(:line_items).dependent(:destroy) }
 
   it { expect(subject).to validate_presence_of(:title) }
   it { expect(subject).to validate_presence_of(:price) }

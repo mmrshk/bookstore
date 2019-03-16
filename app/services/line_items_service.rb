@@ -13,8 +13,10 @@ class LineItemsService
 
   def quantity_change!
     case params[:quantity]
-    when QUANTITY[:increment] then @line_item.increment!(:quantity)
-    when QUANTITY[:decrement] then @line_item.decrement!(:quantity) if @line_item.quantity > 1
+    when QUANTITY[:increment]
+      @line_item.increment!(:quantity)
+    when QUANTITY[:decrement]
+      @line_item.decrement!(:quantity) if @line_item.quantity > 1
     end
   end
 

@@ -31,11 +31,7 @@ class Checkout::UpdateService
   private
 
   def set_order_use_billing
-    if use_billing?
-      order.update(use_billing: true)
-    else
-      order.update(use_billing: false)
-    end
+    order.update(use_billing: use_billing?)
   end
 
   def use_billing?

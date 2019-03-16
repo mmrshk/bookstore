@@ -20,23 +20,13 @@ class AddressesForm
   private
 
   def save_billing
-    if order.addresses.billing.exists?
-      @billing = order.addresses.billing.first
-      @billing.update(address_params(:billing))
-    else
-      @billing = order.addresses.billing.new(address_params(:billing))
-      @billing.save
-    end
+    @billing = order.addresses.billing.first_or_initialize(address_params(:billing))
+    @billing.save
   end
 
   def save_shipping
-    if order.addresses.shipping.exists?
-      @shipping = order.addresses.shipping.first
-      @shipping.update(set_address_cast(address_params(type)))
-    else
-      @shipping = order.addresses.shipping.new(set_address_cast(address_params(type)))
-      @shipping.save
-    end
+    @shipping = order.addresses.shipping.first_or_initialize(set_address_cast(address_params(type)))
+    @shipping.save
   end
 
   def set_billing

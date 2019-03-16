@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_053408) do
     t.bigint "book_id"
     t.integer "quantity", default: 0
     t.integer "integer", default: 0
+    # hellooooo ?!
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
