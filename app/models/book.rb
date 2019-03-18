@@ -15,7 +15,7 @@ class Book < ApplicationRecord
   validates :description, length: { maximum: DESCRIPTION_LENGTH_MAX }
   validates :price, numericality: { only_integer: true }, length: { maximum: PRICE_LENGTH_MAX }
 
-  scope :pop_first, -> { includes(:line_items).order('line_items.quantity ASC') }
+  scope :pop_first, -> { joins(:line_items).order('line_items.quantity DESC') }
   scope :newest, -> { order('created_at DESC') }
   scope :by_title_asc, -> { order('title') }
   scope :by_title_desc, -> { order('title DESC') }

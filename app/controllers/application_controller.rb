@@ -14,7 +14,17 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    session[:order_id] ? Order.find_by(id: session[:order_id]) : Order.new
+    if session[:order_id]
+      order = Order.find_by(id: session[:order_id])
+      order.update(line_item_ids: session[:line_item_ids], coupon_id: session[:coupon_id])
+
+      order
+    else
+      order = Order.create
+      session[:order_id] = order.id
+
+      order
+    end
   end
 
   def current_ability

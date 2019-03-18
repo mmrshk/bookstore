@@ -47,9 +47,8 @@ class CheckoutController < ApplicationController
   end
 
   def set_order
-    return if session[:order_id] || %i[login complete].include?(step) || step.nil? || current_user.nil?
+    return if  %i[login complete].include?(step) || step.nil? || current_user.nil?
 
-    @order = Checkout::OrderService.call(session, current_user)
-    session[:order_id] = @order.id
+    @order = Checkout::OrderService.call(current_user, current_order)
   end
 end
