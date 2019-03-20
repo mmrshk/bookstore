@@ -17,6 +17,8 @@ class OrderFilterService
     order_status ? key_set : key_all
   end
 
+  private
+
   def key_all
     ORDER_FILTERS.key('All')
   end

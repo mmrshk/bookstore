@@ -23,19 +23,19 @@ class Order < ApplicationRecord
     state :canceled
 
     event :place_in_queue do
-      transitions from: %i[in_progress], to: :in_queue
+      transitions from: %i[in_progress], to: %i[in_queue]
     end
 
     event :order_in_delivery do
-      transitions from: %i[in_queue], to: :in_delivery
+      transitions from: %i[in_queue], to: %i[in_delivery]
     end
 
     event :order_delivered do
-      transitions from: %i[in_delivery], to: :delivered
+      transitions from: %i[in_delivery], to: %i[delivered]
     end
 
     event :canceled do
-      transitions from: %i[in_queue in_delivery in_progress delivered], to: :canceled
+      transitions from: %i[in_queue in_delivery in_progress delivered], to: %i[canceled]
     end
   end
 
@@ -66,7 +66,7 @@ class Order < ApplicationRecord
   private
 
   def set_coupon
-    @set_coupon ||= Coupon.find_by(id: coupon_id)
+    @set_coupon ||= Coupon.active.find_by(id: coupon_id)
   end
 
   def set_number

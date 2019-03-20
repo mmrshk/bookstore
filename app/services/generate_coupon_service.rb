@@ -4,7 +4,7 @@ class GenerateCouponService
       loop do
         coupon = Array.new(10) { rand(1...10) }.join
 
-        return coupon if Coupon.where(coupon: coupon).any?
+        return coupon if Coupon.where(code: coupon).none?
       end
     end
   end

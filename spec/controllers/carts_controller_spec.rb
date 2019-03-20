@@ -24,7 +24,7 @@ RSpec.describe CartsController, type: :controller do
 
     # context 'valid coupon' do
     #   before do
-    #     put :update, params: { coupon: '6584798596', active: true }
+    #     put :update, params: { code: '6584798596', active: true }
     #   end
     #
     #   it 'redirect to Cart' do
@@ -37,7 +37,7 @@ RSpec.describe CartsController, type: :controller do
     # end
 
     context 'fake coupon' do
-      before { put :update, params: { coupon: '0000000000', active: true } }
+      before { put :update, params: { code: '0000000000', active: true } }
 
       it 'redirect to Cart' do
         expect(response).to redirect_to cart_path

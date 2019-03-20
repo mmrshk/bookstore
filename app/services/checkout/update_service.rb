@@ -39,7 +39,9 @@ class Checkout::UpdateService
   end
 
   def addresses_params
-    @params.require(:addresses_form)
+    @params.require(:addresses_form).permit(
+      { billing: [:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast] },
+      { shipping: [:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast] }, :use_billing)
   end
 
   def credit_card_params

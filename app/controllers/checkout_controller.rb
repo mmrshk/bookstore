@@ -24,8 +24,8 @@ class CheckoutController < ApplicationController
 
   def handle_show_step
     return jump_to(previous_step) if Checkout::ConditionStepService.new(current_user: current_user,
-                                                                        current_order: current_order,
-                                                                        step: step, session: session).call
+                                                                        current_order: current_order, step: step,
+                                                                        session: session).call
 
     @checkout = Checkout::ShowService.new(current_user: current_user, current_order: current_order, step: step,
                                           session: session).call

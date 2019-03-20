@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   def show
-    @order = Order.new(line_item_ids: session[:line_item_ids], coupon_id: session[:coupon_id])
+    @order = current_order
   end
 
   def update
@@ -11,6 +11,6 @@ class CartsController < ApplicationController
   private
 
   def coupon
-    @coupon ||= Coupon.active.find_by(coupon: params[:coupon])
+    @coupon ||= Coupon.active.find_by(code: params[:coupon])
   end
 end
