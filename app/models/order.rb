@@ -54,7 +54,7 @@ class Order < ApplicationRecord
   def discount
     return 0 unless coupon_id
 
-    total_price * set_coupon.sale / 100
+    total_price * coupon.sale / 100
   end
 
   def total_price_init
@@ -64,10 +64,6 @@ class Order < ApplicationRecord
   end
 
   private
-
-  def set_coupon
-    @set_coupon ||= Coupon.active.find_by(id: coupon_id)
-  end
 
   def set_number
     self.number ||= 'R' + Time.zone.now.strftime('%Y%m%d%H%M%S')
