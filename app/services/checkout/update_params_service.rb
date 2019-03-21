@@ -1,13 +1,12 @@
 class Checkout::UpdateParamsService
   attr_reader :current_order, :session, :credit_card, :request
 
-  def initialize(current_order:, step:, session:, credit_card:, params:, request:)
+  def initialize(current_order:, step:, session:, credit_card:, params:)
     @current_order = current_order
     @step = step
     @session = session
     @credit_card = credit_card
     @params = params
-    @request = request
   end
 
   def call
