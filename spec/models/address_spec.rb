@@ -1,19 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Address, type: :model do
-  it { expect(subject).to validate_presence_of(:firstname) }
-  it { expect(subject).to validate_presence_of(:lastname) }
-  it { expect(subject).to validate_presence_of(:address) }
-  it { expect(subject).to validate_presence_of(:city) }
-  it { expect(subject).to validate_presence_of(:zip) }
-  it { expect(subject).to validate_presence_of(:country) }
-  it { expect(subject).to validate_presence_of(:phone) }
-  it { expect(subject).to validate_presence_of(:cast) }
-  it { expect(subject).to validate_length_of(:firstname).is_at_most(50) }
-  it { expect(subject).to validate_length_of(:lastname).is_at_most(50) }
-  it { expect(subject).to validate_length_of(:address).is_at_most(50) }
-  it { expect(subject).to validate_length_of(:city).is_at_most(50) }
-  it { expect(subject).to validate_length_of(:country).is_at_most(50) }
+  %i[firstname lastname address city zip country phone cast].each do |field|
+    it { expect(subject).to validate_presence_of(field) }
+  end
+
+  %i[firstname lastname address city country].each do |field|
+    it { expect(subject).to validate_length_of(field).is_at_most(50) }
+  end
+
   it { expect(subject).to validate_length_of(:phone).is_at_most(15) }
   it { expect(subject).to validate_length_of(:zip).is_at_most(10) }
   it { expect(subject).to allow_value('Dmitriy').for(:firstname) }

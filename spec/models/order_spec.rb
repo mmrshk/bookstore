@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  it { is_expected.to belong_to(:user) }
-  it { is_expected.to belong_to(:delivery) }
-  it { is_expected.to belong_to(:credit_card) }
+  %i[user delivery credit_card].each do |field|
+    it { is_expected.to belong_to(field) }
+  end
 
-  it { is_expected.to have_many(:line_items).dependent(:destroy) }
-  it { is_expected.to have_many(:addresses).dependent(:destroy) }
+  %i[line_items addresses].each do |field|
+    it { is_expected.to have_many(field).dependent(:destroy) }
+  end
+
   it { is_expected.to have_one(:coupon) }
 end

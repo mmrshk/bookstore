@@ -5,13 +5,17 @@ RSpec.describe Review, type: :model do
   let(:book) { create(:book) }
   let(:review) { create(:review, user_id: user.id, book_id: book.id) }
 
-  it { is_expected.to belong_to(:book) }
-  it { is_expected.to belong_to(:user) }
+  %i[book user].each do |field|
+    it { is_expected.to belong_to(field) }
+  end
 
-  it { expect(subject).to validate_presence_of(:name) }
-  it { expect(subject).to validate_presence_of(:comment) }
-  it { expect(subject).to validate_presence_of(:rating) }
+  %i[name comment rating].each do |field|
+    it { expect(subject).to validate_presence_of(field) }
+  end
+
+  %i[name comment].each do |field|
+    it { expect(subject).to validate_length_of(field) }
+  end
+
   it { expect(subject).to validate_numericality_of(:rating).only_integer }
-  it { expect(subject).to validate_length_of :name }
-  it { expect(subject).to validate_length_of :comment }
 end
