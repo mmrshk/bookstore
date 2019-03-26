@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+ class AddressesController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_addresses
@@ -6,36 +6,40 @@ class AddressesController < ApplicationController
   def index; end
 
   def create
-    if params[:address][:cast] == 'billing'
-      @billing = current_user.addresses.create(address_params)
-      AddressesService.set_save_flash(@billing, flash)
-    else
-      @shipping = current_user.addresses.create(address_params)
-      AddressesService.set_save_flash(@shipping, flash)
-    end
+    @address = AddressesService.new(params: address_params, user: current_user).initialize_by_cast
 
-    render :index
+    if @address.save
+      flash[:success] = I18n.t('controllers.addresses.address_created')
+      redirect_to addresses_path
+    else
+      flash[:danger] = I18n.t('controllers.addresses.address_not_created')
+      render :index
+    end
   end
 
   def update
-    if params[:address][:cast] == 'billing'
-      AddressesService.set_update_flash(@billing, flash, address_params)
+    if address_updated
+      flash[:success] = I18n.t('controllers.addresses.address_updated')
+      redirect_to addresses_path
     else
-      AddressesService.set_update_flash(@shipping, flash, address_params)
+      flash[:danger] = I18n.t('controllers.addresses.address_not_updated')
+      render :index
     end
-
-    render :index
   end
 
   private
 
   def address_params
-    params.require(:address).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast,
-                                    :addressable_type, :addressable_id)
+    params.require(:address).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast)
   end
 
   def set_addresses
-    @billing = current_user.addresses.billing.first_or_initialize
-    @shipping = current_user.addresses.shipping.first_or_initialize
+    @addresses = current_user.addresses
+  end
+
+  def address_updated
+    return @address.update(address_params) if address_params[:cast] == 'billing'
+
+    @address.update(address_params)
   end
 end

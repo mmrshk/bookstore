@@ -23,9 +23,8 @@ class CheckoutController < ApplicationController
   private
 
   def handle_show_step
-    return jump_to(previous_step) if Checkout::ConditionStepService.new(current_user: current_user,
-                                                                        current_order: current_order, step: step,
-                                                                        session: session).call
+    return jump_to(previous_step) if Checkout::ConditionStepService.new(current_order: current_order, step: step,
+                                                                        order_complete: session[:order_complete]).call
 
     @checkout = Checkout::ShowService.new(current_user: current_user, current_order: current_order, step: step,
                                           session: session).call
@@ -49,6 +48,6 @@ class CheckoutController < ApplicationController
   def set_order
     return if  %i[login complete].include?(step) || step.nil? || current_user.nil?
 
-    @order = Checkout::OrderService.call(current_user, current_order)
+    @order ||= Checkout::OrderService.call(current_user, current_order)
   end
 end

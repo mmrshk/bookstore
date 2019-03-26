@@ -1,15 +1,14 @@
 class AddressesService
-  class << self
-    def set_save_flash(address, flash)
-      return flash[:success] = I18n.t('controllers.addresses.address_created') if address.errors.none?
+  attr_reader :address_params, :current_user
 
-      flash[:danger] = I18n.t('controllers.addresses.address_not_created')
-    end
+  def initialize(params:, user: )
+    @address_params = params
+    @current_user = user
+  end
 
-    def set_update_flash(address, flash, address_params)
-      return flash[:success] = I18n.t('controllers.addresses.address_updated') if address.update(address_params)
+  def initialize_by_cast
+    return current_user.addresses.billing.new(address_params) if address_params[:cast] == 'billing'
 
-      flash[:danger] = I18n.t('controllers.addresses.address_not_updated')
-    end
+    current_user.addresses.shipping.new(address_params)
   end
 end

@@ -48,8 +48,7 @@ class AddressesForm
   end
 
   def address_params(type)
-    params.require(type).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast,
-                                :addressable_type, :addressable_id)
+    params.require(type).permit(:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast)
   end
 
   def use_billing?
