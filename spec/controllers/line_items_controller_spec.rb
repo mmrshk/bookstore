@@ -13,7 +13,7 @@ RSpec.describe LineItemsController, type: :controller do
     end
 
     it 'return success response' do
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(302)
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe LineItemsController, type: :controller do
     end
 
     it 'return success response' do
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(302)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe LineItemsController, type: :controller do
     end
 
     it 'return success response' do
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(302)
     end
   end
 end

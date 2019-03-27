@@ -1,7 +1,7 @@
 class AddressesService
   attr_reader :address_params, :current_user
 
-  def initialize(params:, user: )
+  def initialize(params:, user:)
     @address_params = params
     @current_user = user
   end

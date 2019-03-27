@@ -2,40 +2,16 @@
   - if @address
     - if @address.cast == 'billing'
       = simple_form_for @address, html: { id: 'billing_form' } do |form|
-        .col-md-5.mb-40
-          %h3.general-subtitle.mt-0
-            = I18n.t('views.checkout.billing')
-          = render 'addresses/user_form_fields', f:form, cast: :billing
-          = form.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"
+        = render 'addresses/billing_form', f: form
       = simple_form_for @addresses.shipping.first_or_initialize, html: { id: 'shipping_form' } do |form|
-        .col-md-5.mb-40
-          %h3.general-subtitle.mt-0
-            = I18n.t('views.checkout.shipping')
-          = render 'addresses/user_form_fields', f:form, cast: :shipping
-          = form.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"
+        = render 'addresses/shipping_form', f: form
     - else
       = simple_form_for @addresses.billing.first_or_initialize, html: { id: 'billing_form' } do |form|
-        .col-md-5.mb-40
-          %h3.general-subtitle.mt-0
-            = I18n.t('views.checkout.billing')
-          = render 'addresses/user_form_fields', f:form, cast: :billing
-          = form.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"
+        = render 'addresses/billing_form', f: form
       = simple_form_for @address, html: { id: 'shipping_form' } do |form|
-        .col-md-5.mb-40
-          %h3.general-subtitle.mt-0
-            = I18n.t('views.checkout.shipping')
-          = render 'addresses/user_form_fields', f:form, cast: :shipping
-          = form.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"
+        = render 'addresses/shipping_form', f: form
   - else
     = simple_form_for @addresses.billing.first_or_initialize, html: { id: 'billing_form' } do |form|
-      .col-md-5.mb-40
-        %h3.general-subtitle.mt-0
-          = I18n.t('views.checkout.billing')
-        = render 'addresses/user_form_fields', f:form, cast: :billing
-        = form.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"
+      = render 'addresses/billing_form', f: form
     = simple_form_for @addresses.shipping.first_or_initialize, html: { id: 'shipping_form' } do |form|
-      .col-md-5.mb-40
-        %h3.general-subtitle.mt-0
-          = I18n.t('views.checkout.shipping')
-        = render 'addresses/user_form_fields', f:form, cast: :shipping
-        = form.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"
+      = render 'addresses/shipping_form', f: form

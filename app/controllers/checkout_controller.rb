@@ -4,8 +4,6 @@ class CheckoutController < ApplicationController
 
   authorize_resource class: false
 
-  before_action :set_order
-
   steps :login, :addresses, :delivery, :payment, :confirm, :complete
 
   def show
@@ -31,8 +29,8 @@ class CheckoutController < ApplicationController
   end
 
   def handle_update_step
-    @checkout = Checkout::UpdateService.new(current_user: current_user, current_order: current_order, step: step,
-                                            session: session, params: params).call
+    @checkout = Checkout::SetupService.new(current_user: current_user, current_order: current_order, step: step,
+                                           session: session, params: params).call
 
     render_wizard(@checkout) if step == :addresses || step == :payment
     Checkout::UpdateParamsService.new(current_order: current_order, step: step, session: session,
@@ -40,14 +38,9 @@ class CheckoutController < ApplicationController
   end
 
   def login
-    return jump_to(current_order.step) if user_signed_in?
+    return cookies[:from_checkout] = { value: true, expires: 1.day.from_now } unless user_signed_in?
 
-    cookies[:from_checkout] = { value: true, expires: 1.day.from_now }
-  end
-
-  def set_order
-    return if  %i[login complete].include?(step) || step.nil? || current_user.nil?
-
-    @order ||= Checkout::OrderService.call(current_user, current_order)
+    current_order.update(user_id: current_user.id) unless current_order.user_id
+    jump_to(current_order.step)
   end
 end

@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
 //= require active_admin
+//= require book_count
 //= require addresses
 //= require devise
 //= require reviews

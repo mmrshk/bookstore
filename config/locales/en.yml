@@ -10,7 +10,7 @@ en:
       firstname_warning: "Consist of a-z, A-Z only, no special symbols"
       address_warning: "Consist of a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’ only, no special symbols"
       zip_warning: "Consist of 0-9 only,’-’ no special symbols"
-      phone_warning: "Consist of 0-9 only no special symbols"
+      phone_warning: "Must consist of 0-9 and plus at the beggining"
     book:
       newest: 'Newest first'
       pop_first: 'Popular first'
@@ -21,7 +21,7 @@ en:
     order:
       in_queue: 'Waiting for processing'
       in_delivery: 'In delivery'
-      delivery: 'Delivery'
+      delivery: 'Delivered'
       canceled: 'Canceled'
       all: 'All'
   admin:

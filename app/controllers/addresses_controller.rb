@@ -1,4 +1,4 @@
- class AddressesController < ApplicationController
+class AddressesController < ApplicationController
   load_and_authorize_resource
 
   before_action :set_addresses
@@ -18,7 +18,7 @@
   end
 
   def update
-    if address_updated
+    if @address.update(address_params)
       flash[:success] = I18n.t('controllers.addresses.address_updated')
       redirect_to addresses_path
     else
@@ -35,11 +35,5 @@
 
   def set_addresses
     @addresses = current_user.addresses
-  end
-
-  def address_updated
-    return @address.update(address_params) if address_params[:cast] == 'billing'
-
-    @address.update(address_params)
   end
 end

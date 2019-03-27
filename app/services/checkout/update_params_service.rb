@@ -28,11 +28,10 @@ class Checkout::UpdateParamsService
   def confirm
     current_order.update(status: OrderFilterService::ORDER_FILTERS.keys.first.to_s, completed_at: Time.current,
                          step: :complete)
-    current_order.coupon.update(active: false) if current_order.coupon
+    current_order.coupon&.update(active: false)
     session[:order_complete] = true
     session[:order_id] = nil
     session[:line_item_ids] = nil
-    session[:coupon_id] = nil
   end
 
   private

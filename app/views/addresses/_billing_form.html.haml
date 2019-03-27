@@ -1,0 +1,5 @@
+.col-md-5.mb-40
+  %h3.general-subtitle.mt-0
+    = I18n.t('views.checkout.billing')
+  = render 'addresses/user_form_fields', f: f, cast: :billing
+  = f.button :submit, I18n.t('views.addresses.save'), class:"btn btn-default btn"

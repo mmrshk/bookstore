@@ -1,4 +1,4 @@
-class Checkout::UpdateService
+class Checkout::SetupService
   attr_reader :user, :order, :session, :params
 
   def initialize(current_user:, current_order:, step:, session:, params:)
@@ -40,8 +40,8 @@ class Checkout::UpdateService
 
   def addresses_params
     @params.require(:addresses_form).permit(
-      { billing: [:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast] },
-      { shipping: [:firstname, :lastname, :address, :city, :zip, :country, :phone, :cast] }, :use_billing)
+      { billing: %i[firstname lastname address city zip country phone cast] },
+      { shipping: %i[firstname lastname address city zip country phone cast] }, :use_billing)
   end
 
   def credit_card_params

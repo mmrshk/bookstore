@@ -17,8 +17,7 @@ class ApplicationController < ActionController::Base
     order = session[:order_id] ? Order.find_by(id: session[:order_id]) : Order.create
 
     if session[:order_id]
-      order.update(line_item_ids: session[:line_item_ids], coupon_id: session[:coupon_id])
-      set_coupon.update(order_id: order.id) if set_coupon
+      order.update(line_item_ids: session[:line_item_ids], coupon_id: current_coupon)
     else
       session[:order_id] = order.id
     end
@@ -26,8 +25,10 @@ class ApplicationController < ActionController::Base
     order
   end
 
-  def set_coupon
-    @set_coupon ||= Coupon.active.find_by(id: session[:coupon_id])
+  def current_coupon
+    current_coupon = Coupon.active.find_by(order_id: session[:order_id])
+
+    current_coupon&.id
   end
 
   def current_ability

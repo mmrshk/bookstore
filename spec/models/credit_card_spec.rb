@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CreditCard, type: :model do
   it { is_expected.to belong_to(:user) }
-  it { is_expected.to have_many(:orders).dependent(:destroy)  }
+  it { is_expected.to have_many(:orders).dependent(:destroy) }
 
   %i[name card_number cvv expiration_month_year].each do |field|
     it { expect(subject).to validate_presence_of(field) }
@@ -11,10 +11,9 @@ RSpec.describe CreditCard, type: :model do
   it { expect(subject).to validate_length_of(:card_number).is_equal_to(16) }
   it { expect(subject).to validate_length_of(:name).is_at_most(50) }
 
-  # it { expect(subject).to validate_length_of(:cvv).is_at_least(3).is_at_most(4) }
-
   it { expect(subject).to validate_numericality_of(:card_number).only_integer }
   it { expect(subject).to validate_numericality_of(:cvv).only_integer }
+  # it { expect(subject).to validate_length_of(:cvv).is_at_least(3).is_at_most(4) }
 
   it { expect(subject).to allow_value('01/20').for(:expiration_month_year) }
   it { expect(subject).to allow_value('06/20').for(:expiration_month_year) }

@@ -48,7 +48,7 @@ class Order < ApplicationRecord
   end
 
   def total_price
-    self.line_items.joins(:book).sum('books.price * line_items.quantity')
+    line_items.joins(:book).sum('books.price * line_items.quantity')
   end
 
   def discount
