@@ -19,10 +19,13 @@ RSpec.describe AddressesController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:address_params) { { address: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                             address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                             zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                             phone: "+323424324", cast: "billing"} } }
+    let(:address_params) do
+      { address: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
+                   address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                   zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                   phone: '+323424324', cast: 'billing' } }
+    end
+
     before { post :create, params: address_params }
 
     it 'assign @address' do
@@ -37,10 +40,12 @@ RSpec.describe AddressesController, type: :controller do
 
   describe 'PUT #update' do
     let(:address) { create(:address) }
-    let(:address_params) { { address: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                             address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                             zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                             phone: "+323424324", cast: "shipping"}, id: address.id } }
+    let(:address_params) do
+      { address: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
+                   address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                   zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                   phone: '+323424324', cast: 'shipping' }, id: address.id }
+    end
 
     before { put :update, params: address_params }
 

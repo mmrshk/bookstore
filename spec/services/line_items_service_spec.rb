@@ -5,17 +5,17 @@ RSpec.describe LineItemsService do
     let(:line_item) { create(:line_item) }
 
     context 'increment quantity' do
-      let(:line_items_service) { LineItemsService.new(line_item, { quantity: "increment" }) }
+      let(:line_items_service) { LineItemsService.new(line_item, quantity: 'increment') }
       it do
-        expect{ line_items_service.quantity_change! }.to change{ line_item.quantity }.by(+1)
+        expect { line_items_service.quantity_change! }.to change { line_item.quantity }.by(+1)
       end
     end
 
     context 'decrement quantity' do
-      let(:line_items_service) { LineItemsService.new(line_item, { quantity: "decrement" }) }
+      let(:line_items_service) { LineItemsService.new(line_item, quantity: 'decrement') }
       it do
         line_item.quantity = 3
-        expect{ line_items_service.quantity_change! }.to change{ line_item.quantity }.by(-1)
+        expect { line_items_service.quantity_change! }.to change { line_item.quantity }.by(-1)
       end
 
       it do
@@ -30,7 +30,7 @@ RSpec.describe LineItemsService do
     let(:line_item) { create(:line_item) }
 
     context 'returns line_item' do
-      let(:line_items_service) { LineItemsService.new(line_item, { quantity: "decrement", id: line_item.id }) }
+      let(:line_items_service) { LineItemsService.new(line_item, quantity: 'decrement', id: line_item.id) }
 
       it do
         expect(line_items_service.destroy).to eq(line_item)
@@ -38,7 +38,7 @@ RSpec.describe LineItemsService do
     end
 
     context 'returns nil' do
-      let(:line_items_service) { LineItemsService.new(line_item, { quantity: "decrement" }) }
+      let(:line_items_service) { LineItemsService.new(line_item, quantity: 'decrement') }
 
       it do
         expect(line_items_service.destroy).to eq(nil)

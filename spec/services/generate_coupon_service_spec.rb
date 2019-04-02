@@ -18,7 +18,7 @@ RSpec.describe GenerateCouponService do
     allow(Coupon).to receive_message_chain(:where, :none?).and_return(false, false, true)
     allow(generate_coupon_service).to receive(:generate) { coupons.first.code }
 
-    coupons.drop(1).each  do |coupon|
+    coupons.drop(1).each do |coupon|
       expect(coupon.code).not_to eq(generate_coupon_service.generate)
     end
 

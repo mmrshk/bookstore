@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BookBestSellers do
-  describe "#call" do
+  describe '#call' do
     let!(:list) { create(:order_with_payed_books) }
 
     it 'returns four books' do

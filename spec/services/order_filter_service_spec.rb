@@ -10,10 +10,10 @@ RSpec.describe OrderFilterService do
   end
 
   describe 'returns filter from params' do
-    let(:params) { { order_status: "in_queue"} }
+    let(:params) { { order_status: 'in_queue' } }
     it do
       filter = OrderFilterService.new(params)
-      expect(filter.order_status).to eq("in_queue")
+      expect(filter.order_status).to eq('in_queue')
       expect(filter.set_active_filter).to eq(I18n.t('models.order.in_queue'))
     end
   end

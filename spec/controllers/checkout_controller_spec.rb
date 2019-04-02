@@ -29,15 +29,17 @@ RSpec.describe CheckoutController, type: :controller do
 
     context '#update' do
       context 'addressess step' do
-        let(:addresses_form) { { billing: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                                 address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                                 zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                                 phone: "+323424324", cast: "billing"},
-            shipping: {firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                                   address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                                   zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                                   phone: "+323424324", cast: "shipping"},
-            use_billing: 0 } }
+        let(:addresses_form) do
+          { billing: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
+                       address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                       zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                       phone: '+323424324', cast: 'billing' },
+            shipping: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
+                        address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                        zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                        phone: '+323424324', cast: 'shipping' },
+            use_billing: 0 }
+        end
 
         it do
           put :update, params: { id: :addresses, addresses_form: addresses_form }
@@ -56,8 +58,10 @@ RSpec.describe CheckoutController, type: :controller do
       end
 
       context 'payment step' do
-        let(:credit_card) { { card_number: "1111222233334444",  expiration_month_year: "01/21", cvv: "1234",
-                              name: "#{FFaker::Name.first_name} #{FFaker::Name.last_name}" } }
+        let(:credit_card) do
+          { card_number: '1111222233334444',  expiration_month_year: '01/21', cvv: '1234',
+            name: "#{FFaker::Name.first_name} #{FFaker::Name.last_name}" }
+        end
 
         it do
           put :update, params: { id: :payment, credit_card: credit_card }

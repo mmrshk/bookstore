@@ -5,17 +5,17 @@ RSpec.describe AddressesForm do
   let(:order) { create(:order) }
 
   describe 'returns true and saves addresses' do
-    let(:addresses_form) {
-        { billing: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                             address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                             zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                             phone: "+323424324", cast: "billing"},
+    let(:addresses_form) do
+      { billing: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
+                   address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                   zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                   phone: '+323424324', cast: 'billing' },
         shipping: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                               address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                               zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                               phone: "+323424324", cast: "shipping"},
+                    address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                    zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                    phone: '+323424324', cast: 'shipping' },
         use_billing: 0 }
-    }
+    end
 
     it do
       form = AddressesForm.new(user, order, addresses_form)
@@ -26,15 +26,15 @@ RSpec.describe AddressesForm do
   end
 
   describe 'returns false' do
-    let(:addresses_form) {
-        { billing: { firstname: '', lastname: '', address: FFaker::Address.street_address,
-                     city: FFaker::Address.city_prefix, zip: FFaker::AddressDE.zip_code,
-                     country: FFaker::Address.country_code, phone: "+323424324", cast: "billing"},
-        shipping: { firstname: '', lastname: '', address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                    zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                    phone: "+323424324", cast: "shipping"},
+    let(:addresses_form) do
+      { billing: { firstname: '', lastname: '', address: FFaker::Address.street_address,
+                   city: FFaker::Address.city_prefix, zip: FFaker::AddressDE.zip_code,
+                   country: FFaker::Address.country_code, phone: '+323424324', cast: 'billing' },
+        shipping: { firstname: '', address: FFaker::Address.street_address, country: FFaker::Address.country_code,
+                    zip: FFaker::AddressDE.zip_code, city: FFaker::Address.city_prefix, lastname: '',
+                    phone: '+323424324', cast: 'shipping' },
         use_billing: 0 }
-    }
+    end
 
     it do
       form = AddressesForm.new(user, order, addresses_form)

@@ -8,21 +8,21 @@ RSpec.describe Checkout::UpdateParamsService do
   let(:line_item) { create(:line_item) }
   let(:session) { { order_complete: false, order_id: order.id, line_item_ids: [line_item.id] } }
 
-
   it 'calls #addresses' do
     update_params_service = Checkout::UpdateParamsService.new(current_order: order, step: :addresses, session: nil,
                                                               credit_card: credit_card, params: {})
 
     update_params_service.call
-    expect(order.step).to eq("delivery")
+    expect(order.step).to eq('delivery')
   end
 
   # it 'calls #delivery' do
   #   update_params_service = Checkout::UpdateParamsService.new(current_order: order, step: :delivery, session: nil,
-  #                                                             credit_card: credit_card, params: { order: { delivery_id: delivery.id } })
+  #                                                             credit_card: credit_card,
+  #                                                             params: { order: { delivery_id: delivery.id } })
   #
   #   update_params_service.call
-  #   expect(order.step).to eq("payment")
+  #   expect(order.step).to eq('payment')
   #   expect(order.delivery_id).to eq(delivery.id)
   # end
 
@@ -31,7 +31,7 @@ RSpec.describe Checkout::UpdateParamsService do
                                                               credit_card: credit_card, params: {})
 
     update_params_service.call
-    expect(order.step).to eq("confirm")
+    expect(order.step).to eq('confirm')
     expect(order.credit_card_id).to eq(credit_card.id)
   end
 
@@ -41,7 +41,7 @@ RSpec.describe Checkout::UpdateParamsService do
                                                               credit_card: credit_card, params: {})
 
     update_params_service.call
-    expect(order.step).to eq("complete")
+    expect(order.step).to eq('complete')
     expect(order.coupon.active).to eq(false)
     expect(order.status).to eq(OrderFilterService::ORDER_FILTERS.keys.first.to_s)
     expect(session[:order_complete]).to eq(true)
