@@ -4,8 +4,8 @@ default: &default
   pool: 5
   host: localhost
   port: 5432
-  username: <%= ENV['PG_USER'] %>
-  password: <%= ENV['PG_PASSWORD'] %>
+  username: "<%= Rails.application.credentials.PG_USER %>"
+  password: "<%= Rails.application.credentials.PG_PASSWORD %>"
 
 test:
   <<: *default

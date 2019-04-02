@@ -1,11 +1,10 @@
 class Checkout::SetupService
-  attr_reader :user, :order, :session, :params
+  attr_reader :user, :order, :params
 
-  def initialize(current_user:, current_order:, step:, session:, params:)
+  def initialize(current_user:, current_order:, step:, params:)
     @user = current_user
     @order = current_order
     @step = step
-    @session = session
     @params = params
   end
 

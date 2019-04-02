@@ -9,8 +9,7 @@ class AddressesController < ApplicationController
     @address = AddressesService.new(params: address_params, user: current_user).initialize_by_cast
 
     if @address.save
-      flash[:success] = I18n.t('controllers.addresses.address_created')
-      redirect_to addresses_path
+      redirect_to addresses_path, success: I18n.t('controllers.addresses.address_created')
     else
       flash[:danger] = I18n.t('controllers.addresses.address_not_created')
       render :index
@@ -19,8 +18,7 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      flash[:success] = I18n.t('controllers.addresses.address_updated')
-      redirect_to addresses_path
+      redirect_to addresses_path, success: I18n.t('controllers.addresses.address_updated')
     else
       flash[:danger] = I18n.t('controllers.addresses.address_not_updated')
       render :index

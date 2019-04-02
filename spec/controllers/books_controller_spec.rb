@@ -10,13 +10,14 @@ RSpec.describe BooksController, type: :controller do
 
     it 'assigns @book' do
       get :show, params: { id: book.id }
-      expect(assigns(:book)).not_to be_nil
+      subject { assigns(:book) }
+      is_expected.not_to match(book)
     end
 
     it 'render :show template' do
       get :show, params: { id: book.id }
       expect(response.status).to eq(200)
-      expect(response).to render_template :show
+      is_expected.to render_template :show
     end
   end
 end

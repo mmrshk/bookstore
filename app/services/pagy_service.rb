@@ -8,6 +8,8 @@ class PagyService
     (@category ? filter_by_category : default_filter).includes(:authors)
   end
 
+  private
+
   def filter_by_category
     @category.books.by_filter(@filter)
   end

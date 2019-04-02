@@ -9,7 +9,8 @@ RSpec.describe OrdersController, type: :controller do
     before { get :index }
 
     it 'assign @orders' do
-      expect(assigns(:orders)).not_to be_nil
+      subject { assigns(:orders) }
+      is_expected.not_to match(nil)
     end
 
     it 'return a success response' do
@@ -21,7 +22,8 @@ RSpec.describe OrdersController, type: :controller do
     before { get :show, params: { id: order.id } }
 
     it 'assign @order' do
-      expect(assigns(:order)).not_to be_nil
+      subject { assigns(:order) }
+      is_expected.not_to match(nil)
     end
 
     it 'return a success response' do
@@ -29,7 +31,7 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     it 'render template show' do
-      expect(response).to render_template :show
+      is_expected.to render_template :show
     end
   end
 end

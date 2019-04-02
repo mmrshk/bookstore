@@ -30,7 +30,7 @@ class CheckoutController < ApplicationController
 
   def handle_update_step
     @checkout = Checkout::SetupService.new(current_user: current_user, current_order: current_order, step: step,
-                                           session: session, params: params).call
+                                           params: params).call
 
     render_wizard(@checkout) if step == :addresses || step == :payment
     Checkout::UpdateParamsService.new(current_order: current_order, step: step, session: session,

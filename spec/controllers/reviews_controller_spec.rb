@@ -17,10 +17,11 @@ RSpec.describe ReviewsController, type: :controller do
     end
 
     it 'assign @review' do
-      expect(assigns(:review)).not_to be_nil
+      subject { assigns(:review) }
+      is_expected.not_to match(nil)
     end
 
-    it 'return success response' do
+    it 'return redirect response' do
       expect(response.status).to eq(302)
     end
   end
