@@ -48,12 +48,12 @@ group :development, :test do
   gem 'overcommit'
   gem 'rails-controller-testing'
   gem 'rubocop-rspec'
+  gem 'pry'
 end
 
 group :development do
   gem 'foreman'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'spring'

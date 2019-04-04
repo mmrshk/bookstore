@@ -1,9 +1,9 @@
 class Checkout::SetupService
   attr_reader :user, :order, :params
 
-  def initialize(current_user:, current_order:, step:, params:)
-    @user = current_user
+  def initialize(current_order:, step:, params:)
     @order = current_order
+    @user = current_order.user
     @step = step
     @params = params
   end
@@ -30,11 +30,7 @@ class Checkout::SetupService
   private
 
   def set_order_use_billing
-    order.update(use_billing: use_billing?)
-  end
-
-  def use_billing?
-    addresses_params[:use_billing].eql?(AddressesForm::USE_BILLING_CHECKED)
+    order.update(use_billing: addresses_params[:use_billing])
   end
 
   def addresses_params

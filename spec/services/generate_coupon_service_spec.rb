@@ -19,9 +19,9 @@ RSpec.describe GenerateCouponService do
     allow(generate_coupon_service).to receive(:generate) { coupons.first.code }
 
     coupons.drop(1).each do |coupon|
-      expect(coupon.code).not_to eq(generate_coupon_service.generate)
+      expect(generate_coupon_service.generate).not_to eq(coupon.code)
     end
 
-    expect(coupons.first.code).to eq(generate_coupon_service.generate)
+    expect(generate_coupon_service.generate).to eq(coupons.first.code)
   end
 end

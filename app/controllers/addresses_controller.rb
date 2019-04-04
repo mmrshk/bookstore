@@ -6,8 +6,6 @@ class AddressesController < ApplicationController
   def index; end
 
   def create
-    @address = AddressesService.new(params: address_params, user: current_user).initialize_by_cast
-
     if @address.save
       redirect_to addresses_path, success: I18n.t('controllers.addresses.address_created')
     else

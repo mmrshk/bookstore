@@ -50,6 +50,8 @@ en:
       line_item_not_created: 'Book was not added to your bucket.'
       line_item_deleted: 'Book was deleted from your bucket!'
       line_item_not_deleted: 'Book was not deleted from your bucket!'
+    checkout:
+      error: 'Please, full your bucket before checkout.'
   mailers:
     recipient: 'Your Order with bookstore.com'
   views:

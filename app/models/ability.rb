@@ -6,6 +6,7 @@ class Ability
 
     can :read, :all
     can [:home], :page
+
     if user.admin?
       can :manage, :all
     elsif user.is_a?(User) && user.persisted?

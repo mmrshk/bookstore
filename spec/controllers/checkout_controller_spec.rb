@@ -1,4 +1,5 @@
 require 'rails_helper'
+# 1. attribute_for
 
 RSpec.describe CheckoutController, type: :controller do
   let(:user) { create(:user) }
@@ -6,21 +7,27 @@ RSpec.describe CheckoutController, type: :controller do
 
   before { sign_in(user) }
 
-  describe 'invalid #show' do
+  describe 'when cart is empty and step :addresses' do
     before do
       session[:line_item_ids] = nil
     end
 
-    it 'when cart is empty and step :addresses' do
+    it do
       get :show, params: { id: :addresses }
       expect(subject).to redirect_to root_path
     end
   end
 
-  describe 'valid' do
+  describe 'step workflow' do
+
+
     context '#show' do
+      before do
+        session[:line_item_ids] = []
+      end
+
       %i[login addresses delivery payment confirm complete].each do |step|
-        it do
+        it "redirects from #{step}" do
           get :show, params: { id: step }
           expect(response).to have_http_status(302)
         end
@@ -29,7 +36,7 @@ RSpec.describe CheckoutController, type: :controller do
 
     context '#update' do
       context 'addressess step' do
-        let(:addresses_form) do
+        let(:valid_addresses_form) do
           { billing: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
                        address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
                        zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
@@ -41,19 +48,26 @@ RSpec.describe CheckoutController, type: :controller do
             use_billing: 0 }
         end
 
-        it do
-          put :update, params: { id: :addresses, addresses_form: addresses_form }
+        let(:unvalid_addresses_form) do
+          { billing: { firstname: '', lastname: '',
+                       address: '', city: FFaker::Address.city_prefix,
+                       zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                       phone: '+323424324', cast: 'billing' },
+            shipping: { firstname: '', lastname: '',
+                        address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
+                        zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
+                        phone: '+323424324', cast: 'shipping' },
+            use_billing: 0 }
+        end
+
+        it 'return a redirect response' do
+          put :update, params: { id: :addresses, addresses_form: valid_addresses_form }
           expect(response).to have_http_status(302)
         end
-      end
 
-      context 'delivery step' do
-        let(:delivery) { create(:delivery) }
-        let(:delivery_params) { { delivery_id: delivery.id } }
-
-        it do
-          put :update, params: { id: :delivery, order: delivery_params }
-          expect(response).to have_http_status(302)
+        it 'return success response' do
+          put :update, params: { id: :addresses, addresses_form:  unvalid_addresses_form}
+          expect(response).to have_http_status(200)
         end
       end
 
@@ -63,15 +77,30 @@ RSpec.describe CheckoutController, type: :controller do
             name: "#{FFaker::Name.first_name} #{FFaker::Name.last_name}" }
         end
 
-        it do
+        it 'return redirect response' do
           put :update, params: { id: :payment, credit_card: credit_card }
           expect(response).to have_http_status(302)
+        end
+
+        it 'return success response' do
+          put :update, params: { id: :payment, credit_card: { card_number: '', expiration_month_year: '', cvv: '', name: ''} }
+          expect(response).to have_http_status(200)
         end
       end
 
       context 'confirm step' do
-        it do
+        it 'return a redirect response' do
           put :update, params: { id: :confirm }
+          expect(response).to have_http_status(302)
+        end
+      end
+
+      context 'delivery step' do
+        let(:delivery) { create(:delivery) }
+        let(:delivery_params) { { delivery_id: delivery.id } }
+
+        it 'return a redirect response' do
+          put :update, params: { id: :delivery, order: delivery_params }
           expect(response).to have_http_status(302)
         end
       end

@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe BooksController, type: :controller do
   let(:book) { create(:book) }
 
+  index action
+
   describe 'GET #show' do
     before do
       allow(Book).to receive(:find_by) { book }
