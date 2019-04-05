@@ -5,13 +5,15 @@ RSpec.describe CartsController, type: :controller do
     before { get :show }
 
     it 'assign @order' do
-      subject { assigns(:order) }
-      is_expected.not_to match(nil)
+      expect(assigns(:order)).to be_a Order
     end
 
     it 'return success response with show template' do
       expect(response.status).to eq(200)
-      is_expected.to render_template :show
+    end
+
+    it 'render :show template' do
+      expect(subject).to render_template(:show)
     end
   end
 
@@ -27,7 +29,7 @@ RSpec.describe CartsController, type: :controller do
       before { put :update, params: { code: '0000000000', active: true } }
 
       it 'redirect to Cart' do
-        is_expected.to redirect_to cart_path
+        expect(subject).to redirect_to cart_path
       end
 
       it 'show error message' do

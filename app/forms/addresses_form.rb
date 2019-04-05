@@ -1,6 +1,4 @@
 class AddressesForm
-  USE_BILLING_CHECKED = '1'.freeze
-
   include ActiveModel::Model
 
   attr_reader :params, :use_billing, :billing, :shipping, :order, :user
@@ -52,7 +50,7 @@ class AddressesForm
   end
 
   def use_billing?
-    params[:use_billing].eql?(USE_BILLING_CHECKED)
+    params[:use_billing]
   end
 
   def type

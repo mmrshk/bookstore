@@ -1,24 +1,21 @@
-class Checkout::UpdateParamsService
-  attr_reader :current_order, :session, :checkoutable, :params, :step
+class Checkout::UpdateService
+  attr_reader :current_order, :session, :setup_values, :params, :step
 
   def initialize(order:, step:, session:, params:)
     @current_order = order
     @step = step
     @session = session
     @params = params
-    @checkoutable = call_setup_service
+    @setup_values = call_setup_service
   end
 
   def call
     public_send(@step)
   end
-  #
-  # def valid?
-  #   @valid
-  # end
 
   def addresses
     current_order.update(step: :delivery)
+    setup_values.save
   end
 
   def delivery
@@ -26,7 +23,9 @@ class Checkout::UpdateParamsService
   end
 
   def payment
-    current_order.update(credit_card_id: checkoutable.id, step: :confirm)
+    credit_card = setup_values.save
+    current_order.update(credit_card_id: setup_values.id, step: :confirm)
+    credit_card
   end
 
   def confirm

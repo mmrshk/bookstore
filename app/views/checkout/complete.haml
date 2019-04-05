@@ -11,26 +11,26 @@
     .col-sm-6
       .visible-xs
         %p.general-order-number.mb-0
-          = I18n.t('views.checkout.complete.order', order: current_user.orders.last.number)
+          = I18n.t('views.checkout.complete.order', order: current_user.orders[-2].number)
         %p.general-address.mb-30
           = OrderPresenter.new(current_user, self).completed_date
       %p.general-address
-        = OrderPresenter.new(current_user.orders.last, self).complete_username
+        = OrderPresenter.new(current_user.orders[-2], self).complete_username
         %br
-        = current_user.orders.last.addresses.first.address
+        = current_user.orders[-2].addresses.first.address
         %br
-        = OrderPresenter.new(current_user.orders.last, self).complete_city_zip
+        = OrderPresenter.new(current_user.orders[-2], self).complete_city_zip
         %br
-        = current_user.orders.last.addresses.first.country
+        = current_user.orders[-2].addresses.first.country
         %br
-        = I18n.t('views.checkout.complete.phone', phone: current_user.orders.last.addresses.first.phone)
+        = I18n.t('views.checkout.complete.phone', phone: current_user.orders[-2].addresses.first.phone)
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0
-        = I18n.t('views.checkout.complete.order', order: current_user.orders.last.number)
+        = I18n.t('views.checkout.complete.order', order: current_user.orders[-2].number)
       %p.general-address.mb-30
         = OrderPresenter.new(current_user, self).completed_date
   .visible-xs
-    - current_user.orders.last.line_items.each do |line_item|
+    - current_user.orders[-2].line_items.each do |line_item|
       .general-cart-item.divider-lg
         .general-img-wrap-table
           = link_to line_item.book.images.first.url do
@@ -77,7 +77,7 @@
             %span.in-grey-600
               = I18n.t('views.checkout.complete.total')
       %tbody
-        - current_user.orders.last.line_items.each do |line_item|
+        - current_user.orders[-2].line_items.each do |line_item|
           %tr
             %td
               .general-img-wrap-table
@@ -101,6 +101,6 @@
     %p.in-gold-500.font-18
       = I18n.t('views.carts.order_summary')
     %table.general-summary-table.general-summary-table-right.general-text-right
-      = render 'order_summary', order: current_user.orders.last
+      = render 'order_summary', order: current_user.orders[-2]
   .text-center
     = link_to I18n.t('views.checkout.complete.back_to_store'), root_path, class: 'btn btn-default mb-20'

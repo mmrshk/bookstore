@@ -8,5 +8,5 @@ RSpec.describe Author, type: :model do
     it { expect(subject).to validate_length_of(field).is_at_most(50) }
   end
 
-  it { is_expected.to have_and_belong_to_many(:books) }
+  it { expect(subject).to have_and_belong_to_many(:books) }
 end

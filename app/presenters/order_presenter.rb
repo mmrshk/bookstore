@@ -33,7 +33,7 @@ class OrderPresenter < SimpleDelegator
   end
 
   def completed_date
-    @model.orders.last.completed_at.strftime('%B %-d, %Y')
+    @model.orders[-2].completed_at.strftime('%B %-d, %Y')
   end
 
   def show_order_date

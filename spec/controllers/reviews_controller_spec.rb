@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ReviewsController, type: :controller do
-  let(:review) { create(:review) }
   let(:book) { create(:book) }
   let(:user) { create(:user) }
 
   describe 'POST #create' do
     let(:review_params) do
       { book_id: book.id,
-        review: { comment: review.comment, name: review.name, user_id: user.id, rating: review.rating } }
+        review: attributes_for(:review, book_id: book.id, user_id: user.id) }
     end
 
     before do
@@ -17,8 +16,7 @@ RSpec.describe ReviewsController, type: :controller do
     end
 
     it 'assign @review' do
-      subject { assigns(:review) }
-      is_expected.not_to match(nil)
+      expect(assigns(:review)).to match(user.reviews.last)
     end
 
     it 'return redirect response' do

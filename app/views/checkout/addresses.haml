@@ -2,7 +2,7 @@
   %h1.general-title-margin
     = I18n.t('views.checkout.checkout')
   = render 'steps'
-  = simple_form_for @checkout, url: wizard_path, method: :put, html: { class: 'res-mb-100', id: 'address_form' } do |form|
+  = simple_form_for @checkoutable, url: wizard_path, method: :put, html: { class: 'res-mb-100', id: 'address_form' } do |form|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -31,7 +31,7 @@
             = render 'addresses/form_fields', f: ff, cast: :shipping
         .form-group.checkbox
           %label.checkbox-label
-            = form.check_box :use_billing,{ class: 'checkbox-input', id: 'use_billing', hidden: true, checked: @checkout.order.use_billing }, true, false
+            = form.check_box :use_billing,{ class: 'checkbox-input', id: 'use_billing', hidden: true, checked: @checkoutable.order.use_billing }, true, false
             %span.checkbox-icon
               %i.fa.fa-check
             %span.checkbox-text

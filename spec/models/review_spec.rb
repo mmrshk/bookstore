@@ -6,7 +6,7 @@ RSpec.describe Review, type: :model do
   let(:review) { create(:review, user_id: user.id, book_id: book.id) }
 
   %i[book user].each do |field|
-    it { is_expected.to belong_to(field) }
+    it { expect(subject).to belong_to(field) }
   end
 
   %i[name comment rating].each do |field|

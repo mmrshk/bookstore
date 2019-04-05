@@ -5,12 +5,11 @@ RSpec.describe LineItemsController, type: :controller do
   let(:book) { create(:book) }
 
   describe 'POST #create' do
-    let(:line_item_params) { { line_item: { quantity: 1, book_id: book.id } } }
+    let(:line_item_params) { { line_item: attributes_for(:line_item) } }
     before { post :create, params: line_item_params }
 
     it 'assign @line_item' do
-      subject { assigns(:line_item) }
-      is_expected.not_to match(nil)
+      expect(assigns(:line_item)).to be_a LineItem
     end
 
     it 'return redirect response' do
@@ -26,8 +25,7 @@ RSpec.describe LineItemsController, type: :controller do
     end
 
     it 'assign @line_item' do
-      subject { assigns(:line_item) }
-      is_expected.not_to match(nil)
+      expect(assigns(:line_item)).to be_a LineItem
     end
 
     it 'return redirect response' do

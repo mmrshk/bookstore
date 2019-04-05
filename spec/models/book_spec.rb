@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Book, type: :model do
   subject { build(:book) }
 
-  it { is_expected.to have_and_belong_to_many(:authors) }
-  it { is_expected.to belong_to(:category) }
+  it { expect(subject).to have_and_belong_to_many(:authors) }
+  it { expect(subject).to belong_to(:category) }
 
   %i[reviews line_items].each do |field|
-    it { is_expected.to have_many(field).dependent(:destroy) }
+    it { expect(subject).to have_many(field).dependent(:destroy) }
   end
 
   %i[title price quantity dimension_d dimension_h dimension_w].each do |field|

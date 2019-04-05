@@ -1,9 +1,9 @@
 class Checkout::ShowService
   attr_reader :user, :order, :params, :session
 
-  def initialize(current_order:, step:, session:)
-    @order = current_order
-    @user = current_order.user
+  def initialize(user:, order:, step:, session:)
+    @order = order
+    @user = user
     @step = step
     @session = session
   end

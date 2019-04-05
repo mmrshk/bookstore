@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :book do
     title { FFaker::Book.title }
-    price { Faker::Number.between(1, 1000) }
+    price { Faker::Number.between(1, 900) }
     description { FFaker::Book.description }
     quantity { Faker::Number.between(1, 100) }
     dimension_h { Faker::Number.decimal(2) }

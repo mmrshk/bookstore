@@ -1,7 +1,4 @@
 require 'rails_helper'
-TODO
-1. Use attributes for
-2. Use ONLY rspec matchers
 
 RSpec.describe AddressesController, type: :controller do
   let(:user) { create(:user) }
@@ -30,8 +27,7 @@ RSpec.describe AddressesController, type: :controller do
     before { post :create, params: address_params }
 
     it 'assign @address' do
-      subject { assigns(:address) }
-      is_expected.not_to match(nil)
+      expect(assigns(:addresses)).to match_array(user.addresses)
     end
 
     it 'return redirect response' do
@@ -42,10 +38,7 @@ RSpec.describe AddressesController, type: :controller do
   describe 'PUT #update' do
     let(:address) { create(:address) }
     let(:address_params) do
-      { address: { firstname: FFaker::Name.first_name, lastname: FFaker::Name.last_name,
-                   address: FFaker::Address.street_address, city: FFaker::Address.city_prefix,
-                   zip: FFaker::AddressDE.zip_code, country: FFaker::Address.country_code,
-                   phone: '+323424324', cast: 'shipping' }, id: address.id }
+      { address: attributes_for(:address), id: address.id }
     end
 
     before { put :update, params: address_params }

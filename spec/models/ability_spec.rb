@@ -14,44 +14,44 @@ RSpec.describe Ability, type: :model do
       let(:ability) { Ability.new(user, session, order) }
 
       %i[create read].each do |role|
-        it { is_expected.to be_able_to(role, Review) }
+        it { expect(subject).to be_able_to(role, Review) }
       end
 
       %i[update destroy].each do |role|
-        it { is_expected.not_to be_able_to(role, Review) }
+        it { expect(subject).not_to be_able_to(role, Review) }
       end
 
       %i[create read].each do |role|
-        it { is_expected.to be_able_to(role, LineItem) }
+        it { expect(subject).to be_able_to(role, LineItem) }
       end
 
       %i[update destroy].each do |role|
-        it { is_expected.to be_able_to(role, LineItem) }
+        it { expect(subject).to be_able_to(role, LineItem) }
       end
 
       %i[create read].each do |role|
-        it { is_expected.to be_able_to(role, Coupon) }
+        it { expect(subject).to be_able_to(role, Coupon) }
       end
 
       %i[create read update].each do |role|
-        it { is_expected.to be_able_to(role, Order) }
+        it { expect(subject).to be_able_to(role, Order) }
       end
 
       %i[create read update].each do |role|
-        it { is_expected.to be_able_to(role, CreditCard) }
+        it { expect(subject).to be_able_to(role, CreditCard) }
       end
 
       %i[create read update].each do |role|
-        it { is_expected.to be_able_to(role, Address) }
+        it { expect(subject).to be_able_to(role, Address) }
       end
 
       %i[create read update destroy].each do |role|
-        it { is_expected.to be_able_to(role, User) }
+        it { expect(subject).to be_able_to(role, User) }
       end
 
-      it { is_expected.not_to be_able_to(:destroy, Order) }
-      it { is_expected.not_to be_able_to(:destroy, CreditCard) }
-      it { is_expected.not_to be_able_to(:destroy, Address) }
+      it { expect(subject).not_to be_able_to(:destroy, Order) }
+      it { expect(subject).not_to be_able_to(:destroy, CreditCard) }
+      it { expect(subject).not_to be_able_to(:destroy, Address) }
     end
 
     context 'of not authorized user' do
@@ -59,20 +59,20 @@ RSpec.describe Ability, type: :model do
       let(:ability) { Ability.new(user, session, order) }
 
       %i[create read].each do |role|
-        it { is_expected.to be_able_to(role, LineItem) }
+        it { expect(subject).to be_able_to(role, LineItem) }
       end
 
       %i[create read].each do |role|
-        it { is_expected.to be_able_to(role, Coupon) }
+        it { expect(subject).to be_able_to(role, Coupon) }
       end
 
       %i[update destroy].each do |role|
-        it { is_expected.to be_able_to(role, LineItem) }
+        it { expect(subject).to be_able_to(role, LineItem) }
       end
 
-      it { is_expected.not_to be_able_to(:read, Order) }
-      it { is_expected.not_to be_able_to(:read, CreditCard) }
-      it { is_expected.not_to be_able_to(:read, Address ) }
+      it { expect(subject).not_to be_able_to(:read, Order) }
+      it { expect(subject).not_to be_able_to(:read, CreditCard) }
+      it { expect(subject).not_to be_able_to(:read, Address ) }
     end
   end
 end

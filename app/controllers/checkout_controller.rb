@@ -27,33 +27,25 @@ class CheckoutController < ApplicationController
       return jump_to(previous_step)
     end
 
-    @checkout = Checkout::ShowService.new(current_order: current_order, step: step, session: session).call
+    set_order if !current_order.user_id
+    @checkoutable = Checkout::ShowService.new(user: current_user, order: current_order, step: step,
+                                              session: session).call
   end
 
-  # def handle_update_step
-    # use only current_order
-    # rename to checkoutable
-    # @checkout = Checkout::SetupService.new(current_order: current_order, step: step, params: params).call
-
-    # render_wizard(@checkout) if step == :addresses || step == :payment
-    # render_wizard of service calling result
-    # Checkout::UpdateParamsService.new(current_order: current_order, step: step, session: session,
-                                      # credit_card: @checkout, params: params).call
-  # end
-
   def handle_update_step
-    @checkout = Checkout::UpdateParamsService.new(order: current_order, step: step, session: session, params: params).call
+    update_service = Checkout::UpdateService.new(order: current_order, step: step, session: session, params: params)
+    @checkoutable = update_service.setup_values
 
-    render_wizard if @checkout
+    render_wizard if !update_service.call
   end
 
   def login
-    unless user_signed_in?
-      cookies[:from_checkout] = { value: true, expires: 1.day.from_now }
-      return
-    end
+    return jump_to(current_order.step) if user_signed_in?
 
-    current_order.update(user_id: current_user.id) unless current_order.user_id
-    jump_to(current_order.step)
+    cookies[:from_checkout] = { value: true, expires: 1.day.from_now }
+  end
+
+  def set_order
+    current_order.update(user_id: current_user.id)
   end
 end
