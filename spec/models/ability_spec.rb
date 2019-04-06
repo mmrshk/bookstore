@@ -72,7 +72,7 @@ RSpec.describe Ability, type: :model do
 
       it { expect(subject).not_to be_able_to(:read, Order) }
       it { expect(subject).not_to be_able_to(:read, CreditCard) }
-      it { expect(subject).not_to be_able_to(:read, Address ) }
+      it { expect(subject).not_to be_able_to(:read, Address) }
     end
   end
 end

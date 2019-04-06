@@ -62,21 +62,22 @@ RSpec.describe CheckoutController, type: :controller do
         end
 
         it 'return success response' do
-          put :update, params: { id: :addresses, addresses_form:  unvalid_addresses_form }
+          put :update, params: { id: :addresses, addresses_form: unvalid_addresses_form }
           expect(response).to have_http_status(302)
         end
       end
 
       context 'payment step' do
-        let(:credit_card) { attributes_for(:credit_card) }
+        let(:credit_card_valid) { attributes_for(:credit_card) }
+        let(:credit_card_unvalid) { attributes_for(:credit_card, card_number: '', cvv: '') }
 
         it 'return redirect response' do
-          put :update, params: { id: :payment, credit_card: credit_card }
+          put :update, params: { id: :payment, credit_card: credit_card_valid }
           expect(response).to have_http_status(302)
         end
 
         it 'return success response' do
-          put :update, params: { id: :payment, credit_card: { card_number: '', expiration_month_year: '', cvv: '', name: ''} }
+          put :update, params: { id: :payment, credit_card: credit_card_unvalid }
           expect(response).to have_http_status(200)
         end
       end

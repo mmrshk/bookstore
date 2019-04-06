@@ -20,7 +20,7 @@ RSpec.describe Checkout::UpdateService do
   it 'calls #delivery' do
     allow_any_instance_of(Checkout::UpdateService).to receive(:order_params) { { delivery_id: delivery.id } }
     update_params_service = Checkout::UpdateService.new(order: order, step: :delivery, session: nil,
-                                                              params: { order: { delivery_id: delivery.id } })
+                                                        params: { order: { delivery_id: delivery.id } })
 
     expect(update_params_service.call).to eq(true)
     expect(order.step).to eq('payment')

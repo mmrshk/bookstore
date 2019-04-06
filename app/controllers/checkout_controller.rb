@@ -27,7 +27,7 @@ class CheckoutController < ApplicationController
       return jump_to(previous_step)
     end
 
-    set_order if !current_order.user_id
+    set_order unless current_order.user_id
     @checkoutable = Checkout::ShowService.new(user: current_user, order: current_order, step: step,
                                               session: session).call
   end
@@ -36,7 +36,7 @@ class CheckoutController < ApplicationController
     update_service = Checkout::UpdateService.new(order: current_order, step: step, session: session, params: params)
     @checkoutable = update_service.setup_values
 
-    render_wizard if !update_service.call
+    render_wizard unless update_service.call
   end
 
   def login

@@ -46,9 +46,9 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'overcommit'
+  gem 'pry'
   gem 'rails-controller-testing'
   gem 'rubocop-rspec'
-  gem 'pry'
 end
 
 group :development do

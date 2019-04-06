@@ -6,7 +6,6 @@ RSpec.describe GenerateCouponService do
   let(:unique_coupon) { create(:coupon) }
 
   it 'returns unique coupon' do
-    allow(Coupon).to receive_message_chain(:where, :none?) { true }
     allow(generate_coupon_service).to receive(:generate) { unique_coupon.code }
 
     coupons.each do |coupon|
@@ -15,7 +14,6 @@ RSpec.describe GenerateCouponService do
   end
 
   it 'checks loop' do
-    allow(Coupon).to receive_message_chain(:where, :none?).and_return(false, false, true)
     allow(generate_coupon_service).to receive(:generate) { coupons.first.code }
 
     coupons.drop(1).each do |coupon|

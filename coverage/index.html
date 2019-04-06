@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-05T17:20:11+03:00">2019-04-05T17:20:11+03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-06T09:52:34+03:00">2019-04-06T09:52:34+03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         5.49
+         5.5
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>128</b> files in total.
-    <b>1848</b> relevant lines. 
-    <span class="green"><b>1756</b> lines covered</span> and
+    <b>1847</b> relevant lines. 
+    <span class="green"><b>1755</b> lines covered</span> and
     <span class="red"><b>92</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -843,9 +843,9 @@
       <tr>
         <td class="strong"><a href="#8a6390dd054df453d79c2f69f32ae0dee02f8f50" class="src_link" title="spec/controllers/checkout_controller_spec.rb">spec/controllers/checkout_controller_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>102</td>
-        <td>56</td>
-        <td>56</td>
+        <td>103</td>
+        <td>57</td>
+        <td>57</td>
         <td>0</td>
         <td>3.1</td>
       </tr>
@@ -957,7 +957,7 @@
         <td>6</td>
         <td>6</td>
         <td>0</td>
-        <td>3.7</td>
+        <td>4.0</td>
       </tr>
       
       <tr>
@@ -1293,11 +1293,11 @@
       <tr>
         <td class="strong"><a href="#a8e0cc1cbbf6def739121db04eb9796fa7c7772a" class="src_link" title="spec/services/generate_coupon_service_spec.rb">spec/services/generate_coupon_service_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>27</td>
-        <td>16</td>
-        <td>16</td>
+        <td>25</td>
+        <td>14</td>
+        <td>14</td>
         <td>0</td>
-        <td>1.9</td>
+        <td>2.0</td>
       </tr>
       
       <tr>
@@ -1313,7 +1313,7 @@
       <tr>
         <td class="strong"><a href="#82c13d6ad6f308310bd7a65b4f7a54e6c7722e80" class="src_link" title="spec/services/order_filter_service_spec.rb">spec/services/order_filter_service_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>20</td>
+        <td>22</td>
         <td>13</td>
         <td>13</td>
         <td>0</td>
@@ -3432,7 +3432,7 @@
         <li class="covered" data-hits="6" data-linenumber="30">
           <span class="hits">6</span>
           
-          <code class="ruby">    set_order if !current_order.user_id</code>
+          <code class="ruby">    set_order unless current_order.user_id</code>
         </li>
       
         <li class="covered" data-hits="6" data-linenumber="31">
@@ -3486,7 +3486,7 @@
         <li class="covered" data-hits="10" data-linenumber="39">
           <span class="hits">10</span>
           
-          <code class="ruby">    render_wizard if !update_service.call</code>
+          <code class="ruby">    render_wizard unless update_service.call</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -19052,8 +19052,8 @@
     <h3>spec/controllers/checkout_controller_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>56</b> relevant lines. 
-      <span class="green"><b>56</b> lines covered</span> and
+      <b>57</b> relevant lines. 
+      <span class="green"><b>57</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -19448,7 +19448,7 @@
         <li class="covered" data-hits="1" data-linenumber="65">
           <span class="hits">1</span>
           
-          <code class="ruby">          put :update, params: { id: :addresses, addresses_form:  unvalid_addresses_form }</code>
+          <code class="ruby">          put :update, params: { id: :addresses, addresses_form: unvalid_addresses_form }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="66">
@@ -19484,190 +19484,196 @@
         <li class="covered" data-hits="2" data-linenumber="71">
           <span class="hits">2</span>
           
-          <code class="ruby">        let(:credit_card) { attributes_for(:credit_card) }</code>
+          <code class="ruby">        let(:credit_card_valid) { attributes_for(:credit_card) }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="covered" data-hits="2" data-linenumber="72">
+          <span class="hits">2</span>
+          
+          <code class="ruby">        let(:credit_card_unvalid) { attributes_for(:credit_card, card_number: &#39;&#39;, cvv: &#39;&#39;) }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="73">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        it &#39;return redirect response&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="74">
           <span class="hits">1</span>
           
-          <code class="ruby">          put :update, params: { id: :payment, credit_card: credit_card }</code>
+          <code class="ruby">        it &#39;return redirect response&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="75">
           <span class="hits">1</span>
           
-          <code class="ruby">          expect(response).to have_http_status(302)</code>
+          <code class="ruby">          put :update, params: { id: :payment, credit_card: credit_card_valid }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">        end</code>
+          <code class="ruby">          expect(response).to have_http_status(302)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="77">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="78">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="78">
           
-          <code class="ruby">        it &#39;return success response&#39; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="79">
           <span class="hits">1</span>
           
-          <code class="ruby">          put :update, params: { id: :payment, credit_card: { card_number: &#39;&#39;, expiration_month_year: &#39;&#39;, cvv: &#39;&#39;, name: &#39;&#39;} }</code>
+          <code class="ruby">        it &#39;return success response&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="80">
           <span class="hits">1</span>
           
-          <code class="ruby">          expect(response).to have_http_status(200)</code>
+          <code class="ruby">          put :update, params: { id: :payment, credit_card: credit_card_unvalid }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="81">
+        <li class="covered" data-hits="1" data-linenumber="81">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">        end</code>
+          <code class="ruby">          expect(response).to have_http_status(200)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="82">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="83">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="84">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="84">
           
-          <code class="ruby">      context &#39;confirm step&#39; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="85">
           <span class="hits">1</span>
           
-          <code class="ruby">        it &#39;return a redirect response&#39; do</code>
+          <code class="ruby">      context &#39;confirm step&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="86">
           <span class="hits">1</span>
           
-          <code class="ruby">          put :update, params: { id: :confirm }</code>
+          <code class="ruby">        it &#39;return a redirect response&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="87">
           <span class="hits">1</span>
           
-          <code class="ruby">          expect(response).to have_http_status(302)</code>
+          <code class="ruby">          put :update, params: { id: :confirm }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
+        <li class="covered" data-hits="1" data-linenumber="88">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">        end</code>
+          <code class="ruby">          expect(response).to have_http_status(302)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="89">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="90">
           
           
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="91">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="91">
+        <li class="covered" data-hits="1" data-linenumber="92">
           <span class="hits">1</span>
           
           <code class="ruby">      context &#39;delivery step&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="92">
+        <li class="covered" data-hits="2" data-linenumber="93">
           <span class="hits">2</span>
           
           <code class="ruby">        let(:delivery) { create(:delivery) }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="93">
+        <li class="covered" data-hits="2" data-linenumber="94">
           <span class="hits">2</span>
           
           <code class="ruby">        let(:delivery_params) { { delivery_id: delivery.id } }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="94">
+        <li class="never" data-hits="" data-linenumber="95">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="95">
+        <li class="covered" data-hits="1" data-linenumber="96">
           <span class="hits">1</span>
           
           <code class="ruby">        it &#39;return a redirect response&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="96">
+        <li class="covered" data-hits="1" data-linenumber="97">
           <span class="hits">1</span>
           
           <code class="ruby">          put :update, params: { id: :delivery, order: delivery_params }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="97">
+        <li class="covered" data-hits="1" data-linenumber="98">
           <span class="hits">1</span>
           
           <code class="ruby">          expect(response).to have_http_status(302)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="103">
           
           
           <code class="ruby">end</code>
@@ -20611,7 +20617,7 @@
         <li class="covered" data-hits="1" data-linenumber="6">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &#39;.status&#39; do</code>
+          <code class="ruby">  describe &#39;#status&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="7">
@@ -21064,8 +21070,8 @@
           <code class="ruby">  factory :credit_card do</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="3">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="6" data-linenumber="3">
+          <span class="hits">6</span>
           
           <code class="ruby">    name { &quot;#{FFaker::Name.first_name} #{FFaker::Name.last_name}&quot; }</code>
         </li>
@@ -21082,8 +21088,8 @@
           <code class="ruby">    cvv { Faker::Number.number(3) }</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="6">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="6" data-linenumber="6">
+          <span class="hits">6</span>
           
           <code class="ruby">    expiration_month_year { &#39;01/23&#39; }</code>
         </li>
@@ -23776,7 +23782,7 @@
         <li class="covered" data-hits="2" data-linenumber="75">
           <span class="hits">2</span>
           
-          <code class="ruby">      it { expect(subject).not_to be_able_to(:read, Address ) }</code>
+          <code class="ruby">      it { expect(subject).not_to be_able_to(:read, Address) }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="76">
@@ -26704,7 +26710,7 @@
         <li class="never" data-hits="" data-linenumber="23">
           
           
-          <code class="ruby">                                                              params: { order: { delivery_id: delivery.id } })</code>
+          <code class="ruby">                                                        params: { order: { delivery_id: delivery.id } })</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="24">
@@ -26879,8 +26885,8 @@
     <h3>spec/services/generate_coupon_service_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>16</b> relevant lines. 
-      <span class="green"><b>16</b> lines covered</span> and
+      <b>14</b> relevant lines. 
+      <span class="green"><b>14</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -26936,115 +26942,103 @@
           <code class="ruby">  it &#39;returns unique coupon&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="9">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    allow(Coupon).to receive_message_chain(:where, :none?) { true }</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="10">
+        <li class="covered" data-hits="4" data-linenumber="9">
           <span class="hits">4</span>
           
           <code class="ruby">    allow(generate_coupon_service).to receive(:generate) { unique_coupon.code }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="11">
+        <li class="never" data-hits="" data-linenumber="10">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="12">
+        <li class="covered" data-hits="1" data-linenumber="11">
           <span class="hits">1</span>
           
           <code class="ruby">    coupons.each do |coupon|</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="13">
+        <li class="covered" data-hits="3" data-linenumber="12">
           <span class="hits">3</span>
           
           <code class="ruby">      expect(coupon.code).not_to eq(generate_coupon_service.generate)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="14">
+        <li class="never" data-hits="" data-linenumber="13">
           
           
           <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="14">
+          
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="15">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="16">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="17">
+        <li class="covered" data-hits="1" data-linenumber="16">
           <span class="hits">1</span>
           
           <code class="ruby">  it &#39;checks loop&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="18">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    allow(Coupon).to receive_message_chain(:where, :none?).and_return(false, false, true)</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="19">
+        <li class="covered" data-hits="4" data-linenumber="17">
           <span class="hits">4</span>
           
           <code class="ruby">    allow(generate_coupon_service).to receive(:generate) { coupons.first.code }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="20">
+        <li class="never" data-hits="" data-linenumber="18">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="19">
           <span class="hits">1</span>
           
           <code class="ruby">    coupons.drop(1).each do |coupon|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="22">
+        <li class="covered" data-hits="2" data-linenumber="20">
           <span class="hits">2</span>
           
           <code class="ruby">      expect(generate_coupon_service.generate).not_to eq(coupon.code)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="23">
+        <li class="never" data-hits="" data-linenumber="21">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="22">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="25">
+        <li class="covered" data-hits="1" data-linenumber="23">
           <span class="hits">1</span>
           
           <code class="ruby">    expect(generate_coupon_service.generate).to eq(coupons.first.code)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="26">
+        <li class="never" data-hits="" data-linenumber="24">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
           <code class="ruby">end</code>
@@ -27406,91 +27400,103 @@
           <code class="ruby">    let(:params) { {} }</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="6">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="7">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      filter = OrderFilterService.new(params)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="8">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(filter.order_status).to eq(OrderFilterService::ORDER_FILTERS.key(&#39;All&#39;))</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="9">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="10">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="11">
+        <li class="never" data-hits="" data-linenumber="6">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="12">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &#39;returns filter from params&#39; do</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="13">
-          <span class="hits">2</span>
-          
-          <code class="ruby">    let(:params) { { order_status: &#39;in_queue&#39; } }</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="14">
+        <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
           <code class="ruby">    it do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="15">
+        <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
           <code class="ruby">      filter = OrderFilterService.new(params)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="16">
+        <li class="covered" data-hits="1" data-linenumber="9">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(filter.order_status).to eq(&#39;in_queue&#39;)</code>
+          <code class="ruby">      expect(filter.order_status).to eq(OrderFilterService::ORDER_FILTERS.key(&#39;All&#39;))</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="17">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(filter.set_active_filter).to eq(I18n.t(&#39;models.order.in_queue&#39;))</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="18">
+        <li class="never" data-hits="" data-linenumber="10">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="never" data-hits="" data-linenumber="11">
           
           
           <code class="ruby">  end</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &#39;returns filter from params&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="14">
+          <span class="hits">2</span>
+          
+          <code class="ruby">    let(:params) { { order_status: &#39;in_queue&#39; } }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      filter = OrderFilterService.new(params)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(filter.order_status).to eq(&#39;in_queue&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(filter.set_active_filter).to eq(I18n.t(&#39;models.order.in_queue&#39;))</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
           
           
           <code class="ruby">end</code>
