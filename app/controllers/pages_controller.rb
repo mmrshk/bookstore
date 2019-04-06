@@ -5,6 +5,6 @@ class PagesController < ApplicationController
 
   def home
     @latest_books = Book.last(COUNT_LATEST_BOOKS)
-    @best_sellers = BookBestSellers.new.call
+    @best_sellers = BookBestSellers.call
   end
 end

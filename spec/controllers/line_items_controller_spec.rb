@@ -8,7 +8,7 @@ RSpec.describe LineItemsController, type: :controller do
     let(:line_item_params) { { line_item: attributes_for(:line_item) } }
     before { post :create, params: line_item_params }
 
-    it 'assign @line_item' do
+    it 'assigns @line_item' do
       expect(assigns(:line_item)).to be_a LineItem
     end
 
@@ -21,10 +21,10 @@ RSpec.describe LineItemsController, type: :controller do
     before do
       @line_item = create(:line_item)
       session[:line_item_ids] = [@line_item.id]
-      put :update, params: { id: @line_item.id, line_item: { quantity: 2 } }
+      put :update, params: { id: @line_item.id, line_item: attributes_for(:line_item, quantity: 2) }
     end
 
-    it 'assign @line_item' do
+    it 'assigns @line_item' do
       expect(assigns(:line_item)).to be_a LineItem
     end
 
@@ -37,7 +37,7 @@ RSpec.describe LineItemsController, type: :controller do
     before do
       @line_item = create(:line_item)
       session[:line_item_ids] = [@line_item.id]
-      put :destroy, params: { id: @line_item.id, line_item: { quantity: 1 } }
+      put :destroy, params: { id: @line_item.id, line_item: attributes_for(:line_item, quantity: 1) }
     end
 
     it 'return redirect response' do

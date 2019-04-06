@@ -9,8 +9,12 @@ RSpec.describe OrdersController, type: :controller do
   describe 'GET #index' do
     before { get :index }
 
-    it 'assign @orders' do
+    it 'assigns @orders' do
       expect(assigns(:orders)).to match_array(orders)
+    end
+
+    it 'assigns @active_filter' do
+      expect(assigns(:active_filter)).to eq(OrderFilterService::ORDER_FILTERS[:all_orders])
     end
 
     it 'return a success response' do
@@ -25,7 +29,7 @@ RSpec.describe OrdersController, type: :controller do
   describe 'GET #show' do
     before { get :show, params: { id: order.id } }
 
-    it 'assign @order' do
+    it 'assigns @order' do
       expect(assigns(:order)).to match(order)
     end
 

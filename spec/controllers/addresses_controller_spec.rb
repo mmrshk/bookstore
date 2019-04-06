@@ -10,7 +10,7 @@ RSpec.describe AddressesController, type: :controller do
 
     let!(:addresses) { create(:address, addressable: user) }
 
-    it 'assign @addresses' do
+    it 'assigns @addresses' do
       expect(assigns(:addresses)).to match_array(user.addresses)
     end
 
@@ -26,7 +26,7 @@ RSpec.describe AddressesController, type: :controller do
 
     before { post :create, params: address_params }
 
-    it 'assign @address' do
+    it 'assigns @address' do
       expect(assigns(:addresses)).to match_array(user.addresses)
     end
 

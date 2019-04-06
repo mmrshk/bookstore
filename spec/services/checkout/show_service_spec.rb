@@ -7,30 +7,45 @@ RSpec.describe Checkout::ShowService do
   let(:deliveries) { create_list(:delivery, 3) }
   let(:session) { { order_complete: true } }
 
-  it '#addresses' do
-    show_service = Checkout::ShowService.new(user: user, order: order, step: :addresses, session: session)
-    expect(show_service.call).to be_a AddressesForm
+  context '#addresses' do
+    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :addresses, session: session) }
+
+    it do
+      expect(show_service.call).to be_a AddressesForm
+    end
   end
 
-  it '#delivery' do
-    show_service = Checkout::ShowService.new(user: user, order: order, step: :delivery, session: session)
-    expect(show_service.call).to match_array(deliveries)
+  context '#delivery' do
+    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :delivery, session: session) }
+
+    it do
+      expect(show_service.call).to match_array(deliveries)
+    end
   end
 
-  it '#payment' do
-    show_service = Checkout::ShowService.new(user: user, order: order, step: :payment, session: session)
-    expect(show_service.call).to be_a CreditCard
+  context '#payment' do
+    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :payment, session: session) }
+
+    it do
+      expect(show_service.call).to be_a CreditCard
+    end
   end
 
-  it '#confirm' do
-    show_service = Checkout::ShowService.new(user: user, order: order, step: :confirm, session: session)
-    expect(show_service.call).to eq(nil)
+  context '#confirm' do
+    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :confirm, session: session) }
+
+    it do
+      expect(show_service.call).to eq(nil)
+    end
   end
 
-  it '#complete' do
-    show_service = Checkout::ShowService.new(user: user, order: order, step: :complete, session: session)
-    expect { show_service.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
-    expect(session[:order_complete]).to eq(false)
-    expect(show_service.call).to eq(orders.last)
+  context '#complete' do
+    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :complete, session: session) }
+
+    it do
+      expect { show_service.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect(session[:order_complete]).to eq(false)
+      expect(show_service.call).to eq(orders.last)
+    end
   end
 end

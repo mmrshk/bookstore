@@ -15,7 +15,7 @@ RSpec.describe ReviewsController, type: :controller do
       post :create, xhr: true, params: review_params
     end
 
-    it 'assign @review' do
+    it 'assigns @review' do
       expect(assigns(:review)).to match(user.reviews.last)
     end
 

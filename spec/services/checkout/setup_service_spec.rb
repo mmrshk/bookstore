@@ -10,28 +10,40 @@ RSpec.describe Checkout::SetupService do
       shipping: attributes_for(:address, cast: 'shipping') }
   end
 
-  it 'calls #addresses' do
-    allow_any_instance_of(Checkout::SetupService).to receive(:addresses_params) { addresses_params }
-    setup_service = Checkout::SetupService.new(current_order: order, step: :addresses,
-                                               params: addresses_params)
+  context 'calls #addresses' do
+    let(:setup_service) do
+      Checkout::SetupService.new(current_order: order, step: :addresses, params: addresses_params)
+    end
 
-    expect(setup_service).to receive(:set_order_use_billing)
-    expect(setup_service.call).to be_a AddressesForm
+    it do
+      allow_any_instance_of(Checkout::SetupService).to receive(:addresses_params) { addresses_params }
+      expect(setup_service).to receive(:set_order_use_billing)
+      expect(setup_service.call).to be_a AddressesForm
+    end
   end
 
-  it 'calls #payment' do
-    allow_any_instance_of(Checkout::SetupService).to receive(:credit_card_params) { credit_card_params }
-    setup_service = Checkout::SetupService.new(current_order: order, step: :payment, params: credit_card_params)
-    expect(setup_service.call).to be_a CreditCard
+  context 'calls #payment' do
+    let(:setup_service) { Checkout::SetupService.new(current_order: order, step: :payment, params: credit_card_params) }
+
+    it do
+      allow_any_instance_of(Checkout::SetupService).to receive(:credit_card_params) { credit_card_params }
+      expect(setup_service.call).to be_a CreditCard
+    end
   end
 
-  it 'calls #delivery' do
-    setup_service = Checkout::SetupService.new(current_order: order, step: :delivery, params: {})
-    expect(setup_service.call).to eq(deliveries)
+  context 'calls #delivery' do
+    let(:setup_service) { Checkout::SetupService.new(current_order: order, step: :delivery, params: {}) }
+
+    it do
+      expect(setup_service.call).to eq(deliveries)
+    end
   end
 
-  it 'calls #confirm' do
-    setup_service = Checkout::SetupService.new(current_order: order, step: :confirm, params: {})
-    expect(setup_service.call).to eq(nil)
+  context 'calls #confirm' do
+    let(:setup_service) { Checkout::SetupService.new(current_order: order, step: :confirm, params: {}) }
+
+    it do
+      expect(setup_service.call).to eq(nil)
+    end
   end
 end

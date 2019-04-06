@@ -5,77 +5,72 @@ RSpec.describe Checkout::ConditionStepService do
     let(:order) { create(:order) }
     let(:order_complete) { false }
 
-    it 'addresses step' do
-      condition_step_service = Checkout::ConditionStepService.new(order: order, step: :addresses,
-                                                                  is_complete: order_complete)
+    context 'addresses step' do
+      let(:condition_step_service) do
+        Checkout::ConditionStepService.new(order: order, step: :addresses, is_complete: order_complete)
+      end
 
-      expect(condition_step_service.call).to eq(false)
+      it do
+        expect(condition_step_service.call).to eq(false)
+      end
     end
 
     context 'delivery step' do
-      it 'returns true' do
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :delivery,
-                                                                    is_complete: order_complete)
+      let(:condition_step_service) do
+        Checkout::ConditionStepService.new(order: order, step: :delivery, is_complete: order_complete)
+      end
 
+      it 'returns true' do
         expect(condition_step_service.call).to eq(true)
       end
 
       it 'returns false' do
         order.addresses.push(create(:address))
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :delivery,
-                                                                    is_complete: order_complete)
-
         expect(condition_step_service.call).to eq(false)
       end
     end
 
     context 'payment step' do
-      it 'returns true' do
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :payment,
-                                                                    is_complete: order_complete)
+      let(:condition_step_service) do
+        Checkout::ConditionStepService.new(order: order, step: :payment, is_complete: order_complete)
+      end
 
+      it 'returns true' do
         expect(condition_step_service.call).to eq(true)
       end
 
       it 'returns false' do
         order.delivery = create(:delivery)
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :payment,
-                                                                    is_complete: order_complete)
-
         expect(condition_step_service.call).to eq(false)
       end
     end
 
     context 'confirm step' do
-      it 'returns true' do
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :confirm,
-                                                                    is_complete: order_complete)
+      let(:condition_step_service) do
+        Checkout::ConditionStepService.new(order: order, step: :confirm, is_complete: order_complete)
+      end
 
+      it 'returns true' do
         expect(condition_step_service.call).to eq(true)
       end
 
       it 'returns false' do
         order.credit_card = create(:credit_card)
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :confirm,
-                                                                    is_complete: order_complete)
-
         expect(condition_step_service.call).to eq(false)
       end
     end
 
     context 'complete step' do
-      it 'returns true' do
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :complete,
-                                                                    is_complete: order_complete)
+      let(:condition_step_service) do
+        Checkout::ConditionStepService.new(order: order, step: :complete, is_complete: order_complete)
+      end
 
+      it 'returns true' do
         expect(condition_step_service.call).to eq(true)
       end
 
       it 'returns false' do
-        order_complete = true
-        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :complete,
-                                                                    is_complete: order_complete)
-
+        condition_step_service = Checkout::ConditionStepService.new(order: order, step: :complete, is_complete: true)
         expect(condition_step_service.call).to eq(false)
       end
     end

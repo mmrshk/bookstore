@@ -2,10 +2,13 @@ require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
   let(:book) { create(:book) }
-  let(:line_item) { LineItem.new }
 
   describe 'GET #index' do
     before { get :index }
+
+    it 'assigns @line_item' do
+      expect(assigns(:line_item)).to be_a LineItem
+    end
 
     it 'return success response' do
       expect(response.status).to eq(200)
@@ -13,6 +16,17 @@ RSpec.describe BooksController, type: :controller do
 
     it 'render :index template' do
       expect(subject).to render_template(:index)
+    end
+
+    context 'assigns @filter' do
+      it 'equal to DEFAULT_FILTER' do
+        expect(assigns(:filter)).to eq(BookFilterService::DEFAULT_FILTER)
+      end
+
+      it 'equal to filter from params' do
+        get :index, params: { filter: :pop_first }
+        expect(assigns(:filter)).to eq(BookFilterService::FILTERS.keys.second.to_s)
+      end
     end
   end
 
@@ -24,6 +38,10 @@ RSpec.describe BooksController, type: :controller do
 
     it 'assigns @book' do
       expect(assigns(:book)).to match(book)
+    end
+
+    it 'assigns @line_item' do
+      expect(assigns(:line_item)).to be_a LineItem
     end
 
     it 'return success response' do

@@ -9,8 +9,8 @@ class Checkout::UpdateService
     @setup_values = call_setup_service
   end
 
-  def call
-    public_send(@step)
+  def valid?
+    @valid = public_send(step)
   end
 
   def addresses

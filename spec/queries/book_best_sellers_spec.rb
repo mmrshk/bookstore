@@ -5,7 +5,7 @@ RSpec.describe BookBestSellers do
     let!(:list) { create(:order_with_payed_books) }
 
     it 'returns four books' do
-      expect(subject.call.count).to eq(BookBestSellers::COUNT_BOOK_BEST_SELLERS)
+      expect(described_class.call.count).to eq(BookBestSellers::COUNT_BOOK_BEST_SELLERS)
     end
   end
 end

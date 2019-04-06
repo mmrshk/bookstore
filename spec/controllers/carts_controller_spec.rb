@@ -4,7 +4,7 @@ RSpec.describe CartsController, type: :controller do
   describe 'GET #show' do
     before { get :show }
 
-    it 'assign @order' do
+    it 'assigns @order' do
       expect(assigns(:order)).to be_a Order
     end
 
@@ -19,6 +19,7 @@ RSpec.describe CartsController, type: :controller do
 
   describe 'PUT #update' do
     let(:coupon) { create(:coupon) }
+    let(:coupon_attributes) { attributes_for(:coupon, active: true, code: '00000000k') }
 
     it 'set coupon' do
       expect(controller).to receive(:coupon).at_least(:once)
@@ -26,7 +27,7 @@ RSpec.describe CartsController, type: :controller do
     end
 
     context 'fake coupon' do
-      before { put :update, params: { code: '0000000000', active: true } }
+      before { put :update, params: coupon_attributes }
 
       it 'redirect to Cart' do
         expect(subject).to redirect_to cart_path

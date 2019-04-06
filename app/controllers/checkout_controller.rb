@@ -36,7 +36,7 @@ class CheckoutController < ApplicationController
     update_service = Checkout::UpdateService.new(order: current_order, step: step, session: session, params: params)
     @checkoutable = update_service.setup_values
 
-    render_wizard unless update_service.call
+    render_wizard unless update_service.valid?
   end
 
   def login
