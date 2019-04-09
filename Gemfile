@@ -67,5 +67,4 @@ group :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'simplecov', require: false
 end
