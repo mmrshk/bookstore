@@ -9,7 +9,7 @@ RSpec.describe CartsController, type: :controller do
     end
 
     it 'return success response with show template' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
 
     it 'render :show template' do

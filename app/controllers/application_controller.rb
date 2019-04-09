@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_order
+  before_action :set_locale
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -33,5 +34,9 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     @current_ability ||= Ability.new(current_user, session, current_order)
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 end

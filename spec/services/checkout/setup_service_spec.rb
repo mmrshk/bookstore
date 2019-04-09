@@ -10,11 +10,11 @@ RSpec.describe Checkout::SetupService do
       shipping: attributes_for(:address, cast: 'shipping') }
   end
 
-  context 'calls #addresses' do
-    let(:setup_service) do
-      Checkout::SetupService.new(current_order: order, step: :addresses, params: addresses_params)
-    end
+  let(:setup_service) do
+    Checkout::SetupService.new(current_order: order, step: :addresses, params: addresses_params)
+  end
 
+  context 'calls #addresses' do
     it do
       allow_any_instance_of(Checkout::SetupService).to receive(:addresses_params) { addresses_params }
       expect(setup_service).to receive(:set_order_use_billing)
@@ -23,7 +23,11 @@ RSpec.describe Checkout::SetupService do
   end
 
   context 'calls #payment' do
-    let(:setup_service) { Checkout::SetupService.new(current_order: order, step: :payment, params: credit_card_params) }
+    let(:step) { :payment }
+
+    before do
+      setup_service.step = step
+    end
 
     it do
       allow_any_instance_of(Checkout::SetupService).to receive(:credit_card_params) { credit_card_params }
@@ -32,7 +36,11 @@ RSpec.describe Checkout::SetupService do
   end
 
   context 'calls #delivery' do
-    let(:setup_service) { Checkout::SetupService.new(current_order: order, step: :delivery, params: {}) }
+    let(:step) { :delivery }
+
+    before do
+      setup_service.step = step
+    end
 
     it do
       expect(setup_service.call).to eq(deliveries)
@@ -40,7 +48,11 @@ RSpec.describe Checkout::SetupService do
   end
 
   context 'calls #confirm' do
-    let(:setup_service) { Checkout::SetupService.new(current_order: order, step: :confirm, params: {}) }
+    let(:step) { :confirm }
+
+    before do
+      setup_service.step = step
+    end
 
     it do
       expect(setup_service.call).to eq(nil)

@@ -11,7 +11,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it 'return success response' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
 
     it 'render :index template' do
@@ -25,7 +25,7 @@ RSpec.describe BooksController, type: :controller do
 
       it 'equal to filter from params' do
         get :index, params: { filter: :pop_first }
-        expect(assigns(:filter)).to eq(BookFilterService::FILTERS.keys.second.to_s)
+        expect(assigns(:filter)).to eq(BookFilterService::FILTERS.key(I18n.t('models.book.pop_first')).to_s)
       end
     end
   end
@@ -45,7 +45,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it 'return success response' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
 
     it 'render :show template' do

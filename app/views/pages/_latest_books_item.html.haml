@@ -15,4 +15,4 @@
         = form_for LineItem.new, method: :post do |form|
           = form.hidden_field :book_id, value: book.id
           = form.hidden_field :quantity, value: 1
-          = form.submit 'Buy Now', class: "btn btn-primary"
+          = form.submit I18n.t('views.pages.buy_now'), class: "btn btn-primary"

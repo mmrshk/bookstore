@@ -9,6 +9,7 @@ RSpec.describe Checkout::UpdateService do
   let(:session) { { order_complete: false, order_id: order.id, line_item_ids: [line_item.id] } }
   let(:address) { create(:address) }
 
+
   context 'calls #addresses' do
     let(:update_service) { Checkout::UpdateService.new(order: order, step: :addresses, session: nil, params: {}) }
 

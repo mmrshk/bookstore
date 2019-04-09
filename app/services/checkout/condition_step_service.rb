@@ -1,5 +1,6 @@
 class Checkout::ConditionStepService
-  attr_reader :step, :order, :is_complete
+  attr_reader :order, :is_complete
+  attr_accessor :step
 
   def initialize(order:, step:, is_complete:)
     @order = order

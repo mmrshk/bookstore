@@ -1,5 +1,6 @@
 class Checkout::SetupService
   attr_reader :user, :order, :params
+  attr_accessor :step
 
   def initialize(current_order:, step:, params:)
     @order = current_order

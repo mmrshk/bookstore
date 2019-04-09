@@ -18,7 +18,7 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     it 'return a success response' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
 
     it 'render template :index' do
@@ -34,7 +34,7 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     it 'return a success response' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
 
     it 'render template :show' do

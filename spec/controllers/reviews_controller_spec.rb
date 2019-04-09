@@ -20,7 +20,7 @@ RSpec.describe ReviewsController, type: :controller do
     end
 
     it 'return redirect response' do
-      expect(response.status).to eq(302)
+      expect(response).to have_http_status(302)
     end
   end
 end

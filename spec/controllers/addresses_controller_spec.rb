@@ -15,7 +15,7 @@ RSpec.describe AddressesController, type: :controller do
     end
 
     it 'return a success response' do
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
   end
 

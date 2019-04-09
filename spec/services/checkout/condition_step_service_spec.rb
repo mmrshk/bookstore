@@ -4,20 +4,21 @@ RSpec.describe Checkout::ConditionStepService do
   describe 'correct method return value' do
     let(:order) { create(:order) }
     let(:order_complete) { false }
+    let(:condition_step_service) do
+      Checkout::ConditionStepService.new(order: order, step: :addresses, is_complete: order_complete)
+    end
 
     context 'addresses step' do
-      let(:condition_step_service) do
-        Checkout::ConditionStepService.new(order: order, step: :addresses, is_complete: order_complete)
-      end
-
       it do
         expect(condition_step_service.call).to eq(false)
       end
     end
 
     context 'delivery step' do
-      let(:condition_step_service) do
-        Checkout::ConditionStepService.new(order: order, step: :delivery, is_complete: order_complete)
+      let(:step) { :delivery }
+
+      before do
+        condition_step_service.step = step
       end
 
       it 'returns true' do
@@ -31,8 +32,10 @@ RSpec.describe Checkout::ConditionStepService do
     end
 
     context 'payment step' do
-      let(:condition_step_service) do
-        Checkout::ConditionStepService.new(order: order, step: :payment, is_complete: order_complete)
+      let(:step) { :payment }
+
+      before do
+        condition_step_service.step = step
       end
 
       it 'returns true' do
@@ -46,8 +49,10 @@ RSpec.describe Checkout::ConditionStepService do
     end
 
     context 'confirm step' do
-      let(:condition_step_service) do
-        Checkout::ConditionStepService.new(order: order, step: :confirm, is_complete: order_complete)
+      let(:step) { :confirm }
+
+      before do
+        condition_step_service.step = step
       end
 
       it 'returns true' do
@@ -61,8 +66,10 @@ RSpec.describe Checkout::ConditionStepService do
     end
 
     context 'complete step' do
-      let(:condition_step_service) do
-        Checkout::ConditionStepService.new(order: order, step: :complete, is_complete: order_complete)
+      let(:step) { :complete }
+
+      before do
+        condition_step_service.step = step
       end
 
       it 'returns true' do

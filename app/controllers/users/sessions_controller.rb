@@ -7,7 +7,6 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     cookies[:line_item_ids] = { value: session[:line_item_ids].to_json }
-
     return super unless cookies[:from_checkout]
 
     cookies.delete :from_checkout

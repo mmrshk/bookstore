@@ -31,13 +31,13 @@ RSpec.feature 'Checkout', type: :feature do
         fill_in "addresses_form[#{type}][phone]", with: '+380555555555'
       end
 
-      click_button('Save and Continue')
+      click_button(I18n.t('views.checkout.save'))
     end
 
     expect(page.current_path).to eq checkout_path(:delivery)
 
     all('.radio-label').first.click
-    click_button('Save and Continue')
+    click_button(I18n.t('views.checkout.save'))
 
     expect(page.current_path).to eq checkout_path(:payment)
 
@@ -47,14 +47,14 @@ RSpec.feature 'Checkout', type: :feature do
       fill_in 'credit_card[expiration_month_year]', with: '10/22'
       fill_in 'credit_card[cvv]', with: '234'
 
-      click_button('Save and Continue')
+      click_button(I18n.t('views.checkout.save'))
     end
 
     expect(page.current_path).to eq checkout_path(:confirm)
 
-    click_button('Place Order')
+    click_button(I18n.t('views.checkout.confirm.place_order'))
 
     expect(page.current_path).to eq checkout_path(:complete)
-    expect(page).to have_content "An order confirmation has been sent to #{user.email}"
+    expect(page).to have_content I18n.t('views.checkout.complete.email', email: user.email)
   end
 end

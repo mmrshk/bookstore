@@ -7,16 +7,20 @@ RSpec.describe Checkout::ShowService do
   let(:deliveries) { create_list(:delivery, 3) }
   let(:session) { { order_complete: true } }
 
-  context '#addresses' do
-    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :addresses, session: session) }
+  let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :addresses, session: session) }
 
+  context '#addresses' do
     it do
       expect(show_service.call).to be_a AddressesForm
     end
   end
 
   context '#delivery' do
-    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :delivery, session: session) }
+    let(:step) { :delivery }
+
+    before do
+      show_service.step = step
+    end
 
     it do
       expect(show_service.call).to match_array(deliveries)
@@ -24,7 +28,11 @@ RSpec.describe Checkout::ShowService do
   end
 
   context '#payment' do
-    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :payment, session: session) }
+    let(:step) { :payment }
+
+    before do
+      show_service.step = step
+    end
 
     it do
       expect(show_service.call).to be_a CreditCard
@@ -32,7 +40,11 @@ RSpec.describe Checkout::ShowService do
   end
 
   context '#confirm' do
-    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :confirm, session: session) }
+    let(:step) { :confirm }
+
+    before do
+      show_service.step = step
+    end
 
     it do
       expect(show_service.call).to eq(nil)
@@ -40,7 +52,11 @@ RSpec.describe Checkout::ShowService do
   end
 
   context '#complete' do
-    let(:show_service) { Checkout::ShowService.new(user: user, order: order, step: :complete, session: session) }
+    let(:step) { :complete }
+
+    before do
+      show_service.step = step
+    end
 
     it do
       expect { show_service.call }.to change { ActionMailer::Base.deliveries.count }.by(1)
