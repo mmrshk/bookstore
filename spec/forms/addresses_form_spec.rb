@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe AddressesForm do
   let(:user) { create(:user) }
   let(:order) { create(:order) }
+  subject { AddressesForm.new(user, order, addresses_form) }
 
   describe 'returns true and saves addresses' do
     let(:addresses_form) do
@@ -11,10 +12,9 @@ RSpec.describe AddressesForm do
     end
 
     it do
-      form = AddressesForm.new(user, order, addresses_form)
-      expect(form).to receive(:address_params).with(:billing).and_return(addresses_form[:billing]).once
-      expect(form).to receive(:address_params).with(:shipping).and_return(addresses_form[:shipping]).once
-      expect(form.save).to eq(true)
+      expect(subject).to receive(:address_params).with(:billing).and_return(addresses_form[:billing]).once
+      expect(subject).to receive(:address_params).with(:shipping).and_return(addresses_form[:shipping]).once
+      expect(subject.save).to eq(true)
     end
   end
 
@@ -25,10 +25,9 @@ RSpec.describe AddressesForm do
     end
 
     it do
-      form = AddressesForm.new(user, order, addresses_form)
-      expect(form).to receive(:address_params).with(:billing).and_return(addresses_form[:billing]).once
-      expect(form).to receive(:address_params).with(:shipping).and_return(addresses_form[:shipping]).once
-      expect(form.save).to eq(false)
+      expect(subject).to receive(:address_params).with(:billing).and_return(addresses_form[:billing]).once
+      expect(subject).to receive(:address_params).with(:shipping).and_return(addresses_form[:shipping]).once
+      expect(subject.save).to eq(false)
     end
   end
 end

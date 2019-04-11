@@ -18,7 +18,7 @@ RSpec.describe Checkout::ConditionStepService do
       let(:step) { :delivery }
 
       before do
-        condition_step_service.step = step
+        condition_step_service.instance_variable_set(:@step, step)
       end
 
       it 'returns true' do
@@ -35,7 +35,7 @@ RSpec.describe Checkout::ConditionStepService do
       let(:step) { :payment }
 
       before do
-        condition_step_service.step = step
+        condition_step_service.instance_variable_set(:@step, step)
       end
 
       it 'returns true' do
@@ -52,7 +52,7 @@ RSpec.describe Checkout::ConditionStepService do
       let(:step) { :confirm }
 
       before do
-        condition_step_service.step = step
+        condition_step_service.instance_variable_set(:@step, step)
       end
 
       it 'returns true' do
@@ -69,7 +69,7 @@ RSpec.describe Checkout::ConditionStepService do
       let(:step) { :complete }
 
       before do
-        condition_step_service.step = step
+        condition_step_service.instance_variable_set(:@step, step)
       end
 
       it 'returns true' do

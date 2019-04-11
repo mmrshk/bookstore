@@ -26,7 +26,7 @@ RSpec.describe Checkout::SetupService do
     let(:step) { :payment }
 
     before do
-      setup_service.step = step
+      setup_service.instance_variable_set(:@step, step)
     end
 
     it do
@@ -39,7 +39,7 @@ RSpec.describe Checkout::SetupService do
     let(:step) { :delivery }
 
     before do
-      setup_service.step = step
+      setup_service.instance_variable_set(:@step, step)
     end
 
     it do
@@ -51,7 +51,7 @@ RSpec.describe Checkout::SetupService do
     let(:step) { :confirm }
 
     before do
-      setup_service.step = step
+      setup_service.instance_variable_set(:@step, step)
     end
 
     it do

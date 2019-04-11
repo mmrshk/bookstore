@@ -5,6 +5,7 @@ en:
   review_applied: 'Thanks for Review. It will be published as soon as Admin will approve it.'
   review_not_applied: 'Review not applied.'
   choose_delivery_method: 'Please choose delivery method.'
+  my_account: My account
   models:
     address:
       firstname_warning: "Consist of a-z, A-Z only, no special symbols"

@@ -28,7 +28,8 @@
                     = link_to category.title, category_books_path(category), class: "collapse-link"
             - if user_signed_in?
               %li
-                %a.collapse{"aria-controls" => "account", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#account", type: "button"} My account
+                %a.collapse{"aria-controls" => "account", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#account", type: "button"}
+                  = I18n.t('my_account')
                 %ul#account.collapse.list-unstyled-none.mb-10.pl-30{"aria-expanded" => "false"}
                   %li
                     = link_to I18n.t('views.pages.orders'), orders_path

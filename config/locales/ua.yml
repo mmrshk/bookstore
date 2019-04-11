@@ -1,0 +1,191 @@
+ua:
+  bookstore: 'Bookstore'
+  coupon_applied: 'Купон застосовано'
+  coupon_not_applied: 'Недійсний купон'
+  review_applied: 'Дякуємо за відгук. Він буде опублікований, як тільки адміністратор схвалить його.'
+  review_not_applied: 'Відгук не прийнят'
+  choose_delivery_method: 'Виберіть спосіб доставки.'
+  my_account: Мій акаунт
+  models:
+    address:
+      firstname_warning: "Складається з a-z, тільки A-Z, ніяких спеціальних символів"
+      address_warning: 'Складається з a-z, A-Z, 0-9,", "лише", "-", "", ніяких спеціальних символів'
+      zip_warning: 'Складається лише з 0-9, ніяких спеціальних символів'
+      phone_warning: "Номер має складатися з 0-9 і плюс на початку"
+    book:
+      newest: 'Спочатку найновіші'
+      pop_first: 'Спочатку популярні'
+      by_title_asc: 'Назва A-Z'
+      by_title_desc: 'Назва Z-A'
+      price_asc: 'Ціна: від низької до високої'
+      price_desc: 'Ціна: від високої до низької'
+    order:
+      in_queue: 'Очікування обробки'
+      in_delivery: 'В доставці'
+      delivery: 'Доставлено"'
+      canceled: 'Скасовано'
+      all: 'Усі'
+  admin:
+    books:
+      category: 'Категорія'
+      authors: 'Автори'
+    orders:
+      error: "Forbidden event %{event} requested on instance %{order}"
+      safe_event: "%{safe_event}!"
+      current_state: 'Поточний стан'
+      change_state: 'Змінити стан'
+    coupons:
+      coupon: 'Купон'
+      sale: 'Знижкв (%)'
+    reviews:
+      publish: 'Публікувати'
+      unpublish: 'Не публікувати'
+  controllers:
+    addresses:
+      address_updated: 'Вашу адресу успішно оновлено!'
+      address_not_updated: 'Вашу адресу успішно оновлено!'
+      address_created: 'Вашу адресу успішно створено!'
+      address_not_created: 'Адреса не збережена! Перегляньте помилки.'
+    line_item:
+      line_item_created: 'Книгу було додано до вашого кошика!'
+      line_item_not_created: 'Книгу не було додано до вашого кошика.'
+      line_item_deleted: 'Книгу видалено з вашого кошика!'
+      line_item_not_deleted: 'Книгу не було видалено з вашого кошика!'
+    checkout:
+      error: 'Будь ласка, заповніть свою корзину перед купівлею'
+  mailers:
+    recipient: 'Ваше замовлення з bookstore.com'
+  views:
+    pages:
+      welcome: 'Ласкаво просимо до нашого дивовижного Книжкового магазину!'
+      description: "Ми щомісяця розбираємо сотні нових книг і вибираємо п'ять найкращих, які ми можемо знайти, щоб поділитися з нашими членами."
+      start: 'Початок'
+      best_sellers: 'Кращі продавці'
+      previous: 'Попередній'
+      next: 'Далі'
+      support: 'support@bookstore.com'
+      number: '(555)-555-5555'
+      home: 'Головна'
+      shop: 'Магазин'
+      orders: 'Замовлення'
+      settings: 'Налаштування'
+      login: 'Увійти'
+      signup: 'Зареєструватися'
+      logout: 'Вийти'
+      buy_now: 'Купити зараз'
+    reviews:
+      rating: 'Рейтинг'
+      name: "Ваше ім'я"
+      review: 'Відгук'
+      post: 'Опублікувати'
+      verified: 'Перевірений рецензент'
+    addresses:
+      billing: 'Платіжна адреса'
+      shipping: 'Адреса доставки'
+      country: 'Виберіть країну'
+      phone: 'Приклад +355661234567'
+      order: 'Замовлення'
+      save: 'Зберегти'
+    books:
+      cart: 'Додати в кошик'
+      all: 'Усі'
+      catalog: 'Каталог'
+      sort: 'Сортувати за'
+      filter: 'Фільтрувати за категорією'
+      results: 'Назад до результатів'
+      year: 'Рік видання'
+      dimensions: 'Розміри'
+      reviews: "Відгуки (%{review})"
+      materials: 'Матеріали'
+      write_review: 'Написати відгук'
+    carts:
+      subtotal: 'Підсумок:'
+      coupon: 'Купон:'
+      order_total: 'Сума замовлення:'
+      cart: 'Кошик'
+      cart_empty: 'Ваш кошик порожній'
+      price: 'Ціна'
+      quantity: 'Кількість'
+      subtotal_show: 'Сукупність'
+      product: 'Продукт'
+      coupon_code: 'Введіть код купона'
+      apply_coupon: 'Застосувати купон'
+      order_summary: 'Підсумок замовлення'
+      checkout: 'Checkout'
+    checkout:
+      item_total: 'Повна кількість елементів:'
+      coupon: 'Купон:'
+      order_total: 'Сума замовлення:'
+      order_summary: 'Підсумок замовлення'
+      checkout: 'Checkout'
+      billing: 'Платіжна адреса'
+      shipping: 'Адреса доставки'
+      fields_required: "усі поля є обов'язковими"
+      save: 'Зберегти та продовжити'
+      use_billing: 'Використовувати адресу платежу'
+      delivery:
+        shipping_method: 'Метод доставки'
+        method: 'Метод'
+        days: 'Дні'
+        price: 'Ціна'
+      payment:
+        credit_card: 'Кредитна картка'
+        card_number: 'Номер картки'
+        card_name: "Ім'я на картці"
+        month_year: 'MM / YY'
+        cvv: 'CVV'
+        cvv_notice: '3-значний код захисту, як правило, знаходиться на зворотній стороні картки. Карти American Express мають 4-значний код, розташований на передній панелі'
+      confirm:
+        address: "%{address} Адреса"
+        phone: "Телефон %{phone}"
+        shipments: 'Поставка'
+        card_number: "**** **** **** %{number}"
+        price: 'Ціна'
+        quantity: 'Кількість'
+        subtotal: 'SubTotal'
+        book: 'Книга'
+        price: 'Ціна'
+        total: 'Усього'
+        place_order: 'Розмістити замовлення'
+      complete:
+        thank: 'Дякуємо за ваше замовлення!'
+        email: "Підтвердження замовлення надіслано %{email}"
+        order: "Замовлення #%{order}"
+        phone: "Телефон %{phone}"
+        price: 'Ціна'
+        quantity: 'Кількість'
+        subtotal: 'SubTotal'
+        total: 'Усього'
+        book: 'Книга'
+        back_to_store: 'Назад до магазину'
+      login:
+        customer: 'Повернувся клієнт'
+        login: 'Вхід з паролем'
+        email: 'Введіть адресу електронної пошти'
+        password: 'Пароль'
+        forgot_password: 'Забули пароль?'
+        new_customer: 'Новий клієнт'
+        or: 'або'
+        quick_register: 'Швидка реєстрація'
+        create_password_later: "Ви зможете створити пароль пізніше"
+        continue_checkout: 'Продовжити в Checkout'
+    order_mailer:
+      thanks: 'Thanks for choosing us!'
+      successfully_completed: 'Your order successfully completed. Please visit our site for checking your status of order.'
+      check_it: 'Check it'
+      greeting: 'Hi %{email}!'
+    orders:
+      my_orders: 'Мої замовлення'
+      sort_by: 'Сортувати за'
+      all: 'Усі'
+      waiting: 'Очікування обробки'
+      in_delivery: 'В доставці'
+      delivered: 'Доставлено'
+      canceled: 'Скасовано'
+      number: 'Номер'
+      completed_at: 'Завершено на'
+      status: 'Статус'
+      total: 'Усього'
+      order_number: "Замовити %{order}"
+      phone: "Телефон %{phone}"
+      payment_info: 'Інформація про оплату'
