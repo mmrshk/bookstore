@@ -2,7 +2,7 @@
 
 <div class="container">
   <ul class="list-group">
-  <%= JSON.parse(@waiters.body).each_with_index do |waiter, index|%>
+  <%= JSON.parse(@waiters.body).last.each_with_index do |waiter, index|%>
     <li class="list-group-item">
       Официант #<%= index %>
       <%= waiter %>
