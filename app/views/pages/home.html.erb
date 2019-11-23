@@ -1,11 +1,5 @@
 <%= @waiters.body %>
-<div class="container">
-  <ul class="list-group">
-    <li class="list-group-item">Официант #1</li>
-    <li class="list-group-item">Официант #2</li>
-    <li class="list-group-item">Официант #3</li>
-  </ul>
-</div>
+
 <div class="container">
   <ul class="list-group">
   <%= JSON.parse(@waiters.body).each_with_index do |waiter, index|%>
