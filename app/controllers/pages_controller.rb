@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @account_info = Net::HTTP.post_form(URI.parse("https://#{@account}.joinposter.com/api/v2/auth/access_token"),
                                         params_for_request)
     @access_token = JSON.parse(@account_info.body)['access_token']
-    @waiters = JSON.parse(Net::HTTP.get_response(URI.parse("https://joinposter.com/api/access.getEmployees?token=#{@access_token}")))
+    @waiters = JSON.parse(Net::HTTP.get_response(URI.parse("https://joinposter.com/api/access.getEmployees?token=#{@access_token}")).body)
   end
 
   private
