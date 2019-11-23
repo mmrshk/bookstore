@@ -14,11 +14,17 @@ class PagesController < ApplicationController
       'code'                  => params[:code]
     }
 
-    a = Net::HTTP.post_form(URI.parse("https://#{@account}.joinposter.com/api/v2/auth/access_token"), params_for_request)
-    @account_info = a.body
+    @account_info = Net::HTTP.post_form(URI.parse("https://#{@account}.joinposter.com/api/v2/auth/access_token"),
+                                        params_for_request)
+
+    @waiters = Net::HTTP.get_response(URI.parse("https://joinposter.com/api/access.getEmployees?token=#{@access_token}")
   end
 
   private
+
+  def set_access_token
+    @access_token = @account_info.body[:access_token]
+  end
 
   def set_account
     @account = params[:account]

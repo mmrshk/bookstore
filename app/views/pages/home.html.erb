@@ -1,1 +1,11 @@
-<p> <%= @account_info %> </p>
+<p> <%= @account_info.body["access_token"] %> </p>
+
+<%= @waiters %>
+
+<div class="container">
+  <ul class="list-group">
+    <li class="list-group-item">Официант #1</li>
+    <li class="list-group-item">Официант #2</li>
+    <li class="list-group-item">Официант #3</li>
+  </ul>
+</div>
