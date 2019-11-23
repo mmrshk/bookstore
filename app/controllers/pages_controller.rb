@@ -10,7 +10,7 @@ class PagesController < ApplicationController
       'application_id'        => 925,
       'application_secret'    => '7979da75e3ed229483d0a288bee86e5d',
       'grant_type'            => 'authorization_code',
-      'redirect_uri'          => 'http://localhost:8080/',
+      'redirect_uri'          => 'https://radiant-plains-48256.herokuapp.com',
       'code'                  => params[:code]
     }
 
