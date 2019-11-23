@@ -1,8 +1,8 @@
-<%= @waiters %>
+<%= @waiters['response'] %>
 
 <div class="container">
   <ul class="list-group">
-  <%= @waiters['response'].each_with_index do |waiter, index|%>
+  <%= @waiters.each_with_index do |waiter, index|%>
     <li class="list-group-item">
       Официант #<%= index %>
       <%= waiter %>
