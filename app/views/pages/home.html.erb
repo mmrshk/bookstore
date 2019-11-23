@@ -2,7 +2,7 @@
 
 <div class="container">
   <ul class="list-group">
-  <%= @waiters.each_with_index do |waiter, index|%>
+  <%= @waiters['response'].each_with_index do |waiter, index|%>
     <li class="list-group-item">
       Официант #<%= index %>
       <%= waiter %>
