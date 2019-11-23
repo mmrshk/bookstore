@@ -1,10 +1,26 @@
+require "uri"
+require "net/http"
+
 class PagesController < ApplicationController
   authorize_resource class: false
-
-  COUNT_LATEST_BOOKS = 3
+  before_action :set_account
 
   def home
-    @latest_books = Book.last(COUNT_LATEST_BOOKS)
-    @best_sellers = BookBestSellers.call
+    params_for_request = {
+      'application_id'        => 925,
+      'application_secret'    => '7979da75e3ed229483d0a288bee86e5d',
+      'grant_type'            => 'authorization_code',
+      'redirect_uri'          => 'http://localhost:8080/',
+      'code'                  => params[:code]
+    }
+
+    a = Net::HTTP.post_form(URI.parse('https://api-demo.joinposter.com/api/v2/auth/access_token'), params_for_request)
+    @account_info = a.body
+  end
+
+  private
+
+  def set_account
+    @account = params[:account]
   end
 end

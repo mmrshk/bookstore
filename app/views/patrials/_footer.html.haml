@@ -5,8 +5,6 @@
         %ul.list-inline.mb-25
           %li
             = link_to I18n.t('views.pages.home'), root_path, class:"nav-link"
-          %li
-            = link_to I18n.t('views.pages.shop'), categories_path, class:"nav-link"
           - if user_signed_in?
             %li
               %a.nav-link
