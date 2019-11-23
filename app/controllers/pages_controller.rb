@@ -6,7 +6,6 @@ class PagesController < ApplicationController
   before_action :set_account
 
   def home
-    binding.pry
     params_for_request = {
       'application_id'        => 925,
       'application_secret'    => '7979da75e3ed229483d0a288bee86e5d',
