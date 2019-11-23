@@ -11,7 +11,7 @@
   <%= JSON.parse(@waiters.body).each_with_index do |waiter, index|%>
     <li class="list-group-item">
       Официант #<%= index %>
-      <%= waiter["name"] %>
+      <%= waiter %>
     </li>
   <% end %>
   </ul>
