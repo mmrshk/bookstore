@@ -23,7 +23,7 @@ class PagesController < ApplicationController
   private
 
   def set_access_token
-    @access_token = @account_info.body[:access_token]
+    @access_token = @account_info.body['access_token']
   end
 
   def set_account
