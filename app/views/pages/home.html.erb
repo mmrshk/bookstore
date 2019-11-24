@@ -1,12 +1,100 @@
-<%= @waiters['response'] %>
+<style media="screen">
+  .table_drinky {
+      border: solid 1px #DDEEEE;
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+  }
+  .table_drinky thead {
+      border-radius: 10px;
+  }
+  .table_drinky thead th {
+      background-color: #DDEFEF;
+      border: solid 1px #DDEEEE;
+      color: #336B6B;
+      padding: 10px;
+      text-align: left;
+      text-shadow: 1px 1px 1px #fff;
+  }
+  .table_drinky tbody td:first-child {
+      width: 20%;
+  }
+  .table_drinky tbody td {
+      border: solid 1px #DDEEEE;
+      color: #333;
+      padding: 10px;
+      text-shadow: 1px 1px 1px #fff;
+  }
+  .table-zebra tbody tr:hover {
+      background-color: #EEF7EE;
+  }
+  .table-horizontal tbody td {
+
+      border-right: 1px solid #DDEEEE;
+  }
+
+</style>
 
 <div class="container">
-  <ul class="list-group">
-  <%= @waiters.each_with_index do |waiter, index|%>
-    <li class="list-group-item">
-      Официант #<%= index %>
-      <%= waiter %>
-    </li>
-  <% end %>
-  </ul>
+  <img src="/assets/1.png">
+
+  <div class="text-center">
+    <%= link_to 'Add Achievment', root_path, class: 'btn btn-default mb-20' %>
+    <%= link_to 'Drop Achievment', root_path, class: 'btn btn-default mb-20' %>
+  </div>
+  <div class="text-center">
+    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+        <i class="fa fa-calendar"></i>&nbsp;
+        <span></span> <i class="fa fa-caret-down"></i>
+    </div>
+  </div>
+
+  <br>
+
+  <table class="table_drinky table-zebra table-horizontal">
+    <thead>
+      <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Achievments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @waiters.each_with_index do |waiter, index| %>
+        <tr>
+            <td><%= index += 1 %></td>
+            <td><%= waiter["name"] %></td>
+            <td><%= waiter["achievment"] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+  });
+</script>
