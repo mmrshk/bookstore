@@ -32,7 +32,6 @@
 
       border-right: 1px solid #DDEEEE;
   }
-
 </style>
 
 <div class="container">
@@ -64,7 +63,13 @@
         <tr>
             <td><%= index += 1 %></td>
             <td><%= waiter["name"] %></td>
-            <td><%= waiter["achievment"] %></td>
+            <td>
+              <% waiter["achievment"].each do |achievment| %>
+                <a href="#" data-toggle="tooltip" title="Hooray!">
+                  <%= image_tag("/assets/achievments/#{achievment}.png",  height: '64', width: '64') %>
+                </a>
+              <% end %>
+            </td>
         </tr>
       <% end %>
     </tbody>
@@ -72,6 +77,12 @@
 
   <br>
 </div>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
 <script type="text/javascript">
   $(function() {
