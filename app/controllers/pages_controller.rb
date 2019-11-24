@@ -38,7 +38,6 @@ class PagesController < ApplicationController
       a.first.merge('transaction_id' => transaction['transaction_id'])
     end.compact.flatten
 
-
     # '&dateFrom=20170905'
     # '&dateTo=20170908'
 
@@ -55,6 +54,8 @@ class PagesController < ApplicationController
     waiters = add_count_receipt_order(waiters, @statistics)
     waiters.first['achievment'] += ['clients']
     waiters = add_profit_netto_order(waiters, @statistics)
+    @profit_netto_names = waiters.map { |a| [ a['name'] ] }.to_json
+    @profit_netto = waiters.map { |a| [ a['profit_netto'].to_i ] }.to_json
     waiters.first['achievment'] += ['profit_netto']
     waiters = add_uniq_product_order(waiters, @transaction_products, @transactions)
     waiters.each do |waiter|
@@ -63,6 +64,8 @@ class PagesController < ApplicationController
     waiters = add_guest_serve_order(waiters, @transactions)
     waiters.first['achievment'] += ['guests_count']
     @waiters = waiters.sort_by { |k| k['achievment'].count }.reverse!
+    @achievment_names = waiters.map { |a| [ a['name'] ] }.to_json
+    @achievments = waiters.map { |a| [ a['achievment'].count ] }.to_json
   end
 
   private
