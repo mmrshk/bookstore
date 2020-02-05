@@ -1,0 +1,82 @@
+= csrf_meta_tags
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = I18n.t('views.carts.cart')
+  - if @order.line_items.none?
+    %p
+      = I18n.t('views.carts.cart_empty')
+  - else
+    .visible-xs
+      .general-cart-item.divider-lg-bottom
+        .general-cart-item.divider-lg-bottom
+          - @order.line_items.each do |line_item|
+            %button.close.general-cart-close{ "aria-label" => "Close", type: "button" }
+              %span{"aria-hidden" => "true"} ×
+            .general-img-wrap-table
+              = link_to line_item.book.images.first.url do
+                = image_tag line_item.book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+            %p.title
+              = line_item.book.title
+            %table.table
+              %tr
+                %td
+                  %span.in-grey-600
+                    = I18n.t('views.carts.price')
+                %td
+                  %span.font-16.in-gold-500
+                    = number_to_euro line_item.book.price
+              %tr
+                %td.vertical-middle
+                  %span.in-grey-600
+                    = I18n.t('views.carts.quantity')
+                %td
+                  .input-group
+                    = link_to line_item_path(id: line_item.id, quantity: :decrease), class: "input-link" do
+                      %i.fa.fa-minus.line-heaght-40
+                    %input.form-control.quantity-input{type: "text", value: "#{line_item.quantity}"}
+                    = link_to line_item_path(id: line_item.id, quantity: :increase), class: "input-link" do
+                      %i.fa.fa-plus.line-heaght-40
+              %tr
+                %td
+                  %span.in-grey-600
+                    = I18n.t('views.carts.subtotal')
+                %td
+                  %span.font-16.in-gold-500
+                    = number_to_euro line_item.total_price
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600
+              = I18n.t('views.carts.product')
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600
+              = I18n.t('views.carts.price')
+          %th.col-quantity
+            %span.in-grey-600
+              = I18n.t('views.carts.quantity')
+          %th.col-total
+            %span.in-grey-600
+              = I18n.t('views.carts.subtotal_show')
+          %th.col-close
+        = render(@order.line_items)
+    .general-order-wrap
+      .row
+        .col-sm-4
+          .input-group.general-input-group
+            = form_tag cart_path, method: :put
+            = label_tag :coupon_id, I18n.t('views.carts.coupon_code'), class: 'input-label'
+            = text_field_tag(:coupon, nil, placeholder: I18n.t('views.carts.coupon_code'), class: 'form-control mb-30')
+            %div
+              = submit_tag I18n.t('views.carts.apply_coupon'), class: 'btn btn-primary mb-15 res-block'
+        .col-sm-8
+          .res-mr-200.text-center.general-text-right
+            %p.in-gold-500.font-18.general-text-right
+              = I18n.t('views.carts.order_summary')
+            %table.general-summary-table.general-summary-table-right.general-text-right
+              = render 'order_summary'
+            %button.btn.btn-default.mb-20.visible-xs-inline-block
+              = I18n.t('views.carts.checkout')
+    .center-block
+      = link_to I18n.t('views.carts.checkout'), checkout_path(:login, destination: 'login'), class:"btn btn-default mb-20 hidden-xs center-block"

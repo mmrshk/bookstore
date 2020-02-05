@@ -1,0 +1,38 @@
+<main class="container general-main-wrap">
+  <div class="text-center">
+    <h3 class="general-login-title">Log In</h3>
+    <%= link_to user_facebook_omniauth_authorize_path, class: "general-login-icon" do %>
+      <i class="fa fa-facebook-official"></i>
+    <% end %>
+    <p class="general-login-text">or</p>
+  </div>
+  <div class="general-form">
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <div class="form-group mb-30">
+        <%= f.label :email, "Enter Email", class:"control-label input-label" %>
+        <%= f.input :email, required: true, autofocus: true, input_html: { autocomplete: "email" }, label: false %>
+      </div>
+      <div class="form-group mb-30">
+        <%= f.label :password, "Password", class:"control-label input-label" %>
+        <%= f.input :password, required: true, input_html: { autocomplete: "current-password" }, label: false %>
+      </div>
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to "Forgot password?", new_password_path(resource_name), class: "help-block in-gold-500" %>
+      <% end -%>
+      <div class="form-group checkbox text-center mb-30">
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+    </div>
+    <div class="text-center">
+      <%= f.button :submit, "Log in", class:"btn btn-default mb-20" %>
+    <% end %>
+  </div>
+</div>
+
+<p class="general-sign-text text-center">Don’t have an Account?
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <%= link_to "Sign up", new_registration_path(resource_name), class:"in-gold-500" %>
+  <% end -%>
+</p>
+</main>

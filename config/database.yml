@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  port: 5432
+  username: "<%= Rails.application.credentials.PG_USER %>"
+  password: "<%= Rails.application.credentials.PG_PASSWORD %>"
+
+test:
+  <<: *default
+  database: bookstore_test
+
+development:
+  <<: *default
+  database: bookstore_development
+
+production:
+  <<: *default
+  database: bookstore

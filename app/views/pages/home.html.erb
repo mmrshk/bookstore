@@ -1,0 +1,169 @@
+<style media="screen">
+
+  .table_drinky {
+      border: solid 1px #DDEEEE;
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+  }
+  .table_drinky thead {
+      border-radius: 10px;
+  }
+  .table_drinky thead th {
+      background-color: #DDEFEF;
+      border: solid 1px #DDEEEE;
+      color: #336B6B;
+      padding: 10px;
+      text-align: left;
+      text-shadow: 1px 1px 1px #fff;
+  }
+  .table_drinky tbody td:first-child {
+      width: 20%;
+  }
+  .table_drinky tbody td {
+      border: solid 1px #DDEEEE;
+      color: #333;
+      padding: 10px;
+      text-shadow: 1px 1px 1px #fff;
+  }
+  .table-zebra tbody tr:hover {
+      background-color: #EEF7EE;
+  }
+  .table-horizontal tbody td {
+
+      border-right: 1px solid #DDEEEE;
+  }
+</style>
+
+<div class="container">
+  <img src="/assets/1.png">
+
+  <div class="text-center">
+    <%= link_to 'Add Achievment', root_path, class: 'btn btn-default mb-20' %>
+    <%= link_to 'Drop Achievment', root_path, class: 'btn btn-default mb-20' %>
+  </div>
+  <div class="text-center">
+    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+        <i class="fa fa-calendar"></i>&nbsp;
+        <span></span> <i class="fa fa-caret-down"></i>
+    </div>
+  </div>
+
+  <br>
+
+  <table class="table_drinky table-zebra table-horizontal">
+    <thead>
+      <tr>
+          <th>#</th>
+          <th>Официант</th>
+          <th>Достижения</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @waiters.each_with_index do |waiter, index| %>
+        <tr>
+            <td><%= index += 1 %></td>
+            <td><%= waiter["name"] %></td>
+            <td>
+              <% waiter["achievment"].each do |achievment| %>
+                <a href="#" data-toggle="tooltip" title="<%= I18n.t("achievment.#{achievment}")%>">
+                  <%= image_tag("/assets/achievments/#{achievment}.png",  height: '64', width: '64') %>
+                </a>
+              <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <div class="text-center">
+    <h2>Прибыль официанта от общей прибыли</h2>
+    <canvas id="pieChart" width="770" height="385" style="width: 770px; height: 385px"></canvas>
+  </div>
+
+  <br>
+
+  <div class="text-center">
+    <h2>Количество достижений за неделю</h2>
+    <canvas id="barChart" width="700" height="305" style="width: 700px; height: 305px"></canvas>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function chart(profit_netto, profit_netto_names) {
+    var ctx = document.getElementById('pieChart');
+
+    var data = {
+      datasets: [{
+          data: profit_netto,
+          backgroundColor: [
+            '#ff6384',
+            '#36a2eb',
+            '#ffcd56'
+          ]
+      }],
+      labels: profit_netto_names
+    };
+
+    var myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: data
+    });
+  }
+  chart(<%= raw @profit_netto %>, <%= raw @profit_netto_names %>);
+
+  function bar_chart(achievments, achievment_names) {
+    let ctx = document.getElementById('barChart');
+    var myBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: achievment_names,
+        datasets: [{
+          label: 'Официанты',
+          barPercentage: 1,
+          backgroundColor:[
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            "rgba(255, 205, 86, 0.2)"
+          ],
+          barThickness: 6,
+          maxBarThickness: 8,
+          minBarLength: 2,
+          data: achievments
+        }]
+      }
+    });
+  }
+  bar_chart(<%= raw @achievments %>, <%= raw @achievment_names %>);
+
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $(function() {
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+  });
+</script>

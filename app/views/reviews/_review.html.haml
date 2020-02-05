@@ -1,0 +1,22 @@
+- if review.publish == true
+  .general-message-wrap.divider-lg
+    .clearfix
+      %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+        = ReviewPresenter.new(review, self).name
+      .ml-70
+        %div
+          .general-message-date.hidden-xs
+            = ReviewPresenter.new(review, self).datetime
+          .max-240
+            - if review.user.book_ids.include?(@book.id)
+              .general-message-verified
+                = I18n.t('views.reviews.verified')
+            .general-message-name
+              = review.name
+        .mb-15
+          - review.rating.times do
+            %i.fa.fa-star.rate-star
+          - ( 5 - review.rating ).times do
+            %i.fa.fa-star.rate-star.rate-empty
+        %p
+          = review.comment

@@ -1,0 +1,12 @@
+%main.container
+  %h1.general-title-margin
+    = I18n.t('devise.registrations.settings')
+  %ul.nav.clearfix.mb-20{ role: "tablist"}
+    %li.tab-item.active{ role: "presentation"}
+      = link_to I18n.t('devise.registrations.address'), addresses_path, class: "tab-link"
+    %li.tab-item{ role: "presentation"}
+      %a.tab-link{"aria-controls" => "privacy", "data-toggle" => "tab", href: "#privacy", role: "tab"}
+        = I18n.t('devise.registrations.privacy')
+  .tab-content
+    #privacy.tab-pane.fade.in.active{ role: "tabpanel"}
+      = render 'edit_form'

@@ -1,0 +1,13 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+google:
+  service: GCS
+  project: bookstore
+  credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
+  bucket: radiant-plains-48256

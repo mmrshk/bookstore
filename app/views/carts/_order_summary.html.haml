@@ -1,0 +1,21 @@
+%tr
+  %td
+    %p.font-16
+      = I18n.t('views.carts.subtotal')
+  %td
+    %p.font-16
+      = number_to_euro current_order.total_price
+%tr
+  %td
+    %p.font-16
+      = I18n.t('views.carts.coupon')
+  %td
+    %p.font-16
+      = number_to_euro current_order.discount
+%tr
+  %td
+    %strong.font-18
+      = I18n.t('views.carts.order_total')
+  %td
+    %strong.font-18
+      = number_to_euro current_order.total_price_init

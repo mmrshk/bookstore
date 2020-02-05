@@ -1,0 +1,60 @@
+%main.container
+  = link_to :back, class: "general-back-link" do
+    %i.fa.fa-long-arrow-left.mr-15
+    = I18n.t('views.books.results')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          %img.img-responsive
+            = link_to @book.images.first.url do
+              = image_tag @book.images.first.url, alt: "design-book"
+        .images.clearfix
+          - @book.images.drop(1).each do |image|
+            %a.img-link
+              %img
+                = image_tag image.url(:thumb)
+    .col-sm-6
+      %h1.mt-res-0
+        = @book.title
+      %p.lead.small
+        = BookPresenter.new(@book, self).book_authors
+      .row
+        = render 'form'
+      .general-info-wrap.divider-lg
+        %p Description
+        %p.lead.small.line-height-2
+          - if @book.description.length > Book::DESCRIPTION_LENGTH
+            = truncate(@book.description, length: Book::DESCRIPTION_LENGTH)
+            = link_to 'Read more', '', class: "read-more in-gold-500 ml-10"
+            :javascript
+              $(".read-more").on('click', function(e) {
+                e.preventDefault()
+                $(this).parent().html('#{escape_javascript @book.description}')
+              })
+          - else
+            = @book.description
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = I18n.t('views.books.year')
+          %p.lead.small.pull-right= @book.year
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = I18n.t('views.books.dimensions')
+          %p.lead.small.pull-right
+            = BookPresenter.new(@book, self).book_dimensions
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = I18n.t('views.books.materials')
+          %p.lead.small.pull-right= @book.material
+  .mb-80
+    %h3.in-gold-500.mb-25
+      = I18n.t('views.books.reviews', review: BookPresenter.new(@book, self).book_reviews)
+    = render @book.reviews
+    - if user_signed_in?
+      %h3.in-gold-500.mb-25
+        = I18n.t('views.books.write_review')
+      = render 'reviews/form'

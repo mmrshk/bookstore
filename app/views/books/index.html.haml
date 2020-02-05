@@ -1,0 +1,78 @@
+%main.container
+  %h1.general-title-margin
+    - if params[:category_id]
+      = @category.title
+    - else
+      = I18n.t('views.books.catalog')
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        %a.dropdown-toggle.lead.small{ "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button" }
+          = BookFilterService::FILTERS[@filter.to_sym]
+          %i.fa.fa-angle-down.dropdown-icon.pull-right
+        = render 'filter'
+    %ul.list-inline.pt-10.mb-25.mr-240
+      %li.mr-35
+        = link_to books_path, class: "filter-link"  do
+          = I18n.t('views.books.all')
+          %span.badge.general-badge
+            = Book.all.count
+      - Category.all.each do |category|
+        %li.mr-35
+          = link_to category_books_path(category), class: "filter-link"  do
+            = category.title
+            %span.badge.general-badge= category.books.count
+  .dropdowns.mb-25.visible-xs
+    %p.lead.small.mb-10
+      = I18n.t('views.books.filter')
+    .dropdown
+      %a.dropdown-toggle.lead.small{ "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button" }
+        = I18n.t('models.book.newest')
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        %li
+          = link_to books_path do
+            = I18n.t('views.books.all')
+            %span.badge.general-badge
+              = Book.all.count
+        - Category.all.each do |category|
+          %li
+            = link_to category_books_path(category) do
+              = category.title
+              %span.badge.general-badge
+                = category.books.count
+    %p.lead.small.mb-10
+      = I18n.t('views.books.sort')
+    .dropdown
+      %a.dropdown-toggle.lead.small.filter{ "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button" }
+        = I18n.t('models.book.newest')
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      = render 'filter'
+  .mb-120
+    .row
+      - @books.each do |book|
+        .col-xs-6.col-sm-3
+          .general-thumb-wrap
+            .general-thumbnail.thumbnail-main
+              = link_to book.images.first.url do
+                = image_tag book.images.first.url, class: "img-shadow general-thumbnail-img", alt: "design-book"
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to book_path(book), class: "thumb-hover-link" do
+                    %i.fa.fa-eye.thumb-icon{"aria-hidden" => "true"}
+                  .fl-r
+                    = simple_form_for @line_item do |f|
+                      = f.input :book_id, as: :hidden, input_html: { value: book.id }
+                      = f.input :quantity, as: :hidden, input_html: { value: 1 }
+                      = button_tag(type: 'submit', class: "thumb-hover-link button-hover") do
+                        %i.fa.fa-shopping-cart.thumb-icon
+          .general-thumb-info
+            %p.title
+              = book.title
+            %p.font-16.in-gold-500
+              = number_to_euro(book.price)
+            %span.divider-sm
+            %p.lead.small
+              = BookPresenter.new(book, self).book_authors
+  .text-center
+    = pagy_nav_bootstrap(@pagy).html_safe

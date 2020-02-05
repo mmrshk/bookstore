@@ -1,0 +1,17 @@
+.row
+  - if @address
+    - if @address.cast == 'billing'
+      = simple_form_for @address, html: { id: 'billing_form' } do |form|
+        = render 'addresses/billing_form', f: form
+      = simple_form_for @addresses.shipping.first_or_initialize, html: { id: 'shipping_form' } do |form|
+        = render 'addresses/shipping_form', f: form
+    - else
+      = simple_form_for @addresses.billing.first_or_initialize, html: { id: 'billing_form' } do |form|
+        = render 'addresses/billing_form', f: form
+      = simple_form_for @address, html: { id: 'shipping_form' } do |form|
+        = render 'addresses/shipping_form', f: form
+  - else
+    = simple_form_for @addresses.billing.first_or_initialize, html: { id: 'billing_form' } do |form|
+      = render 'addresses/billing_form', f: form
+    = simple_form_for @addresses.shipping.first_or_initialize, html: { id: 'shipping_form' } do |form|
+      = render 'addresses/shipping_form', f: form

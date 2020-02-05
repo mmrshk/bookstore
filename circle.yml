@@ -1,0 +1,9 @@
+machine:
+  ruby:
+    version: 2.5.3
+database:
+  override:
+    - bundle exec rake db:create db:schema:load --trace
+dependencies:
+  pre:
+    - gem install bundler

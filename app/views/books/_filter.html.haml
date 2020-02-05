@@ -1,0 +1,28 @@
+- if @category
+  %ul.dropdown-menu.filter
+    %li
+      = link_to I18n.t('models.book.newest'), category_books_path(filter: :newest)
+    %li
+      = link_to I18n.t('models.book.pop_first'), category_books_path(filter: :pop_first)
+    %li
+      = link_to I18n.t('models.book.by_title_asc'), category_books_path( filter: :by_title_asc)
+    %li
+      = link_to I18n.t('models.book.by_title_desc'), category_books_path( filter: :by_title_desc)
+    %li
+      = link_to I18n.t('models.book.price_asc'), category_books_path( filter: :price_asc)
+    %li
+      = link_to I18n.t('models.book.price_desc'), category_books_path( filter: :price_desc)
+- else
+  %ul.dropdown-menu.filter
+    %li
+      = link_to I18n.t('models.book.newest'), books_path(filter: :newest)
+    %li
+      = link_to I18n.t('models.book.pop_first'), books_path(filter: :pop_first)
+    %li
+      = link_to I18n.t('models.book.by_title_asc'), books_path(filter: :by_title_asc)
+    %li
+      = link_to I18n.t('models.book.by_title_desc'), books_path(filter: :by_title_desc)
+    %li
+      = link_to I18n.t('models.book.price_asc'), books_path(filter: :price_asc)
+    %li
+      = link_to I18n.t('models.book.price_desc'), books_path(filter: :price_desc)
