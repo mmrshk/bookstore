@@ -17,7 +17,7 @@
       %p.general-address
         = OrderPresenter.new(current_user.orders[-2], self).complete_username
         %br
-        = current_user.orders[-2].addresses.first.address
+        = current_user.orders[-2].addresses.first&.address
         %br
         = OrderPresenter.new(current_user.orders[-2], self).complete_city_zip
         %br

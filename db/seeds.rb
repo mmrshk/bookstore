@@ -47,7 +47,9 @@ used_book_titles = []
               year: rand(2001..2019),
               material: FFaker::Lorem.words.join(', '),
               category_id: categories.sample.id,
-              images: [File.open(File.join(Rails.root,'app/assets/images/1.jpg')), File.open(File.join(Rails.root,'app/assets/images/2.jpg')), File.open(File.join(Rails.root,'app/assets/images/3.jpg')),
+              images: [File.open(File.join(Rails.root,'app/assets/images/1.jpg')),
+                       File.open(File.join(Rails.root,'app/assets/images/2.jpg')),
+                       File.open(File.join(Rails.root,'app/assets/images/3.jpg')),
                        File.open(File.join(Rails.root,'app/assets/images/4.jpg'))]
               )
 end

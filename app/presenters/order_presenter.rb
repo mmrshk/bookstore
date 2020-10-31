@@ -17,7 +17,7 @@ class OrderPresenter < SimpleDelegator
   end
 
   def complete_username
-    "#{@model.addresses.first.firstname} #{@model.addresses.first.lastname}"
+    "#{@model.addresses.first&.firstname} #{@model.addresses.first&.lastname}"
   end
 
   def complete_city_zip
@@ -33,7 +33,7 @@ class OrderPresenter < SimpleDelegator
   end
 
   def completed_date
-    @model.orders[-2].completed_at.strftime('%B %-d, %Y')
+    @model.orders[-2].completed_at&.strftime('%B %-d, %Y')
   end
 
   def show_order_date

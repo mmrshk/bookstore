@@ -4,13 +4,8 @@
       .text-center
         %h3.general-subtitle.mt-0
           = I18n.t('views.checkout.login.customer')
-        %a.general-login-icon{ href: user_facebook_omniauth_authorize_path }
-          %i.fa.fa-facebook-official
-        %p.general-login-text or
       = form_for(User.new, url: user_session_path, html: { class: 'general-form' }) do |f|
         .form-group.mb-40
-          %h4.general-login-title
-            = I18n.t('views.checkout.login.login')
           = f.label :email, I18n.t('views.checkout.login.email'), class: 'control-label input-label'
           = f.email_field :email, placeholder: I18n.t('views.checkout.login.email'), autofocus: true, class: 'form-control'
         .form-group.mb-40
@@ -24,10 +19,6 @@
       .text-center
         %h3.general-subtitle.mt-0
           = I18n.t('views.checkout.login.new_customer')
-        %a.general-login-icon{ href: user_facebook_omniauth_authorize_path }
-          %i.fa.fa-facebook-official
-        %p.general-login-text
-          = I18n.t('views.checkout.login.or')
       = form_for(User.new, url: user_registration_path, html: { class: 'general-form' }) do |f|
         .form-group.mb-40
           %h4.general-login-title.mb-5

@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def show
     @order = current_order
   end

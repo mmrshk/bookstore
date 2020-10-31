@@ -1,11 +1,4 @@
 en:
-  achievment:
-    middle_time: 'Общее время, потраченное на обслуживание в минутах'
-    middle_invoice: 'Средний чек в гривнах\рублях'
-    clients: 'Количество закрытых чеков'
-    profit_netto: 'Прибыль без НДС в копейках. Возвращается если включена настройка «Считать себестоимость и прибыль нетто»'
-    uniq_product: 'Продажа 5 уникальных продуктов выбранных хозяином заведения'
-    guests_count: 'Количество обслуженных гостей'
   bookstore: 'Bookstore'
   coupon_applied: 'Coupon applied'
   coupon_not_applied: 'Invalid coupon'
@@ -70,7 +63,7 @@ en:
       best_sellers: 'Best Sellers'
       previous: 'Previous'
       next: 'Next'
-      support: 'mikykonst@gmail.com'
+      support: 'emma.yeroshek@gmail.com'
       number: '(097)-234-2345'
       home: 'Home'
       shop: 'Shop'

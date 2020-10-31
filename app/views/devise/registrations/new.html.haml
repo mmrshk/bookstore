@@ -2,10 +2,6 @@
   .text-center
     %h3.general-login-title
       = I18n.t('devise.registrations.signup')
-    = link_to user_facebook_omniauth_authorize_path, class: "general-login-icon" do
-      %i.fa.fa-facebook-official
-    %p.general-login-text
-      = I18n.t('devise.registrations.or')
   .general-form
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = f.error_notification
