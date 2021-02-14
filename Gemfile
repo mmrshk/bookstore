@@ -37,7 +37,7 @@ gem 'presenter-rails'
 gem 'puma', '~> 3.11'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'sass-rails', '~> 5.0'
-gem 'simple_form', '~> 4.1'
+gem 'simple_form', '~> 5.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uglifier', '>= 1.3.0'
 gem 'wicked'
